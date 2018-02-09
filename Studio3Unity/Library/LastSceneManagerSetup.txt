@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/IndividualSections/Leon/Scenes/4 Player.unity
+- path: Assets/IndividualSections/Khatim/Scenes/KhatimTestScene.unity
   isLoaded: 1
   isActive: 1
