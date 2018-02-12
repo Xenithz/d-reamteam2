@@ -9,12 +9,12 @@ public class Zombie_Pool : MonoBehaviour {
     public GameObject zombie;
     public float spawntime;
     public int zombiespooled;
-    public float spawntime2;
+    
 #endregion
 
     private void Awake()
     {
-        spawntime2 = 10;
+        
          zombies = new List<GameObject>();
     }
     private void Start()
@@ -33,7 +33,7 @@ public class Zombie_Pool : MonoBehaviour {
     }
     private void Update()
     {
-        spawntime2 -= Time.deltaTime;
+        
     }
 
 
@@ -42,13 +42,13 @@ public class Zombie_Pool : MonoBehaviour {
     {
         for (int i = 0; i <zombies.Count ; i++)
         {
-            if (!zombies[i].activeInHierarchy && spawntime2<=5)
+            if (!zombies[i].activeInHierarchy)
             {
 
                 zombies[i].transform.position = transform.position;
                 zombies[i].transform.rotation = transform.rotation;
                 zombies[i].SetActive(true);
-                spawntime2 = 7;
+                
                 break;
 
             }
