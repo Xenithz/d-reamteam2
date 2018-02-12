@@ -13,17 +13,22 @@ public class Character_Controller : MonoBehaviour {
 
     #endregion
 
+
+
 #region Public Variables
     public float movespeed;
-    public float rotspeed = 100f;
     public float lockrot;
-    public float clampmagnitude;
-    public float jumpforce;
+    public float magnitudetoclamp;
+    public float jumppower;
+    public float RBvelocitytoclamp;
+    
+
 
     #endregion
 
 
-#region Execution
+
+    #region Execution
     private void Start()
     {
         playerbody = GetComponent<Rigidbody>();
@@ -31,21 +36,43 @@ public class Character_Controller : MonoBehaviour {
     }
 
 
+
+
+
+
+
+
+    //To prevent the player from sliding
+
+   
+
+
     private void FixedUpdate()
     {
+        Debug.Log(playerbody.velocity.magnitude);
+        Debug.Log(MovementInput());
         
-        JumpExecution();
-        
+        Jump();
+
+         
         transform.rotation = Quaternion.Euler(lockrot, transform.rotation.eulerAngles.y, lockrot);
-        Vector3 storageVector = MovementInput();
+        Vector3 Vectorofmovement = MovementInput();
+       
         
         
-        MovementExecution(storageVector);
+        Movement(Vectorofmovement);
         // the object will only turn if input is not zero, meanning that there was input recieved from the player, if not then we dont turn.
         if (MovementInput() != Vector3.zero)
         {
             transform.rotation = turn();
         }
+        /*
+        if (isnotgrounded())
+        {
+            playerbody.constraints = RigidbodyConstraints.None;
+
+        }
+        */
         
 
     }
@@ -53,29 +80,55 @@ public class Character_Controller : MonoBehaviour {
 
 
 
-
- #region My Functions
+#region  Functions
 
     private Vector3 MovementInput()
     {
-        Vector3 inputToReturn;
-        float horizontalTrack = Input.GetAxisRaw("Horizontal");
-        float verticalTrack = Input.GetAxisRaw("Vertical");
-        inputToReturn = new Vector3(horizontalTrack, 0f, verticalTrack);
-        return inputToReturn;
+        Vector3 playerinput;
+        float Horinput = Input.GetAxisRaw("Horizontal");
+        float Verinput = Input.GetAxisRaw("Vertical");
+        playerinput = new Vector3(Horinput, 0f, Verinput);
+        return playerinput;
     }
 
     //Takes in proccessed input and uses it to move the character using AddForce
-    
-    private void MovementExecution(Vector3 vectorForMovement)
+   
+
+
+
+
+
+
+
+
+
+
+
+    private void Movement(Vector3 movementvector)
     {
-        vectorForMovement.x = vectorForMovement.x * movespeed;
-        vectorForMovement.z = vectorForMovement.z *movespeed;
-        vectorForMovement.y = 0f;
-        vectorForMovement = Vector3.ClampMagnitude(vectorForMovement, clampmagnitude);
-        
-       playerbody.AddForce(vectorForMovement, ForceMode.Acceleration);
+        movementvector.x = movementvector.x * movespeed;
+        movementvector.z = movementvector.z *movespeed;
+        movementvector.y = 0f;
+        movementvector = Vector3.ClampMagnitude(movementvector, magnitudetoclamp);
+
+        playerbody.AddForce(movementvector, ForceMode.Impulse);
     }
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
 
     private Quaternion turn()
     {
@@ -85,25 +138,26 @@ public class Character_Controller : MonoBehaviour {
         return look;
 
     }
-    private bool JumpCheck()
+    private bool isnotgrounded()
     {
         
-        float distanceToGround;
-        distanceToGround = playercollider.bounds.extents.y;
-        return Physics.Raycast(transform.position, -Vector3.up, distanceToGround );
+        float grounddistance;
+        grounddistance = playercollider.bounds.extents.y;
+        return Physics.Raycast(transform.position, -Vector3.up, grounddistance);
         
     }
-    private void JumpExecution()
+    private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && JumpCheck())
+
+        if (Input.GetKeyDown(KeyCode.Space) && isnotgrounded())
         {
-           playerbody.constraints =  RigidbodyConstraints.None;
-            playerbody.AddForce(new Vector3(0f, jumpforce, 0f), ForceMode.Impulse);
+            // playerbody.constraints =  RigidbodyConstraints.None;
+            playerbody.AddForce(new Vector3(0f, jumppower, 0f), ForceMode.Impulse);
             
         }
-        else if(!Input.GetKeyDown(KeyCode.Space)&& JumpCheck())
+        else if(!Input.GetKeyDown(KeyCode.Space) && isnotgrounded())
         {
-            playerbody.constraints = RigidbodyConstraints.FreezePositionY;
+           // playerbody.constraints = RigidbodyConstraints.FreezePositionY;
 
         }
         
@@ -111,8 +165,9 @@ public class Character_Controller : MonoBehaviour {
 
        
     }
-#endregion
+    #endregion
 
+  
 
 
 
