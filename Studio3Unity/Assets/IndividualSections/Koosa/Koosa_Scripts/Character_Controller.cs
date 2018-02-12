@@ -13,21 +13,38 @@ public class Character_Controller : MonoBehaviour {
 
     #endregion
 
+
+
 #region Public Variables
     public float movespeed;
     public float lockrot;
     public float magnitudetoclamp;
     public float jumppower;
+    public float RBvelocitytoclamp;
     
+
+
     #endregion
 
 
-#region Execution
+
+    #region Execution
     private void Start()
     {
         playerbody = GetComponent<Rigidbody>();
         playercollider = GetComponent<BoxCollider>();   
     }
+
+
+
+
+
+
+
+
+    //To prevent the player from sliding
+
+   
 
 
     private void FixedUpdate()
@@ -36,9 +53,11 @@ public class Character_Controller : MonoBehaviour {
         Debug.Log(MovementInput());
         
         Jump();
-        
+
+         
         transform.rotation = Quaternion.Euler(lockrot, transform.rotation.eulerAngles.y, lockrot);
         Vector3 Vectorofmovement = MovementInput();
+       
         
         
         Movement(Vectorofmovement);
@@ -47,6 +66,13 @@ public class Character_Controller : MonoBehaviour {
         {
             transform.rotation = turn();
         }
+        /*
+        if (isnotgrounded())
+        {
+            playerbody.constraints = RigidbodyConstraints.None;
+
+        }
+        */
         
 
     }
@@ -54,8 +80,7 @@ public class Character_Controller : MonoBehaviour {
 
 
 
-
- #region  Functions
+#region  Functions
 
     private Vector3 MovementInput()
     {
@@ -86,7 +111,7 @@ public class Character_Controller : MonoBehaviour {
         movementvector.y = 0f;
         movementvector = Vector3.ClampMagnitude(movementvector, magnitudetoclamp);
 
-        playerbody.AddForce(movementvector, ForceMode.Force);
+        playerbody.AddForce(movementvector, ForceMode.Impulse);
     }
 
 
@@ -123,9 +148,10 @@ public class Character_Controller : MonoBehaviour {
     }
     private void Jump()
     {
+
         if (Input.GetKeyDown(KeyCode.Space) && isnotgrounded())
         {
-          // playerbody.constraints =  RigidbodyConstraints.None;
+            // playerbody.constraints =  RigidbodyConstraints.None;
             playerbody.AddForce(new Vector3(0f, jumppower, 0f), ForceMode.Impulse);
             
         }
@@ -139,8 +165,9 @@ public class Character_Controller : MonoBehaviour {
 
        
     }
-#endregion
+    #endregion
 
+  
 
 
 
