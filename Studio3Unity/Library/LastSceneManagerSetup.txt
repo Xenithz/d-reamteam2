@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Photon Unity Networking/Demos/Demo2DJumpAndRunWithPhysics/Demo2DJumpAndRunWithPhysics-Scene.unity
+- path: Assets/IndividualSections/Angelo/TestScene.unity
   isLoaded: 1
   isActive: 1
