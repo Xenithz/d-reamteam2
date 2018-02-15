@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class PlayerStats : Character_Controller
 {
-    public float Health = 3.0f;
+    //public float Health = 6.0f;
 }
