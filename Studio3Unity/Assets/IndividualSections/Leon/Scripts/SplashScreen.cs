@@ -34,7 +34,7 @@ public class SplashScreen : MonoBehaviour
         //Background.color = Color.red;
         if (ChangeScene == 1)
         {
-            SceneManager.LoadScene("Main_Menu");
+            SceneManager.LoadScene("Story_Scene");
         }
 
     }
