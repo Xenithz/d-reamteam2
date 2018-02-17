@@ -9,9 +9,9 @@ public class Zombie_Pool : MonoBehaviour {
     public GameObject zombie;
     public float spawntime;
     public int zombiespooled;
-    
-#endregion
 
+    #endregion
+#region Unity Functions
     private void Awake()
     {
         
@@ -35,9 +35,9 @@ public class Zombie_Pool : MonoBehaviour {
     {
         
     }
+    #endregion
 
-
-
+#region My Functions
     private void spawn()
     {
         for (int i = 0; i <zombies.Count ; i++)
@@ -64,3 +64,4 @@ public class Zombie_Pool : MonoBehaviour {
 
     }
 }
+#endregion
