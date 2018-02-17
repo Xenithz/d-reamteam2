@@ -49,8 +49,8 @@ public class Character_Controller : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        Debug.Log(playerbody.velocity.magnitude);
-        Debug.Log(MovementInput());
+        /*Debug.Log(playerbody.velocity.magnitude);
+        Debug.Log(MovementInput());*/
         
         Jump();
 
