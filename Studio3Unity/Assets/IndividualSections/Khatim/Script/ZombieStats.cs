@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class ZombieStats : MonoBehaviour
 {
-    #region Private Stats Variables
-    /*private float health = 1.0f;
-    private float regularDamage = 0.5f;
-    private float heavyDamage = 3.0f;*/
+    #region Public Variables
+    public float health = 1.0f;
+    public float regularDamage = 0.5f;
+    public float heavyDamage = 3.0f;
+    public float speed;
+    public float attackDistance;
+    public float chaseDistance;
+    public float distanceToPlayer;
+    public Transform player;
+
+
     #endregion
 
     #region Private Variables
     //private Animation anim;
-    #endregion
-    #region Public Variables
-
     #endregion
 
     #region Functions

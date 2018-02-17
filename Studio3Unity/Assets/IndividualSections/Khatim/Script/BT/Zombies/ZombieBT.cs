@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class ZombieBT : MonoBehaviour
 {
-	// Use this for initialization
-	void Start ()
+    #region Public Variables
+    [HideInInspector] public Node root;
+    [HideInInspector] public ZombieStats zom;
+
+    #endregion
+
+    #region Functions
+    void Start ()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        zom = GetComponent<ZombieStats>();
+
+        Sequence sequenceNode = new Sequence();
+        root = sequenceNode;
+
+        sequenceNode.children.Add(new Chase());
+        sequenceNode.children.Add(new Attack());
+    }
+
+    void Update ()
     {
-		
-	}
+        root.Execute(this);
+    }
+    #endregion
+
 }
