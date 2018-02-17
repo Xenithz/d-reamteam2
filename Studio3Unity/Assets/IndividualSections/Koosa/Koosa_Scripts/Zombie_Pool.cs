@@ -9,6 +9,10 @@ public class Zombie_Pool : MonoBehaviour {
     public GameObject zombie;
     public float spawntime;
     public int zombiespooled;
+    public Transform spawnpoint;
+    public int spawnindex;
+    public float time;
+    public float timetoincrease;
 
     #endregion
 #region Unity Functions
@@ -19,7 +23,7 @@ public class Zombie_Pool : MonoBehaviour {
     }
     private void Start()
     {
-        InvokeRepeating("spawn", spawntime, spawntime);
+        //InvokeRepeating("spawn", spawntime, spawntime);
         for(int i = 0; i < zombiespooled; i++)
         {
             GameObject zombieobject = Instantiate(zombie, transform.position, Quaternion.identity);
@@ -33,6 +37,20 @@ public class Zombie_Pool : MonoBehaviour {
     }
     private void Update()
     {
+        time -=Time.deltaTime;
+        
+        if (time <= 5)
+        {
+            spawn();
+            time = timetoincrease;
+        }
+       
+
+
+
+
+
+        spawnindex = Random.Range(0, spawnpoint.childCount);
         
     }
     #endregion
@@ -45,7 +63,7 @@ public class Zombie_Pool : MonoBehaviour {
             if (!zombies[i].activeInHierarchy)
             {
 
-                zombies[i].transform.position = transform.position;
+                zombies[i].transform.position = spawnpoint.GetChild(spawnindex).position;
                 zombies[i].transform.rotation = transform.rotation;
                 zombies[i].SetActive(true);
                 
