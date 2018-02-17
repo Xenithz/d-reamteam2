@@ -7,25 +7,40 @@ public class HealthSystem : MonoBehaviour
 {
     #region Public Variables
     public Text healthText;
-    public GameObject healthObj;
     #endregion
 
     #region Private Variables
-    private int Score = 0;
+    private int Health;
     #endregion
-    // Update is called once per frame
-    void Update ()
+
+    #region Functions
+    void Start()
+    {
+        Health = 6;
+        healthText.text = Health.ToString();
+
+    }
+    void FixedUpdate()
     {
 
-	}
+    }
+    #endregion
+
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E))
+        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && Health < 6)
         {
-            Score++;
-            healthText.text = Score.ToString();
-            healthObj.SetActive(false);
+            Health++;
+            healthText.text = Health.ToString();
+            other.gameObject.SetActive(false);
+        }
+
+        if (other.gameObject.tag == "Damage" && Input.GetKey(KeyCode.E) && Health > 0)
+        {
+            Health--;
+            healthText.text = Health.ToString();
+            other.gameObject.SetActive(false);
         }
     }
 }
