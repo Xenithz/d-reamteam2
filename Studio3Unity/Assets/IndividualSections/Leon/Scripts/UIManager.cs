@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
-    public float scrollingTextTimer;
+    public Transform loginPanel;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        scrollingTextTimer -= Time.deltaTime;
+        
 	}
 
     public void OnClickToLogin() // to go to log in
@@ -42,6 +42,11 @@ public class UIManager : MonoBehaviour {
     public void OnClickToMain() // to go to main menu
     {
         SceneManager.LoadScene("Main_Menu");
+    }
+
+    public void OnClickLoginPanel()
+    {
+        
     }
 
     
