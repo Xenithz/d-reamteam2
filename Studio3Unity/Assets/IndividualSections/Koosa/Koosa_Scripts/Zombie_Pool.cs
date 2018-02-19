@@ -23,10 +23,10 @@ public class Zombie_Pool : MonoBehaviour {
     }
     private void Start()
     {
-        //InvokeRepeating("spawn", spawntime, spawntime);
+        
         for(int i = 0; i < zombiespooled; i++)
         {
-            GameObject zombieobject = Instantiate(zombie, transform.position, Quaternion.identity);
+            GameObject zombieobject = Instantiate(zombie, spawnpoint.GetChild(spawnindex).position, Quaternion.identity);
             zombieobject.SetActive(true);
             zombies.Add(zombieobject);
         }
@@ -39,7 +39,7 @@ public class Zombie_Pool : MonoBehaviour {
     {
         time -=Time.deltaTime;
         
-        if (time <= 5)
+        if (time <= 10)
         {
             spawn();
             time = timetoincrease;
@@ -67,7 +67,6 @@ public class Zombie_Pool : MonoBehaviour {
                 zombies[i].transform.rotation = transform.rotation;
                 zombies[i].SetActive(true);
                 
-                break;
 
             }
 
@@ -81,5 +80,6 @@ public class Zombie_Pool : MonoBehaviour {
 
 
     }
+
 }
 #endregion
