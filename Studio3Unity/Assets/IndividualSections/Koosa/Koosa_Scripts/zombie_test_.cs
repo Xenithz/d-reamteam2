@@ -4,37 +4,38 @@ using UnityEngine;
 
 public class zombie_test_ : MonoBehaviour
 {
-    #region Public Variables
+#region Public Variables
     public float speed;
-    public float recycletime;
-    private GameObject Player;
-    
-
+    public float recycleTime;
     #endregion
 
-    #region  Unity Functions
+
+
+#region Private Variables
+    private GameObject player;
+    #endregion
+
+
+
+#region  Unity Functions
 
     private void Awake()
     {
 
 
-        Player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Player");
 
     }
 
     private void OnEnable()
     {
-        StartCoroutine("zombieon");
+        StartCoroutine("ZombieCou");
         //Invoke("recycle", recycletime);
     }
-    private void recycle()
-    {
-        gameObject.SetActive(false);
-
-    }
+   
     private void OnDisable()
     {
-        StopCoroutine("zombieon");
+        StopCoroutine("ZombieCou");
         //CancelInvoke();
     }
 
@@ -44,21 +45,38 @@ public class zombie_test_ : MonoBehaviour
     {
 
         // transform.Translate(0, 0, speed * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, speed*Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed*Time.deltaTime);
 
     
 
     }
-    #region IEnumerators
-    IEnumerator zombieon()
+    #endregion
+
+
+
+#region My Functions
+    private void Recycle()
     {
-        yield return new WaitForSeconds(recycletime);
-        recycle();
+        gameObject.SetActive(false);
+
+    }
+
+    #endregion
+
+
+
+#region IEnumerators
+    IEnumerator ZombieCou()
+    {
+        yield return new WaitForSeconds(recycleTime);
+        Recycle();
     }
 
 
 
-    #endregion
+    
 }
 #endregion
+
+
 

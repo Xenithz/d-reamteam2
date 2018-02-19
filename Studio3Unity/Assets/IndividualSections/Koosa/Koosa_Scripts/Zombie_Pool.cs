@@ -5,16 +5,23 @@ using UnityEngine;
 public class Zombie_Pool : MonoBehaviour {
 
 #region Public Variables
-    public List<GameObject> zombies;
+    
     public GameObject zombie;
-    public float spawntime;
-    public int zombiespooled;
-    public Transform spawnpoint;
-    public int spawnindex;
-    public float time;
-    public float timetoincrease;
-
+    public int zombiesPooled;
+    public float timeToIncrease;
     #endregion
+
+
+
+#region Private Variables
+    private List<GameObject> zombies;
+    private int spawnIndex;
+    private float time;
+    private Transform spawnPoint;
+    #endregion
+
+
+
 #region Unity Functions
     private void Awake()
     {
@@ -24,11 +31,11 @@ public class Zombie_Pool : MonoBehaviour {
     private void Start()
     {
         
-        for(int i = 0; i < zombiespooled; i++)
+        for(int i = 0; i < zombiesPooled; i++)
         {
-            GameObject zombieobject = Instantiate(zombie, spawnpoint.GetChild(spawnindex).position, Quaternion.identity);
-            zombieobject.SetActive(true);
-            zombies.Add(zombieobject);
+            GameObject zombieObject = Instantiate(zombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
+            zombieObject.SetActive(true);
+            zombies.Add(zombieObject);
         }
 
 
@@ -39,10 +46,10 @@ public class Zombie_Pool : MonoBehaviour {
     {
         time -=Time.deltaTime;
         
-        if (time <= 10)
+        if (time <= timeToIncrease)
         {
-            spawn();
-            time = timetoincrease;
+            Spawn();
+            time = timeToIncrease;
         }
        
 
@@ -50,20 +57,22 @@ public class Zombie_Pool : MonoBehaviour {
 
 
 
-        spawnindex = Random.Range(0, spawnpoint.childCount);
+        spawnIndex = Random.Range(0, spawnPoint.childCount);
         
     }
     #endregion
 
+
+
 #region My Functions
-    private void spawn()
+    private void Spawn()
     {
         for (int i = 0; i <zombies.Count ; i++)
         {
             if (!zombies[i].activeInHierarchy)
             {
 
-                zombies[i].transform.position = spawnpoint.GetChild(spawnindex).position;
+                zombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
                 zombies[i].transform.rotation = transform.rotation;
                 zombies[i].SetActive(true);
                 

@@ -6,8 +6,8 @@ using UnityEngine;
 public class Character_Controller : MonoBehaviour {
 
 #region Private Variables 
-    private Rigidbody playerbody;
-    private BoxCollider playercollider;
+    private Rigidbody playerBody;
+    private BoxCollider playerCollider;
 
 
 
@@ -16,11 +16,11 @@ public class Character_Controller : MonoBehaviour {
 
 
 #region Public Variables
-    public float movespeed;
-    public float lockrot;
-    public float magnitudetoclamp;
-    public float jumppower;
-    public float RBvelocitytoclamp;
+    public float moveSpeed;
+    public float lockRot;
+    public float magnitudeToClamp;
+    public float jumpPower;
+    
     
 
 
@@ -28,51 +28,32 @@ public class Character_Controller : MonoBehaviour {
 
 
 
-    #region Execution
+#region Unity Functions
     private void Start()
     {
-        playerbody = GetComponent<Rigidbody>();
-        playercollider = GetComponent<BoxCollider>();   
+        playerBody = GetComponent<Rigidbody>();
+        playerCollider = GetComponent<BoxCollider>();   
     }
 
 
 
-
-
-
-
-
-    //To prevent the player from sliding
-
-   
-
-
     private void FixedUpdate()
     {
-        /*Debug.Log(playerbody.velocity.magnitude);
-        Debug.Log(MovementInput());*/
-        
+                
         Jump();
 
          
-        transform.rotation = Quaternion.Euler(lockrot, transform.rotation.eulerAngles.y, lockrot);
-        Vector3 Vectorofmovement = MovementInput();
+        transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
+        Vector3 vectorOfMovement = MovementInput();
        
         
-        
-        Movement(Vectorofmovement);
-        // the object will only turn if input is not zero, meanning that there was input recieved from the player, if not then we dont turn.
+        Movement(vectorOfMovement);
+       
         if (MovementInput() != Vector3.zero)
         {
-            transform.rotation = turn();
+            transform.rotation = Turn();
         }
-        /*
-        if (isnotgrounded())
-        {
-            playerbody.constraints = RigidbodyConstraints.None;
-
-        }
-        */
+      
         
 
     }
@@ -80,57 +61,30 @@ public class Character_Controller : MonoBehaviour {
 
 
 
-#region  Functions
+#region  My Functions
 
     private Vector3 MovementInput()
     {
         Vector3 playerinput;
-        float Horinput = Input.GetAxisRaw("Horizontal");
-        float Verinput = Input.GetAxisRaw("Vertical");
-        playerinput = new Vector3(Horinput, 0f, Verinput);
+        float horInput = Input.GetAxisRaw("Horizontal");
+        float verInput = Input.GetAxisRaw("Vertical");
+        playerinput = new Vector3(horInput, 0f, verInput);
         return playerinput;
     }
-
-    //Takes in proccessed input and uses it to move the character using AddForce
-   
-
-
-
-
-
-
-
-
-
 
 
     private void Movement(Vector3 movementvector)
     {
-        movementvector.x = movementvector.x * movespeed;
-        movementvector.z = movementvector.z *movespeed;
+        movementvector.x = movementvector.x * moveSpeed;
+        movementvector.z = movementvector.z *moveSpeed;
         movementvector.y = 0f;
-        movementvector = Vector3.ClampMagnitude(movementvector, magnitudetoclamp);
+        movementvector = Vector3.ClampMagnitude(movementvector, magnitudeToClamp);
 
-        playerbody.AddForce(movementvector, ForceMode.Impulse);
+        playerBody.AddForce(movementvector, ForceMode.Impulse);
     }
 
 
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private Quaternion turn()
+    private Quaternion Turn()
     {
         Quaternion look;
          look= Quaternion.LookRotation(MovementInput());
@@ -138,32 +92,27 @@ public class Character_Controller : MonoBehaviour {
         return look;
 
     }
-    private bool isnotgrounded()
+
+
+    private bool IsNotGrounded()
     {
         
-        float grounddistance;
-        grounddistance = playercollider.bounds.extents.y;
-        return Physics.Raycast(transform.position, -Vector3.up, grounddistance);
+        float groundDistance;
+        groundDistance = playerCollider.bounds.extents.y;
+        return Physics.Raycast(transform.position, -Vector3.up, groundDistance);
         
     }
+
+
     private void Jump()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) && isnotgrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
         {
-            // playerbody.constraints =  RigidbodyConstraints.None;
-            playerbody.AddForce(new Vector3(0f, jumppower, 0f), ForceMode.Impulse);
             
-        }
-        else if(!Input.GetKeyDown(KeyCode.Space) && isnotgrounded())
-        {
-           // playerbody.constraints = RigidbodyConstraints.FreezePositionY;
-
-        }
-        
-       
-
-       
+            playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
+            
+        }        
     }
     #endregion
 
