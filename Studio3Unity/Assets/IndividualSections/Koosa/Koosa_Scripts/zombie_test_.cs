@@ -7,15 +7,16 @@ public class zombie_test_ : MonoBehaviour
     #region Public Variables
     public float speed;
     public float recycletime;
-    public GameObject Player;
+    private GameObject Player;
     
 
     #endregion
 
-    #region  Functions
+    #region  Unity Functions
 
     private void Awake()
     {
+
 
         Player = GameObject.FindWithTag("Player");
 
@@ -23,7 +24,8 @@ public class zombie_test_ : MonoBehaviour
 
     private void OnEnable()
     {
-        Invoke("recycle", recycletime);
+        StartCoroutine("zombieon");
+        //Invoke("recycle", recycletime);
     }
     private void recycle()
     {
@@ -32,19 +34,31 @@ public class zombie_test_ : MonoBehaviour
     }
     private void OnDisable()
     {
-        CancelInvoke();
+        StopCoroutine("zombieon");
+        //CancelInvoke();
     }
 
 
     // Update is called once per frame
     void Update()
     {
+
         // transform.Translate(0, 0, speed * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, Player.transform.position, speed*Time.deltaTime);
 
     
 
     }
+    #region IEnumerators
+    IEnumerator zombieon()
+    {
+        yield return new WaitForSeconds(recycletime);
+        recycle();
+    }
+
+
+
+    #endregion
 }
 #endregion
 
