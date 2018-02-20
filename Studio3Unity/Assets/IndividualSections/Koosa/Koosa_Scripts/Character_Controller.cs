@@ -8,11 +8,7 @@ public class Character_Controller : MonoBehaviour {
 #region Private Variables 
     private Rigidbody playerBody;
     private BoxCollider playerCollider;
-
-
-
     #endregion
-
 
 
 #region Public Variables
@@ -20,12 +16,7 @@ public class Character_Controller : MonoBehaviour {
     public float lockRot;
     public float magnitudeToClamp;
     public float jumpPower;
-    
-    
-
-
     #endregion
-
 
 
 #region Unity Functions
@@ -35,34 +26,25 @@ public class Character_Controller : MonoBehaviour {
         playerCollider = GetComponent<BoxCollider>();   
     }
 
-
-
     private void FixedUpdate()
     {
-                
         Jump();
 
-         
         transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
+
         Vector3 vectorOfMovement = MovementInput();
-       
-        
+
         Movement(vectorOfMovement);
        
         if (MovementInput() != Vector3.zero)
         {
             transform.rotation = Turn();
         }
-      
-        
-
     }
 #endregion
 
 
-
 #region  My Functions
-
     private Vector3 MovementInput()
     {
         Vector3 playerinput;
@@ -72,27 +54,22 @@ public class Character_Controller : MonoBehaviour {
         return playerinput;
     }
 
-
     private void Movement(Vector3 movementvector)
     {
         movementvector.x = movementvector.x * moveSpeed;
         movementvector.z = movementvector.z *moveSpeed;
         movementvector.y = 0f;
         movementvector = Vector3.ClampMagnitude(movementvector, magnitudeToClamp);
-
         playerBody.AddForce(movementvector, ForceMode.Impulse);
     }
-
 
     private Quaternion Turn()
     {
         Quaternion look;
-         look= Quaternion.LookRotation(MovementInput());
-       
+        look= Quaternion.LookRotation(MovementInput());
+
         return look;
-
     }
-
 
     private bool IsNotGrounded()
     {
@@ -103,18 +80,15 @@ public class Character_Controller : MonoBehaviour {
         
     }
 
-
     private void Jump()
     {
-
         if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
         {
             
-            playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
+         playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
             
         }        
     }
     #endregion
-
 }
 
