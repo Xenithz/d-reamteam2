@@ -13,6 +13,10 @@ public class UserInformationControl : MonoBehaviour
     string myRegisterUrl = "http://localhost/studio3/RegisterData.php";
     [SerializeField]
     string myLoginUrl = "http://localhost/studio3/Login.php";
+    [SerializeField]
+    string myBanCheckUrl = "http://localhost/studio3/BanCheck.php";
+    [SerializeField]
+    string myAdminCheckUrl = "http://localhost/studio3/AdminCheck.php";
 
     [SerializeField]
     string myUsername;
@@ -52,12 +56,35 @@ public class UserInformationControl : MonoBehaviour
 
     IEnumerator Login(string username, string password)
     {
-        WWWForm myform = new WWWForm();
-        myform.AddField("playerusernamepost", username);
-        myform.AddField("playerpasswordpost", password);
+        WWWForm myForm = new WWWForm();
+        myForm.AddField("playerusernamepost", username);
+        myForm.AddField("playerpasswordpost", password);
 
 
-        WWW myWWW = new WWW(myLoginUrl, myform);
+        WWW myWWW = new WWW(myLoginUrl, myForm);
+        yield return myWWW;
+
+        Debug.Log(myWWW.text);
+
+    }
+
+    IEnumerator BanCheck(string username)
+    {
+        WWWForm myForm = new WWWForm();
+        myForm.AddField("playerusernamepost", username);
+
+        WWW myWWW = new WWW(myBanCheckUrl, myForm);
+        yield return myWWW;
+
+        Debug.Log(myWWW.text);
+    }
+
+    IEnumerator AdminCheck(string username)
+    {
+        WWWForm myForm = new WWWForm();
+        myForm.AddField("playerusernamepost", username);
+
+        WWW myWWW = new WWW(myAdminCheckUrl, myForm);
         yield return myWWW;
 
         Debug.Log(myWWW.text);
@@ -73,6 +100,26 @@ public class UserInformationControl : MonoBehaviour
     public void CallLogin(string inputUsername, string inputPassword)
     {
         StartCoroutine(Login(inputUsername, inputPassword));
+    }
+
+    public void CallBanCheck(string inputUsername)
+    {
+        StartCoroutine(BanCheck(inputUsername));
+    }
+
+    public void CallAdminCheck(string inputUsername)
+    {
+        StartCoroutine(AdminCheck(inputUsername));
+    }
+
+    public void AddRoundSurvived()
+    {
+
+    }
+
+    public void AddRoundLost()
+    {
+
     }
     #endregion
 }
