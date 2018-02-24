@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Camera_Controller : MonoBehaviour {
 
-
+    public float speed;
+    public Vector3 offset;
+    public Camera maincam;
 
 
 	// Use this for initialization
 	void Start () {
+
 		
 	}
 	

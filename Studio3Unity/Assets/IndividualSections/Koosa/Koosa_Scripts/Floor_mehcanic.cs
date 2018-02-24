@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Floor_mehcanic : MonoBehaviour {
-
-    public bool isfalling;
-    public Vector3 startpos;
+    // This script will not be used in the tile manager, its here for refrence.
+    public bool isFalling;
+    public Vector3 startPos;
     public float speed;
-    public float actiontime;
-    public float blockcooldown;
-    public Vector3 stoppos;
+    public float actionTime;
+    public float blockCoolDown;
+    public Vector3 stopPos;
 
 
 	// Use this for initialization
 	void Start () {
-        startpos = transform.position;
-        isfalling = false;
+        startPos = transform.position;
+        isFalling = false;
 		
 	}
 	
@@ -27,27 +27,27 @@ public class Floor_mehcanic : MonoBehaviour {
         }
 	}
 
-    public void fall()
+    public void Fall()
     {
-        if (transform.position != stoppos)
+        if (transform.position != stopPos)
         {
             transform.Translate(0, speed, 0);
         }
     }
-    public void rise()
+    public void Rise()
     {
-        if (transform.position != startpos)
+        if (transform.position != startPos)
         {
             transform.Translate(0, speed, 0);
         }
     }
-    IEnumerator ground()
+    IEnumerator Ground()
     {
 
-        yield return new WaitForSeconds(actiontime);
-        fall();
-        yield return new WaitForSeconds(blockcooldown);
-        rise();
+        yield return new WaitForSeconds(actionTime);
+        Fall();
+        yield return new WaitForSeconds(blockCoolDown);
+        Rise();
 
 
 

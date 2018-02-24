@@ -5,81 +5,67 @@ using UnityEngine;
 public class Zombie_Pool : MonoBehaviour {
 
 #region Public Variables
-    public List<GameObject> zombies;
     public GameObject zombie;
-    public float spawntime;
-    public int zombiespooled;
-    public Transform spawnpoint;
-    public int spawnindex;
-    public float time;
-    public float timetoincrease;
-
+    public int zombiesPooled;
+    public float timeToIncrease;
+    public Transform spawnPoint;
+    public float spawnTime;  
     #endregion
+
+
+#region Private Variables
+    private List<GameObject> zombies;
+    private int spawnIndex;
+    private int rate = 2;
+    [SerializeField]
+    private float maxTime = 20;
+    [SerializeField]
+    private float time = 20;
+    #endregion
+
+
 #region Unity Functions
     private void Awake()
-    {
-        
-         zombies = new List<GameObject>();
+    {  
+      zombies = new List<GameObject>();
     }
+
     private void Start()
     {
-        //InvokeRepeating("spawn", spawntime, spawntime);
-        for(int i = 0; i < zombiespooled; i++)
+        for (int i = 0; i < zombiesPooled; i++)
         {
-            GameObject zombieobject = Instantiate(zombie, transform.position, Quaternion.identity);
-            zombieobject.SetActive(true);
-            zombies.Add(zombieobject);
+           GameObject zombieObject = Instantiate(zombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
+           zombieObject.SetActive(true);
+           zombies.Add(zombieObject);
         }
-
-
-
-
     }
+
     private void Update()
     {
-        time -=Time.deltaTime;
+       time -=Time.deltaTime*rate;
         
-        if (time <= 5)
-        {
-            spawn();
-            time = timetoincrease;
-        }
-       
-
-
-
-
-
-        spawnindex = Random.Range(0, spawnpoint.childCount);
-        
+       if (time <=spawnTime )
+        { 
+           Spawn();
+           time = maxTime;
+       }
+        spawnIndex = Random.Range(0, spawnPoint.childCount);
     }
     #endregion
 
+
 #region My Functions
-    private void spawn()
+    private void Spawn()
     {
         for (int i = 0; i <zombies.Count ; i++)
         {
             if (!zombies[i].activeInHierarchy)
             {
-
-                zombies[i].transform.position = spawnpoint.GetChild(spawnindex).position;
+                zombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
                 zombies[i].transform.rotation = transform.rotation;
-                zombies[i].SetActive(true);
-                
-                break;
-
-            }
-
-
-
-
-            
+                zombies[i].SetActive(true);             
+            }  
         }
-
-
-
-
     }
 }
 #endregion

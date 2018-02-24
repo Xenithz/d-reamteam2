@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
-    public float scrollingTextTimer;
+    public Transform loginPanel;
+    public Transform registerPanel;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,7 +14,7 @@ public class UIManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        scrollingTextTimer -= Time.deltaTime;
+        
 	}
 
     public void OnClickToLogin() // to go to log in
@@ -30,13 +31,13 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene("Tutorial");
     }
 
-    public void OnClickTwoPlayer() // to go to 2 player map
+    public void OnClickOfflineOnePlayer() // to go to 2 player map
     {
-        SceneManager.LoadScene("2_Player");
+        SceneManager.LoadScene("2_Player_Offline");
     }
-    public void OnClickFourPlayer() // to go to 4 player map
+    public void OnClickOfflineTwoPlayer() // to go to 4 player map
     {
-        SceneManager.LoadScene("4_Player");
+        SceneManager.LoadScene("2_Player_Offline");
     }
 
     public void OnClickToMain() // to go to main menu
@@ -44,5 +45,23 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene("Main_Menu");
     }
 
+    public void OnClickRegisterPanel()
+    {
+        loginPanel.gameObject.SetActive(false);
+        registerPanel.gameObject.SetActive(true);
+    }
+
+    public void OnClickLoginPanel()
+    {
+        loginPanel.gameObject.SetActive(true);
+        registerPanel.gameObject.SetActive(false);
+    }
+
+    public void OnClickToOfflinePick() // to go to main menu
+    {
+        SceneManager.LoadScene("Offline_Level_Pick");
+    }
+
     
+
 }
