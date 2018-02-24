@@ -10,8 +10,8 @@ public class ZombieStats : MonoBehaviour
     public float heavyDamage = 3.0f;
     public float speed;
     public float attackDistance;
-    public float chaseDistance;
     public float distanceToPlayer;
+    [HideInInspector] public Rigidbody rg;
     public Transform player;
 
 
@@ -21,13 +21,13 @@ public class ZombieStats : MonoBehaviour
     //private Animation anim;
     #endregion
 
-    #region Functions
+    #region Callbacks
     void Start()
     {
-
+        rg = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
     }
