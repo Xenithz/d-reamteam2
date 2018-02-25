@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/IndividualSections/Leon/Scenes/4_Player.unity
+- path: Assets/Alpha Presentation/Alpha.unity
   isLoaded: 1
   isActive: 1
