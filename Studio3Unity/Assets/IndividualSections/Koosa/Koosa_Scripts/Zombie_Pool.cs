@@ -7,7 +7,6 @@ public class Zombie_Pool : MonoBehaviour {
 #region Public Variables
     public GameObject zombie;
     public int zombiesPooled;
-    public float timeToIncrease;
     public Transform spawnPoint;
     public float spawnTime;  
     #endregion

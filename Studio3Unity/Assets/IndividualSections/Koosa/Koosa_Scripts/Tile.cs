@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+
+#region Public Varaiables
+    public Vector3 position;
+    public bool falling;
+    #endregion
+
+
+#region Unity Functions
+
+
+
+    void Awake () {
+        position = transform.position;
+        falling = false;
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	
 }
+#endregion
