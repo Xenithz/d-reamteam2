@@ -62,7 +62,8 @@ public class Zombie_Pool : MonoBehaviour {
             {
                 zombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
                 zombies[i].transform.rotation = transform.rotation;
-                zombies[i].SetActive(true);             
+                zombies[i].SetActive(true);
+                break;
             }  
         }
     }
