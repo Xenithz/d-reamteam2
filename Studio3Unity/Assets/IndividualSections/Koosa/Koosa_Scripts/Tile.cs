@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour {
+public class Tile  {
 
 
 #region Public Varaiables
-    public Vector3 position;
-    public bool falling;
+    public GameObject myTile;
     #endregion
 
 
-#region Unity Functions
+#region My Functions
+    public Tile (GameObject tileToPass)
+    {
+        myTile = tileToPass;
+    }
 
 
 
-    void Awake () {
-        position = transform.position;
-        falling = false;
-		
-	}
+   
 	
 	
 }
