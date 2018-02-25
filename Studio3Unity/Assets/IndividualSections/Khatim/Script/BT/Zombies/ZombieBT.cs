@@ -10,7 +10,7 @@ public class ZombieBT : MonoBehaviour
 
     #endregion
 
-    #region Functions
+    #region Callbacks
     void Start ()
     {
         zom = GetComponent<ZombieStats>();
@@ -22,7 +22,7 @@ public class ZombieBT : MonoBehaviour
         sequenceNode.children.Add(new Attack());
     }
 
-    void Update ()
+    void FixedUpdate ()
     {
         root.Execute(this);
     }
