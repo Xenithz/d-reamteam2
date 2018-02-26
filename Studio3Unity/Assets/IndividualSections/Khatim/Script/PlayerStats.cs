@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : Character_Controller
+public class PlayerStats : MonoBehaviour
 {
     #region Public Variables
-    public float health;
-    public GameObject[] healthSprite;
     #endregion
 
     #region Private Variables
