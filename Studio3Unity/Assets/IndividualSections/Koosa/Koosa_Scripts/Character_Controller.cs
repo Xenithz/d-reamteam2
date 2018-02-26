@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+//(typeof(Rigidbody))]
 public class Character_Controller : MonoBehaviour {
 
 #region Private Variables 
+    [SerializeField]
     private Rigidbody playerBody;
     private BoxCollider playerCollider;
     private RaycastHit hit;
@@ -25,24 +26,18 @@ public class Character_Controller : MonoBehaviour {
 #region Unity Functions
     private void Start()
     {
-        
-        playerBody = GetComponent<Rigidbody>();
+        GameObject controlScripts = GameObject.Find("ControlScripts");
+        tileManager = controlScripts.GetComponent<Tile_Manager>();
+        playerBody = gameObject.GetComponent<Rigidbody>();
         playerCollider = GetComponent<BoxCollider>();   
     }
 
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-            DropMyTile();
+        //if (Input.GetKeyDown(KeyCode.G))
+        //    DropMyTile();
 
-        
-
-
-
-
-
-
-        Jump();
+        //Jump();
 
         playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
@@ -57,10 +52,18 @@ public class Character_Controller : MonoBehaviour {
             transform.rotation = Turn();
         }
     }
-#endregion
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+            DropMyTile();
+
+        Jump();
+    }
+    #endregion
 
 
-#region  My Functions
+    #region  My Functions
     private Vector3 MovementInput()
     {
         Vector3 playerinput;
@@ -107,18 +110,15 @@ public class Character_Controller : MonoBehaviour {
     }
     private void DropMyTile()
     {
-        
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
        
         myTile = hit.transform.gameObject;
         if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile)) 
         {
             Debug.Log("HITTTING");
-            StartCoroutine(tileManager.DroppingTile(myTile));
+            tileManager.CallDropRPC(hit.transform.gameObject.name);
 
         }
-        
-
     }
 
 

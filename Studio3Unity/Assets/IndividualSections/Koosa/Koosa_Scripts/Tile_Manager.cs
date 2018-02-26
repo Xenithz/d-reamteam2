@@ -2,106 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using Photon;
 
-public class Tile_Manager : MonoBehaviour {
+public class Tile_Manager : Photon.MonoBehaviour {
 
     public float countDownToFall;
     public float countDownToRise;
     public GameObject tileToDtrop;
-   public  float fallPos;
+    public  float fallPos;
     public float risePos;
     public List<GameObject> tiles = new List<GameObject>();
-    
+    public bool flagTest;
 
-
-
-
-
-    void Update()
+    private void Awake()
     {
-     
-
-       
-
-
-       
         foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Tile"))
         {
-            
             if (!tiles.Contains(tile))
-            
-
-                tiles.Add(  tile);
-
-            
+                tiles.Add(tile);
         }
+
+        flagTest = false;
     }
-    /*
-   public   void DropTile()
-    {
-        StartCoroutine(DroppingTile( tileToDtrop));
+
+    void Update()
+    {       
+     
     }
-    */
 
-   public IEnumerator DroppingTile(GameObject myTile)
+    public IEnumerator DroppingTile(string myTileName)
     {
-
-
-
-
+        Debug.Log("This gets reached");
+        GameObject myTile = GameObject.Find(myTileName);
+        flagTest = false;
         yield return new WaitForSeconds(countDownToFall);
-
-        //if (myTile.transform.position.y >= fallPos)
-
+        Debug.Log("This gets dropped");
         myTile.gameObject.SetActive(false);
 
-        //myTile.transform.Translate(0, fallPos, 0);
-
         yield return new WaitForSeconds(countDownToRise);
-
-        //  if (myTile.transform.position.y <= risePos)
+        Debug.Log("This gets raised");
         myTile.gameObject.SetActive(true);
-          // myTile.transform.Translate(0, risePos, 0);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-
-    for (int i=0; i<tile.childCount; i++)
+    [PunRPC]
+    public void CallDropTile(string inputName)
     {
-        if (i < tile.childCount && canAdd)
-        {
-
-
-            tiles.Add(tile.GetChild(i).transform.gameObject);
-        }
-        if (i > tile.childCount)
-        {
-            canAdd = false;
-        }
-
-
-
+        StartCoroutine(DroppingTile(inputName));
     }
-    */
 
-
-
-
-
-
+    public void CallDropRPC(string nameToPass)
+    {
+        if(flagTest == false)
+        {
+            flagTest = true;
+            photonView.RPC("CallDropTile", PhotonTargets.All, nameToPass);
+        }
+    }
 }
