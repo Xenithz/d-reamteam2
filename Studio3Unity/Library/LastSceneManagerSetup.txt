@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/IndividualSections/Leon/Scenes/Tutorial.unity
+- path: Assets/IndividualSections/Koosa/KoosaTestScene.unity
   isLoaded: 1
   isActive: 1

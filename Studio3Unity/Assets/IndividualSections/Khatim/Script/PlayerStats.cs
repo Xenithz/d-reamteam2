@@ -4,5 +4,28 @@ using UnityEngine;
 
 public class PlayerStats : Character_Controller
 {
-    //public float Health = 6.0f;
+    #region Public Variables
+    public float health;
+    public GameObject[] healthSprite;
+    #endregion
+
+    #region Private Variables
+
+    #endregion
+
+    #region Callbacks
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        
+    }
+    #endregion
+
+    #region Functions
+
+    #endregion
 }
