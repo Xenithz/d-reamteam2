@@ -27,7 +27,7 @@ public class Character_Controller : MonoBehaviour {
     private void Start()
     {
         GameObject controlScripts = GameObject.Find("ControlScripts");
-        tileManager = controlScripts.GetComponent<Tile_Manager>();
+        
         playerBody = gameObject.GetComponent<Rigidbody>();
         playerCollider = GetComponent<BoxCollider>();   
     }
@@ -111,6 +111,29 @@ public class Character_Controller : MonoBehaviour {
     private void DropMyTile()
     {
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
+        Debug.Log("raycast shot");
+        myTile = hit.transform.gameObject;
+        if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile))
+        {
+            Debug.Log("HITTTING");
+            StartCoroutine(tileManager.DroppingTile(myTile));
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    /*
+    private void DropMyTile()
+    {
+        Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
        
         myTile = hit.transform.gameObject;
         if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile)) 
@@ -120,7 +143,7 @@ public class Character_Controller : MonoBehaviour {
 
         }
     }
-
+    */
 
 
 

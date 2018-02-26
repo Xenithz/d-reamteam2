@@ -8,28 +8,72 @@ public class Tile_Manager : Photon.MonoBehaviour {
 
     public float countDownToFall;
     public float countDownToRise;
-    public GameObject tileToDtrop;
+   // public GameObject tileToDtrop;
     public  float fallPos;
     public float risePos;
     public List<GameObject> tiles = new List<GameObject>();
     public bool flagTest;
+   
 
     private void Awake()
     {
+        Renderer rend = GetComponent<Renderer>();
+
+
         foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Tile"))
         {
             if (!tiles.Contains(tile))
                 tiles.Add(tile);
+
+            rend.material.color = Color.green;
+            /*
+            foreach (Transform child in tile.transform)
+            {
+                child.transform.gameObject.tag = "Tile";
+
+            }
+            */
+
+
+
         }
+       
+       
 
         flagTest = false;
     }
 
     void Update()
-    {       
-     
+    {
+        
+
+
+    }
+    public IEnumerator DroppingTile(GameObject myTile)
+    {
+        Debug.Log("This gets reached");
+        
+        
+        yield return new WaitForSeconds(countDownToFall);
+        Debug.Log("This gets dropped");
+        myTile.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(countDownToRise);
+        Debug.Log("This gets raised");
+        myTile.gameObject.SetActive(true);
     }
 
+
+
+
+
+
+
+
+
+    
+
+    /*
     public IEnumerator DroppingTile(string myTileName)
     {
         Debug.Log("This gets reached");
@@ -58,4 +102,5 @@ public class Tile_Manager : Photon.MonoBehaviour {
             photonView.RPC("CallDropTile", PhotonTargets.All, nameToPass);
         }
     }
+    */
 }
