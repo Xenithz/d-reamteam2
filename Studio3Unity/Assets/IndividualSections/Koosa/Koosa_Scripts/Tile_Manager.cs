@@ -6,75 +6,102 @@ using UnityEngine.Assertions;
 public class Tile_Manager : MonoBehaviour {
 
     public float speed;
-    public float time;
-    public List<GameObject> tiles = new List<GameObject>();
-   // public bool canAdd = true;
-   // public Transform tile;
+    public float countDownToFall;
+    public float countDownToRise;
+   // public Vector3 fallPos;
+   // public Vector3 risePos;
+    public GameObject tileToDtrop;
+   public  float min;
+    public float max;
+    public List<Tile> tiles = new List<Tile>();
+    // public bool canAdd = true;
+    // public Transform tile;
+    public GameObject[] tempTilesHolder;
 
 
 
-    private void Awake()
+
+
+    void Update()
     {
-       
-    }
+     
 
-
-    // Use this for initialization
-    void Start () {
-       
-
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Tile"))
+        if (Input.GetKeyDown(KeyCode.G) )
         {
-            if (!tiles.Contains(tile))
-            {
-
-                tiles.Add(tile);
-                
-            }
+            DropTile();
+            Debug.Log("started");
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-
-        for (int i=0; i<tile.childCount; i++)
+        tempTilesHolder = GameObject.FindGameObjectsWithTag("Tile");
+        foreach (GameObject tile in tempTilesHolder)
         {
-            if (i < tile.childCount && canAdd)
-            {
-
-
-                tiles.Add(tile.GetChild(i).transform.gameObject);
-            }
-            if (i > tile.childCount)
-            {
-                canAdd = false;
-            }
             
+           // if (!tiles.Contains(tile))
             
+
+                tiles.Add( new Tile( tile));
+
             
         }
-        */
+    }
+     void DropTile()
+    {
+        StartCoroutine(DroppingTile( tileToDtrop));
+    }
+
+    IEnumerator DroppingTile(GameObject myTile)
+    {
+        yield return new WaitForSeconds(countDownToFall);
+        if (transform.position.y >= min)
+          myTile.  transform.Translate(Vector3.down* speed * Time.deltaTime);
+
         
+        yield return new WaitForSeconds(countDownToRise);
 
+        if (transform.position.y >= max)
+           myTile. transform.Translate(Vector3.up * speed * Time.deltaTime);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+
+    for (int i=0; i<tile.childCount; i++)
+    {
+        if (i < tile.childCount && canAdd)
+        {
+
+
+            tiles.Add(tile.GetChild(i).transform.gameObject);
+        }
+        if (i > tile.childCount)
+        {
+            canAdd = false;
+        }
 
 
 
     }
+    */
+
+
+
+
+
+
 }

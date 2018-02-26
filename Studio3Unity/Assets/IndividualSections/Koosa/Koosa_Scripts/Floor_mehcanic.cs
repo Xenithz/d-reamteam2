@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Floor_mehcanic : MonoBehaviour {
-    // This script will not be used in the tile manager, its here for refrence.
+    // This script will not be used in the tile manager, its here for refrence. 
     public bool isFalling;
     public Vector3 startPos;
     public float speed;
