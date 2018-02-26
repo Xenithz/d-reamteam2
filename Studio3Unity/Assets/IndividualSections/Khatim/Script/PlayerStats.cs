@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerStats : Character_Controller
 {
     #region Public Variables
-    public float health = 6.0f;
+    public float health;
+    public GameObject[] healthSprite;
     #endregion
 
     #region Private Variables
@@ -13,7 +14,15 @@ public class PlayerStats : Character_Controller
     #endregion
 
     #region Callbacks
+    void Start()
+    {
 
+    }
+
+    void Update()
+    {
+        
+    }
     #endregion
 
     #region Functions
