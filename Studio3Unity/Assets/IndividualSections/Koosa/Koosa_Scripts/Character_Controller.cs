@@ -30,6 +30,8 @@ public class Character_Controller : MonoBehaviour {
     {
         Jump();
 
+        playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
         transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
 
         Vector3 vectorOfMovement = MovementInput();

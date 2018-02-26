@@ -49,11 +49,11 @@ public class UserInformationControl : MonoBehaviour
     //TESTING PURPOSES
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             CallEditData(UserStats.instance.myUsername);
         }
-        else if (Input.GetKeyDown(KeyCode.K))
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             CallGrabData(UserStats.instance.myUsername, false);
         }
@@ -114,6 +114,7 @@ public class UserInformationControl : MonoBehaviour
         if(myWWW.text == "User is banned")
         {
             Debug.Log("User is banned, don't continue");
+            gameObject.GetComponent<LoginUI>().DisplayBanned();
         }
         else if(myWWW.text == "User isn't banned")
         {
@@ -191,7 +192,7 @@ public class UserInformationControl : MonoBehaviour
         userStatsArray = dataString.Split(';');
         localRounds = int.Parse(userStatsArray[0]);
         localExp = int.Parse(userStatsArray[1]);
-
+    
         UserStats.instance.SetUserStats(username, localRounds, localExp);
         
         if(usedForLogin == true)

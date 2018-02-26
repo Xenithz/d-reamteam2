@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class LoginUI : MonoBehaviour
 {
     #region Public variables
+
+    public GameObject uiPanel;
     public InputField registrationUsername;
     public InputField registrationPassword;
     public InputField registrationEmail;
@@ -14,8 +16,9 @@ public class LoginUI : MonoBehaviour
     public InputField loginPassword;
 
     public GameObject adminPanel;
-
     public InputField adminPanelUsername;
+
+    public GameObject banPanel;
     #endregion
 
     #region My functions
@@ -53,6 +56,12 @@ public class LoginUI : MonoBehaviour
     public void EnableAdminPanel()
     {
         adminPanel.SetActive(true);
+    }
+
+    public void DisplayBanned()
+    {
+        uiPanel.SetActive(false);
+        banPanel.SetActive(true);
     }
     #endregion
 }

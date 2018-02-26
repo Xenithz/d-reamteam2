@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour {
+public class Tile  {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+
+#region Public Varaiables
+    public GameObject myTile;
+    #endregion
+
+
+#region My Functions
+    public Tile (GameObject tileToPass)
+    {
+        myTile = tileToPass;
+    }
+
+
+
+   
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	
 }
+#endregion
