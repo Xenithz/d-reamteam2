@@ -6,6 +6,7 @@ public class UserInformationControl : MonoBehaviour
 {
     #region Public variables
     public static UserInformationControl instance = new UserInformationControl();
+
     public string[] userStatsArray;
     #endregion
 
@@ -28,17 +29,9 @@ public class UserInformationControl : MonoBehaviour
     string myRecieveDataUrl = "http://localhost/studio3/GrabUserData.php";
 
     [SerializeField]
-    string myUsername;
-    [SerializeField]
-    string myPassword;
-    [SerializeField]
-    string myEmail;
-
-    [SerializeField]
     int localRounds;
     [SerializeField]
     int localExp;
-
     #endregion
 
     #region Unity callbacks 
@@ -51,6 +44,19 @@ public class UserInformationControl : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    //TESTING PURPOSES
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            CallEditData(UserStats.instance.myUsername);
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            CallGrabData(UserStats.instance.myUsername, false);
+        }
     }
     #endregion
 
@@ -83,7 +89,7 @@ public class UserInformationControl : MonoBehaviour
         if(myWWW.text == "Login success")
         {
             Debug.Log("Login success");
-            StartCoroutine(GrabData(username));
+            StartCoroutine(GrabData(username, true));
         }
         else if(myWWW.text == "Password incorrect")
         {
@@ -167,9 +173,11 @@ public class UserInformationControl : MonoBehaviour
         yield return myWWW;
 
         Debug.Log(myWWW.text);
+
+        StartCoroutine(GrabData(username, false));
     }
 
-    IEnumerator GrabData(string username)
+    IEnumerator GrabData(string username, bool usedForLogin)
     {
         WWWForm myForm = new WWWForm();
         myForm.AddField("playerusernamepost", username);
@@ -178,13 +186,22 @@ public class UserInformationControl : MonoBehaviour
         yield return myWWW;
 
         Debug.Log(myWWW.text);
+
         string dataString = myWWW.text;
         userStatsArray = dataString.Split(';');
         localRounds = int.Parse(userStatsArray[0]);
         localExp = int.Parse(userStatsArray[1]);
 
         UserStats.instance.SetUserStats(username, localRounds, localExp);
-        StartCoroutine(BanCheck(username));
+        
+        if(usedForLogin == true)
+        {
+            StartCoroutine(BanCheck(username));
+        }
+        else
+        {
+            Debug.Log("Coroutine not used for login");
+        }
     }
     #endregion
 
@@ -212,6 +229,11 @@ public class UserInformationControl : MonoBehaviour
     public void CallEditData(string inputUsername)
     {
         StartCoroutine(EditData(inputUsername));
+    }
+
+    public void CallGrabData(string inputUsername, bool inputBool)
+    {
+        StartCoroutine(GrabData(inputUsername, inputBool));
     }
     #endregion
 }
