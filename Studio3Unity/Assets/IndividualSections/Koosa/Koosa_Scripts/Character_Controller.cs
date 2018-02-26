@@ -52,7 +52,7 @@ public class Character_Controller : MonoBehaviour {
         Vector3 playerinput;
         float horInput = Input.GetAxisRaw("Horizontal");
         float verInput = Input.GetAxisRaw("Vertical");
-        playerinput = new Vector3(horInput, 0f, verInput);
+        playerinput = new Vector3(horInput, 0f, verInput).normalized;
         return playerinput;
     }
 
