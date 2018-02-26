@@ -32,6 +32,7 @@ public class UserStats : MonoBehaviour
     #region My functions
     public void SetUserStats(string usernameToSet, int roundsToSet, int expToSet)
     {
+        PhotonNetwork.playerName = usernameToSet;
         myUsername = usernameToSet;
         myRounds = roundsToSet;
         myExp = expToSet;
