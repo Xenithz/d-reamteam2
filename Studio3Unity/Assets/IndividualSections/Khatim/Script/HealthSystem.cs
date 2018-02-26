@@ -10,15 +10,13 @@ public class HealthSystem : MonoBehaviour
     #endregion
 
     #region Private Variables
-    private int Health;
+    public PlayerStats ply;
     #endregion
 
-    #region Functions
+    #region Callbacks
     void Start()
     {
-        Health = 6;
-        healthText.text = Health.ToString();
-
+        healthText.text = ply.health.ToString();
     }
     void FixedUpdate()
     {
@@ -26,21 +24,22 @@ public class HealthSystem : MonoBehaviour
     }
     #endregion
 
+    #region Functions
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && Health < 6)
+        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && ply.health < 6)
         {
-            Health++;
-            healthText.text = Health.ToString();
+            ply.health++;
             other.gameObject.SetActive(false);
         }
 
-        if (other.gameObject.tag == "Damage" && Input.GetKey(KeyCode.E) && Health > 0)
+        if (other.gameObject.tag == "Damage" && Input.GetKey(KeyCode.E) && ply.health > 0)
         {
-            Health--;
-            healthText.text = Health.ToString();
+            ply.health--;
+            //ply.healthSprite[0].SetActive(false);
             other.gameObject.SetActive(false);
         }
     }
+    #endregion
 }

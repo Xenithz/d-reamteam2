@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour {
     public Transform loginPanel;
     public Transform registerPanel;
+    public Transform mainMenuPanel;
+    public Transform offlinePickPanel;
+    public Transform onlinePickPanel;
+    public Transform lobbyPanel;
 	// Use this for initialization
 	void Start () {
 		
@@ -31,18 +35,17 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene("Tutorial");
     }
 
-    public void OnClickOfflineOnePlayer() // to go to 2 player map
-    {
-        SceneManager.LoadScene("2_Player_Offline");
-    }
-    public void OnClickOfflineTwoPlayer() // to go to 4 player map
-    {
-        SceneManager.LoadScene("2_Player_Offline");
+    public void OnClickOfflinePanel()
+    { 
+        offlinePickPanel.gameObject.SetActive(true);
+        mainMenuPanel.gameObject.SetActive(false);
     }
 
-    public void OnClickToMain() // to go to main menu
+    public void OnClickOnlinePanel()
     {
-        SceneManager.LoadScene("Main_Menu");
+        onlinePickPanel.gameObject.SetActive(true);
+        mainMenuPanel.gameObject.SetActive(false); 
+        loginPanel.gameObject.SetActive(false);
     }
 
     public void OnClickRegisterPanel()
@@ -57,10 +60,48 @@ public class UIManager : MonoBehaviour {
         registerPanel.gameObject.SetActive(false);
     }
 
-    public void OnClickToOfflinePick() // to go to main menu
+    public void OnClickPlayOnline()
     {
-        SceneManager.LoadScene("Offline_Level_Pick");
+        mainMenuPanel.gameObject.SetActive(false);
+        loginPanel.gameObject.SetActive(true);
     }
+
+    public void OnClickLobbyPanel()
+    {
+        lobbyPanel.gameObject.SetActive(true);
+        onlinePickPanel.gameObject.SetActive(false);
+    }
+    public void OnClickOfflineOnePlayerScene() // to go to 2 player map
+    {
+        SceneManager.LoadScene("2_Player_Offline");
+    }
+
+    
+    public void OnClickOfflineTwoPlayerScene() // to go to 4 player map
+    {
+        SceneManager.LoadScene("2_Player_Offline");
+    }
+
+    public void OnClickFourPlayerScene() // to go to 4 player map
+    {
+        SceneManager.LoadScene("4_Player_Offline");
+    }
+
+    public void OnClickToMain() // to go to main menu
+    {
+        mainMenuPanel.gameObject.SetActive(true);
+        loginPanel.gameObject.SetActive(false);
+        offlinePickPanel.gameObject.SetActive(false);
+        onlinePickPanel.gameObject.SetActive(false);
+        registerPanel.gameObject.SetActive(false);
+        lobbyPanel.gameObject.SetActive(false);
+    }
+
+    
+
+    
+
+    
 
     
 

@@ -8,6 +8,8 @@ public class Character_Controller : MonoBehaviour {
 #region Private Variables 
     private Rigidbody playerBody;
     private BoxCollider playerCollider;
+    private RaycastHit hit;
+    private GameObject myTile;
     #endregion
 
 
@@ -16,18 +18,30 @@ public class Character_Controller : MonoBehaviour {
     public float lockRot;
     public float magnitudeToClamp;
     public float jumpPower;
+    public Tile_Manager tileManager;
     #endregion
 
 
 #region Unity Functions
     private void Start()
     {
+        
         playerBody = GetComponent<Rigidbody>();
         playerCollider = GetComponent<BoxCollider>();   
     }
 
     private void FixedUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.G))
+            DropMyTile();
+
+        
+
+
+
+
+
+
         Jump();
 
         playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
@@ -52,7 +66,7 @@ public class Character_Controller : MonoBehaviour {
         Vector3 playerinput;
         float horInput = Input.GetAxisRaw("Horizontal");
         float verInput = Input.GetAxisRaw("Vertical");
-        playerinput = new Vector3(horInput, 0f, verInput);
+        playerinput = new Vector3(horInput, 0f, verInput).normalized;
         return playerinput;
     }
 
@@ -78,7 +92,7 @@ public class Character_Controller : MonoBehaviour {
         
         float groundDistance;
         groundDistance = playerCollider.bounds.extents.y;
-        return Physics.Raycast(transform.position, -Vector3.up, groundDistance);
+        return Physics.Raycast(transform.position, -Vector3.up, groundDistance+2f);
         
     }
 
@@ -91,6 +105,26 @@ public class Character_Controller : MonoBehaviour {
             
         }        
     }
+    private void DropMyTile()
+    {
+        
+        Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
+       
+        myTile = hit.transform.gameObject;
+        if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile)) 
+        {
+            Debug.Log("HITTTING");
+            StartCoroutine(tileManager.DroppingTile(myTile));
+
+        }
+        
+
+    }
+
+
+
+
+
     #endregion
 }
 

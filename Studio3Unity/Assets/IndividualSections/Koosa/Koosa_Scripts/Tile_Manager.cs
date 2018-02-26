@@ -5,18 +5,13 @@ using UnityEngine.Assertions;
 
 public class Tile_Manager : MonoBehaviour {
 
-    public float speed;
     public float countDownToFall;
     public float countDownToRise;
-   // public Vector3 fallPos;
-   // public Vector3 risePos;
     public GameObject tileToDtrop;
-   public  float min;
-    public float max;
-    public List<Tile> tiles = new List<Tile>();
-    // public bool canAdd = true;
-    // public Transform tile;
-    public GameObject[] tempTilesHolder;
+   public  float fallPos;
+    public float risePos;
+    public List<GameObject> tiles = new List<GameObject>();
+    
 
 
 
@@ -26,42 +21,47 @@ public class Tile_Manager : MonoBehaviour {
     {
      
 
-        if (Input.GetKeyDown(KeyCode.G) )
-        {
-            DropTile();
-            Debug.Log("started");
-        }
+       
 
 
-        tempTilesHolder = GameObject.FindGameObjectsWithTag("Tile");
-        foreach (GameObject tile in tempTilesHolder)
+       
+        foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Tile"))
         {
             
-           // if (!tiles.Contains(tile))
+            if (!tiles.Contains(tile))
             
 
-                tiles.Add( new Tile( tile));
+                tiles.Add(  tile);
 
             
         }
     }
-     void DropTile()
+    /*
+   public   void DropTile()
     {
         StartCoroutine(DroppingTile( tileToDtrop));
     }
+    */
 
-    IEnumerator DroppingTile(GameObject myTile)
+   public IEnumerator DroppingTile(GameObject myTile)
     {
-        yield return new WaitForSeconds(countDownToFall);
-        if (transform.position.y >= min)
-          myTile.  transform.Translate(Vector3.down* speed * Time.deltaTime);
 
-        
+
+
+
+        yield return new WaitForSeconds(countDownToFall);
+
+        //if (myTile.transform.position.y >= fallPos)
+
+        myTile.gameObject.SetActive(false);
+
+        //myTile.transform.Translate(0, fallPos, 0);
+
         yield return new WaitForSeconds(countDownToRise);
 
-        if (transform.position.y >= max)
-           myTile. transform.Translate(Vector3.up * speed * Time.deltaTime);
-
+        //  if (myTile.transform.position.y <= risePos)
+        myTile.gameObject.SetActive(true);
+          // myTile.transform.Translate(0, risePos, 0);
     }
 
 
