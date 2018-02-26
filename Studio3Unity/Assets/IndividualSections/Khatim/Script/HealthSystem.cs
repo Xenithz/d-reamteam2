@@ -7,16 +7,17 @@ public class HealthSystem : MonoBehaviour
 {
     #region Public Variables
     public Text healthText;
+    public int hlth;
+    public GameObject[] healthSprite;
     #endregion
 
     #region Private Variables
-    public PlayerStats ply;
     #endregion
 
     #region Callbacks
     void Start()
     {
-        healthText.text = ply.health.ToString();
+        healthText.text = hlth.ToString();
     }
     void FixedUpdate()
     {
@@ -28,16 +29,19 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && ply.health < 6)
+        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && hlth < 6)
         {
-            ply.health++;
+            healthSprite[hlth].SetActive(true);
+            hlth++;
+            healthText.text = hlth.ToString();
             other.gameObject.SetActive(false);
         }
 
-        if (other.gameObject.tag == "Damage" && Input.GetKey(KeyCode.E) && ply.health > 0)
+        if (other.gameObject.tag == "Damage" && Input.GetKey(KeyCode.E) && hlth > 0)
         {
-            ply.health--;
-            //ply.healthSprite[0].SetActive(false);
+            hlth--;
+            healthSprite[hlth].SetActive(false);
+            healthText.text = hlth.ToString();
             other.gameObject.SetActive(false);
         }
     }
