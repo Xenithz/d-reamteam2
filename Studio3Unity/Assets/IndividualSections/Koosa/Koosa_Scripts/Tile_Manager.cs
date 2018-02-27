@@ -18,7 +18,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
     private void Awake()
     {
         Renderer rend = GetComponent<Renderer>();
-
+        
 
         foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Tile"))
         {
@@ -49,19 +49,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
 
 
     }
-    public IEnumerator DroppingTile(GameObject myTile)
-    {
-        Debug.Log("This gets reached");
-        
-        
-        yield return new WaitForSeconds(countDownToFall);
-        Debug.Log("This gets dropped");
-        myTile.gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(countDownToRise);
-        Debug.Log("This gets raised");
-        myTile.gameObject.SetActive(true);
-    }
+    
 
 
 
@@ -73,7 +61,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
 
     
 
-    /*
+    
     public IEnumerator DroppingTile(string myTileName)
     {
         Debug.Log("This gets reached");
@@ -102,5 +90,5 @@ public class Tile_Manager : Photon.MonoBehaviour {
             photonView.RPC("CallDropTile", PhotonTargets.All, nameToPass);
         }
     }
-    */
+    
 }
