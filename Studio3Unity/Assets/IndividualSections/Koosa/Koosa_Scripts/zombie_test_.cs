@@ -7,6 +7,7 @@ public class zombie_test_ : MonoBehaviour
 #region Public Variables
     public float speed;
     public float recycleTime;
+    
     #endregion
 
 
@@ -36,10 +37,17 @@ public class zombie_test_ : MonoBehaviour
     {  
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed*Time.deltaTime);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("hit player");
+        }
+    }
     #endregion
 
 
-#region My Functions
+    #region My Functions
     private void Recycle()
     {
         gameObject.SetActive(false);

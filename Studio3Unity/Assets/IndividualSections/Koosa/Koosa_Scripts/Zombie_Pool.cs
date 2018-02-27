@@ -15,7 +15,8 @@ public class Zombie_Pool : MonoBehaviour {
 #region Private Variables
     private List<GameObject> zombies;
     private int spawnIndex;
-    private int rate = 2;
+    [SerializeField]
+    private int rate;
     [SerializeField]
     private float maxTime = 20;
     [SerializeField]
@@ -25,18 +26,23 @@ public class Zombie_Pool : MonoBehaviour {
 
 #region Unity Functions
     private void Awake()
-    {  
-      zombies = new List<GameObject>();
+    {
+        zombies = new List<GameObject>();
+       
+        
     }
 
     private void Start()
     {
+        
         for (int i = 0; i < zombiesPooled; i++)
         {
            GameObject zombieObject = Instantiate(zombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
-           zombieObject.SetActive(true);
+           zombieObject.SetActive(false);
            zombies.Add(zombieObject);
+           
         }
+        
     }
 
     private void Update()
