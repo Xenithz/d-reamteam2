@@ -6,18 +6,21 @@ using UnityEngine.UI;
 public class HealthSystem : MonoBehaviour
 {
     #region Public Variables
-    public Text healthText;
-    public int hlth;
+    //public Text healthText;
     public GameObject[] healthSprite;
+    public int hlth;
+
     #endregion
 
     #region Private Variables
+
     #endregion
 
     #region Callbacks
     void Start()
     {
-        healthText.text = hlth.ToString();
+        //healthText.text = hlth.ToString();
+        hlth = 6;
     }
     void FixedUpdate()
     {
@@ -33,7 +36,7 @@ public class HealthSystem : MonoBehaviour
         {
             healthSprite[hlth].SetActive(true);
             hlth++;
-            healthText.text = hlth.ToString();
+            //healthText.text = hlth.ToString();
             other.gameObject.SetActive(false);
         }
 
@@ -41,7 +44,7 @@ public class HealthSystem : MonoBehaviour
         {
             hlth--;
             healthSprite[hlth].SetActive(false);
-            healthText.text = hlth.ToString();
+            //healthText.text = hlth.ToString();
             other.gameObject.SetActive(false);
         }
     }

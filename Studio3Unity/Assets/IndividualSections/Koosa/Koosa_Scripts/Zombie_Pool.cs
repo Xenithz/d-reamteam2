@@ -34,7 +34,7 @@ public class Zombie_Pool : MonoBehaviour {
         for (int i = 0; i < zombiesPooled; i++)
         {
            GameObject zombieObject = Instantiate(zombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
-           zombieObject.SetActive(true);
+           zombieObject.SetActive(false);
            zombies.Add(zombieObject);
         }
     }
