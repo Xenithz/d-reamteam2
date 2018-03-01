@@ -73,5 +73,17 @@ public class Zombie_Pool : MonoBehaviour {
             }  
         }
     }
+    public GameObject ZombieToSpawn()
+    {
+        for (int i=0; i < zombies.Count; i++)
+        {
+            if (!zombies[i].activeInHierarchy)
+            {
+                return zombies[i];
+            }
+        }
+        return null;
+
+    }
 }
 #endregion
