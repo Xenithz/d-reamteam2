@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon;
 
-public class Camera_Controller : MonoBehaviour {
+public class Camera_Controller : Photon.MonoBehaviour {
 
 #region Public Variables
-    public Transform player;
+    public Transform player = null;
     
     public Vector3 offset;
     public float smoothing;
@@ -21,15 +22,28 @@ public class Camera_Controller : MonoBehaviour {
 #region Unity Functions
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player").transform;
+
     }
  
-	
-	
-	void Update () {
-       target = player.transform.position + offset;
-        transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothing);
+	void Update ()
+    {
+        GivePlayer();
 
+        target = player.transform.position + offset;
+        transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothing);
+    }
+
+    public void GivePlayer()
+    {
+        GameObject[] myPlayers = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject checkPlayer in myPlayers)
+        {
+            if (checkPlayer.GetComponent<PhotonView>().isMine)
+            {
+                player = checkPlayer.transform;
+            }
+        }
+        return;
     }
 }
 #endregion

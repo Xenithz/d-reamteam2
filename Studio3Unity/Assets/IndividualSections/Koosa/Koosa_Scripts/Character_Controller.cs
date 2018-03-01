@@ -30,16 +30,12 @@ public class Character_Controller : MonoBehaviour {
         GameObject controlScripts = GameObject.Find("ControlScripts");
         tileManager = controlScripts.GetComponent<Tile_Manager>();
         playerBody = gameObject.GetComponent<Rigidbody>();
-        playerCollider = GetComponent<BoxCollider>();   
+        playerCollider = GetComponent<BoxCollider>();
+        tileManager = controlScripts.GetComponent<Tile_Manager>();
     }
 
     private void FixedUpdate()
     {
-        //if (Input.GetKeyDown(KeyCode.G))
-        //    DropMyTile();
-
-        //Jump();
-
         playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
@@ -87,57 +83,35 @@ public class Character_Controller : MonoBehaviour {
     {
         Quaternion look;
         look= Quaternion.LookRotation(MovementInput());
-
         return look;
     }
 
     private bool IsNotGrounded()
     {
-        
         float groundDistance;
         groundDistance = playerCollider.bounds.extents.y;
         return Physics.Raycast(transform.position, -Vector3.up, groundDistance+2f);
-        
     }
 
     private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
-        {
-            
-         playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
-            
+        {   
+            playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
         }        
     }
-  
-
-
-
-
-
-
-
-
-
-
     
     private void DropMyTile()
     {
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
-       
         myTile = hit.transform.gameObject;
+
         if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile)) 
         {
             Debug.Log("HITTTING");
             tileManager.CallDropRPC(hit.transform.gameObject.name);
-
         }
     }
-    
-
-
-
-
     #endregion
 }
 

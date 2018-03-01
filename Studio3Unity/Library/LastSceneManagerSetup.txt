@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/IndividualSections/Leon/Scenes/2_Player_Offline.unity
+- path: Assets/IndividualSections/Angelo/TestScene.unity
   isLoaded: 1
   isActive: 1
