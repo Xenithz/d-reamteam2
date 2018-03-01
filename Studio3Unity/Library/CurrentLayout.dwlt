@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -42,10 +42,10 @@ MonoBehaviour:
     y: 30
     width: 1858
     height: 987
-  m_MinSize: {x: 681, y: 492}
+  m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 238
+  controlID: 9
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -89,8 +89,8 @@ MonoBehaviour:
     y: 0
     width: 366
     height: 716
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -165,7 +165,7 @@ MonoBehaviour:
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: Default
+  m_LastLoadedLayoutName: 
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -206,10 +206,10 @@ MonoBehaviour:
     y: 0
     width: 1481
     height: 987
-  m_MinSize: {x: 404, y: 492}
+  m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 239
+  controlID: 10
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -230,10 +230,10 @@ MonoBehaviour:
     y: 0
     width: 1481
     height: 716
-  m_MinSize: {x: 404, y: 221}
-  m_MaxSize: {x: 8004, y: 4021}
+  m_MinSize: {x: 406, y: 221}
+  m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 240
+  controlID: 11
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -324,19 +324,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/IndividualSections/Leon/Assets/Red Tile Material
+    - Assets/IndividualSections/Leon/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/IndividualSections/Leon/Assets/Red Tile Material
+  - Assets/IndividualSections/Leon/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity Projects\Studio 3\d-reamteam2\Studio3Unity
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 51}
-    m_SelectedIDs: c2720000
-    m_LastClickedID: 29378
-    m_ExpandedIDs: 0000000008520000e4520000545300005e5300006c530000a8550000ac550000545600008c5600002e570000ae570000c45700004a5800008672000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 207}
+    m_SelectedIDs: d6300000
+    m_LastClickedID: 12502
+    m_ExpandedIDs: 000000004026000028270000d4270000e02700009a2b0000e22d0000e82d00009e2e0000da2e00000c3000005a300000c4300000d6300000da30000074310000766f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -364,7 +364,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000008520000e4520000545300005e530000625300006c530000ac550000545600008c5600002e5700006c570000c4570000c85700004a5800008672000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000004026000028270000d4270000e02700009a2b0000e22d0000e82d00009e2e0000da2e00000c3000005a300000c4300000d6300000da30000074310000766f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -480,23 +480,23 @@ MonoBehaviour:
     height: 695
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7ec9f9ff
-    m_LastClickedID: -407170
-    m_ExpandedIDs: 1c80fdfff01efffff875ffff00000000b65b0000885d0000
+    m_SelectedIDs: 3a310000
+    m_LastClickedID: 0
+    m_ExpandedIDs: ecd3ffffdafbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: ZombieLeon(Clone)
-      m_OriginalName: ZombieLeon(Clone)
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -616402
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -532,14 +532,14 @@ MonoBehaviour:
     width: 1111
     height: 695
   m_SceneLighting: 1
-  lastFramingTime: 2708.8841309027584
+  lastFramingTime: 71.03207620889732
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 52.560074, y: 14.522068, z: 8.082401}
+    m_Target: {x: 44.47992, y: -14.53125, z: 36.152344}
     speed: 2
-    m_Value: {x: 52.560074, y: 14.522068, z: 8.082401}
+    m_Value: {x: 44.47992, y: -14.53125, z: 36.152344}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -562,17 +562,17 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.001741262, y: -0.8457541, z: 0.5335629, w: -0.0027601772}
+    m_Target: {x: 0.003585942, y: 0.6582375, z: -0.75279534, w: 0.0031354865}
     speed: 2
-    m_Value: {x: -0.001741262, y: -0.8457541, z: 0.5335629, w: -0.0027601772}
+    m_Value: {x: 0.003585942, y: 0.6582375, z: -0.75279534, w: 0.0031354865}
   m_Size:
-    m_Target: 87.52754
+    m_Target: 200.10138
     speed: 2
-    m_Value: 87.52754
+    m_Value: 200.10138
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_LastSceneViewRotation: {x: 0.48098138, y: -0.5178526, z: 0.47552162, w: 0.52379847}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
