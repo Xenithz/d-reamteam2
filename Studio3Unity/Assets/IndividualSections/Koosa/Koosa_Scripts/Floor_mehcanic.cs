@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Floor_mehcanic : MonoBehaviour {
+    //TODO: Change to MECHANIC
     // This script will not be used in the tile manager, its here for refrence. 
     public bool isFalling;
     public Vector3 startPos;
@@ -13,14 +14,15 @@ public class Floor_mehcanic : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         startPos = transform.position;
         isFalling = false;
-		
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (Input.GetKey(KeyCode.F))
         {
             StartCoroutine("ground");
@@ -48,18 +50,6 @@ public class Floor_mehcanic : MonoBehaviour {
         Fall();
         yield return new WaitForSeconds(blockCoolDown);
         Rise();
-
-
-
-
-
-
     }
-
-
-
-
-
-
 
 }

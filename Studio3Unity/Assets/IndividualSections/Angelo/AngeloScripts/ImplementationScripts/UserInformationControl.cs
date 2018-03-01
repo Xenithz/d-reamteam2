@@ -80,7 +80,6 @@ public class UserInformationControl : MonoBehaviour
         myForm.AddField("playerusernamepost", username);
         myForm.AddField("playerpasswordpost", password);
 
-
         WWW myWWW = new WWW(myLoginUrl, myForm);
         yield return myWWW;
 
