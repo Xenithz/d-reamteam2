@@ -22,14 +22,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
             if (!tiles.Contains(tile))
                 tiles.Add(tile);
 
-            //rend.material.color = Color.green;
-            /*
-            foreach (Transform child in tile.transform)
-            {
-                child.transform.gameObject.tag = "Tile";
-
-            }
-            */
+           
         }
        
        

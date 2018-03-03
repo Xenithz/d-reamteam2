@@ -11,6 +11,8 @@ public class Character_Controller : MonoBehaviour {
     private BoxCollider playerCollider;
     private RaycastHit hit;
     private GameObject myTile;
+    [SerializeField]
+    private float cooldown;
     #endregion
 
 
