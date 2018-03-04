@@ -19,6 +19,9 @@ public class LoginUI : MonoBehaviour
     public InputField adminPanelUsername;
 
     public GameObject banPanel;
+
+    public GameObject leaderboardPanel;
+    public Text[] leaderboardTextArray;
     #endregion
 
     #region My functions
@@ -62,6 +65,14 @@ public class LoginUI : MonoBehaviour
     {
         uiPanel.SetActive(false);
         banPanel.SetActive(true);
+    }
+
+    public void UpdateLeaderboard()
+    {
+        UserInformationControl.instance.CallGrabLeaderboard();
+        leaderboardPanel.SetActive(true);
+        uiPanel.SetActive(false);
+
     }
     #endregion
 }

@@ -8,6 +8,7 @@ public class UserInformationControl : MonoBehaviour
     public static UserInformationControl instance = new UserInformationControl();
 
     public string[] userStatsArray;
+    public string[] leaderboardArray;
     #endregion
 
     #region Private variables
@@ -27,6 +28,8 @@ public class UserInformationControl : MonoBehaviour
     string myEditDataUrl = "http://localhost/studio3/EditData.php";
     [SerializeField]
     string myRecieveDataUrl = "http://localhost/studio3/GrabUserData.php";
+    [SerializeField]
+    string myLeaderboardUrl = "http://localhost/studio3/Leaderboard.php";
 
     [SerializeField]
     int localRounds;
@@ -56,6 +59,10 @@ public class UserInformationControl : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             CallGrabData(UserStats.instance.myUsername, false);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            CallGrabLeaderboard();
         }
     }
     #endregion
@@ -89,6 +96,7 @@ public class UserInformationControl : MonoBehaviour
         {
             Debug.Log("Login success");
             StartCoroutine(GrabData(username, true));
+            StartCoroutine(GrabLeaderboard());
         }
         else if(myWWW.text == "Password incorrect")
         {
@@ -203,6 +211,20 @@ public class UserInformationControl : MonoBehaviour
             Debug.Log("Coroutine not used for login");
         }
     }
+
+    IEnumerator GrabLeaderboard()
+    {
+        WWW myWWW = new WWW(myLeaderboardUrl);
+        yield return myWWW;
+        string leaderboardString = myWWW.text;
+        leaderboardArray = leaderboardString.Split(';');
+
+        for(int i = 0; i < GetComponent<LoginUI>().leaderboardTextArray.Length; i++)
+        {
+            GetComponent<LoginUI>().leaderboardTextArray[i].text = UserInformationControl.instance.leaderboardArray[i];
+            Debug.Log("hit");
+        }
+    }
     #endregion
 
     #region My functions
@@ -234,6 +256,11 @@ public class UserInformationControl : MonoBehaviour
     public void CallGrabData(string inputUsername, bool inputBool)
     {
         StartCoroutine(GrabData(inputUsername, inputBool));
+    }
+
+    public void CallGrabLeaderboard()
+    {
+        StartCoroutine(GrabLeaderboard());
     }
     #endregion
 }
