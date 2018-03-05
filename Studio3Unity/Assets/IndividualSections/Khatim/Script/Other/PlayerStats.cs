@@ -5,22 +5,22 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     #region Public Variables
-
+    public GameObject[] healthSprite;
     #endregion
 
     #region Private Variables
-    private HealthSystem hlthSys;
+    private int hlth = 6;
     #endregion
 
     #region Callbacks
     void Start()
     {
-        hlthSys = GetComponent<HealthSystem>();
+
     }
 
     void Update()
     {
-        if (hlthSys.hlth <=0)
+        if (hlth <=0)
         {
             gameObject.SetActive(false);
         }
@@ -39,9 +39,19 @@ public class PlayerStats : MonoBehaviour
     #region Functions
     void Damage()
     {
-            hlthSys.hlth--;
-            hlthSys.healthSprite[hlthSys.hlth].SetActive(false);
-            Debug.Log("Damage");
+        hlth--;
+        healthSprite[hlth].SetActive(false);
+        Debug.Log("Damage");
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && hlth < 6)
+        {
+            healthSprite[hlth].SetActive(true);
+            hlth++;
+            other.gameObject.SetActive(false);
+        }
     }
     #endregion
 }
