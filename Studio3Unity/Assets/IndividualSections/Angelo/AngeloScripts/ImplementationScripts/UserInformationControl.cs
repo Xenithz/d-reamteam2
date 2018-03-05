@@ -212,7 +212,7 @@ public class UserInformationControl : MonoBehaviour
         }
     }
 
-    IEnumerator GrabLeaderboard()
+    IEnumerator GrabLeaderboard()   
     {
         WWW myWWW = new WWW(myLeaderboardUrl);
         yield return myWWW;

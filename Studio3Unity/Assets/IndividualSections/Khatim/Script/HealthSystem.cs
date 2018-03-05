@@ -11,7 +11,7 @@ public class HealthSystem : MonoBehaviour
     //public Text healthText;
     public GameObject[] healthSprite;
     public int hlth;
-
+    public int maxHealth;
     #endregion
 
     #region Private Variables
@@ -23,6 +23,7 @@ public class HealthSystem : MonoBehaviour
     {
         //healthText.text = hlth.ToString();
         hlth = 6;
+        maxHealth = 6;
     }
     void FixedUpdate()
     {
@@ -34,7 +35,7 @@ public class HealthSystem : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && hlth < 6)
+        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && hlth < maxHealth)
         {
             healthSprite[hlth].SetActive(true);
             hlth++;
