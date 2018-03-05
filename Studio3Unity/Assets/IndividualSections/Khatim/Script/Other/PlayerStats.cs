@@ -25,23 +25,14 @@ public class PlayerStats : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Zombie")
-        {
-            Damage();
-            other.gameObject.SetActive(false);
-        }
-    }
     #endregion
 
     #region Functions
-    void Damage()
+    public void Damage()
     {
-        hlth--;
-        healthSprite[hlth].SetActive(false);
-        Debug.Log("Damage");
+            hlth--;
+            healthSprite[hlth].SetActive(false);
+            Debug.Log("Damage");
     }
 
     private void OnTriggerStay(Collider other)

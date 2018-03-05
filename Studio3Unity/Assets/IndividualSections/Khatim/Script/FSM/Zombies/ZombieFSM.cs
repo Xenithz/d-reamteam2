@@ -5,13 +5,13 @@ using UnityEngine;
 public class ZombieFSM : MonoBehaviour
 {
     #region Public Variables
+    public GameObject[] healthSprite;
     #endregion
-
+    public PlayerStats myPlayer;
     #region Private Variables
     private enum Condition { Chase, Attack };
     private Condition currCondition;
     private ZombieStats zom;
-    private Vector3 vel;
     #endregion
 
     #region Callbacks
@@ -20,6 +20,8 @@ public class ZombieFSM : MonoBehaviour
     {
         zom = GetComponent<ZombieStats>();
         zom.rg = GetComponent<Rigidbody>();
+        GameObject myGameObject = GameObject.FindGameObjectWithTag("Player");
+        myPlayer = myGameObject.GetComponent<PlayerStats>();
         currCondition = Condition.Chase;
     }
 
@@ -27,7 +29,7 @@ public class ZombieFSM : MonoBehaviour
     void FixedUpdate()
     {
         zom.distanceToPlayer = Vector3.Distance(transform.position, zom.player.transform.position);
-        if (zom.distanceToPlayer < zom.attackDistance)
+        if (zom.distanceToPlayer <= zom.attackDistance)
         {
             currCondition = Condition.Attack;
         }
@@ -43,6 +45,7 @@ public class ZombieFSM : MonoBehaviour
                 Debug.Log("Chasing");
                 break;
             case Condition.Attack:
+                //myPlayer.Damage();
                 Debug.Log("Attacking");
                 break;
             default:
