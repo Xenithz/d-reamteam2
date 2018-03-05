@@ -8,8 +8,7 @@ public class HealthSystem : MonoBehaviour
     //TODO: Make flags for RPCs as this system makes use of triggers/collisions
 
     #region Public Variables
-    public GameObject[] healthSprite;
-    public int hlth;
+
 
     #endregion
 
@@ -20,7 +19,7 @@ public class HealthSystem : MonoBehaviour
     #region Callbacks
     void Start()
     {
-        hlth = 6;
+
     }
     void FixedUpdate()
     {
@@ -29,22 +28,5 @@ public class HealthSystem : MonoBehaviour
     #endregion
 
     #region Functions
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && hlth < 6)
-        {
-            healthSprite[hlth].SetActive(true);
-            hlth++;
-            other.gameObject.SetActive(false);
-        }
-
-        if (other.gameObject.tag == "Damage" && Input.GetKey(KeyCode.E) && hlth > 0)
-        {
-            hlth--;
-            healthSprite[hlth].SetActive(false);
-            other.gameObject.SetActive(false);
-        }
-    }
     #endregion
 }

@@ -37,13 +37,6 @@ public class zombie_test_ : MonoBehaviour
     {  
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed*Time.deltaTime);
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("hit player");
-        }
-    }
     #endregion
 
 
@@ -53,7 +46,6 @@ public class zombie_test_ : MonoBehaviour
         gameObject.SetActive(false);
     }
     #endregion
-
 
 #region IEnumerators
     IEnumerator ZombieCou()
