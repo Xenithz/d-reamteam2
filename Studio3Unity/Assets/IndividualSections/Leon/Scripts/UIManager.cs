@@ -11,8 +11,12 @@ public class UIManager : MonoBehaviour {
     public Transform offlinePickPanel;
     public Transform onlinePickPanel;
     public Transform lobbyPanel;
-	// Use this for initialization
-	void Start () {
+    public GameObject banPanel;
+    public Transform leaderboardPanel;
+
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -71,6 +75,24 @@ public class UIManager : MonoBehaviour {
         lobbyPanel.gameObject.SetActive(true);
         onlinePickPanel.gameObject.SetActive(false);
     }
+
+    public void OnClickToLeaderboard()
+    {
+        leaderboardPanel.gameObject.SetActive(true);
+        mainMenuPanel.gameObject.SetActive(false);
+    }
+
+    public void OnClickToAdminPanel()
+    {
+       if( banPanel.activeInHierarchy == false)
+        {
+            banPanel.gameObject.SetActive(true);
+        }
+       else if( banPanel.activeInHierarchy == true)
+        {
+            banPanel.gameObject.SetActive(false);
+        }
+    }
     public void OnClickOfflineOnePlayerScene() // to go to 2 player map
     {
         SceneManager.LoadScene("2_Player_Offline");
@@ -95,6 +117,8 @@ public class UIManager : MonoBehaviour {
         onlinePickPanel.gameObject.SetActive(false);
         registerPanel.gameObject.SetActive(false);
         lobbyPanel.gameObject.SetActive(false);
+        
+        leaderboardPanel.gameObject.SetActive(false);
     }
 
     
