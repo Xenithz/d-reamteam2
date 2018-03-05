@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour {
     public GameObject banPanel;
     public Transform leaderboardPanel;
 
+    public Transform youAreBannedPanel;
+
 
     // Use this for initialization
     void Start () {
@@ -93,6 +95,8 @@ public class UIManager : MonoBehaviour {
             banPanel.gameObject.SetActive(false);
         }
     }
+
+    
     public void OnClickOfflineOnePlayerScene() // to go to 2 player map
     {
         SceneManager.LoadScene("2_Player_Offline");
@@ -117,7 +121,7 @@ public class UIManager : MonoBehaviour {
         onlinePickPanel.gameObject.SetActive(false);
         registerPanel.gameObject.SetActive(false);
         lobbyPanel.gameObject.SetActive(false);
-        
+        youAreBannedPanel.gameObject.SetActive(false);
         leaderboardPanel.gameObject.SetActive(false);
     }
 

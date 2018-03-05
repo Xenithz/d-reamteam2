@@ -142,6 +142,8 @@ public class UserInformationControl : MonoBehaviour
 
         if(myWWW.text == "User is an admin")
         {
+            GetComponent<LoginUI>().networkChoosePanel.SetActive(true);
+            GetComponent<LoginUI>().loginPanel.SetActive(false);
             gameObject.GetComponent<LoginUI>().EnableAdminPanel();
         }
         else if(myWWW.text == "User isn't an admin")
