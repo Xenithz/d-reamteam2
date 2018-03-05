@@ -8,7 +8,6 @@ public class HealthSystem : MonoBehaviour
     //TODO: Make flags for RPCs as this system makes use of triggers/collisions
 
     #region Public Variables
-    //public Text healthText;
     public GameObject[] healthSprite;
     public int hlth;
 
@@ -21,7 +20,6 @@ public class HealthSystem : MonoBehaviour
     #region Callbacks
     void Start()
     {
-        //healthText.text = hlth.ToString();
         hlth = 6;
     }
     void FixedUpdate()
@@ -38,7 +36,6 @@ public class HealthSystem : MonoBehaviour
         {
             healthSprite[hlth].SetActive(true);
             hlth++;
-            //healthText.text = hlth.ToString();
             other.gameObject.SetActive(false);
         }
 
@@ -46,7 +43,6 @@ public class HealthSystem : MonoBehaviour
         {
             hlth--;
             healthSprite[hlth].SetActive(false);
-            //healthText.text = hlth.ToString();
             other.gameObject.SetActive(false);
         }
     }
