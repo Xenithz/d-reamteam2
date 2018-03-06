@@ -1,26 +1,15 @@
 fileFormatVersion: 2
-guid: 4d65b9179d1283a44b4c26de0d81ab25
-timeCreated: 1520231277
+guid: e37c7c5be70789a49a4c22e89a70e49c
+timeCreated: 1520329224
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Line001
-    100002: Plane001
-    100004: Spot001
-    100006: Spot001.Target
-    100008: //RootNode
-    400000: Line001
-    400002: Plane001
-    400004: Spot001
-    400006: Spot001.Target
-    400008: //RootNode
-    2300000: Line001
-    2300002: Plane001
-    3300000: Line001
-    3300002: Plane001
-    4300000: Plane001
-    4300002: Line001
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Line001
     9500000: //RootNode
   materials:
     importMaterials: 1
