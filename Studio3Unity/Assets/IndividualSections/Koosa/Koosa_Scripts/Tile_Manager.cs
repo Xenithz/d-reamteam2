@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 using Photon;
 
 public class Tile_Manager : Photon.MonoBehaviour {
-
+    // i suck
     public float countDownToFall;
     public float countDownToRise;
     public List<GameObject> tiles = new List<GameObject>();
