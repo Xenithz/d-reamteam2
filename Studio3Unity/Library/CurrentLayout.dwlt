@@ -42,8 +42,8 @@ MonoBehaviour:
     y: 30
     width: 1858
     height: 987
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 14002, y: 14042}
+  m_MinSize: {x: 683, y: 492}
+  m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
   controlID: 9
 --- !u!114 &3
@@ -206,7 +206,7 @@ MonoBehaviour:
     y: 0
     width: 1241
     height: 987
-  m_MinSize: {x: 404, y: 492}
+  m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
   controlID: 10
@@ -230,8 +230,8 @@ MonoBehaviour:
     y: 0
     width: 1241
     height: 568
-  m_MinSize: {x: 404, y: 221}
-  m_MaxSize: {x: 8004, y: 4021}
+  m_MinSize: {x: 406, y: 221}
+  m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
   controlID: 11
 --- !u!114 &11
@@ -324,19 +324,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/IndividualSections/Leon/Teleport Particle System
+    - Assets/IndividualSections/Leon/Assets/Particle Systems
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/IndividualSections/Leon/Teleport Particle System
+  - Assets/IndividualSections/Leon/Assets/Particle Systems
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity Projects\Studio 3\d-reamteam2\Studio3Unity
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 87}
-    m_SelectedIDs: e05b0000
-    m_LastClickedID: 23520
-    m_ExpandedIDs: 00000000422600002a2700002e270000b6270000d2270000de270000022b0000402b0000422b0000b42c0000c42c0000d02c0000342d0000462d00004a2d0000e62d0000f02d0000f845000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 55}
+    m_SelectedIDs: ec960100
+    m_LastClickedID: 104172
+    m_ExpandedIDs: 00000000422600002a2700002e270000b6270000d2270000de270000062b0000442b0000462b0000d02c0000e02c0000ec2c0000562d0000682d00006c2d0000082e0000122e00005646000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -364,7 +364,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000422600002a2700002e270000b6270000d2270000de270000022b0000402b0000422b0000b42c0000c42c0000d02c0000342d0000462d00004a2d0000e62d0000f02d0000f8450000
+    m_ExpandedIDs: 00000000422600002a2700002e270000b6270000d2270000de270000062b0000442b0000462b0000d02c0000e02c0000ec2c0000562d0000682d00006c2d0000082e0000122e000056460000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -392,7 +392,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000
+    m_ExpandedInstanceIDs: c623000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -445,7 +445,7 @@ MonoBehaviour:
     y: 92
     width: 615
     height: 966
-  m_ScrollPosition: {x: 0, y: 120}
+  m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 314
@@ -480,23 +480,23 @@ MonoBehaviour:
     height: 547
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 84bbf8ffe4cef0ff70c7f0ff425cf6ff6cfff5ff54fdf5ff
-    m_LastClickedID: -476284
-    m_ExpandedIDs: dafbffff00000000ca420000
+    m_SelectedIDs: e0370000
+    m_LastClickedID: 14304
+    m_ExpandedIDs: dafbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Ground
-      m_OriginalName: Ground
+      m_Name: Zombie Teleporting Particle System
+      m_OriginalName: Zombie Teleporting Particle System
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -72328
+      m_UserData: -3058
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 4
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -532,14 +532,14 @@ MonoBehaviour:
     width: 846
     height: 547
   m_SceneLighting: 1
-  lastFramingTime: 7409.140312493827
+  lastFramingTime: 11.773354271604939
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 52.27046, y: 1.6748228, z: 17.71297}
+    m_Target: {x: 45.306038, y: 4.9602165, z: 8.8013315}
     speed: 2
-    m_Value: {x: 52.27046, y: 1.6748228, z: 17.71297}
+    m_Value: {x: 45.306038, y: 4.9602165, z: 8.8013315}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -562,13 +562,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.112330794, y: -0.15672356, z: 0.017944066, w: -0.9810696}
+    m_Target: {x: -0.40618765, y: -0.080165766, z: 0.03579943, w: -0.9095623}
     speed: 2
-    m_Value: {x: -0.112330794, y: -0.15672356, z: 0.017944066, w: -0.9810696}
+    m_Value: {x: -0.40618765, y: -0.080165766, z: 0.03579943, w: -0.9095623}
   m_Size:
-    m_Target: 119.64536
+    m_Target: 209.4893
     speed: 2
-    m_Value: 119.64536
+    m_Value: 209.4893
   m_Ortho:
     m_Target: 0
     speed: 2
