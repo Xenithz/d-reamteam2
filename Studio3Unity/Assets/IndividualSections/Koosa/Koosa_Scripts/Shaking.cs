@@ -5,9 +5,9 @@ using UnityEngine;
 public class Shaking : MonoBehaviour {
 public float delta;
 public float speed;
+public float minSpeed;
+public float maxSpeed;
 public Quaternion startRot;
-public int minSpeed;
-public int maxSpeed;
 	// Use this for initialization
 	void Start () {
 		startRot=transform.rotation;
@@ -16,8 +16,8 @@ public int maxSpeed;
 	
 	// Update is called once per frame
 	void Update () {
-		speed=Random.Range(minSpeed,maxSpeed);
-		startRot.z+=delta*Mathf.Sin(speed*Time.deltaTime);
+	//	speed=Random.Range(minSpeed,maxSpeed);
+		startRot.z+=delta*Mathf.Sin(speed*Time.time);
 		transform.rotation=startRot;
 		
 	}
