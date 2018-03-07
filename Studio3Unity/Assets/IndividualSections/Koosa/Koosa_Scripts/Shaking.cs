@@ -8,17 +8,20 @@ public float speed;
 public float minSpeed;
 public float maxSpeed;
 public Quaternion startRot;
+Vector3 startpos;
 	// Use this for initialization
 	void Start () {
 		startRot=transform.rotation;
-		
+		 startpos=transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	//	speed=Random.Range(minSpeed,maxSpeed);
-		startRot.z+=delta*Mathf.Sin(speed*Time.time);
-		transform.rotation= Quaternion.Euler(0,0,startRot.z);
+		
+		startpos.x+=delta*Mathf.Sin(speed*Time.time);
+		transform.position=startpos;
+
 		
 	}
 	
