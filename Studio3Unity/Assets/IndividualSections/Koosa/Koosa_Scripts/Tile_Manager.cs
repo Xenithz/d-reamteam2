@@ -5,16 +5,15 @@ using UnityEngine.Assertions;
 using Photon;
 
 public class Tile_Manager : Photon.MonoBehaviour {
-    public float delta;// how far to move it from its inital rotation
-    Quaternion defaultRot;
+    public float delta;// how far to move it from its inital postion
     public float speed;
     public bool loop=true;
-    public Quaternion startRot;
-    public float minSpeed;
-    public float maxSpeed;
+    public int timeToStartShake;
     public float timeToShake;
     public float countDownToFall;
     public float countDownToRise;
+    public Vector3 startpos;
+    public Vector3 defaultpos;
     public List<GameObject> tiles = new List<GameObject>();
     public bool flagTest;
     private void Awake()
@@ -27,11 +26,10 @@ public class Tile_Manager : Photon.MonoBehaviour {
         flagTest = false;
     }
     public void ShakeTile(GameObject tileToShake){
-        startRot.z+=delta*Mathf.Sin(speed*Time.time);
-		tileToShake.transform.rotation=startRot;
-        timeToShake-=1;
+        	startpos.x+=delta*Mathf.Sin(speed*Time.time);
+		    tileToShake.transform.position=startpos;
+            timeToShake--;
          Debug.Log("i am shaking");
-        Debug.Log(tileToShake.transform.rotation);
     }
         
     public IEnumerator DroppingTile(string myTileName)
@@ -41,14 +39,12 @@ public class Tile_Manager : Photon.MonoBehaviour {
         Debug.Log("This gets reached");
         GameObject myTile = GameObject.Find(myTileName);
         flagTest = false;
-        startRot=myTile.transform.rotation;
-        defaultRot=myTile.transform.rotation;
+        startpos=myTile.transform.position;
+        defaultpos=myTile.transform.position;
+        yield return new WaitForSeconds(timeToStartShake);
       while (true){
-
-
           for(int i=0; i<timeToShake; i++){
        ShakeTile(myTile);
-       yield return new WaitForSeconds(1);
           }
           break;
       }
@@ -61,7 +57,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
         myTile.gameObject.SetActive(false);
         yield return new WaitForSeconds(countDownToRise);
         Debug.Log("This gets raised");
-        myTile.transform.rotation=defaultRot;
+       myTile.transform.position=defaultpos;
         myTile.gameObject.SetActive(true);
         timeToShake=15;
     }
