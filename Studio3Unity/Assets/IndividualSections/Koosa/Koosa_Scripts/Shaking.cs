@@ -18,7 +18,7 @@ public Quaternion startRot;
 	void Update () {
 	//	speed=Random.Range(minSpeed,maxSpeed);
 		startRot.z+=delta*Mathf.Sin(speed*Time.time);
-		transform.rotation=startRot;
+		transform.rotation= Quaternion.Euler(0,0,startRot.z);
 		
 	}
 	
