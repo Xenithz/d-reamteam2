@@ -51,19 +51,20 @@ public class Tile_Manager : Photon.MonoBehaviour {
         flagTest = false;
         startpos=myTile.transform.position;
         defaultpos=myTile.transform.position;
-        while (true){
-        for(int i=0; i<timeToShake; i++){
-        ShakeTile(myTile);
-        yield return new WaitForSeconds(timeToStartShake);
-      }
+        while (true)
+        {
+            for(int i=0; i<timeToShake; i++)
+            {
+                ShakeTile(myTile);
+                yield return new WaitForSeconds(timeToStartShake);
+            }
           break;
-      }
+        }
         yield return new WaitForSeconds(countDownToFall);
         Debug.Log("This gets dropped");
         myTile.gameObject.SetActive(false);
         yield return new WaitForSeconds(countDownToRise);
         Debug.Log("This gets raised");
-       myTile.transform.position=defaultpos;
         myTile.gameObject.SetActive(true);
         timeToShake=50;
     }
