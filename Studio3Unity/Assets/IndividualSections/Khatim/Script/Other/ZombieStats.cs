@@ -11,6 +11,7 @@ public class ZombieStats : MonoBehaviour
     public float distanceToPlayer;
     [HideInInspector] public Rigidbody rg;
     public GameObject player;
+    public float damageDelay = 2;
     #endregion
 
     #region Private Variables
@@ -21,6 +22,10 @@ public class ZombieStats : MonoBehaviour
     #endregion
 
     #region Callbacks
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
     void FixedUpdate()
     {
 
@@ -30,6 +35,4 @@ public class ZombieStats : MonoBehaviour
     #region Functions
 
     #endregion
-
-    
 }
