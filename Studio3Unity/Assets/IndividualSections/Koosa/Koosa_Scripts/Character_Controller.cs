@@ -15,7 +15,6 @@ public class Character_Controller : MonoBehaviour {
     private float cooldown;
     #endregion
 
-
 #region Public Variables
     public float moveSpeed;
     public float lockRot;
@@ -23,7 +22,6 @@ public class Character_Controller : MonoBehaviour {
     public float jumpPower;
     public Tile_Manager tileManager;
     #endregion
-
 
 #region Unity Functions
     private void Start()
@@ -61,8 +59,7 @@ public class Character_Controller : MonoBehaviour {
     }
     #endregion
 
-
-    #region  My Functions
+#region  My Functions
     private Vector3 MovementInput()
     {
         Vector3 playerinput;
