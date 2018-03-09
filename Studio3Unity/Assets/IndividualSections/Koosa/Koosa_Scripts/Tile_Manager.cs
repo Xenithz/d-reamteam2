@@ -35,11 +35,13 @@ public class Tile_Manager : Photon.MonoBehaviour {
     #endregion 
     
     #region My Functions
-    public void ShakeTile(GameObject tileToShake){
+    public GameObject ShakeTile(GameObject tileToShake){
         startpos.x+=delta*Mathf.Sin(speed*Time.time);
 		tileToShake.transform.position=startpos;
         timeToShake--;
-        Debug.Log("i am shaking");
+        defaultpos=tileToShake.transform.position;
+        return tileToShake;
+      // Debug.Log("i am shaking");
     }
     #endregion
     
@@ -63,7 +65,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
         myTile.gameObject.SetActive(false);
         yield return new WaitForSeconds(countDownToRise);
         Debug.Log("This gets raised");
-       myTile.transform.position=defaultpos;
+        myTile.transform.position=defaultpos;
         myTile.gameObject.SetActive(true);
         timeToShake=50;
     }
