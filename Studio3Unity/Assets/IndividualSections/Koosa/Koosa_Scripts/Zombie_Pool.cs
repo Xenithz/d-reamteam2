@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zombie_Pool : Photon.MonoBehaviour {
+public class Zombie_Pool : Photon.MonoBehaviour 
+{
 
 #region Public Variables
     public GameObject zombie;
