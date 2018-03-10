@@ -7,6 +7,7 @@ using Photon;
 public class Tile_Manager : Photon.MonoBehaviour {
   
     #region Public Variables
+    public static Tile_Manager _instance_;
     public float delta;// how far to move it from its inital postion
     public float speed;// how fast the object is to be moved
     public float timeToStartShake;// is time between every shake, every movemnt of the object every change in its position 
@@ -25,6 +26,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
     #region Unity Functions
     private void Awake()
     {
+         _instance_ = this;
         foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Tile"))
         {
             if (!tiles.Contains(tile))

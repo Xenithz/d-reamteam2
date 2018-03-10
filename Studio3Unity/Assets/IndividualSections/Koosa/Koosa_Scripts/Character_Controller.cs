@@ -29,7 +29,7 @@ public class Character_Controller : MonoBehaviour {
     private void Start()
     {
         coolDownImage=GameObject.FindGameObjectWithTag("DropAbility");
-        coolDown=50;
+        coolDown=0;
         GameObject controlScripts = GameObject.Find("ControlScripts");
         tileManager = controlScripts.GetComponent<Tile_Manager>();
         playerBody = gameObject.GetComponent<Rigidbody>();
