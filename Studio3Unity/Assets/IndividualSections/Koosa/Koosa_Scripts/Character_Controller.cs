@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //(typeof(Rigidbody))]
 public class Character_Controller : MonoBehaviour {
@@ -12,7 +13,8 @@ public class Character_Controller : MonoBehaviour {
     private RaycastHit hit;
     private GameObject myTile;
     [SerializeField]
-    private float cooldown;
+    private float coolDown;
+    public GameObject coolDownImage;
     #endregion
 
 #region Public Variables
@@ -26,7 +28,8 @@ public class Character_Controller : MonoBehaviour {
 #region Unity Functions
     private void Start()
     {
-
+        coolDownImage=GameObject.FindGameObjectWithTag("DropAbility");
+        coolDown=0;
         GameObject controlScripts = GameObject.Find("ControlScripts");
         tileManager = controlScripts.GetComponent<Tile_Manager>();
         playerBody = gameObject.GetComponent<Rigidbody>();
@@ -36,6 +39,8 @@ public class Character_Controller : MonoBehaviour {
 
     private void FixedUpdate()
     {
+        Countdown();
+
         playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
@@ -51,11 +56,26 @@ public class Character_Controller : MonoBehaviour {
     }
 
     private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-            DropMyTile();
+    
+    { 
+        if(coolDown<=0 ){
+            coolDownImage.SetActive(true);
+      
+        if (Input.GetKeyDown(KeyCode.G) )
+         DropMyTile();
+        }
+        if(Input.GetKeyDown(KeyCode.Y)){
+            AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
+            Debug.Log("ff");
+            
+        }
+        
+            
+            
 
         Jump();
+
+        
     }
     #endregion
 
@@ -102,6 +122,8 @@ public class Character_Controller : MonoBehaviour {
     
     private void DropMyTile()
     {
+        coolDownImage.SetActive(false);
+        coolDown=50;
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
         myTile = hit.transform.gameObject;
 
@@ -111,6 +133,14 @@ public class Character_Controller : MonoBehaviour {
             tileManager.CallDropRPC(hit.transform.gameObject.name);
         }
     }
+    private void Countdown(){
+        coolDown-=0.1f;
+    }
+   
+         
+        
+     
+ }
     #endregion
-}
+
 
