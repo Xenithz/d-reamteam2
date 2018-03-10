@@ -64,6 +64,11 @@ public class Character_Controller : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.G) )
          DropMyTile();
         }
+        if(Input.GetKeyDown(KeyCode.Y)){
+            AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
+            Debug.Log("ff");
+            
+        }
         
             
             
