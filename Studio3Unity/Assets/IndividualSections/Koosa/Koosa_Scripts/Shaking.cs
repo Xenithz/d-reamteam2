@@ -5,13 +5,9 @@ using UnityEngine;
 public class Shaking : MonoBehaviour {
 public float delta;
 public float speed;
-public float minSpeed;
-public float maxSpeed;
-public Quaternion startRot;
 Vector3 startpos;
 	// Use this for initialization
 	void Start () {
-		startRot=transform.rotation;
 		 startpos=transform.position;
 	}
 	
