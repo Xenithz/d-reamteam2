@@ -148,6 +148,8 @@ public class UserInformationControl : MonoBehaviour
         }
         else if(myWWW.text == "User isn't an admin")
         {
+            GetComponent<LoginUI>().networkChoosePanel.SetActive(true);
+            GetComponent<LoginUI>().loginPanel.SetActive(false); 
             Debug.Log("User not admin, don't enable panel");
         }
     }
