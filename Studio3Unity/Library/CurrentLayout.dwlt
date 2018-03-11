@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -87,7 +87,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 395
+    width: 202
     height: 714
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
@@ -143,7 +143,7 @@ MonoBehaviour:
     y: 0
     width: 1858
     height: 1037
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -248,9 +248,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 395
+    x: 202
     y: 0
-    width: 847
+    width: 1040
     height: 714
   m_MinSize: {x: 204, y: 221}
   m_MaxSize: {x: 4004, y: 4021}
@@ -324,19 +324,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/IndividualSections/Leon/Assets
+    - Assets/IndividualSections/Leon/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/IndividualSections/Leon/Assets
+  - Assets/IndividualSections/Leon/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity Projects\Studio 3\d-reamteam2\Studio3Unity
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 373}
-    m_SelectedIDs: 902d0000
-    m_LastClickedID: 11664
-    m_ExpandedIDs: 0000000040260000342700004e270000d6270000f8270000082800000c2800001e280000502b00008e2b0000902b0000102d0000202d00002c2d0000902d0000a22d0000a62d0000b02d0000442e00004e2e00006446000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 537}
+    m_SelectedIDs: 9a320000
+    m_LastClickedID: 12954
+    m_ExpandedIDs: 00000000422600002e27000048270000d6270000fa2700000a2800000e28000020280000242f00006c2f0000722f0000742f000000320000103200001e320000883200009a3200009e320000aa320000403300004a330000524b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -364,7 +364,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000040260000342700004e270000d6270000f8270000082800000c2800001e280000502b00008e2b0000902b0000102d0000202d00002c2d0000902d0000a22d0000a62d0000b02d0000442e00004e2e000064460000
+    m_ExpandedIDs: 00000000422600002e27000048270000d6270000fa2700000a2800000e28000020280000242f00006c2f0000722f0000742f000000320000103200001e320000883200009a3200009e320000aa320000403300004a330000524b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -476,32 +476,32 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 92
-    width: 393
+    width: 200
     height: 693
   m_TreeViewState:
-    scrollPos: {x: 0, y: 48}
-    m_SelectedIDs: caf8ffff
-    m_LastClickedID: -1846
-    m_ExpandedIDs: dafbffff00000000c8360000
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 8abefdff80dbfdff6ae1ffffdafbffff00000000da5a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: GameObject
+      m_OriginalName: GameObject
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: -87590
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 4
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
   m_ExpandedScenes:
-  - 2_Player_Offline
+  - 4_Player
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -527,19 +527,19 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: 397
+    x: 204
     y: 92
-    width: 843
+    width: 1036
     height: 693
   m_SceneLighting: 1
-  lastFramingTime: 464.30441520987654
+  lastFramingTime: 493.64644227160494
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 59.941914, y: 38.896236, z: 17.490572}
+    m_Target: {x: 56.19751, y: 0.625, z: 51.89453}
     speed: 2
-    m_Value: {x: 59.941914, y: 38.896236, z: 17.490572}
+    m_Value: {x: 56.19751, y: 0.625, z: 51.89453}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -562,13 +562,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.07177111, y: -0.06668564, z: -0.0048094145, w: -0.9951778}
+    m_Target: {x: 0.6705571, y: -0.0075543714, z: 0.006828646, w: 0.7417881}
     speed: 2
-    m_Value: {x: 0.07177111, y: -0.06668564, z: -0.0048094145, w: -0.9951778}
+    m_Value: {x: 0.6705571, y: -0.0075543714, z: 0.006828646, w: 0.7417881}
   m_Size:
-    m_Target: 37.5494
+    m_Target: 262.93924
     speed: 2
-    m_Value: 37.5494
+    m_Value: 262.93924
   m_Ortho:
     m_Target: 0
     speed: 2
