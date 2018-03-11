@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 9
+  controlID: 35
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -64,8 +64,8 @@ MonoBehaviour:
     y: 0
     width: 518
     height: 957
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -89,8 +89,8 @@ MonoBehaviour:
     y: 0
     width: 403
     height: 602
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -143,7 +143,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 1007
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 10
+  controlID: 36
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 11
+  controlID: 37
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -252,8 +252,8 @@ MonoBehaviour:
     y: 0
     width: 999
     height: 602
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -324,33 +324,33 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/UnityChan/Models
+    - Assets/IndividualSections/Khatim/Script/Other
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/UnityChan/Models
+  - Assets/IndividualSections/Khatim/Script/Other
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\UNITY\Studio-3-stuff\Project\d-reamteam2\Studio3Unity
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c49a0000
-    m_LastClickedID: 39620
-    m_ExpandedIDs: 00000000522600004c27000066270000c4270000f02700002228000026280000c62a00006e2b0000ac2b0000ae2b00002e2d00004c2d0000c62d0000ca2d00001e2e0000682e0000722e00004a360000ee4b0000f24b0000f64b0000189b000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 67}
+    m_SelectedIDs: 32300000
+    m_LastClickedID: 12338
+    m_ExpandedIDs: 00000000642700005c28000076280000d62800004229000068290000762900007a2900008e290000d62c0000242d0000262d0000a82e0000c62e00007a2f00007e2f00008c2f0000de2f00002a30000032300000a43d0000a63d0000a83d0000aa3d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Scripts
-      m_OriginalName: Scripts
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 10130
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 5}
     m_SearchString: 
@@ -364,7 +364,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000522600004c27000066270000c4270000f027000012280000222800002628000048280000c62a00006e2b0000ac2b0000ae2b00002e2d00004c2d0000c62d0000ca2d00001e2e0000682e0000722e00004a360000
+    m_ExpandedIDs: 00000000642700005c28000076280000d628000042290000762900007a290000222c0000d62c0000242d0000262d0000a82e0000c62e00007a2f00007e2f0000de2f0000f42f00002a30000032300000a43d0000a63d0000a83d0000aa3d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -480,23 +480,23 @@ MonoBehaviour:
     height: 581
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: dcfbffff
-    m_LastClickedID: -1060
-    m_ExpandedIDs: 5206feff6606feff7c06feff9206feff9a07fefff607feff2808feff2a08feff185dfeffa4d6ffffcafbffffdcfbffffdefbffff000000008c300000
+    m_SelectedIDs: f2070000
+    m_LastClickedID: 0
+    m_ExpandedIDs: cedeffffcce3fffffcf8ffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Shirts
-      m_OriginalName: Shirts
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -129030
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.013294249, y: 0.90604603, z: 0.028542444, w: 0.42200628}
     speed: 2
-    m_Value: {x: -0.013294249, y: 0.90604603, z: 0.028542444, w: 0.42200628}
+    m_Value: {x: -0.013294249, y: 0.906046, z: 0.028542442, w: 0.42200628}
   m_Size:
     m_Target: 2.8578837
     speed: 2
