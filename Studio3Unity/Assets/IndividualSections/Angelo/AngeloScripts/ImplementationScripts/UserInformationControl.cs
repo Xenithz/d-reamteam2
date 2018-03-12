@@ -142,10 +142,14 @@ public class UserInformationControl : MonoBehaviour
 
         if(myWWW.text == "User is an admin")
         {
+            GetComponent<LoginUI>().networkChoosePanel.SetActive(true);
+            GetComponent<LoginUI>().loginPanel.SetActive(false);
             gameObject.GetComponent<LoginUI>().EnableAdminPanel();
         }
         else if(myWWW.text == "User isn't an admin")
         {
+            GetComponent<LoginUI>().networkChoosePanel.SetActive(true);
+            GetComponent<LoginUI>().loginPanel.SetActive(false); 
             Debug.Log("User not admin, don't enable panel");
         }
     }
@@ -212,7 +216,7 @@ public class UserInformationControl : MonoBehaviour
         }
     }
 
-    IEnumerator GrabLeaderboard()
+    IEnumerator GrabLeaderboard()   
     {
         WWW myWWW = new WWW(myLeaderboardUrl);
         yield return myWWW;
