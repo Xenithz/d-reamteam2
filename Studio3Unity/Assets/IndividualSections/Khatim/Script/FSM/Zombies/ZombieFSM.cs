@@ -41,32 +41,56 @@ public class ZombieFSM : Photon.MonoBehaviour
         myCondition = chaseCondition;
     }
 
+    void OnEnable() 
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        if(PhotonNetwork.isMasterClient)
+        {
+            int randomizedInt = Random.Range(0, players.Length);
+            this.photonView.RPC("ChoosePlayer", PhotonTargets.AllViaServer, randomizedInt.ToString());
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
+        //Processing
         if(PhotonNetwork.isMasterClient)
         {
             distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
             if (distanceToPlayer <= attackDistance)
             {
                 //currCondition = Condition.Attack;
-                photonView.RPC("ChangeCondition", PhotonTargets.All, "2");
+                if(myCondition != attackCondition)
+                {
+                    photonView.RPC("ChangeCondition", PhotonTargets.All, "2");
+                }
             }
             else
-                photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
+            {
+                if(myCondition != chaseCondition)
+                {
+                    photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
+                }
+            }
+                
         }
 
+        //Execution
         switch (/*currCondition*/ myCondition)
         {
             case /*Condition.Chase*/ 1:
-                transform.LookAt(player.transform.position);
+                //transform.LookAt(player.transform.position);
+                Vector3 heading = player.transform.position - this.gameObject.transform.position;
+                Vector3.Normalize(heading);
                 speed = Mathf.Clamp(speed, 0, maxSpeed);
-                rg.AddForce(transform.forward * speed);
-                Debug.Log("Chasing");
+                rg.AddForce(heading * speed);
+                //Debug.Log("Chasing");
                 break;
             case /*Condition.Attack*/ 2:
                 //myPlayer.Damage();
-                Debug.Log("Attacking");
+                //Debug.Log("Attacking");
                 break;
             default:
                 break;
@@ -81,6 +105,14 @@ public class ZombieFSM : Photon.MonoBehaviour
     {
         int myInt = int.Parse(intToPass);
         myCondition = myInt;
+        Debug.Log("switched");
+    }
+
+    [PunRPC]
+    public void ChoosePlayer(string intToPass)
+    {
+        int myInt = int.Parse(intToPass);
+        player = players[myInt];
     }
     #endregion
 
