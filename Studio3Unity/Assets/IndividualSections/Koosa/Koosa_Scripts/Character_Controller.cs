@@ -14,6 +14,7 @@ public class Character_Controller : MonoBehaviour {
     private GameObject myTile;
     [SerializeField]
     private float coolDown;
+    public float coolDownToSet;
     public GameObject coolDownImage;
     #endregion
 
@@ -123,7 +124,7 @@ public class Character_Controller : MonoBehaviour {
     private void DropMyTile()
     {
         coolDownImage.SetActive(false);
-        coolDown=50;
+        coolDown = coolDownToSet;
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
         myTile = hit.transform.gameObject;
 
@@ -134,7 +135,7 @@ public class Character_Controller : MonoBehaviour {
         }
     }
     private void Countdown(){
-        coolDown-=0.1f;
+        coolDown -= Time.deltaTime;
     }
    
          
