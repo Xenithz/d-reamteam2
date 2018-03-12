@@ -8,6 +8,8 @@ public class LoginUI : MonoBehaviour
     #region Public variables
 
     public GameObject uiPanel;
+    public GameObject loginPanel;
+    public GameObject networkChoosePanel;
     public InputField registrationUsername;
     public InputField registrationPassword;
     public InputField registrationEmail;
@@ -63,7 +65,8 @@ public class LoginUI : MonoBehaviour
 
     public void DisplayBanned()
     {
-        uiPanel.SetActive(false);
+        //uiPanel.SetActive(false);
+        loginPanel.SetActive(false);
         banPanel.SetActive(true);
     }
 
@@ -72,7 +75,6 @@ public class LoginUI : MonoBehaviour
         UserInformationControl.instance.CallGrabLeaderboard();
         leaderboardPanel.SetActive(true);
         uiPanel.SetActive(false);
-
     }
     #endregion
 }

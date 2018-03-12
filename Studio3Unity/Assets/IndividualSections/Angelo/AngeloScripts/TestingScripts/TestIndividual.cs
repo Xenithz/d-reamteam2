@@ -6,7 +6,7 @@ using Photon;
 public class TestIndividual : Photon.MonoBehaviour
 {
     Character_Controller myCharacter;
-
+    
     private void Awake()
     {
         myCharacter = GetComponent<Character_Controller>();
