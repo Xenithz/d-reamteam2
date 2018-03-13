@@ -12,11 +12,12 @@ public class Zombie_Pool : Photon.MonoBehaviour
     public float spawnTime;  
 
     public static Zombie_Pool zombiePoolInstance;
+    public List<GameObject> zombies;
     #endregion
 
 
 #region Private Variables
-    private List<GameObject> zombies;
+    
     [SerializeField]
     private int spawnIndex;
     [SerializeField]
@@ -60,12 +61,9 @@ public class Zombie_Pool : Photon.MonoBehaviour
             Spawn(1);
         }
 
-        if(PhotonNetwork.connected && myFlag == true)
+        if(PhotonNetwork.connected && myFlag == true && PhotonNetwork.room.PlayerCount >= 1 && PhotonNetwork.isMasterClient)
         {
-            if(PhotonNetwork.isMasterClient)
-            {
-                Initialize();
-            }
+            Initialize();
         }
     }
     #endregion
@@ -98,12 +96,15 @@ public class Zombie_Pool : Photon.MonoBehaviour
             Debug.Log("called");
            //GameObject zombieObject = Instantiate(zombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
            GameObject zombieObject = PhotonNetwork.Instantiate(zombie.name, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity, 0);
-           zombieObject.SetActive(false);
-           zombies.Add(zombieObject);
+           zombieObject.name = "balllicker" + i;
+           //zombieObject.SetActive(false);
+           //zombies.Add(zombieObject);
+           //photonView.RPC("DeactivateAndClear", PhotonTargets.AllBuffered, zombieObject.name);
+           //TODO: OnPhotonInstantiateCallback()
         } 
         myFlag = false;
     }
-
+    
     private GameObject ZombieToSpawn()
     {
         for (int i=0; i < zombies.Count; i++)
@@ -137,6 +138,14 @@ public class Zombie_Pool : Photon.MonoBehaviour
         myZombie.transform.position = spawnPoint.GetChild(int.Parse(myInt)).position;
         myZombie.transform.rotation = Quaternion.identity;
         myZombie.SetActive(true);
+    }
+
+    [PunRPC]
+    public void DeactivateAndClear(string gameObjectName)
+    {
+        GameObject myGameObject = GameObject.Find(gameObjectName);
+        myGameObject.SetActive(false);
+        zombies.Add(myGameObject);
     }
 }
 #endregion
