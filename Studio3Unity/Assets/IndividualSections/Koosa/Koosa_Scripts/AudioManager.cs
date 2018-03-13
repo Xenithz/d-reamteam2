@@ -26,37 +26,44 @@ void Awake()
 #endregion
 
 #region My Functions
-public void PlaySingleMusicClip(){
+public void PlaySingleMusicClip()
+{
     musicSource.Play();
 }
 
-public void StopSingleMusicClip(){
+public void StopSingleMusicClip()
+{
     musicSource.Stop();
 }  
 
-public void PlaySingleMusicClipPoint(float startTime,float endTime){
+public void PlaySingleMusicClipPoint(float startTime,float endTime)
+{
     musicSource.PlayScheduled(startTime);
     musicSource.SetScheduledEndTime(AudioSettings.dspTime+(endTime));
 }
 
-public void PlaySingleEffect(){
+public void PlaySingleEffect()
+{
     effectSource.Play();
 }
 
-public void StopSingleEffect(){
+public void StopSingleEffect()
+{
     effectSource.Stop();
 }
 
-public void PlaySingleEffectPoint(float startTime,float endTime){
+public void PlaySingleEffectPoint(float startTime,float endTime)
+{
 	effectSource.PlayScheduled(startTime);
     effectSource.SetScheduledEndTime(AudioSettings.dspTime+(endTime));
 }
-public void MusicShuffle(){
+public void MusicShuffle()
+{
 	int randomIndex=Random.Range(0,musicClips.Length);
 	for(int i=0; i<musicClips.Length;i++){
-	AudioClip temp=musicClips[i];	
+	AudioClip tempClip=musicClips[i];	
 	musicClips[i]=musicClips[randomIndex];
-	musicClips[randomIndex]=temp;
+	musicClips[randomIndex]=tempClip;
 	}
 	musicSource.clip=musicClips[randomIndex];
 	musicSource.Play();
