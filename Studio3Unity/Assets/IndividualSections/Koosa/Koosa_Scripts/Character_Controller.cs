@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //(typeof(Rigidbody))]
-public class Character_Controller : MonoBehaviour {
+public class Character_Controller : MonoBehaviour
+ {
 
 #region Private Variables 
     [SerializeField]
@@ -26,7 +27,7 @@ public class Character_Controller : MonoBehaviour {
     #endregion
 
 #region Unity Functions
-    private void Awake()
+    private void Start()
     {
         coolDownImage=GameObject.FindGameObjectWithTag("DropAbility");
         coolDown=0;
@@ -56,7 +57,6 @@ public class Character_Controller : MonoBehaviour {
     }
 
     private void Update()
-    
     { 
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
@@ -69,7 +69,6 @@ public class Character_Controller : MonoBehaviour {
             Debug.Log("ff");
             
         }
-
         Jump();
     }
     #endregion
@@ -122,17 +121,15 @@ public class Character_Controller : MonoBehaviour {
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
         myTile = hit.transform.gameObject;
 
-        if (hit.transform.gameObject.tag == ("Tile") && /*tileManager.tiles.Contains(myTile)*/ Tile_Manager._instance_.tiles.Contains(myTile)) 
+        if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile)) 
         {
             Debug.Log("HITTTING");
-            //tileManager.CallDropRPC(hit.transform.gameObject.name);
-            Tile_Manager._instance_.CallDropRPC(hit.transform.gameObject.name);
+            tileManager.CallDropRPC(hit.transform.gameObject.name);
         }
     }
-    private void Countdown()
-    {
+    private void Countdown(){
         coolDown-=0.1f;
-    }     
+    }
  }
     #endregion
 

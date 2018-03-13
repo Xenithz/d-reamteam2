@@ -15,35 +15,39 @@ public class Tile_Manager : Photon.MonoBehaviour {
     public float countDownToFall;
     public float countDownToRise;
     public bool flagTest;
+    public GameObject[] temp;
     #endregion Private Variables
 
-     #region Private and Portected Variables
+    #region Private and Portected Variables
     private Vector3 startpos;
     private Vector3 defaultpos;
-    protected internal List<GameObject> tiles = new List<GameObject>();
+    protected internal List<Tile> tiles = new List<Tile>();
     #endregion
     
     #region Unity Functions
+  private void Start()
+   {
+       temp = GameObject.FindGameObjectsWithTag("Tile");
+   }
     private void Awake()
     {
          _instance_ = this;
-        foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Tile"))
+        foreach (GameObject tile in temp)
         {
-            if (!tiles.Contains(tile))
-                tiles.Add(tile);
+            tiles.Add(new Tile(tile));
         }
         flagTest = false;
     }
     #endregion 
     
     #region My Functions
-    public GameObject ShakeTile(GameObject tileToShake){
+    public GameObject ShakeTile(GameObject tileToShake)
+    {
         startpos.x+=delta*Mathf.Sin(speed*Time.time);
 		tileToShake.transform.position=startpos;
         timeToShake--;
         defaultpos=tileToShake.transform.position;
         return tileToShake;
-      // Debug.Log("i am shaking");
     }
     #endregion
     
@@ -51,7 +55,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
     public IEnumerator DroppingTile(string myTileName)
     {
         Debug.Log("This gets reached");
-        GameObject myTile = GameObject.Find(myTileName);
+       Tile myTile = GameObject.Find(myTileName);
         flagTest = false;
         startpos=myTile.transform.position;
         defaultpos=myTile.transform.position;

@@ -60,7 +60,7 @@ public class ZombieFSM : Photon.MonoBehaviour
         {
             case /*Condition.Chase*/ 1:
                 transform.LookAt(player.transform.position);
-                speed = Mathf.Clamp(speed, 0, maxSpeed);
+                speed = Mathf.Clamp(speed,0,maxSpeed);
                 rg.AddForce(transform.forward * speed);
                 Debug.Log("Chasing");
                 break;
@@ -83,5 +83,4 @@ public class ZombieFSM : Photon.MonoBehaviour
         myCondition = myInt;
     }
     #endregion
-
 }
