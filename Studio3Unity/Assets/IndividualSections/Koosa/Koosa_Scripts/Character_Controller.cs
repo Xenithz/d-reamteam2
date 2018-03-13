@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //(typeof(Rigidbody))]
-public class Character_Controller : MonoBehaviour
- {
+public class Character_Controller : MonoBehaviour {
 
 #region Private Variables 
     [SerializeField]
@@ -15,6 +14,7 @@ public class Character_Controller : MonoBehaviour
     private GameObject myTile;
     [SerializeField]
     private float coolDown;
+    public float coolDownToSet;
     public GameObject coolDownImage;
     #endregion
 
@@ -57,6 +57,7 @@ public class Character_Controller : MonoBehaviour
     }
 
     private void Update()
+    
     { 
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
@@ -69,7 +70,13 @@ public class Character_Controller : MonoBehaviour
             Debug.Log("ff");
             
         }
+        
+            
+            
+
         Jump();
+
+        
     }
     #endregion
 
@@ -117,7 +124,7 @@ public class Character_Controller : MonoBehaviour
     private void DropMyTile()
     {
         coolDownImage.SetActive(false);
-        coolDown=50;
+        coolDown = coolDownToSet;
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
         myTile = hit.transform.gameObject;
 
@@ -128,8 +135,12 @@ public class Character_Controller : MonoBehaviour
         }
     }
     private void Countdown(){
-        coolDown-=0.1f;
+        coolDown -= Time.deltaTime;
     }
+   
+         
+        
+     
  }
     #endregion
 
