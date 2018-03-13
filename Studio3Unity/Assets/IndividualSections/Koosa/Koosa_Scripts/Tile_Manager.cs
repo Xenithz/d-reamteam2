@@ -21,20 +21,21 @@ public class Tile_Manager : Photon.MonoBehaviour {
     #region Private and Portected Variables
     private Vector3 startpos;
     private Vector3 defaultpos;
-    protected internal List<Tile> tiles = new List<Tile>();
+   protected internal List<GameObject> tiles = new List<GameObject>();
     #endregion
     
     #region Unity Functions
   private void Start()
    {
-       temp = GameObject.FindGameObjectsWithTag("Tile");
+      // temp = GameObject.FindGameObjectsWithTag("Tile");
    }
     private void Awake()
     {
          _instance_ = this;
-        foreach (GameObject tile in temp)
+        foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Tile"))
         {
-            tiles.Add(new Tile(tile));
+            if (!tiles.Contains(tile))
+                 tiles.Add(tile);
         }
         flagTest = false;
     }
@@ -55,7 +56,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
     public IEnumerator DroppingTile(string myTileName)
     {
         Debug.Log("This gets reached");
-       Tile myTile = GameObject.Find(myTileName);
+       GameObject myTile = GameObject.Find(myTileName);
         flagTest = false;
         startpos=myTile.transform.position;
         defaultpos=myTile.transform.position;
