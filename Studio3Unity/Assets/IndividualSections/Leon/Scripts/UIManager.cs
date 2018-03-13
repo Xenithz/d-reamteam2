@@ -23,8 +23,8 @@ public class UIManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        
+	void Update () 
+    {
 	}
 
     public void OnClickToLogin() // to go to log in

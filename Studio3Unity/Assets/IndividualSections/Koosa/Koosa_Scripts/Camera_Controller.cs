@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon;
 
-public class Camera_Controller : Photon.MonoBehaviour {
+public class Camera_Controller : Photon.MonoBehaviour
+{
 
 #region Public Variables
     public Transform player = null;
@@ -35,6 +36,7 @@ public class Camera_Controller : Photon.MonoBehaviour {
 
     public void GivePlayer()
     {
+        if(PhotonNetwork.connected){
         GameObject[] myPlayers = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject checkPlayer in myPlayers)
         {
@@ -44,6 +46,7 @@ public class Camera_Controller : Photon.MonoBehaviour {
             }
         }
         return;
+    }
     }
 }
 #endregion

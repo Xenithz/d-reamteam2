@@ -25,6 +25,8 @@ public class Zombie_Pool : Photon.MonoBehaviour
     private float maxTime = 20;
     [SerializeField]
     private float time;
+
+    private bool myFlag;
     #endregion
 
 
@@ -34,16 +36,12 @@ public class Zombie_Pool : Photon.MonoBehaviour
         zombiePoolInstance = this;
         zombies = new List<GameObject>();
         time = 20;
+        myFlag = true;
     }
 
     private void Start()
     {
-        for (int i = 0; i < zombiesPooled; i++)
-        {
-           GameObject zombieObject = Instantiate(zombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
-           zombieObject.SetActive(false);
-           zombies.Add(zombieObject);
-        } 
+
     }
 
     private void Update()
@@ -60,6 +58,14 @@ public class Zombie_Pool : Photon.MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P))
         {
             Spawn(1);
+        }
+
+        if(PhotonNetwork.connected && myFlag == true)
+        {
+            if(PhotonNetwork.isMasterClient)
+            {
+                Initialize();
+            }
         }
     }
     #endregion
@@ -83,6 +89,19 @@ public class Zombie_Pool : Photon.MonoBehaviour
         {
             RandomizeSpawn();
         }
+    }
+
+    public void Initialize()
+    {
+        for (int i = 0; i < zombiesPooled; i++)
+        {
+            Debug.Log("called");
+           //GameObject zombieObject = Instantiate(zombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
+           GameObject zombieObject = PhotonNetwork.Instantiate(zombie.name, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity, 0);
+           zombieObject.SetActive(false);
+           zombies.Add(zombieObject);
+        } 
+        myFlag = false;
     }
 
     private GameObject ZombieToSpawn()
