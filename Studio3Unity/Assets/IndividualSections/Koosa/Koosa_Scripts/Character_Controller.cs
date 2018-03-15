@@ -9,6 +9,7 @@ public class Character_Controller : MonoBehaviour {
 #region Private Variables 
     [SerializeField]
     private Rigidbody playerBody;
+    [SerializeField]
     private BoxCollider playerCollider;
     private RaycastHit hit;
     private GameObject myTile;
@@ -34,7 +35,7 @@ public class Character_Controller : MonoBehaviour {
         GameObject controlScripts = GameObject.Find("ControlScripts");
         tileManager = controlScripts.GetComponent<Tile_Manager>();
         playerBody = gameObject.GetComponent<Rigidbody>();
-        playerCollider = GetComponent<BoxCollider>();
+        playerCollider = gameObject.GetComponent<BoxCollider>();
         tileManager = controlScripts.GetComponent<Tile_Manager>();
     }
 
@@ -58,7 +59,16 @@ public class Character_Controller : MonoBehaviour {
 
     private void Update()
     
-    { 
+    {
+        if (IsNotGrounded())
+        {
+            Debug.Log("notgrounded");
+        }
+
+
+
+
+
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
       
@@ -70,10 +80,6 @@ public class Character_Controller : MonoBehaviour {
             Debug.Log("ff");
             
         }
-        
-            
-            
-
         Jump();
 
         
@@ -110,13 +116,15 @@ public class Character_Controller : MonoBehaviour {
     {
         float groundDistance;
         groundDistance = playerCollider.bounds.extents.y;
-        return Physics.Raycast(transform.position, -Vector3.up, groundDistance+2f);
+        return Physics.Raycast(transform.position, -Vector3.up, groundDistance + 1);
+        
     }
 
     private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
-        {   
+        {
+            Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
         }        
     }
