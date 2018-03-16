@@ -16,6 +16,7 @@ public Vector3 right;
 public float avoidanceForce;
 public float vision;
 public float speed;
+public float lookSpeed;
 	void Start () 
 	{
 	left = transform.position;
@@ -23,21 +24,22 @@ public float speed;
     left.x -= vision;
     right.x += vision;
 	}
-	void Update () 
+	void FixedUpdate () 
 	{
 	  Look();
-	  targetDir = (player.transform.position - transform.position).normalized;	
+	  targetDir = (player.transform.position - transform.position);
+	  Vector3.Normalize(targetDir);
      if (Physics.Raycast(transform.position+height, transform.forward+height, out colliderHit, raycastLenght))
 	 {
 		 Debug.DrawLine(transform.position, colliderHit.point, Color.blue);
 		 targetDir+=AvoidFront();
 	 }
-	 if (Physics.Raycast(left+height, transform.forward+height, out colliderHit, raycastLenght))
+	  if (Physics.Raycast(left+height, transform.forward+height, out colliderHit, raycastLenght))
 	 {
 		 Debug.DrawLine(left, colliderHit.point, Color.red);
 		 targetDir+=AvoidLeft();
 	 }
-	 if (Physics.Raycast(right+height, transform.forward+height, out colliderHit, raycastLenght))
+	  if (Physics.Raycast(right+height, transform.forward+height, out colliderHit, raycastLenght))
 	 {
 		 Debug.DrawLine(right, colliderHit.point, Color.green);
 		 targetDir+=AvoidRight();
@@ -75,9 +77,8 @@ public float speed;
 	}
    public void Look()
    {
-	   Quaternion rot = Quaternion.LookRotation(targetDir); 
-	   transform.rotation= Quaternion.Slerp(transform.rotation,rot,Time.deltaTime*speed);
-	   transform.position+=transform.forward*Time.deltaTime;
+	  transform.LookAt(targetDir);
+	   transform.position+=targetDir*Time.deltaTime*speed;
    }
     public bool CanAvoid()
 	{
