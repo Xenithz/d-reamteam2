@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieFSM : Photon.MonoBehaviour
+public class ZombieFSM : Photon.PunBehaviour
 {
     #region Public Variables
     public GameObject[] healthSprite;
@@ -50,6 +50,12 @@ public class ZombieFSM : Photon.MonoBehaviour
             int randomizedInt = Random.Range(0, players.Length);
             this.photonView.RPC("ChoosePlayer", PhotonTargets.AllViaServer, randomizedInt.ToString());
         }
+    }
+
+    public override void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        gameObject.SetActive(false);
+        Zombie_Pool.zombiePoolInstance.zombies.Add(gameObject);
     }
 
     // Update is called once per frame
@@ -113,6 +119,13 @@ public class ZombieFSM : Photon.MonoBehaviour
     {
         int myInt = int.Parse(intToPass);
         player = players[myInt];
+    }
+
+    [PunRPC]
+    public void AddZombie(string gameObjectToPass)
+    {
+        GameObject myGameObject = GameObject.Find(gameObjectToPass);
+        Zombie_Pool.zombiePoolInstance.zombies.Add(myGameObject);
     }
     #endregion
 
