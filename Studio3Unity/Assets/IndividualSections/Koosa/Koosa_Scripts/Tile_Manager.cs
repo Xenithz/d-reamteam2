@@ -7,7 +7,7 @@ using Photon;
 public class Tile_Manager : Photon.MonoBehaviour {
   
     #region Public Variables
-    public static Tile_Manager _instance_;
+    public static Tile_Manager instance;
     public float delta;// how far to move it from its inital postion
     public float speed;// how fast the object is to be moved
     public float timeToStartShake;// is time between every shake, every movemnt of the object every change in its position 
@@ -21,60 +21,66 @@ public class Tile_Manager : Photon.MonoBehaviour {
     #region Private and Portected Variables
     private Vector3 startpos;
     private Vector3 defaultpos;
-   protected internal List<GameObject> tiles = new List<GameObject>();
+   public List<Tile> tiles = new List<Tile>();
+   public Tile myTile;
     #endregion
     
     #region Unity Functions
   private void Start()
    {
-      // temp = GameObject.FindGameObjectsWithTag("Tile");
+       temp = GameObject.FindGameObjectsWithTag("Tile");
+       foreach (GameObject tile in temp)
+        {
+            //if (!tiles.Contains(tile))
+                 //tiles.Add(tile);
+                  tiles.Add(new Tile(tile));
+        }
    }
     private void Awake()
     {
-         _instance_ = this;
-        foreach (GameObject tile in GameObject.FindGameObjectsWithTag("Tile"))
-        {
-            if (!tiles.Contains(tile))
-                 tiles.Add(tile);
-        }
+         instance = this;
+        
         flagTest = false;
     }
     #endregion 
     
     #region My Functions
-    public GameObject ShakeTile(GameObject tileToShake)
+    public Tile ShakeTile(Tile tileToShake)
     {
         startpos.x+=delta*Mathf.Sin(speed*Time.time);
-		tileToShake.transform.position=startpos;
-        timeToShake--;
-        defaultpos=tileToShake.transform.position;
+		tileToShake.myTile.gameObject.transform.position=startpos;
+        tileToShake.timeToShake--;
         return tileToShake;
     }
     #endregion
     
     #region Coroutines
     public IEnumerator DroppingTile(string myTileName)
-    {
+    { 
         Debug.Log("This gets reached");
-       GameObject myTile = GameObject.Find(myTileName);
+        GameObject thisTile;
+        thisTile=GameObject.Find(myTileName);
+       Debug.Log(thisTile);
+        myTile= new Tile (thisTile);
+        myTile.myTile=thisTile;
         flagTest = false;
-        startpos=myTile.transform.position;
-        defaultpos=myTile.transform.position;
+        startpos=myTile.myTile.transform.position;
+        defaultpos=myTile.myTile.transform.position;
         while (true){
-        for(int i=0; i<timeToShake; i++){
+        for(int i=0; i<myTile.timeToShake; i++){
         ShakeTile(myTile);
-        yield return new WaitForSeconds(timeToStartShake);
+        yield return new WaitForSeconds(myTile.timeToStartShake);
       }
-          break;
+        break;
       }
-        yield return new WaitForSeconds(countDownToFall);
+        yield return new WaitForSeconds(myTile.countDownToFall);
         Debug.Log("This gets dropped");
-        myTile.gameObject.SetActive(false);
-        yield return new WaitForSeconds(countDownToRise);
+        myTile.myTile.gameObject.SetActive(false);
+        yield return new WaitForSeconds(myTile.countDownToRise);
         Debug.Log("This gets raised");
-        myTile.transform.position=defaultpos;
-        myTile.gameObject.SetActive(true);
-        timeToShake=50;
+        myTile.myTile.transform.position=defaultpos;
+        myTile.myTile.gameObject.SetActive(true);
+        myTile.timeToShake=30;
     }
     #endregion
 

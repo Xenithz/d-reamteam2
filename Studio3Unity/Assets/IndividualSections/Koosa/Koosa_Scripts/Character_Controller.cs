@@ -12,7 +12,7 @@ public class Character_Controller : MonoBehaviour {
     [SerializeField]
     private BoxCollider playerCollider;
     private RaycastHit hit;
-    private GameObject myTile;
+    private Tile myTile;
     [SerializeField]
     private float coolDown;
     public float coolDownToSet;
@@ -25,6 +25,7 @@ public class Character_Controller : MonoBehaviour {
     public float magnitudeToClamp;
     public float jumpPower;
     public Tile_Manager tileManager;
+    
     #endregion
 
 #region Unity Functions
@@ -60,10 +61,7 @@ public class Character_Controller : MonoBehaviour {
     private void Update()
     
     {
-        if (IsNotGrounded())
-        {
-            Debug.Log("notgrounded");
-        }
+      
 
 
 
@@ -134,12 +132,20 @@ public class Character_Controller : MonoBehaviour {
         coolDownImage.SetActive(false);
         coolDown = coolDownToSet;
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
-        myTile = hit.transform.gameObject;
-
-        if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile)) 
+        Debug.Log("shooting");
+        GameObject tileName=hit.transform.gameObject;
+        GameObject thisTile =hit.transform.gameObject;
+        for(int i=0; i<Tile_Manager.instance.tiles.Count;i++){
+           if(thisTile==Tile_Manager.instance.tiles[i].myTile){
+               myTile=Tile_Manager.instance.tiles[i];
+           }
+           
+        }
+        
+        if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile))
         {
             Debug.Log("HITTTING");
-            tileManager.CallDropRPC(hit.transform.gameObject.name);
+            Tile_Manager.instance.CallDropRPC(myTile.myTile.gameObject.name);
         }
     }
     private void Countdown(){
