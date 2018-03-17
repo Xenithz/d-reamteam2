@@ -61,10 +61,7 @@ public class Character_Controller : MonoBehaviour {
     private void Update()
     
     {
-        if (IsNotGrounded())
-        {
-            Debug.Log("notgrounded");
-        }
+      
 
 
 
@@ -136,12 +133,11 @@ public class Character_Controller : MonoBehaviour {
         coolDown = coolDownToSet;
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
         Debug.Log("shooting");
+        GameObject tileName=hit.transform.gameObject;
         GameObject thisTile =hit.transform.gameObject;
-        for(int i=0; i<tileManager.tiles.Count;i++){
-            Debug.Log("searching");
-           if(thisTile==tileManager.tiles[i].myTile){
-               tileManager.tiles[i]=myTile;
-               Debug.Log("FOUND!!");
+        for(int i=0; i<Tile_Manager.instance.tiles.Count;i++){
+           if(thisTile==Tile_Manager.instance.tiles[i].myTile){
+               myTile=Tile_Manager.instance.tiles[i];
            }
            
         }
@@ -149,7 +145,7 @@ public class Character_Controller : MonoBehaviour {
         if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile))
         {
             Debug.Log("HITTTING");
-            tileManager.CallDropRPC(hit.transform.gameObject.name);
+            Tile_Manager.instance.CallDropRPC(myTile.myTile.gameObject.name);
         }
     }
     private void Countdown(){
