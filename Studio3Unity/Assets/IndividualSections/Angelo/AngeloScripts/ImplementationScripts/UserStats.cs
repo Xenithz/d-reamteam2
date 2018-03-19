@@ -33,6 +33,7 @@ public class UserStats : MonoBehaviour
     public void SetUserStats(string usernameToSet, int roundsToSet, int expToSet)
     {
         PhotonNetwork.playerName = usernameToSet;
+        PhotonNetwork.player.NickName = usernameToSet;
         myUsername = usernameToSet;
         myRounds = roundsToSet;
         myExp = expToSet;

@@ -9,9 +9,10 @@ public class Character_Controller : MonoBehaviour {
 #region Private Variables 
     [SerializeField]
     private Rigidbody playerBody;
+    [SerializeField]
     private BoxCollider playerCollider;
     private RaycastHit hit;
-    private GameObject myTile;
+    private Tile myTile;
     [SerializeField]
     private float coolDown;
     public float coolDownToSet;
@@ -24,6 +25,7 @@ public class Character_Controller : MonoBehaviour {
     public float magnitudeToClamp;
     public float jumpPower;
     public Tile_Manager tileManager;
+    
     #endregion
 
 #region Unity Functions
@@ -34,7 +36,7 @@ public class Character_Controller : MonoBehaviour {
         GameObject controlScripts = GameObject.Find("ControlScripts");
         tileManager = controlScripts.GetComponent<Tile_Manager>();
         playerBody = gameObject.GetComponent<Rigidbody>();
-        playerCollider = GetComponent<BoxCollider>();
+        playerCollider = gameObject.GetComponent<BoxCollider>();
         tileManager = controlScripts.GetComponent<Tile_Manager>();
     }
 
@@ -57,8 +59,7 @@ public class Character_Controller : MonoBehaviour {
     }
 
     private void Update()
-    
-    { 
+    {
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
       
@@ -70,10 +71,6 @@ public class Character_Controller : MonoBehaviour {
             Debug.Log("ff");
             
         }
-        
-            
-            
-
         Jump();
 
         
@@ -110,13 +107,15 @@ public class Character_Controller : MonoBehaviour {
     {
         float groundDistance;
         groundDistance = playerCollider.bounds.extents.y;
-        return Physics.Raycast(transform.position, -Vector3.up, groundDistance+2f);
+        return Physics.Raycast(transform.position, -Vector3.up, groundDistance + 1);
+        
     }
 
     private void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
-        {   
+        {
+            Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
         }        
     }
@@ -126,21 +125,33 @@ public class Character_Controller : MonoBehaviour {
         coolDownImage.SetActive(false);
         coolDown = coolDownToSet;
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
-        myTile = hit.transform.gameObject;
-
-        if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile)) 
-        {
-            Debug.Log("HITTTING");
-            tileManager.CallDropRPC(hit.transform.gameObject.name);
-        }
-    }
-    private void Countdown(){
-        coolDown -= Time.deltaTime;
-    }
-   
-         
+        Debug.Log("shooting");
         
-     
+        if(hit.transform.gameObject.tag == "Tile")
+        {
+            GameObject thisTile = hit.transform.gameObject;
+            for(int i=0; i<Tile_Manager.instance.tiles.Count;i++)
+            {
+                if(thisTile==Tile_Manager.instance.tiles[i].myTile)
+                {
+                    myTile=Tile_Manager.instance.tiles[i];
+                    //Tile_Manager.instance.CallDropRPC(myTile.myTile.gameObject.name);
+                    Tile_Manager.instance.photonView.RPC("CallDropTile", PhotonTargets.All, myTile.myTile.name);
+                }
+            }
+        }
+        
+        // if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile))
+        // {
+        //     Debug.Log("HITTTING");
+        //     Tile_Manager.instance.CallDropRPC(myTile.myTile.gameObject.name);
+        // }
+    }
+    private void Countdown()
+    {
+        coolDown -= Time.deltaTime;
+    }        
+
  }
     #endregion
 

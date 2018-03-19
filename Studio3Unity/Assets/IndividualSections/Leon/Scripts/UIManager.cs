@@ -124,13 +124,4 @@ public class UIManager : MonoBehaviour {
         youAreBannedPanel.gameObject.SetActive(false);
         leaderboardPanel.gameObject.SetActive(false);
     }
-
-    
-
-    
-
-    
-
-    
-
 }
