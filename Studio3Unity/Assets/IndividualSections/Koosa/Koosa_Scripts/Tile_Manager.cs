@@ -22,7 +22,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
     private Vector3 startpos;
     private Vector3 defaultpos;
    public List<Tile> tiles = new List<Tile>();
-   public Tile myTile;
+   public Tile myTile=null;
     #endregion
     
     #region Unity Functions
@@ -61,7 +61,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
         GameObject thisTile;
         thisTile=GameObject.Find(myTileName);
        Debug.Log(thisTile);
-        myTile= new Tile (thisTile);
+       // myTile= new Tile (thisTile);
         myTile.myTile=thisTile;
         flagTest = false;
         startpos=myTile.myTile.transform.position;
