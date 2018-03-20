@@ -59,14 +59,7 @@ public class Character_Controller : MonoBehaviour {
     }
 
     private void Update()
-    
     {
-      
-
-
-
-
-
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
       
@@ -133,28 +126,32 @@ public class Character_Controller : MonoBehaviour {
         coolDown = coolDownToSet;
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
         Debug.Log("shooting");
-        GameObject tileName=hit.transform.gameObject;
-        GameObject thisTile =hit.transform.gameObject;
-        for(int i=0; i<Tile_Manager.instance.tiles.Count;i++){
-           if(thisTile==Tile_Manager.instance.tiles[i].myTile){
-               myTile=Tile_Manager.instance.tiles[i];
-           }
-           
-        }
         
-        if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile))
+        if(hit.transform.gameObject.tag == "Tile")
         {
-            Debug.Log("HITTTING");
-            Tile_Manager.instance.CallDropRPC(myTile.myTile.gameObject.name);
+            GameObject thisTile = hit.transform.gameObject;
+            for(int i=0; i<Tile_Manager.instance.tiles.Count;i++)
+            {
+                if(thisTile==Tile_Manager.instance.tiles[i].myTile)
+                {
+                    myTile=Tile_Manager.instance.tiles[i];
+                    //Tile_Manager.instance.CallDropRPC(myTile.myTile.gameObject.name);
+                    Tile_Manager.instance.photonView.RPC("CallDropTile", PhotonTargets.All, myTile.myTile.name);
+                }
+            }
         }
-    }
-    private void Countdown(){
-        coolDown -= Time.deltaTime;
-    }
-   
-         
         
-     
+        // if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile))
+        // {
+        //     Debug.Log("HITTTING");
+        //     Tile_Manager.instance.CallDropRPC(myTile.myTile.gameObject.name);
+        // }
+    }
+    private void Countdown()
+    {
+        coolDown -= Time.deltaTime;
+    }        
+
  }
     #endregion
 

@@ -22,7 +22,7 @@ public class Tile_Manager : Photon.MonoBehaviour {
     private Vector3 startpos;
     private Vector3 defaultpos;
    public List<Tile> tiles = new List<Tile>();
-   public Tile myTile=null;
+   public Tile myTile;
     #endregion
     
     #region Unity Functions
@@ -45,12 +45,12 @@ public class Tile_Manager : Photon.MonoBehaviour {
     #endregion 
     
     #region My Functions
-    public Tile ShakeTile(Tile tileToShake)
+    public void ShakeTile(Tile tileToShake)
     {
         startpos.x+=delta*Mathf.Sin(speed*Time.time);
 		tileToShake.myTile.gameObject.transform.position=startpos;
         tileToShake.timeToShake--;
-        return tileToShake;
+        //return tileToShake;
     }
     #endregion
     
@@ -59,26 +59,29 @@ public class Tile_Manager : Photon.MonoBehaviour {
     { 
         Debug.Log("This gets reached");
         GameObject thisTile;
-        thisTile=GameObject.Find(myTileName);
-       Debug.Log(thisTile);
-       // myTile= new Tile (thisTile);
+        thisTile = GameObject.Find(myTileName);
+        myTile= new Tile (thisTile);
         myTile.myTile=thisTile;
         flagTest = false;
-        startpos=myTile.myTile.transform.position;
-        defaultpos=myTile.myTile.transform.position;
-        while (true){
-        for(int i=0; i<myTile.timeToShake; i++){
-        ShakeTile(myTile);
-        yield return new WaitForSeconds(myTile.timeToStartShake);
-      }
-        break;
-      }
+        //startpos=myTile.myTile.transform.position;
+        //defaultpos=myTile.myTile.transform.position;
+
+        // while (true)
+        // {
+        //     for(int i=0; i<myTile.timeToShake; i++)
+        //     {
+        //         ShakeTile(myTile);
+        //         yield return new WaitForSeconds(myTile.timeToStartShake);
+        //     }
+        // break;
+        // }
+
         yield return new WaitForSeconds(myTile.countDownToFall);
         Debug.Log("This gets dropped");
         myTile.myTile.gameObject.SetActive(false);
         yield return new WaitForSeconds(myTile.countDownToRise);
         Debug.Log("This gets raised");
-        myTile.myTile.transform.position=defaultpos;
+        //myTile.myTile.transform.position=defaultpos;
         myTile.myTile.gameObject.SetActive(true);
         myTile.timeToShake=30;
     }

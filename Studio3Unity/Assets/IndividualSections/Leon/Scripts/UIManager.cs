@@ -27,6 +27,10 @@ public class UIManager : MonoBehaviour {
     {
 	}
 
+    public void OnClickToMainMenuScene()
+    {
+        SceneManager.LoadScene("Main_Menu");
+    }
     public void OnClickToLogin() // to go to log in
     {
         SceneManager.LoadScene("Login");
@@ -124,13 +128,4 @@ public class UIManager : MonoBehaviour {
         youAreBannedPanel.gameObject.SetActive(false);
         leaderboardPanel.gameObject.SetActive(false);
     }
-
-    
-
-    
-
-    
-
-    
-
 }

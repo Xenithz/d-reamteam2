@@ -16,7 +16,7 @@ public class ScrollingTextTimer : MonoBehaviour {
         scrollingTextTimer -= Time.deltaTime;
         if (scrollingTextTimer <= 0)
         {
-            SceneManager.LoadScene("Main_Menu");
+            SceneManager.LoadScene("Tutorial");
         }
     }
 
