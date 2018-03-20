@@ -27,6 +27,10 @@ public class UIManager : MonoBehaviour {
     {
 	}
 
+    public void OnClickToMainMenuScene()
+    {
+        SceneManager.LoadScene("Main_Menu");
+    }
     public void OnClickToLogin() // to go to log in
     {
         SceneManager.LoadScene("Login");
