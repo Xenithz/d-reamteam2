@@ -134,6 +134,7 @@ public class Character_Controller : MonoBehaviour {
             {
                 if(thisTile==Tile_Manager.instance.tiles[i].myTile)
                 {
+                    Debug.Log("HITTTING");
                     myTile=Tile_Manager.instance.tiles[i];
                     //Tile_Manager.instance.CallDropRPC(myTile.myTile.gameObject.name);
                     Tile_Manager.instance.photonView.RPC("CallDropTile", PhotonTargets.All, myTile.myTile.name);

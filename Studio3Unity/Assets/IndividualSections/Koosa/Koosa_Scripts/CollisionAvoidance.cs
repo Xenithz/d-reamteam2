@@ -26,9 +26,8 @@ public float lookSpeed;
 	}
 	void FixedUpdate () 
 	{
-	  Look();
-	  targetDir = (player.transform.position - transform.position);
-	  Vector3.Normalize(targetDir);
+	  
+	  targetDir = (player.transform.position - transform.position);//.normalized;
      if (Physics.Raycast(transform.position+height, transform.forward+height, out colliderHit, raycastLenght))
 	 {
 		 Debug.DrawLine(transform.position, colliderHit.point, Color.blue);
@@ -44,6 +43,7 @@ public float lookSpeed;
 		 Debug.DrawLine(right, colliderHit.point, Color.green);
 		 targetDir+=AvoidRight();
 	 }
+	 Look();
 	}
 	public Vector3 AvoidFront()
 	{
@@ -77,11 +77,12 @@ public float lookSpeed;
 	}
    public void Look()
    {
-	  transform.LookAt(targetDir);
-	   transform.position+=targetDir*Time.deltaTime*speed;
+	  transform.LookAt(targetDir+transform.position); //add this transform.position becuz the targetdir is stored as value in memory
+	   transform.position+=targetDir.normalized*Time.deltaTime*speed;
    }
     public bool CanAvoid()
 	{
 	return colliderHit.transform != player && colliderHit.collider.tag == "Avoid";
 	}
 }
+

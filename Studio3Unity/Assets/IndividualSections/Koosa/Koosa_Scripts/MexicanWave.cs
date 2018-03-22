@@ -19,15 +19,18 @@ public Color[] colors=new Color[6];
          colors[4] = Color.yellow;
          colors[5] = Color.magenta;
 		rend=GetComponent<Renderer>();
+		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("mexican"))
+		{
+			mexican.Add(obj);
+			Debug.Log(obj.name);
+
+		}
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
 		time+=Time.deltaTime;
-		foreach (GameObject obj in GameObject.FindGameObjectsWithTag("mexican"))
-		{
-			mexican.Add(obj);
-		}
+		
 		if(Input.GetKeyDown(KeyCode.G )&& time<=10){
 		
 			mexican[index].GetComponent<Renderer>().material.color=colors[Random.Range(0,5)];
