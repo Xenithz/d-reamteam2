@@ -10,35 +10,39 @@ public class LobbyManager : Photon.PunBehaviour
     public Transform myPlayerNamePosition;
     public GameObject playerListPanel;
     public GameObject lobbyPanel;
+
+    public PhotonPlayer[] myPlayerList;
+    #endregion
+
+    #region Unity callbacks
+    private void Update()
+    {
+        Debug.Log(myPlayerList.Length);
+        for(int i = 0; i < myPlayerList.Length; i++)
+        {
+            playerNamePositions[i].GetComponentInChildren<Text>().text = myPlayerList[i].NickName;
+        }
+    }
     #endregion
 
     #region Photon callbacks
     public override void OnJoinedRoom()
     {
-        GameObject playerName = PhotonNetwork.Instantiate("PlayerName", myPlayerNamePosition.position, Quaternion.identity, 0);
-        playerName.GetComponentInChildren<Text>().text = PhotonNetwork.player.NickName;
-        playerName.transform.SetParent(lobbyPanel.transform);
-
-        if(PhotonNetwork.isMasterClient == false)
-        {
-            for(int i = 0; i < PhotonNetwork.playerList.Length - 1; i++)
-            {
-                GameObject otherPlayerNames = PhotonNetwork.Instantiate("PlayerName", playerNamePositions[i].position, Quaternion.identity, 0);
-                otherPlayerNames.GetComponentInChildren<Text>().text = PhotonNetwork.playerList[i].NickName;
-                otherPlayerNames.transform.SetParent(playerListPanel.transform);
-            }
-        }
+        myPlayerNamePosition.GetComponentInChildren<Text>().text = PhotonNetwork.player.NickName;
+        myPlayerList = PhotonNetwork.playerList;
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
-        PhotonPlayer[] myPlayerList = PhotonNetwork.playerList;
-        System.Array.Reverse(myPlayerList);
-        for(int i = 0; i < PhotonNetwork.playerList.Length - 1; i++)
+        myPlayerList = PhotonNetwork.playerList;
+    }
+
+    public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+    {
+        myPlayerList = PhotonNetwork.playerList;
+        for (int i = 0; i < playerNamePositions.Length; i++)
         {
-            GameObject playerName = PhotonNetwork.Instantiate("PlayerName", playerNamePositions[i].position, Quaternion.identity, 0);
-            playerName.GetComponentInChildren<Text>().text = newPlayer.NickName;
-            playerName.transform.SetParent(playerListPanel.transform);
+            playerNamePositions[i].GetComponentInChildren<Text>().text = "";
         }
     }
     #endregion
