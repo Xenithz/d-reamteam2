@@ -49,9 +49,9 @@ public class UserInformationControl : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    //TESTING PURPOSES
     private void Update()
     {
+        //TESTING STUFF
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             CallEditData(UserStats.instance.myUsername);
@@ -143,6 +143,11 @@ public class UserInformationControl : MonoBehaviour
 
         if(myWWW.text == "User is an admin")
         {
+            while(GetComponent<MyNetworkManager>().hasConnected != true)
+            {
+                yield return null;
+            }
+
             GetComponent<LoginUI>().networkChoosePanel.SetActive(true);
             GetComponent<LoginUI>().loginPanel.SetActive(false);
             gameObject.GetComponent<LoginUI>().EnableAdminPanel();

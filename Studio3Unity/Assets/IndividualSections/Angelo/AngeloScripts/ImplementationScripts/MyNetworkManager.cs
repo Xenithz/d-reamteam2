@@ -5,8 +5,8 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class MyNetworkManager : Photon.PunBehaviour
 {
-	#region Public varaibles
-	public MyNetworkManager instance = new MyNetworkManager();
+	#region Public variables
+	public MyNetworkManager instance;
 
 	public bool shouldConnect;
 	public bool hasConnected;
@@ -17,12 +17,14 @@ public class MyNetworkManager : Photon.PunBehaviour
 	#region Private variables
 	private static int maxPlayersForTwo = 2;
 	private static int maxPlayersForFour = 4;
+
+	private	GameObject uiHolder;
 	#endregion
 
 	#region Unity callbacks
 	private void Awake()
 	{
-		 if (instance != null && instance != this)
+		if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -31,6 +33,7 @@ public class MyNetworkManager : Photon.PunBehaviour
         DontDestroyOnLoad(this.gameObject);
 
 		shouldConnect = false;
+		uiHolder = GameObject.Find("UI");
 	}
 
 	private void Update()
@@ -46,6 +49,7 @@ public class MyNetworkManager : Photon.PunBehaviour
 	public override void OnConnectedToPhoton()
 	{
 		Debug.Log("Initial Photon connection established");
+		hasConnected = true;
 	}
 
 	public override void OnJoinedRoom()
@@ -53,15 +57,20 @@ public class MyNetworkManager : Photon.PunBehaviour
 		Debug.Log("Joined a room succesfully");
 		PhotonNetwork.automaticallySyncScene = true;
 		//enable lobby panel
+		uiHolder.GetComponent<UIManager>().lobbyPanel.gameObject.SetActive(true);
+		uiHolder.GetComponent<UIManager>().onlinePickPanel.gameObject.SetActive(false);
 	}
 
 	public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
 	{
 		Debug.Log("Player just joined");
+		Debug.Log(PhotonNetwork.room.MaxPlayers);
 
 		if(PhotonNetwork.room.PlayerCount == PhotonNetwork.room.MaxPlayers)
 		{
-			PhotonNetwork.LoadLevel(myScene);
+			PhotonNetwork.room.IsOpen = false;
+			Debug.Log("Room is now closed");
+			//PhotonNetwork.LoadLevel(myScene);
 		}
 	}
 
@@ -108,29 +117,23 @@ public class MyNetworkManager : Photon.PunBehaviour
 		return myRoomOptions;
 	}
 
-	// public void CallSyncLoad(string sceneName)
-	// {
-	// 	this.photonView.RPC("SyncLoadScene", PhotonTargets.All, sceneName);
-	// }
+	public void LoadSceneFromLobby()
+	{
+		PhotonNetwork.LoadLevel(myScene);
+	}
 
 	public void JoinTwoPlayersRandom()
 	{
+		myScene = "twoplayers";
 		Hashtable roomPropertiesToSearch = new Hashtable() {{"twoplayers", 1}};
 		PhotonNetwork.JoinRandomRoom(roomPropertiesToSearch, (byte)maxPlayersForTwo);
 	}
 
 	public void JoinFourPlayersRandom()
 	{
+		myScene = "fourplayers";
 		Hashtable roomPropertiesToSearch = new Hashtable() {{"fourplayers", 1}};
 		PhotonNetwork.JoinRandomRoom(roomPropertiesToSearch, (byte)maxPlayersForFour);
 	}
-	#endregion
-
-	#region My RPCs
-	// [PunRPC]
-	// public void SyncLoadScene(string levelToLoad)
-	// {
-	// 	PhotonNetwork.LoadLevel(levelToLoad);
-	// }
 	#endregion
 }
