@@ -17,7 +17,7 @@ public class LobbyManager : Photon.PunBehaviour
     #region Unity callbacks
     private void Update()
     {
-        if(PhotonNetwork.connected == true)
+        if(PhotonNetwork.connected)
         {
             Debug.Log(myPlayerList.Length);
             for(int i = 0; i < myPlayerList.Length; i++)

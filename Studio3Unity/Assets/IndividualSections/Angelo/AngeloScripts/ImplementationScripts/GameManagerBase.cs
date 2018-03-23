@@ -19,10 +19,14 @@ public class GameManagerBase : Photon.PunBehaviour
 
     public GameObject[] spawnPoints;
 
-    public string playerPrefabName;
+    public GameObject playerPrefab;
     #endregion
 
     #region Unity callbacks
+    private void Start()
+    {
+        Initialize();
+    }
     private void Awake() 
     {
         instance = this;
@@ -32,10 +36,7 @@ public class GameManagerBase : Photon.PunBehaviour
     #region My functions
     public void Initialize()
     {
-        if(PhotonNetwork.player.IsLocal)
-        {
-            GameObject myPlayer = PhotonNetwork.Instantiate(this.playerPrefabName, spawnPoints[PhotonNetwork.player.ID - 1].transform.position, Quaternion.identity, 0);
-        }
+        GameObject myPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[0].transform.position, Quaternion.identity, 0);
         this.myGameState = GameStates.Starting;
     }
 
@@ -46,7 +47,7 @@ public class GameManagerBase : Photon.PunBehaviour
 
     public void SetUpNewRound()
     {
-
+        
     }
     
     public void EndGame ()

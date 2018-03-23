@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIHandler : MonoBehaviour 
+public class AIHandler : Photon.MonoBehaviour 
 {
 	#region Public variables
 	public List<GameObject> aiToTrack;
 
-	public AIHandler instance;
+	public static AIHandler instance;
 	#endregion
 
 	#region Private variables
@@ -22,7 +22,15 @@ public class AIHandler : MonoBehaviour
 	#endregion
 
 	#region My functions
+	public void CallRefreshList()
+	{
+		this.photonView.RPC("RefreshList", PhotonTargets.All);	
+	}
 	
+	public void CallRemoveFromList(string gameObjectName)
+	{
+		this.photonView.RPC("RemoveFromList", PhotonTargets.All, gameObjectName);
+	}
 	#endregion
 
 	#region My RPCs
@@ -38,13 +46,11 @@ public class AIHandler : MonoBehaviour
 		GameObject gameObjectToRemove = GameObject.Find(objectName);
 		if(aiToTrack.Contains(gameObjectToRemove))
 		{
-			for (int i = 0; i < aiToTrack.Count; i++)
-			{
-				if(aiToTrack[i] == gameObjectToRemove)
-				{
-					aiToTrack.Remove(aiToTrack[i]);
-				}
-			}
+			aiToTrack.Remove(gameObjectToRemove);
+		}
+		else
+		{
+			Debug.Log("Object not present");
 		}
 	}
 	#endregion

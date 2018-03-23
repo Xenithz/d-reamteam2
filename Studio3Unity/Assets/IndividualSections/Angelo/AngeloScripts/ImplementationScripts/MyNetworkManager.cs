@@ -71,16 +71,17 @@ public class MyNetworkManager : Photon.PunBehaviour
 			PhotonNetwork.room.IsOpen = false;
 			Debug.Log("Room is now closed");
 			//PhotonNetwork.LoadLevel(myScene);
+			LoadSceneFromLobby();
 		}
 	}
 
 	public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
 	{
-		if(myScene == "twoplayers")
+		if(myScene == "2_Player_Online")
 		{
 			PhotonNetwork.CreateRoom(null, TwoPlayerOnline(), null);
 		}
-		else if(myScene == "fourplayers")
+		else if(myScene == "4_Player_Online")
 		{
 			PhotonNetwork.CreateRoom(null, FourPlayerOnline(), null);
 		}
@@ -124,14 +125,14 @@ public class MyNetworkManager : Photon.PunBehaviour
 
 	public void JoinTwoPlayersRandom()
 	{
-		myScene = "twoplayers";
+		myScene = "2_Player_Online";
 		Hashtable roomPropertiesToSearch = new Hashtable() {{"twoplayers", 1}};
 		PhotonNetwork.JoinRandomRoom(roomPropertiesToSearch, (byte)maxPlayersForTwo);
 	}
 
 	public void JoinFourPlayersRandom()
 	{
-		myScene = "fourplayers";
+		myScene = "4_Player_Online";
 		Hashtable roomPropertiesToSearch = new Hashtable() {{"fourplayers", 1}};
 		PhotonNetwork.JoinRandomRoom(roomPropertiesToSearch, (byte)maxPlayersForFour);
 	}

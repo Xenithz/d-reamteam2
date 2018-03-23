@@ -140,7 +140,27 @@ public class Zombie_Pool : Photon.MonoBehaviour
         myZombie.transform.position = spawnPoint.GetChild(int.Parse(myInt)).position;
         myZombie.transform.rotation = Quaternion.identity;
         activeZombies.Add(myZombie);
+        AIHandler.instance.CallRefreshList();
         myZombie.SetActive(true);
+    }
+
+    public void CallRemoveZombie(string objectToPass)
+    {
+        this.photonView.RPC("RemoveZombieFromActive", PhotonTargets.All, objectToPass);
+    }
+
+    [PunRPC]
+    public void RemoveZombieFromActive(string objectNameToRemove)
+    {
+        GameObject objectToRemove = GameObject.Find(objectNameToRemove);
+        if(activeZombies.Contains(objectToRemove))
+		{
+			activeZombies.Remove(objectToRemove);
+		}
+		else
+		{
+			Debug.Log("Object not present");
+		}
     }
 }
 #endregion
