@@ -5,6 +5,7 @@ using Photon;
 
 public class GameManagerBase : Photon.PunBehaviour
 {
+    #region Public variables
     public enum GameStates
     {
         Starting,
@@ -19,12 +20,16 @@ public class GameManagerBase : Photon.PunBehaviour
     public GameObject[] spawnPoints;
 
     public string playerPrefabName;
+    #endregion
 
+    #region Unity callbacks
     private void Awake() 
     {
         instance = this;
     }
+    #endregion
 
+    #region My functions
     public void Initialize()
     {
         if(PhotonNetwork.player.IsLocal)
@@ -48,11 +53,16 @@ public class GameManagerBase : Photon.PunBehaviour
     {
 
     }
+        
+    #endregion
 
+    #region My RPCs
     [PunRPC]
     public void DisplayEndPanel()
     {
         
     }
+        
+    #endregion
 
 }

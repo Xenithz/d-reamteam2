@@ -13,6 +13,8 @@ public class Zombie_Pool : Photon.MonoBehaviour
 
     public static Zombie_Pool zombiePoolInstance;
     public List<GameObject> zombies;
+
+    public List<GameObject> activeZombies;
     #endregion
 
 
@@ -137,15 +139,8 @@ public class Zombie_Pool : Photon.MonoBehaviour
         GameObject myZombie = ZombieToSpawn();
         myZombie.transform.position = spawnPoint.GetChild(int.Parse(myInt)).position;
         myZombie.transform.rotation = Quaternion.identity;
+        activeZombies.Add(myZombie);
         myZombie.SetActive(true);
-    }
-
-    [PunRPC]
-    public void DeactivateAndClear(string gameObjectName)
-    {
-        GameObject myGameObject = GameObject.Find(gameObjectName);
-        myGameObject.SetActive(false);
-        zombies.Add(myGameObject);
     }
 }
 #endregion

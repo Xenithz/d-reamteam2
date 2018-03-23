@@ -17,10 +17,13 @@ public class LobbyManager : Photon.PunBehaviour
     #region Unity callbacks
     private void Update()
     {
-        Debug.Log(myPlayerList.Length);
-        for(int i = 0; i < myPlayerList.Length; i++)
+        if(PhotonNetwork.connected == true)
         {
-            playerNamePositions[i].GetComponentInChildren<Text>().text = myPlayerList[i].NickName;
+            Debug.Log(myPlayerList.Length);
+            for(int i = 0; i < myPlayerList.Length; i++)
+            {
+                playerNamePositions[i].GetComponentInChildren<Text>().text = myPlayerList[i].NickName;
+            }
         }
     }
     #endregion
