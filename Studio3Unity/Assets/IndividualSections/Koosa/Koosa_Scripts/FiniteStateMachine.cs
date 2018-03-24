@@ -1,36 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class FiniteStateMachine : MonoBehaviour {
-
-public class Condition
+namespace StateSystem
 {
-    public virtual bool Test()
-    {
-        return false;
-    }
-}
-
-public class Transition
+public class FiniteStateMachine<zombie>
 {
-    public Condition condition;
-	 public State target;    
-}
+    public FSMState<zombie> currentState{get;private set;}
+    public zombie owner;
 
-public class State : MonoBehaviour
-{
-    public List<Transition> transitions; 
-}
 
- public virtual void Awake()
+
+public FiniteStateMachine(zombie T){
+    owner=T;
+    currentState = null;
+
+} 
+ 
+public void ChangeState(FSMState<zombie> newstate)
 {
-   // transitions = new List<Transition>();
+    if(currentState!=null)
+    currentState.ExitState(owner);
+    currentState=newstate;
+    currentState.EnterState(owner);
     
-
-
-
-
+}
+public void Update()
+{
+    if(currentState!=null)
+    currentState.UpdateState(owner);
+    
 }
 
 
@@ -45,23 +43,13 @@ public class State : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+abstract public class FSMState  <zombie>
+ {
+  abstract public void EnterState (zombie owner);
+  abstract public void UpdateState (zombie owner);
+  abstract public void ExitState(zombie owner);
+ }
 }
+}
+
+

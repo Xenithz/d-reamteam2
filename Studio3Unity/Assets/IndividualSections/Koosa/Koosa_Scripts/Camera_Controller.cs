@@ -28,6 +28,7 @@ public class Camera_Controller : Photon.MonoBehaviour
  
 	void Update ()
     {
+        
         GivePlayer();
 
         target = player.transform.position + offset;
@@ -36,7 +37,7 @@ public class Camera_Controller : Photon.MonoBehaviour
 
     public void GivePlayer()
     {
-        if(PhotonNetwork.connected){
+        if(PhotonNetwork.inRoom){
         GameObject[] myPlayers = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject checkPlayer in myPlayers)
         {
