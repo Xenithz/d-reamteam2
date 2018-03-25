@@ -7,41 +7,47 @@ public class CollisionAvoidance : MonoBehaviour
  {
 
 private RaycastHit colliderHit;
-public Vector3 targetDir;
+public Vector3 velocity;
+public Vector3 targetVector;
+public Vector3 steeringForce;
+public float maxSpeed;
+public float maxForce;
+public float maxVelocity;
 public float raycastLenght;
 public Vector3 height;
-public Transform player;
-public Vector3 left;
-public Vector3 right;
+public Transform target;
 public float avoidanceForce;
+public Vector3 avoidanceVector;
 public float vision;
 public float speed;
 public float lookSpeed;
+public Rigidbody rb;
 	void Start () 
 	{
-	left = transform.position;
-    right = transform.position;
-    left.x -= vision;
-    right.x += vision;
+	rb = GetComponent<Rigidbody>();
 	}
 	void FixedUpdate () 
 	{
+		velocity=rb.velocity;
+        Vector3 left=transform.position;
+		Vector3 right=transform.position;
+
 	  
-	  targetDir = (player.transform.position - transform.position);//.normalized;
+	  targetVector = (target.transform.position - transform.position).normalized;
      if (Physics.Raycast(transform.position+height, transform.forward+height, out colliderHit, raycastLenght))
 	 {
 		 Debug.DrawLine(transform.position, colliderHit.point, Color.blue);
-		 targetDir+=AvoidFront();
+		 targetVector+=AvoidFront();
 	 }
-	  if (Physics.Raycast(left+height, transform.forward+height, out colliderHit, raycastLenght))
+	  if (Physics.Raycast(left+(-transform.right*vision), transform.forward+height, out colliderHit, raycastLenght))
 	 {
 		 Debug.DrawLine(left, colliderHit.point, Color.red);
-		 targetDir+=AvoidLeft();
+		 targetVector+=AvoidLeft();
 	 }
-	  if (Physics.Raycast(right+height, transform.forward+height, out colliderHit, raycastLenght))
+	  if (Physics.Raycast(right + (transform.right * vision), transform.forward+height, out colliderHit, raycastLenght))
 	 {
 		 Debug.DrawLine(right, colliderHit.point, Color.green);
-		 targetDir+=AvoidRight();
+		 targetVector+=AvoidRight();
 	 }
 	 Look();
 	}
@@ -50,7 +56,8 @@ public float lookSpeed;
     Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-           avoidanceVector+=colliderHit.normal*avoidanceForce;
+           avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+
 		   Debug.Log("avoidfront");
 		}
 	 return avoidanceVector;
@@ -60,7 +67,8 @@ public float lookSpeed;
 		Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-           avoidanceVector+=colliderHit.normal*avoidanceForce;
+			avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+           
 		   Debug.Log("avoidleft");
 		}
 	 return avoidanceVector;
@@ -70,19 +78,19 @@ public float lookSpeed;
     Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-           avoidanceVector+=colliderHit.normal*avoidanceForce;
+           avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
 		   Debug.Log("avoidright");
 		}
 	 return avoidanceVector;
 	}
    public void Look()
    {
-	  transform.LookAt(targetDir+transform.position); //add this transform.position becuz the targetdir is stored as value in memory
-	   transform.position+=targetDir.normalized*Time.deltaTime*speed;
+	transform.LookAt(targetVector+transform.position); //add this transform.position becuz the targetdir is stored as value in memory on the graph, in order to actually look at we need to add out posotion
+	transform.position+=targetVector.normalized*Time.deltaTime*speed;
    }
     public bool CanAvoid()
 	{
-	return colliderHit.transform != player && colliderHit.collider.tag == "Avoid";
+	return colliderHit.transform != target && colliderHit.collider.tag == "Avoid";
 	}
 }
 

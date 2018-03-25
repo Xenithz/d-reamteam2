@@ -13,6 +13,8 @@ public class Zombie_Pool : Photon.MonoBehaviour
 
     public static Zombie_Pool zombiePoolInstance;
     public List<GameObject> zombies;
+
+    public List<GameObject> activeZombies;
     #endregion
 
 
@@ -137,15 +139,28 @@ public class Zombie_Pool : Photon.MonoBehaviour
         GameObject myZombie = ZombieToSpawn();
         myZombie.transform.position = spawnPoint.GetChild(int.Parse(myInt)).position;
         myZombie.transform.rotation = Quaternion.identity;
+        activeZombies.Add(myZombie);
+        AIHandler.instance.CallRefreshList();
         myZombie.SetActive(true);
     }
 
-    [PunRPC]
-    public void DeactivateAndClear(string gameObjectName)
+    public void CallRemoveZombie(string objectToPass)
     {
-        GameObject myGameObject = GameObject.Find(gameObjectName);
-        myGameObject.SetActive(false);
-        zombies.Add(myGameObject);
+        this.photonView.RPC("RemoveZombieFromActive", PhotonTargets.All, objectToPass);
+    }
+
+    [PunRPC]
+    public void RemoveZombieFromActive(string objectNameToRemove)
+    {
+        GameObject objectToRemove = GameObject.Find(objectNameToRemove);
+        if(activeZombies.Contains(objectToRemove))
+		{
+			activeZombies.Remove(objectToRemove);
+		}
+		else
+		{
+			Debug.Log("Object not present");
+		}
     }
 }
 #endregion
