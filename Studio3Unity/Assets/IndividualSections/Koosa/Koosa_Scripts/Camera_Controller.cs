@@ -25,19 +25,19 @@ public class Camera_Controller : Photon.MonoBehaviour
     {
 
     }
- 
-	void Update ()
+   void Update()
+   {
+    GivePlayer();
+   }
+	void LateUpdate ()
     {
-        
-        GivePlayer();
-
         target = player.transform.position + offset;
         transform.position = Vector3.SmoothDamp(transform.position, target, ref velocity, smoothing);
     }
 
     public void GivePlayer()
     {
-        if(PhotonNetwork.inRoom){
+        if(PhotonNetwork.connected){
         GameObject[] myPlayers = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject checkPlayer in myPlayers)
         {
