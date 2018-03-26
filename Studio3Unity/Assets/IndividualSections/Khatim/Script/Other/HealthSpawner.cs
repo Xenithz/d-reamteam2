@@ -10,23 +10,24 @@ public class HealthSpawner : MonoBehaviour
 	#endregion
 
 	#region Private Variables
-	private int index;
 	public float timer = 0;
 	private float maxTime = 5;
+	private int index;
 	#endregion
 
 	#region Callbacks
 	void Start () 
 	{
-		index = Random.Range(0, healthSpawnLocation.Length);
+		timer = maxTime;
 	}
 	
 	void Update () 
 	{
+		index = Random.Range(0, healthSpawnLocation.Length);
 		timer -= Time.deltaTime;
 		if (timer <= 0)
 		{
-			//SpawnHealth();
+			SpawnHealth();
 			Debug.Log("Health Spawned");
 			timer = maxTime;
 		}
@@ -34,9 +35,9 @@ public class HealthSpawner : MonoBehaviour
 	#endregion
 
 	#region Functions
-	/*void SpawnHealth()
+	void SpawnHealth()
 	{
-		Instantiate(healthPrefab,,Quaternion.identity);
-	}*/
+		Instantiate(healthPrefab,healthSpawnLocation[index].position,Quaternion.identity);
+	}
 	#endregion
 }
