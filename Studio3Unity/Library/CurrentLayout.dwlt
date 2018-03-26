@@ -109,7 +109,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 11
+  controlID: 57
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,8 +176,8 @@ MonoBehaviour:
     y: 0
     width: 202
     height: 621
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -440,28 +440,28 @@ MonoBehaviour:
     height: 600
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c63d0000
-    m_LastClickedID: 15814
-    m_ExpandedIDs: dafbffff00000000083c0000ce3d0000
+    m_SelectedIDs: 9e330000
+    m_LastClickedID: 0
+    m_ExpandedIDs: 261cfcff2a1cfcff8076fcff8476fcff8cf4fcffb4f4fcffbcf4fcffac45fdffb245fdff4467fdffda74fdff408ffdff749bfdff629efdff345cfeff462effffa22fffffaef8ffffdafbffff00000000b8a50000daa500002ca70000b2a7000000a90000844d0100d24e0100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Main Camera
+      m_OriginalName: Main Camera
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 46500
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
   m_ExpandedScenes:
-  - Main_Menu
+  - Offline_1_Player
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -518,14 +518,14 @@ MonoBehaviour:
     width: 1108
     height: 600
   m_SceneLighting: 1
-  lastFramingTime: 290.06320869135806
-  m_2DMode: 1
+  lastFramingTime: 928.0692333827161
+  m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 615.7294, y: 162.63742, z: -34.75}
+    m_Target: {x: 15.345356, y: -3.049862, z: 10.062145}
     speed: 2
-    m_Value: {x: 615.7294, y: 162.63742, z: -34.75}
+    m_Value: {x: 15.345356, y: -3.049862, z: 10.062145}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -540,26 +540,26 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     yGrid:
-      m_Target: 0
-      speed: 2
-      m_Value: 0
-    zGrid:
       m_Target: 1
       speed: 2
       m_Value: 1
+    zGrid:
+      m_Target: 0
+      speed: 2
+      m_Value: 0
   m_Rotation:
-    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    m_Target: {x: 0.28513184, y: 0.06406559, z: -0.01910456, w: 0.9561541}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: -1}
+    m_Value: {x: 0.2851318, y: 0.06406558, z: -0.019104559, w: 0.956154}
   m_Size:
-    m_Target: 954.99255
+    m_Target: 144.94315
     speed: 2
-    m_Value: 954.99255
+    m_Value: 144.94315
   m_Ortho:
-    m_Target: 1
+    m_Target: 0
     speed: 2
-    m_Value: 1
-  m_LastSceneViewRotation: {x: -0.074290365, y: -0.035302185, z: 0.002630825, w: -0.9966082}
+    m_Value: 0
+  m_LastSceneViewRotation: {x: 0.32715753, y: 0.009358221, z: -0.0032398337, w: 0.9449179}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -611,10 +611,10 @@ MonoBehaviour:
   m_LastProjectPath: D:\Unity Projects\Studio 3\d-reamteam2\Studio3Unity
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 184}
+    scrollPos: {x: 0, y: 223}
     m_SelectedIDs: 02370000
     m_LastClickedID: 14082
-    m_ExpandedIDs: 00000000542700008e280000ce280000042a0000342a0000462a0000682a0000a02a0000043300007e33000086330000f2360000023700000c3700001037000018370000063800001e38000022380000d83800003e39000052390000823f0000843f0000863f0000883f000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000054270000de2700008e280000ce280000042a0000342a0000462a0000682a0000a02a0000043300007e33000086330000a0330000f2360000023700000c3700001037000018370000063800001e38000022380000d83800003e39000052390000823f0000843f0000863f0000883f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
