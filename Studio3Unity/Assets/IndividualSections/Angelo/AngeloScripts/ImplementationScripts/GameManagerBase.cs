@@ -22,12 +22,14 @@ public class GameManagerBase : Photon.PunBehaviour
     public GameObject playerPrefab;
 
     public int roundNumber;
+
+    public bool flag1;
     #endregion
 
     #region Unity callbacks
     private void Start()
     {
-        roundNumber = 0;
+        roundNumber = 1;
         myGameState = GameStates.Starting;
         Initialize();
     }
@@ -41,7 +43,7 @@ public class GameManagerBase : Photon.PunBehaviour
         if(AIHandler.instance.aiToTrack.Count == 0)
         {
             roundNumber++;
-            SetUpNewRound(roundNumber);
+            SetUpNewRound(1);
         }
     }
     #endregion

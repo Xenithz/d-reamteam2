@@ -43,7 +43,7 @@ public void Update()
 
 
 
-abstract public class FSMState  <zombie>
+abstract public class FSMState  <zombie1>
  {
   abstract public void EnterState (zombie owner);
   abstract public void UpdateState (zombie owner);

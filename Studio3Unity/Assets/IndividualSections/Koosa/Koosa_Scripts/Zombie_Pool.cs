@@ -126,6 +126,7 @@ public class Zombie_Pool : Photon.MonoBehaviour
             spawnIndex = Random.Range(0, spawnPoint.childCount);
             int intToSend = spawnIndex;
             this.photonView.RPC("SetZombie", PhotonTargets.AllViaServer, intToSend.ToString());
+            Debug.Log("do something");
         }
         else
         {

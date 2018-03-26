@@ -21,7 +21,7 @@ public class ZombieFSM : Photon.PunBehaviour
     #region Private Variables
     //private enum Condition { Chase, Attack };
     //private Condition currCondition;
-    private int myCondition;
+    public   int myCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
     #endregion
@@ -57,14 +57,14 @@ public class ZombieFSM : Photon.PunBehaviour
         Zombie_Pool.zombiePoolInstance.zombies.Add(gameObject);
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+
+    void Update()
     {
         //Processing
         if(PhotonNetwork.isMasterClient)
         {
             distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-            if (distanceToPlayer <= attackDistance)
+            if (distanceToPlayer < attackDistance)
             {
                 //currCondition = Condition.Attack;
                 if(myCondition != attackCondition)
@@ -72,7 +72,7 @@ public class ZombieFSM : Photon.PunBehaviour
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "2");
                 }
             }
-            else
+            else if(distanceToPlayer > attackDistance)
             {
                 if(myCondition != chaseCondition)
                 {
@@ -81,18 +81,23 @@ public class ZombieFSM : Photon.PunBehaviour
             }
                 
         }
+    }
 
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         //Execution
         switch (/*currCondition*/ myCondition)
         {
-            case /*Condition.Chase*/ 1:
+            case 1:
                 Vector3 heading = (player.transform.position - this.gameObject.transform.position).normalized;
                 speed = Mathf.Clamp(speed, 0, maxSpeed);
-                rg.AddForce(heading * speed*Time.deltaTime);
+                rg.AddForce(heading * speed, ForceMode.Impulse);
                 transform.LookAt(heading+this.transform.position);
                 //Debug.Log("Chasing");
                 break;
-            case /*Condition.Attack*/ 2:
+            case 2:
+            Debug.Log("attacking");
                 //myPlayer.Damage();
                 //Debug.Log("Attacking");
                 break;
