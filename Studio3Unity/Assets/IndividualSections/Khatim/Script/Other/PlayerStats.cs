@@ -41,7 +41,7 @@ public class PlayerStats : MonoBehaviour
         {
             healthSprite[hlth].SetActive(true);
             hlth++;
-            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
         }
     }
     #endregion
