@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class ZombieFSM : Photon.PunBehaviour
 {
     #region Public Variables
@@ -87,11 +86,10 @@ public class ZombieFSM : Photon.PunBehaviour
         switch (/*currCondition*/ myCondition)
         {
             case /*Condition.Chase*/ 1:
-                //transform.LookAt(player.transform.position);
-                Vector3 heading = player.transform.position - this.gameObject.transform.position;
-                Vector3.Normalize(heading);
+                Vector3 heading = (player.transform.position - this.gameObject.transform.position).normalized;
                 speed = Mathf.Clamp(speed, 0, maxSpeed);
-                rg.AddForce(heading * speed);
+                rg.AddForce(heading * speed*Time.deltaTime);
+                transform.LookAt(heading+this.transform.position);
                 //Debug.Log("Chasing");
                 break;
             case /*Condition.Attack*/ 2:

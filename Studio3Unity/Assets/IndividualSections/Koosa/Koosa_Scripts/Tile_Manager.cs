@@ -61,10 +61,10 @@ public class Tile_Manager : Photon.MonoBehaviour {
          break;
          }
 
-        yield return new WaitForSeconds(myTile.countDownToFall);
+        yield return new WaitForSeconds(countDownToFall);
         Debug.Log("This gets dropped");
         myTile.myTile.gameObject.SetActive(false);
-        yield return new WaitForSeconds(myTile.countDownToRise);
+        yield return new WaitForSeconds(countDownToRise);
         Debug.Log("This gets raised");
         myTile.myTile.transform.position=defaultpos;
         myTile.myTile.gameObject.SetActive(true);

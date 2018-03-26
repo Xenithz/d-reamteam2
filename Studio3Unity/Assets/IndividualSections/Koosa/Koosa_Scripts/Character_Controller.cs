@@ -10,7 +10,7 @@ public class Character_Controller : MonoBehaviour {
     [SerializeField]
     private Rigidbody playerBody;
     [SerializeField]
-    private BoxCollider playerCollider;
+    private Collider playerCollider;
     private RaycastHit hit;
     private Tile myTile;
     [SerializeField]
@@ -25,12 +25,17 @@ public class Character_Controller : MonoBehaviour {
     public float magnitudeToClamp;
     public float jumpPower;
     public Tile_Manager tileManager;
+    public Animator playerAnim;
+    public float hp;
     
     #endregion
 
 #region Unity Functions
-    private void Start()
+
+
+    private void Awake()
     {
+        playerAnim=GetComponent<Animator>();
         coolDownImage=GameObject.FindGameObjectWithTag("DropAbility");
         coolDown=0;
         GameObject controlScripts = GameObject.Find("ControlScripts");
@@ -46,7 +51,7 @@ public class Character_Controller : MonoBehaviour {
 
         playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
+       transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
 
         Vector3 vectorOfMovement = MovementInput();
 
