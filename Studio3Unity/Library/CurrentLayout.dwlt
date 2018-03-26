@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -43,7 +43,7 @@ MonoBehaviour:
     y: 0
     width: 1858
     height: 1037
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -440,9 +440,9 @@ MonoBehaviour:
     height: 600
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: b8720000
-    m_LastClickedID: 29368
-    m_ExpandedIDs: ce99ffff62edffffdafbffff0000000072720000
+    m_SelectedIDs: c63d0000
+    m_LastClickedID: 15814
+    m_ExpandedIDs: dafbffff00000000083c0000ce3d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -519,13 +519,13 @@ MonoBehaviour:
     height: 600
   m_SceneLighting: 1
   lastFramingTime: 290.06320869135806
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 554, y: 291.5, z: 0}
+    m_Target: {x: 615.7294, y: 162.63742, z: -34.75}
     speed: 2
-    m_Value: {x: 554, y: 291.5, z: 0}
+    m_Value: {x: 615.7294, y: 162.63742, z: -34.75}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -540,26 +540,26 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     yGrid:
-      m_Target: 1
-      speed: 2
-      m_Value: 1
-    zGrid:
       m_Target: 0
       speed: 2
       m_Value: 0
+    zGrid:
+      m_Target: 1
+      speed: 2
+      m_Value: 1
   m_Rotation:
-    m_Target: {x: -0.074290365, y: -0.035302185, z: 0.0026308247, w: -0.99660814}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0.074290365, y: -0.035302185, z: 0.0026308247, w: -0.99660814}
+    m_Value: {x: 0, y: 0, z: 0, w: -1}
   m_Size:
-    m_Target: 2065.8323
+    m_Target: 954.99255
     speed: 2
-    m_Value: 2065.8323
+    m_Value: 954.99255
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
-  m_LastSceneViewRotation: {x: 0.11073657, y: 0.028025275, z: -0.0031259859, w: 0.9934496}
+    m_Value: 1
+  m_LastSceneViewRotation: {x: -0.074290365, y: -0.035302185, z: 0.002630825, w: -0.9966082}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -602,19 +602,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/IndividualSections/Leon/Scenes
+    - Assets/IndividualSections/Leon
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/IndividualSections/Leon/Scenes
+  - Assets/IndividualSections/Leon
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity Projects\Studio 3\d-reamteam2\Studio3Unity
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 304}
-    m_SelectedIDs: 1e380000
-    m_LastClickedID: 14366
-    m_ExpandedIDs: 00000000542700008e280000ce280000042a0000342a0000462a0000682a0000a02a0000043300007e33000086330000f2360000023700000c3700001037000018370000063800001e38000022380000d83800003e390000523900008a6e00008c6e00008e6e0000906e000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 184}
+    m_SelectedIDs: 02370000
+    m_LastClickedID: 14082
+    m_ExpandedIDs: 00000000542700008e280000ce280000042a0000342a0000462a0000682a0000a02a0000043300007e33000086330000f2360000023700000c3700001037000018370000063800001e38000022380000d83800003e39000052390000823f0000843f0000863f0000883f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -642,7 +642,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000542700008e280000ce280000042a0000342a0000462a0000682a0000a02a0000043300007e33000086330000f2360000023700000c3700001037000018370000063800001e38000022380000d83800003e390000523900008a6e00008c6e00008e6e0000906e0000
+    m_ExpandedIDs: 00000000542700008e280000ce280000042a0000342a0000462a0000682a0000a02a0000043300007e33000086330000f2360000023700000c3700001037000018370000063800001e38000022380000d83800003e39000052390000823f0000843f0000863f0000883f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
