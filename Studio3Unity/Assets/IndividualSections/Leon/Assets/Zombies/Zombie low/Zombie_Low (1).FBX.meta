@@ -1,27 +1,15 @@
 fileFormatVersion: 2
-guid: 098d51c5e8998534c9e6a03dce60cda1
-timeCreated: 1522041123
+guid: f1447b7987f21314cbe3e89e17a96e83
+timeCreated: 1522137751
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Metal_Head
-    100002: Pipe
-    100004: //RootNode
-    100006: Zombie_Med
-    400000: Metal_Head
-    400002: Pipe
-    400004: //RootNode
-    400006: Zombie_Med
-    2300000: Metal_Head
-    2300002: Pipe
-    2300004: Zombie_Med
-    3300000: Metal_Head
-    3300002: Pipe
-    3300004: Zombie_Med
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Zombie_Med
-    4300002: Pipe
-    4300004: Metal_Head
   materials:
     importMaterials: 1
     materialName: 0
