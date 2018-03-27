@@ -20,16 +20,31 @@ public class GameManagerBase : Photon.PunBehaviour
     public GameObject[] spawnPoints;
 
     public GameObject playerPrefab;
+
+    public int roundNumber;
+
+    public bool flag1;
     #endregion
 
     #region Unity callbacks
     private void Start()
     {
+        roundNumber = 1;
+        myGameState = GameStates.Starting;
         Initialize();
     }
     private void Awake() 
     {
         instance = this;
+    }
+
+    private void Update()
+    {
+        if(AIHandler.instance.aiToTrack.Count == 0)
+        {
+            roundNumber++;
+            SetUpNewRound(1);
+        }
     }
     #endregion
 
@@ -38,6 +53,7 @@ public class GameManagerBase : Photon.PunBehaviour
     {
         GameObject myPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[0].transform.position, Quaternion.identity, 0);
         this.myGameState = GameStates.Starting;
+        SetUpNewRound(roundNumber);
     }
 
     public void UpdateRoundsSurvived()
@@ -45,12 +61,12 @@ public class GameManagerBase : Photon.PunBehaviour
         UserInformationControl.instance.CallEditData(UserStats.instance.myUsername);
     }
 
-    public void SetUpNewRound()
+    public void SetUpNewRound(int roundNumberToPass)
     {
-        
+        Zombie_Pool.zombiePoolInstance.Spawn(roundNumberToPass);
     }
     
-    public void EndGame ()
+    public void EndGame()
     {
 
     }

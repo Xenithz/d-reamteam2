@@ -13,23 +13,32 @@ public class UserInformationControl : MonoBehaviour
 
     #region Private variables
     [SerializeField]
-    string myRegisterUrl = "http://localhost/studio3/RegisterData.php";
+    // string myRegisterUrl = "http://localhost/studio3/RegisterData.php";
+    string myRegisterUrl = "https://amcg.000webhostapp.com/RegisterData.php";
     [SerializeField]
-    string myLoginUrl = "http://localhost/studio3/Login.php";
+    // string myLoginUrl = "http://localhost/studio3/Login.php";
+    string myLoginUrl = "https://amcg.000webhostapp.com/Login.php";
     [SerializeField]
-    string myBanCheckUrl = "http://localhost/studio3/BanCheck.php";
+    // string myBanCheckUrl = "http://localhost/studio3/BanCheck.php";
+    string myBanCheckUrl = "https://amcg.000webhostapp.com/BanCheck.php";
     [SerializeField]
-    string myAdminCheckUrl = "http://localhost/studio3/AdminCheck.php";
+    // string myAdminCheckUrl = "http://localhost/studio3/AdminCheck.php";
+    string myAdminCheckUrl = "https://amcg.000webhostapp.com/AdminCheck.php";
     [SerializeField]
-    string myBanUserUrl = "http://localhost/studio3/BanUser.php";
+    // string myBanUserUrl = "http://localhost/studio3/BanUser.php";
+    string myBanUserUrl = "https://amcg.000webhostapp.com/BanUser.php";
     [SerializeField]
-    string myUnbanUserUrl = "http://localhost/studio3/UnbanUser.php";
+    // string myUnbanUserUrl = "http://localhost/studio3/UnbanUser.php";
+    string myUnbanUserUrl = "https://amcg.000webhostapp.com/UnbanUser.php";
     [SerializeField]
-    string myEditDataUrl = "http://localhost/studio3/EditData.php";
+    // string myEditDataUrl = "http://localhost/studio3/EditData.php";
+    string myEditDataUrl = "https://amcg.000webhostapp.com/EditData.php";
     [SerializeField]
-    string myRecieveDataUrl = "http://localhost/studio3/GrabUserData.php";
+    // string myRecieveDataUrl = "http://localhost/studio3/GrabUserData.php";
+    string myRecieveDataUrl = "https://amcg.000webhostapp.com/GrabUserData.php";
     [SerializeField]
-    string myLeaderboardUrl = "http://localhost/studio3/Leaderboard.php";
+    // string myLeaderboardUrl = "http://localhost/studio3/Leaderboard.php";
+    string myLeaderboardUrl = "https://amcg.000webhostapp.com/Leaderboard.php";
 
     [SerializeField]
     int localRounds;
