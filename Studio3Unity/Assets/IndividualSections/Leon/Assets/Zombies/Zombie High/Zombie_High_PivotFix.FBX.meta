@@ -1,15 +1,22 @@
 fileFormatVersion: 2
-guid: 148faddccb5beec408bcd7ed19477561
-timeCreated: 1522041007
+guid: 9b706a7ae816cd842bd57880586d4f4e
+timeCreated: 1522137420
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Zombie_Med
+    100000: Bucket
+    100002: Zombie_High 1
+    100004: //RootNode
+    400000: Bucket
+    400002: Zombie_High 1
+    400004: //RootNode
+    2300000: Bucket
+    2300002: Zombie_High 1
+    3300000: Bucket
+    3300002: Zombie_High 1
+    4300000: Bucket
+    4300002: Zombie_High
   materials:
     importMaterials: 1
     materialName: 0

@@ -20,9 +20,16 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        if (hlth <=0)
+        if (GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp<=0)
         {
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
+            Debug.Log("Dead");
+        }
+
+        //Testing purposes
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            Damage();
         }
     }
     #endregion
@@ -30,17 +37,17 @@ public class PlayerStats : MonoBehaviour
     #region Functions
     public void Damage()
     {
-            hlth--;
-            healthSprite[hlth].SetActive(false);
+            GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp--;
+            healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(false);
             Debug.Log("Damage");
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && hlth < 6)
+        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp < 6)
         {
-            healthSprite[hlth].SetActive(true);
-            hlth++;
+            healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(true);
+            GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp++;
             Destroy(other.gameObject);
         }
     }

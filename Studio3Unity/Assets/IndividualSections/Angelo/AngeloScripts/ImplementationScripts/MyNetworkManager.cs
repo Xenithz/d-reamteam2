@@ -12,6 +12,8 @@ public class MyNetworkManager : Photon.PunBehaviour
 	public bool hasConnected;
 
 	public string myScene;
+
+	public GameObject myButton;
 	#endregion
 
 	#region Private variables
@@ -71,7 +73,8 @@ public class MyNetworkManager : Photon.PunBehaviour
 			PhotonNetwork.room.IsOpen = false;
 			Debug.Log("Room is now closed");
 			//PhotonNetwork.LoadLevel(myScene);
-			LoadSceneFromLobby();
+			//LoadSceneFromLobby();
+			myButton.SetActive(true);
 		}
 	}
 

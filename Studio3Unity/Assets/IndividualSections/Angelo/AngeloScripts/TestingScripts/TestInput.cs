@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseState : MonoBehaviour {
+public class TestInput : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -10,7 +10,11 @@ public class ChaseState : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update () 
+	{
+		if(Input.GetKeyDown(KeyCode.L))
+		{
+			Debug.Log("kek");	
+		}
 	}
 }
