@@ -21,6 +21,8 @@ public class GameManagerBase : Photon.PunBehaviour
 
     public GameObject playerPrefab;
 
+    public GameObject myLocalPlayer;
+
     public int roundNumber;
 
     public bool flag1;
@@ -40,11 +42,11 @@ public class GameManagerBase : Photon.PunBehaviour
 
     private void Update()
     {
-        if(AIHandler.instance.aiToTrack.Count == 0)
-        {
-            roundNumber++;
-            SetUpNewRound(1);
-        }
+        //if(AIHandler.instance.aiToTrack.Count == 0)
+        //{
+            // roundNumber++;
+            // SetUpNewRound(1);
+        //}
     }
     #endregion
 
@@ -52,8 +54,9 @@ public class GameManagerBase : Photon.PunBehaviour
     public void Initialize()
     {
         GameObject myPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[0].transform.position, Quaternion.identity, 0);
+        myLocalPlayer = myPlayer;
         this.myGameState = GameStates.Starting;
-        SetUpNewRound(roundNumber);
+        //SetUpNewRound(roundNumber);
     }
 
     public void UpdateRoundsSurvived()
