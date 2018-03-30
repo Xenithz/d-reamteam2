@@ -37,14 +37,14 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Awake()
     {
-       // playerAnim=GetComponent<Animator>();
+        playerAnim=GetComponent<Animator>();
         coolDownImage=GameObject.FindGameObjectWithTag("DropAbility");
         coolDown=0;
         GameObject TileManager = GameObject.Find("TileManager");
-        tileManager = TileManager.GetComponent<OfflineTileManager>();
+        //tileManager = TileManager.GetComponent<OfflineTileManager>();
         playerBody = gameObject.GetComponent<Rigidbody>();
         playerCollider = gameObject.GetComponent<BoxCollider>();
-        tileManager = TileManager.GetComponent<OfflineTileManager>();
+        //tileManager = TileManager.GetComponent<OfflineTileManager>();
     }
 
     private void FixedUpdate()
@@ -58,7 +58,7 @@ public class OfflineCharacterController : MonoBehaviour {
 
         playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-       transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
+        transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, lockRot);
 
         Vector3 vectorOfMovement = MovementInput();
 
@@ -75,12 +75,12 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Update()
     {
-		if(Input.GetKey(KeyCode .J))
+		if(Input.GetKeyDown(KeyCode .J))
 		playerAnim.SetInteger("int",5);
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
       
-        if (Input.GetKey(KeyCode.G)){
+        if (Input.GetKeyDown(KeyCode.G)){
          DropMyTile();
 		 playerAnim.SetInteger("int",2);
 		}
@@ -102,8 +102,8 @@ public class OfflineCharacterController : MonoBehaviour {
     private Vector3 MovementInput()
     {
         Vector3 playerinput;
-        float horInput = Input.GetAxisRaw("Horizontal");
-        float verInput = Input.GetAxisRaw("Vertical");
+        float horInput = Input.GetAxis("Horizontal");
+        float verInput = Input.GetAxis("Vertical");
         playerinput = new Vector3(horInput, 0f, verInput).normalized;
         return playerinput;
     }
@@ -111,7 +111,7 @@ public class OfflineCharacterController : MonoBehaviour {
     private void Movement(Vector3 movementvector)
     {
         movementvector.x = movementvector.x * moveSpeed;
-        movementvector.z = movementvector.z *moveSpeed;
+        movementvector.z = movementvector.z * moveSpeed;
         movementvector.y = 0f;
         movementvector = Vector3.ClampMagnitude(movementvector, magnitudeToClamp);
         playerBody.AddForce(movementvector, ForceMode.Impulse);
@@ -134,7 +134,7 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && IsNotGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
         {
             Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);

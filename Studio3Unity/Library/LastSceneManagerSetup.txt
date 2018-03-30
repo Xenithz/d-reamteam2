@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/IndividualSections/Angelo/TestScene.unity
+- path: Assets/IndividualSections/Koosa/mexican wave.unity
   isLoaded: 1
   isActive: 1
