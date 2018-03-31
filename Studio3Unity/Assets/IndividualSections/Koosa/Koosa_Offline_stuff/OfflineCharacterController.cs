@@ -51,8 +51,8 @@ public class OfflineCharacterController : MonoBehaviour {
     {
 		inputH=Input.GetAxisRaw("Horizontal");
 		inputV= Input.GetAxisRaw("Vertical");
-		playerAnim.SetFloat("inputH",inputH);
-		playerAnim.SetFloat("inputV",inputV);
+		//playerAnim.SetFloat("move",inputH);
+		//playerAnim.SetFloat("move",inputV);
 
         Countdown();
 
@@ -66,27 +66,31 @@ public class OfflineCharacterController : MonoBehaviour {
        
         if (MovementInput() != Vector3.zero)
         {
-			playerAnim.SetInteger("int",1);
+			//playerAnim.SetInteger("int",1);
             transform.rotation = Turn();
+            Debug.Log("i am ");
+            
+
         }
-		else
-		playerAnim.SetInteger("int",0);
+		
+		//playerAnim.SetInteger("int",0);
+
     }
 
     private void Update()
     {
 		if(Input.GetKeyDown(KeyCode .J))
-		playerAnim.SetInteger("int",5);
+		//playerAnim.SetInteger("int",5);
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
       
         if (Input.GetKeyDown(KeyCode.G)){
          DropMyTile();
-		 playerAnim.SetInteger("int",2);
+        // playerAnim.SetInteger("anim",3);
+        // playerAnim.SetInteger("anime",1);
 		}
         }
 		else
-		playerAnim.SetInteger("int",0);
         if(Input.GetKeyDown(KeyCode.Y)){
             AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
             Debug.Log("ff");
@@ -104,7 +108,7 @@ public class OfflineCharacterController : MonoBehaviour {
         Vector3 playerinput;
         float horInput = Input.GetAxis("Horizontal");
         float verInput = Input.GetAxis("Vertical");
-        playerinput = new Vector3(horInput, 0f, verInput).normalized;
+        playerinput = new Vector3(horInput, 1, verInput).normalized;
         return playerinput;
     }
 
@@ -138,7 +142,7 @@ public class OfflineCharacterController : MonoBehaviour {
         {
             Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
-			playerAnim.SetInteger("int",3);
+			//playerAnim.SetInteger("anim",2);
         }        
     }
     
