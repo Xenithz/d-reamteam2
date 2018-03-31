@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //(typeof(Rigidbody))]
-public class Character_Controller : MonoBehaviour {
+public class Character_Controller : MonoBehaviour, IPunObservable {
 
 #region Private Variables 
     [SerializeField]
@@ -26,7 +26,7 @@ public class Character_Controller : MonoBehaviour {
     public float jumpPower;
     public Tile_Manager tileManager;
     public Animator playerAnim;
-    public float hp;
+    public int hp;
     
     #endregion
 
@@ -43,6 +43,7 @@ public class Character_Controller : MonoBehaviour {
         playerBody = gameObject.GetComponent<Rigidbody>();
         playerCollider = gameObject.GetComponent<BoxCollider>();
         tileManager = controlScripts.GetComponent<Tile_Manager>();
+        hp = 6;
     }
 
     private void FixedUpdate()
@@ -146,19 +147,26 @@ public class Character_Controller : MonoBehaviour {
                 }
             }
         }
-        
-        // if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile))
-        // {
-        //     Debug.Log("HITTTING");
-        //     Tile_Manager.instance.CallDropRPC(myTile.myTile.gameObject.name);
-        // }
     }
     private void Countdown()
     {
         coolDown -= Time.deltaTime;
     }        
+        #endregion
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
  }
-    #endregion
+
+    
 
 

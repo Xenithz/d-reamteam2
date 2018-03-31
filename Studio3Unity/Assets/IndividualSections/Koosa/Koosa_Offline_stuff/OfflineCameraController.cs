@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class OfflineCameraController : MonoBehaviour 
 {
-
-
 	public List <Transform> Players;
 	public Vector3 offset;
 	public Vector3 vel;
@@ -14,11 +12,6 @@ public class OfflineCameraController : MonoBehaviour
 	public float maxZoom;
 	public float limitZoom;
 	public Camera playerCam;
-
-
-	
-
-
 void Start()
 {
 	playerCam=GetComponent<Camera>();

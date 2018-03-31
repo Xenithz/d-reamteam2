@@ -37,28 +37,28 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Awake()
     {
-       // playerAnim=GetComponent<Animator>();
+        playerAnim=GetComponent<Animator>();
         coolDownImage=GameObject.FindGameObjectWithTag("DropAbility");
         coolDown=0;
         GameObject TileManager = GameObject.Find("TileManager");
-        tileManager = TileManager.GetComponent<OfflineTileManager>();
+        //tileManager = TileManager.GetComponent<OfflineTileManager>();
         playerBody = gameObject.GetComponent<Rigidbody>();
         playerCollider = gameObject.GetComponent<BoxCollider>();
-        tileManager = TileManager.GetComponent<OfflineTileManager>();
+        //tileManager = TileManager.GetComponent<OfflineTileManager>();
     }
 
     private void FixedUpdate()
     {
 		inputH=Input.GetAxisRaw("Horizontal");
 		inputV= Input.GetAxisRaw("Vertical");
-		playerAnim.SetFloat("inputH",inputH);
-		playerAnim.SetFloat("inputV",inputV);
+		//playerAnim.SetFloat("move",inputH);
+		//playerAnim.SetFloat("move",inputV);
 
         Countdown();
 
         playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-       transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
+        transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, lockRot);
 
         Vector3 vectorOfMovement = MovementInput();
 
@@ -66,27 +66,31 @@ public class OfflineCharacterController : MonoBehaviour {
        
         if (MovementInput() != Vector3.zero)
         {
-			playerAnim.SetInteger("int",1);
+			//playerAnim.SetInteger("int",1);
             transform.rotation = Turn();
+            Debug.Log("i am ");
+            
+
         }
-		else
-		playerAnim.SetInteger("int",0);
+		
+		//playerAnim.SetInteger("int",0);
+
     }
 
     private void Update()
     {
-		if(Input.GetKey(KeyCode .J))
-		playerAnim.SetInteger("int",5);
+		if(Input.GetKeyDown(KeyCode .J))
+		//playerAnim.SetInteger("int",5);
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
       
-        if (Input.GetKey(KeyCode.G)){
+        if (Input.GetKeyDown(KeyCode.G)){
          DropMyTile();
-		 playerAnim.SetInteger("int",2);
+        // playerAnim.SetInteger("anim",3);
+        // playerAnim.SetInteger("anime",1);
 		}
         }
 		else
-		playerAnim.SetInteger("int",0);
         if(Input.GetKeyDown(KeyCode.Y)){
             AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
             Debug.Log("ff");
@@ -102,16 +106,16 @@ public class OfflineCharacterController : MonoBehaviour {
     private Vector3 MovementInput()
     {
         Vector3 playerinput;
-        float horInput = Input.GetAxisRaw("Horizontal");
-        float verInput = Input.GetAxisRaw("Vertical");
-        playerinput = new Vector3(horInput, 0f, verInput).normalized;
+        float horInput = Input.GetAxis("Horizontal");
+        float verInput = Input.GetAxis("Vertical");
+        playerinput = new Vector3(horInput, 1, verInput).normalized;
         return playerinput;
     }
 
     private void Movement(Vector3 movementvector)
     {
         movementvector.x = movementvector.x * moveSpeed;
-        movementvector.z = movementvector.z *moveSpeed;
+        movementvector.z = movementvector.z * moveSpeed;
         movementvector.y = 0f;
         movementvector = Vector3.ClampMagnitude(movementvector, magnitudeToClamp);
         playerBody.AddForce(movementvector, ForceMode.Impulse);
@@ -134,11 +138,11 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.Space) && IsNotGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
         {
             Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
-			playerAnim.SetInteger("int",3);
+			//playerAnim.SetInteger("anim",2);
         }        
     }
     
