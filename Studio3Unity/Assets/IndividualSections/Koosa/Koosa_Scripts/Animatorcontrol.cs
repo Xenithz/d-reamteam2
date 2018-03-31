@@ -32,10 +32,10 @@ public Rigidbody rb;
 	 }
 	  if(rb.velocity!=Vector3.zero)
 	 {
-		playerAnime.SetInteger("anime",5);
+		playerAnime.SetInteger("anim",5);
 	 }
 	  if(rb.velocity==Vector3.zero) 
-	 playerAnime.SetInteger("anime",1);
+	 playerAnime.SetInteger("anim",1);
 
 	 
 	 
