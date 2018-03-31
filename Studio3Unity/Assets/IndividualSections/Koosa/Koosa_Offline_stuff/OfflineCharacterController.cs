@@ -51,14 +51,14 @@ public class OfflineCharacterController : MonoBehaviour {
     {
 		inputH=Input.GetAxisRaw("Horizontal");
 		inputV= Input.GetAxisRaw("Vertical");
-		//playerAnim.SetFloat("move",inputH);
-		//playerAnim.SetFloat("move",inputV);
+		playerAnim.SetFloat("inputH",inputH);
+		playerAnim.SetFloat("inputV",inputV);
 
         Countdown();
 
-        playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        //playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
-        transform.rotation = Quaternion.Euler(-90, transform.rotation.eulerAngles.y, lockRot);
+        transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
 
         Vector3 vectorOfMovement = MovementInput();
 
@@ -79,22 +79,23 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Update()
     {
-		if(Input.GetKeyDown(KeyCode .J))
-		//playerAnim.SetInteger("int",5);
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
-      
         if (Input.GetKeyDown(KeyCode.G)){
          DropMyTile();
-        // playerAnim.SetInteger("anim",3);
-        // playerAnim.SetInteger("anime",1);
+        playerAnim.SetInteger("anim",2);
 		}
+        else playerAnim.SetInteger("anim",0);
+        if(Input.GetKeyDown(KeyCode .J)){
+		playerAnim.SetBool("death",true);
         }
-		else
-        if(Input.GetKeyDown(KeyCode.Y)){
-            AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
-            Debug.Log("ff");
-            
+        else playerAnim.SetBool("death",false);
+
+
+
+
+
+
         }
         Jump();
 
@@ -108,7 +109,7 @@ public class OfflineCharacterController : MonoBehaviour {
         Vector3 playerinput;
         float horInput = Input.GetAxis("Horizontal");
         float verInput = Input.GetAxis("Vertical");
-        playerinput = new Vector3(horInput, 1, verInput).normalized;
+        playerinput = new Vector3(horInput, 0, verInput).normalized;
         return playerinput;
     }
 
@@ -132,7 +133,7 @@ public class OfflineCharacterController : MonoBehaviour {
     {
         float groundDistance;
         groundDistance = playerCollider.bounds.extents.y;
-        return Physics.Raycast(transform.position, -Vector3.up, groundDistance + 1);
+        return Physics.Raycast(transform.position, -Vector3.up, groundDistance + 1f);
         
     }
 
@@ -143,7 +144,10 @@ public class OfflineCharacterController : MonoBehaviour {
             Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
 			//playerAnim.SetInteger("anim",2);
-        }        
+            playerAnim.SetBool("ground",IsNotGrounded());
+            Debug.Log("i m getting called");
+        }     
+        else playerAnim.SetBool("ground",!IsNotGrounded());
     }
     
     private void DropMyTile()
