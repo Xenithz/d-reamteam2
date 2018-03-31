@@ -11,17 +11,17 @@ public class TestJoin : MonoBehaviour
 
     public virtual void Start()
     {
-        //PhotonNetwork.autoJoinLobby = false;
-        PhotonNetwork.ConnectUsingSettings(version + "." + SceneManagerHelper.ActiveSceneBuildIndex);
+        PhotonNetwork.autoJoinLobby = false;
+        //PhotonNetwork.ConnectUsingSettings(version + "." + SceneManagerHelper.ActiveSceneBuildIndex);
     }
 
     public virtual void Update()
     {
-        // if (connectInUpdate && autoConnect && !PhotonNetwork.connected)
-        // {
-        //     connectInUpdate = false;
-        //     PhotonNetwork.ConnectUsingSettings(version + "." + SceneManagerHelper.ActiveSceneBuildIndex);
-        // }
+        if (connectInUpdate && autoConnect && !PhotonNetwork.connected)
+        {
+            connectInUpdate = false;
+            PhotonNetwork.ConnectUsingSettings(version + "." + SceneManagerHelper.ActiveSceneBuildIndex);
+        }
     }
 
     public virtual void OnConnectedToMaster()

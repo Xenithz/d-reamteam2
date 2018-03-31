@@ -6,6 +6,8 @@ public class PlayerStats : MonoBehaviour
 {
     #region Public Variables
     public GameObject[] healthSprite;
+
+    public static PlayerStats instance;
     #endregion
 
     #region Private Variables
@@ -15,14 +17,13 @@ public class PlayerStats : MonoBehaviour
     #region Callbacks
     void Start()
     {
-
+        instance = this;
     }
 
     void Update()
     {
         if (GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp<=0)
         {
-            // gameObject.SetActive(false);
             Debug.Log("Dead");
         }
 

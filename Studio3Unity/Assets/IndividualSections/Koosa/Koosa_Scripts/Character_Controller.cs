@@ -81,6 +81,17 @@ public class Character_Controller : MonoBehaviour, IPunObservable {
 
         
     }
+
+    //Khatim health system
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp < 6)
+        {
+            PlayerStats.instance.healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(true);
+            GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp++;
+            Destroy(other.gameObject);
+        }
+    }
     #endregion
 
 #region  My Functions
