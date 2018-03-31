@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a55ce319d7ae0f041838e3ab0610619f
-timeCreated: 1521729036
+guid: 74f5d5ce52e9515419dbcaf761301ab8
+timeCreated: 1522481420
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -62,7 +62,7 @@ ModelImporter:
     4300016: Foot_R
     4300018: Leg_L
     4300020: Foot_L
-    7400000: Death
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -86,63 +86,11 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Death
-      takeName: Take 001
-      firstFrame: 0
-      lastFrame: 40
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Char_RED
-        weight: 1
-      - path: Char_RED/Arm_L
-        weight: 1
-      - path: Char_RED/Arm_L/Hand_L
-        weight: 1
-      - path: Char_RED/Arm_R
-        weight: 1
-      - path: Char_RED/Arm_R/Hand_R
-        weight: 1
-      - path: Char_RED/Head
-        weight: 1
-      - path: Char_RED/Head/Box005
-        weight: 1
-      - path: Leg_L
-        weight: 1
-      - path: Leg_L/Foot_L
-        weight: 1
-      - path: Leg_R
-        weight: 1
-      - path: Leg_R/Foot_R
-        weight: 1
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 3
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
