@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a55ce319d7ae0f041838e3ab0610619f
-timeCreated: 1521729036
+guid: c244c959feec78b4f8066f0bf06bc14a
+timeCreated: 1522481421
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -62,7 +62,7 @@ ModelImporter:
     4300016: Foot_R
     4300018: Leg_L
     4300020: Foot_L
-    7400000: Death
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -88,17 +88,17 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Death
+      name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 40
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -142,7 +142,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 3
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
