@@ -8,7 +8,7 @@ public class ZombieFSM : Photon.PunBehaviour
 
     public int speed;
     public int maxSpeed;
-    public int attackDistance;
+    public float attackDistance;
     public float distanceToPlayer;
     [HideInInspector] public Rigidbody rg;
 
@@ -60,10 +60,14 @@ public class ZombieFSM : Photon.PunBehaviour
 
     void Update()
     {
+        Vector3 heading = (transform.position- player.transform.position).normalized;
+           distanceToPlayer=heading.magnitude;
         //Processing
         if(PhotonNetwork.isMasterClient)
         {
-            distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
+           //Vector3 heading = (transform.position- player.transform.position).normalized;
+          // distanceToPlayer=heading.magnitude;
             if (distanceToPlayer < attackDistance)
             {
                 //currCondition = Condition.Attack;
@@ -81,6 +85,21 @@ public class ZombieFSM : Photon.PunBehaviour
             }
                 
         }
+        else if (distanceToPlayer < attackDistance)
+            {
+                //currCondition = Condition.Attack;
+                if(myCondition != attackCondition)
+                {
+                    myCondition=2;
+                }
+            }
+            else if(distanceToPlayer > attackDistance)
+            {
+                if(myCondition != chaseCondition)
+                {
+                    myCondition=1;
+                }
+            }
     }
 
     // Update is called once per frame
@@ -98,6 +117,7 @@ public class ZombieFSM : Photon.PunBehaviour
                 break;
             case 2:
             Debug.Log("attacking");
+             GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
                 //myPlayer.Damage();
                 //Debug.Log("Attacking");
                 break;
