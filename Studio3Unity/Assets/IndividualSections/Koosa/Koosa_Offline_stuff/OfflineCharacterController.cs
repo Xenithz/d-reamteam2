@@ -56,7 +56,7 @@ public class OfflineCharacterController : MonoBehaviour {
 
         Countdown();
 
-        //playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
         transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
 
@@ -144,10 +144,10 @@ public class OfflineCharacterController : MonoBehaviour {
             Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
 			//playerAnim.SetInteger("anim",2);
-            playerAnim.SetBool("ground",IsNotGrounded());
+            playerAnim.SetBool("ground",true);
             Debug.Log("i m getting called");
         }     
-        else playerAnim.SetBool("ground",!IsNotGrounded());
+        else playerAnim.SetBool("ground",false);
     }
     
     private void DropMyTile()
