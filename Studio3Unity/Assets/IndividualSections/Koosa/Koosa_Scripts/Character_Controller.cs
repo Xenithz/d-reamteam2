@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //(typeof(Rigidbody))]
-public class Character_Controller : MonoBehaviour, IPunObservable {
+public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
 
 #region Private Variables 
     [SerializeField]
@@ -48,25 +48,35 @@ public class Character_Controller : MonoBehaviour, IPunObservable {
 
     private void FixedUpdate()
     {
-        Countdown();
-
-        playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
-       transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
-
-        Vector3 vectorOfMovement = MovementInput();
-
-        Movement(vectorOfMovement);
-       
-        if (MovementInput() != Vector3.zero)
+        if(photonView.isMine)
         {
-            transform.rotation = Turn();
+            Countdown();
+
+            playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+            transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
+
+            Vector3 vectorOfMovement = MovementInput();
+
+            Movement(vectorOfMovement);
+       
+            if (MovementInput() != Vector3.zero)
+            {
+                transform.rotation = Turn();
+                playerAnim.SetBool("isWalk", true);
+            }
+            else
+            {
+                playerAnim.SetBool("isWalk", false);
+            }
         }
     }
 
     private void Update()
     {
-        if(coolDown<=0 ){
+        if(photonView.isMine)
+        {
+            if(coolDown<=0 ){
             coolDownImage.SetActive(true);
       
         if (Input.GetKeyDown(KeyCode.G) )
@@ -75,11 +85,24 @@ public class Character_Controller : MonoBehaviour, IPunObservable {
         if(Input.GetKeyDown(KeyCode.Y)){
             AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
             Debug.Log("ff");
-            
         }
         Jump();
+        if(Input.GetKeyDown(KeyCode .J)){
+		playerAnim.SetBool("death",true);
+        }
+        else playerAnim.SetBool("death",false);
+        }
+    }
 
-        
+    //Khatim health system
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp < 6)
+        {
+            PlayerStats.instance.healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(true);
+            GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp++;
+            Destroy(other.gameObject);
+        }
     }
     #endregion
 
@@ -123,7 +146,9 @@ public class Character_Controller : MonoBehaviour, IPunObservable {
         {
             Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
+            playerAnim.SetBool("ground",true);
         }        
+        else playerAnim.SetBool("ground",false);
     }
     
     private void DropMyTile()
@@ -158,11 +183,15 @@ public class Character_Controller : MonoBehaviour, IPunObservable {
     {
         if (stream.isWriting)
         {
-            
+            stream.SendNext(playerAnim.GetBool("isWalk"));
+            stream.SendNext(playerAnim.GetBool("ground"));
+            stream.SendNext(playerAnim.GetBool("death"));
         }
         else
         {
-            
+            playerAnim.SetBool("isWalk", (bool)stream.ReceiveNext());
+            playerAnim.SetBool("ground", (bool)stream.ReceiveNext());
+            playerAnim.SetBool("death", (bool)stream.ReceiveNext());
         }
     }
  }
