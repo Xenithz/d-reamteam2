@@ -83,9 +83,9 @@ public class OfflineCharacterController : MonoBehaviour {
             coolDownImage.SetActive(true);
         if (Input.GetKeyDown(KeyCode.G)){
          DropMyTile();
-        playerAnim.SetInteger("anim",2);
+        //playerAnim.SetInteger("anim",2);
 		}
-        else playerAnim.SetInteger("anim",0);
+        //else playerAnim.SetInteger("anim",0);
         if(Input.GetKeyDown(KeyCode .J)){
 		playerAnim.SetBool("death",true);
         }
