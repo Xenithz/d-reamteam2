@@ -9,10 +9,7 @@ public class CollisionAvoidance : MonoBehaviour
 private RaycastHit colliderHit;
 public Vector3 velocity;
 public Vector3 targetVector;
-public Vector3 steeringForce;
-public float maxSpeed;
-public float maxForce;
-public float maxVelocity;
+public Vector3 steering;
 public float raycastLenght;
 public Vector3 height;
 public Transform target;
@@ -28,11 +25,9 @@ public Rigidbody rb;
 	}
 	void FixedUpdate () 
 	{
-		velocity=rb.velocity;
+		Look();
         Vector3 left=transform.position;
 		Vector3 right=transform.position;
-
-	  
 	  targetVector = (target.transform.position - transform.position).normalized;
      if (Physics.Raycast(transform.position+height, transform.forward+height, out colliderHit, raycastLenght))
 	 {
@@ -49,14 +44,14 @@ public Rigidbody rb;
 		 Debug.DrawLine(right, colliderHit.point, Color.green);
 		 targetVector+=AvoidRight();
 	 }
-	 Look();
+	 Move();
 	}
 	public Vector3 AvoidFront()
 	{
     Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-           avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+           avoidanceVector=((targetVector+colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
 
 		   Debug.Log("avoidfront");
 		}
@@ -67,7 +62,7 @@ public Rigidbody rb;
 		Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-			avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+			avoidanceVector=((targetVector+colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
            
 		   Debug.Log("avoidleft");
 		}
@@ -78,19 +73,27 @@ public Rigidbody rb;
     Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-           avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+           avoidanceVector=((targetVector+colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
 		   Debug.Log("avoidright");
 		}
 	 return avoidanceVector;
 	}
    public void Look()
    {
-	transform.LookAt(targetVector+transform.position); //add this transform.position becuz the targetdir is stored as value in memory on the graph, in order to actually look at we need to add out posotion
-	transform.position+=targetVector.normalized*Time.deltaTime*speed;
+	Quaternion.LookRotation(targetVector+transform.position); //add this transform.position becuz the targetdir is stored as value in memory on the graph, in order to actually look at we need to add out posotion
    }
     public bool CanAvoid()
 	{
 	return colliderHit.transform != target && colliderHit.collider.tag == "Avoid";
 	}
+	public void Move()
+	{
+	steering=(transform.position+=targetVector.normalized);
+	rb.AddForce(steering*Time.deltaTime*speed);
+	}
+
+
+
+	
 }
 

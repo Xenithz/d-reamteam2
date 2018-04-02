@@ -7,14 +7,26 @@ public class Zombie_Pool : Photon.MonoBehaviour
 
 #region Public Variables
     public GameObject zombie;
+    public GameObject easyZombie;
+    public GameObject mediumZombie;
+    public GameObject hardZombie;
     public int zombiesPooled;
+    public int easyZombiesPooled;
+    public int mediumZombiesPooled;
+    public int hardZombiesPooled;
+
     public Transform spawnPoint;
     public float spawnTime;  
 
     public static Zombie_Pool zombiePoolInstance;
     public List<GameObject> zombies;
-
+    public List<GameObject> easyZombies;
+    public List<GameObject> mediumZombies;
+    public List<GameObject> hardZombies;
     public List<GameObject> activeZombies;
+    public List<GameObject> activeEasyZombies;
+    public List<GameObject> activeMediumZombies;
+    public List<GameObject> activeHardZombies;
     #endregion
 
 
@@ -40,6 +52,9 @@ public class Zombie_Pool : Photon.MonoBehaviour
     {
         zombiePoolInstance = this;
         zombies = new List<GameObject>();
+        easyZombies= new List<GameObject>();
+        mediumZombies= new List<GameObject>();
+        hardZombies= new List<GameObject>();
         time = 20;
         myFlag = true;
         spawnFlag = true;

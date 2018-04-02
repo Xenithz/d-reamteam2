@@ -5,25 +5,35 @@ using UnityEngine;
 public class HealthSpawner : MonoBehaviour 
 {
 	#region Public Variables
-	public Transform[] healthSpawnLocation;
+	public Transform healthSpawnLocation;
 	public GameObject healthPrefab;
+	public int healthPooled;
+	public List<GameObject> health;
+	public float timer = 0;
 	#endregion
 
 	#region Private Variables
-	public float timer = 0;
 	private float maxTime = 5;
-	private int index;
+	public int index;
 	#endregion
 
 	#region Callbacks
 	void Start () 
 	{
+		index = Random.Range(0, healthSpawnLocation.childCount);
+		health = new List<GameObject>();
+		for(int i = 0; i < healthPooled; i++)
+		{
+			GameObject healthObj = Instantiate(healthPrefab, healthSpawnLocation.GetChild(index).position, Quaternion.identity);
+			healthObj.SetActive(false);
+			health.Add(healthObj);
+		}
+
 		timer = maxTime;
 	}
 	
-	void Update () 
+	void FixedUpdate () 
 	{
-		index = Random.Range(0, healthSpawnLocation.Length);
 		timer -= Time.deltaTime;
 		if (timer <= 0)
 		{
@@ -37,7 +47,14 @@ public class HealthSpawner : MonoBehaviour
 	#region Functions
 	void SpawnHealth()
 	{
-		Instantiate(healthPrefab,healthSpawnLocation[index].position,Quaternion.identity);
+		for(int i = 0; i < health.Count; i++)
+		{
+			if(!health[i].activeInHierarchy)
+			{
+				health[i].SetActive(true);
+				break;
+			}
+		}
 	}
 	#endregion
 }
