@@ -54,7 +54,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void Update()
     {
-        Debug.Log(Xposition);
-        Debug.Log(Yposition);
+        //Debug.Log(Xposition);
+        //Debug.Log(Yposition);
+        Debug.Log(Input);
     }
 }
