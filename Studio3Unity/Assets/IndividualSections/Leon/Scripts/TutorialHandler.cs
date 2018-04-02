@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialHandler : MonoBehaviour {
     public Transform welcomeCanvas;
@@ -8,6 +9,7 @@ public class TutorialHandler : MonoBehaviour {
     public Transform dismantleTileCanvas;
     public Transform zombieExplainCanvas;
     public Transform playerExplainCanvas;
+    public List<GameObject> zombiesInLevel=new List<GameObject>();
 	// Use this for initialization
 	void Start () {
         Time.timeScale = 0;
@@ -41,6 +43,20 @@ public class TutorialHandler : MonoBehaviour {
     }
 
     void Update () {
+
+     foreach (var zombie in GameObject.FindGameObjectsWithTag("Zombie"))
+     {
+         if(!zombiesInLevel.Contains(zombie))
+             zombiesInLevel.Add(zombie);
+     }
+
+
+
+
+        if(!zombiesInLevel.Contains(gameObject))
+        {
+            SceneManager.LoadScene("Main_Menu");
+        }
 		
 	}
 }
