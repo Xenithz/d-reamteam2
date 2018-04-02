@@ -51,7 +51,7 @@ public Rigidbody rb;
     Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-           avoidanceVector=((targetVector+colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+           avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
 
 		   Debug.Log("avoidfront");
 		}
@@ -62,7 +62,7 @@ public Rigidbody rb;
 		Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-			avoidanceVector=((targetVector+colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+			avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
            
 		   Debug.Log("avoidleft");
 		}
@@ -73,7 +73,7 @@ public Rigidbody rb;
     Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-           avoidanceVector=((targetVector+colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+           avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
 		   Debug.Log("avoidright");
 		}
 	 return avoidanceVector;
