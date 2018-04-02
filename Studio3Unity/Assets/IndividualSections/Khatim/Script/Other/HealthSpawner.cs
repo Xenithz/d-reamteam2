@@ -5,40 +5,49 @@ using UnityEngine;
 public class HealthSpawner : MonoBehaviour 
 {
 	#region Public Variables
-	public Transform healthSpawnLocation;
+	public GameObject[] healthSpawnLocation;
 	public GameObject healthPrefab;
-	public int healthPooled;
 	public List<GameObject> health;
 	public float timer = 0;
+	public int index;
 	#endregion
 
 	#region Private Variables
 	private float maxTime = 5;
-	public int index;
 	#endregion
 
 	#region Callbacks
-	void Start () 
+	void Awake () 
 	{
-		index = Random.Range(0, healthSpawnLocation.childCount);
+		timer = maxTime;
+		healthSpawnLocation = GameObject.FindGameObjectsWithTag("HealthSpawn");
+
+		for(int i = 0; i < healthSpawnLocation.Length; i++)
+		{
+			GameObject healthObj = Instantiate(healthPrefab, healthSpawnLocation[i].transform.position, Quaternion.identity);
+			healthPrefab.SetActive(false);
+			health.Add(healthObj);
+		}
+		#region Commented Code
+		//Instantiate(healthPrefab, healthSpawnLocation.)
+		/*index = Random.Range(0, healthSpawnLocation.childCount);
 		health = new List<GameObject>();
 		for(int i = 0; i < healthPooled; i++)
 		{
 			GameObject healthObj = Instantiate(healthPrefab, healthSpawnLocation.GetChild(index).position, Quaternion.identity);
 			healthObj.SetActive(false);
 			health.Add(healthObj);
-		}
-
-		timer = maxTime;
+		}*/
+		#endregion
 	}
 	
 	void FixedUpdate () 
 	{
+		index = Random.Range(0, health.Count);
 		timer -= Time.deltaTime;
 		if (timer <= 0)
 		{
 			SpawnHealth();
-			Debug.Log("Health Spawned");
 			timer = maxTime;
 		}
 	}
@@ -51,7 +60,7 @@ public class HealthSpawner : MonoBehaviour
 		{
 			if(!health[i].activeInHierarchy)
 			{
-				health[i].SetActive(true);
+				health[index].SetActive(true);
 				break;
 			}
 		}
