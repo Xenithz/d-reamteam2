@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -43,7 +43,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 1007
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -367,9 +367,9 @@ MonoBehaviour:
     height: 665
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: bea40000
-    m_LastClickedID: 42174
-    m_ExpandedIDs: f2b9feffaad7feff00000000
+    m_SelectedIDs: 1a070000
+    m_LastClickedID: 0
+    m_ExpandedIDs: defbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -562,7 +562,7 @@ MonoBehaviour:
     width: 1358
     height: 250
   m_SearchFilter:
-    m_NameFilter: 
+    m_NameFilter: charac
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -572,19 +572,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/IndividualSections/Angelo/Resources
+    - Assets/IndividualSections/Khatim/Script/Other
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/IndividualSections/Angelo/Resources
+  - Assets/IndividualSections/Khatim/Script/Other
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\UNITY\Studio-3-stuff\Project\d-reamteam2\Studio3Unity
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 111}
-    m_SelectedIDs: f47e0000
-    m_LastClickedID: 32500
-    m_ExpandedIDs: 000000005c750000ae750000787600009e760000347700004c7700006c770000767700007a770000d2770000b8790000e87a0000a27b00001a7c00001e7c0000487c0000187d0000f47e0000187f0000427f0000467f00004c7f0000ac7f0000288000003a8000003e800000f4800000068100004881000076810000828100008c820000489800004a9800004c9800004e98000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 199}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 000000005c270000d0270000b4280000f4280000062a00005a2a0000942a0000a62a0000aa2a0000e62a00002c2d00005e3200000a340000b8340000c2340000f8340000e6350000d8390000023a0000343a0000383a0000403a0000c23a0000743b00008c3b0000903b0000a63b00006a3c0000803c0000e03c0000143d00002a3d00008c3e0000a0590000a2590000a4590000a659000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -612,7 +612,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000005c750000ae750000787600009e760000347700004c7700006c770000767700007a770000d2770000b8790000e87a0000a27b00001a7c00001e7c0000487c0000187d0000f47e0000187f0000427f0000467f00004c7f0000ac7f0000288000003a8000003e800000f4800000068100004881000076810000828100008c820000489800004a9800004c9800004e980000
+    m_ExpandedIDs: 000000005c270000d0270000b4280000f4280000062a00005a2a0000942a0000a62a0000aa2a0000222b00002c2d00005e3200000a340000b8340000c2340000f8340000e6350000d8390000023a0000343a0000383a0000403a0000c23a0000743b00008c3b0000903b00006a3c0000803c0000e03c0000143d00002a3d00008c3e0000a0590000a2590000a4590000a6590000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
