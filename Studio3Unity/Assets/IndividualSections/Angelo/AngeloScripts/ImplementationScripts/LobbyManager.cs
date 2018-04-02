@@ -11,13 +11,20 @@ public class LobbyManager : Photon.PunBehaviour
     public GameObject playerListPanel;
     public GameObject lobbyPanel;
 
+    public bool inRoom;
+
     public PhotonPlayer[] myPlayerList;
     #endregion
 
     #region Unity callbacks
+    private void Start()
+    {
+        inRoom = false;
+    }
+
     private void Update()
     {
-        if(PhotonNetwork.connected)
+        if(PhotonNetwork.connected && inRoom == true)
         {
             Debug.Log(myPlayerList.Length);
             for(int i = 0; i < myPlayerList.Length; i++)
@@ -33,6 +40,7 @@ public class LobbyManager : Photon.PunBehaviour
     {
         myPlayerNamePosition.GetComponentInChildren<Text>().text = PhotonNetwork.player.NickName;
         myPlayerList = PhotonNetwork.playerList;
+        inRoom = true;
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
@@ -47,6 +55,16 @@ public class LobbyManager : Photon.PunBehaviour
         {
             playerNamePositions[i].GetComponentInChildren<Text>().text = "";
         }
+    }
+
+    public override void OnConnectionFail(DisconnectCause cause)
+    {
+        inRoom = false;
+    }
+
+    public override void OnDisconnectedFromPhoton()
+    {
+        inRoom = false;
     }
     #endregion
 }
