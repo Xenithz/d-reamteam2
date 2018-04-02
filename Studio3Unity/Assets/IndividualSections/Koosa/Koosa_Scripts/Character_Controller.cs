@@ -186,12 +186,14 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
             stream.SendNext(playerAnim.GetBool("isWalk"));
             stream.SendNext(playerAnim.GetBool("ground"));
             stream.SendNext(playerAnim.GetBool("death"));
+            stream.SendNext(hp);
         }
         else
         {
             playerAnim.SetBool("isWalk", (bool)stream.ReceiveNext());
             playerAnim.SetBool("ground", (bool)stream.ReceiveNext());
             playerAnim.SetBool("death", (bool)stream.ReceiveNext());
+            hp = (int)stream.ReceiveNext();
         }
     }
  }
