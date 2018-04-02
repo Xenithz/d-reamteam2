@@ -21,14 +21,11 @@ public class Seeking : MonoBehaviour
 	{
 		distance = Vector3.Distance(healthTarget.transform.position, transform.position);
 
-		Vector3 desiredVel = healthTarget.transform.position - transform.position;
-
-		Vector3 vel	= desiredVel * maxSpeed;
-		Vector3 steering = (vel -rg.velocity) * maxForce;
-		rg.AddForce(steering);
-		transform.LookAt(steering);
-
-		rg.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-		Debug.DrawLine(transform.position, steering);
+		Vector3 desiredVel = (healthTarget.transform.position - transform.position).normalized * maxSpeed;
+		Vector3 steering = desiredVel - rg.velocity;
+		Vector3 steeringClamped = Vector3.ClampMagnitude(steering, maxForce);
+		rg.AddForce(steeringClamped);
+		transform.LookAt(transform.position + rg.velocity);
+		//Debug.DrawLine(transform.position, steering);
 	}
 }
