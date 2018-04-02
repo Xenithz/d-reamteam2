@@ -137,7 +137,6 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
         float groundDistance;
         groundDistance = playerCollider.bounds.extents.y;
         return Physics.Raycast(transform.position, -Vector3.up, groundDistance + 1);
-        
     }
 
     private void Jump()
