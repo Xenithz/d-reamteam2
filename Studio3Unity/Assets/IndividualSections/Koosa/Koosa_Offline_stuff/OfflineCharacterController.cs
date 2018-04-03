@@ -49,11 +49,6 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-		inputH=Input.GetAxisRaw("Horizontal");
-		inputV= Input.GetAxisRaw("Vertical");
-		playerAnim.SetFloat("inputH",inputH);
-		playerAnim.SetFloat("inputV",inputV);
-
         Countdown();
 
         playerBody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
@@ -61,20 +56,25 @@ public class OfflineCharacterController : MonoBehaviour {
         transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
 
         Vector3 vectorOfMovement = MovementInput();
+        Vector3 vectorOfJump=JumpInput();
 
         Movement(vectorOfMovement);
-       
-        if (MovementInput() != Vector3.zero)
+        if (IsNotGrounded() && vectorOfJump!=Vector3.zero)
         {
-			//playerAnim.SetInteger("int",1);
-            transform.rotation = Turn();
-            Debug.Log("i am ");
-            
+        Jump(vectorOfJump);
+         playerAnim.SetBool("ground",true);
 
         }
-		
-		//playerAnim.SetInteger("int",0);
-
+        else  playerAnim.SetBool("ground",false);
+       
+        if (vectorOfMovement != Vector3.zero)
+        {
+			playerAnim.SetBool("isWalk",true);
+            transform.rotation = Turn();
+            Debug.Log("i am ");
+            playerAnim.SetInteger("anim",0);
+        }
+        else playerAnim.SetBool("isWalk",false);
     }
 
     private void Update()
@@ -83,22 +83,13 @@ public class OfflineCharacterController : MonoBehaviour {
             coolDownImage.SetActive(true);
         if (Input.GetKeyDown(KeyCode.G)){
          DropMyTile();
-        //playerAnim.SetInteger("anim",2);
+        playerAnim.SetInteger("anim",2);
 		}
-        //else playerAnim.SetInteger("anim",0);
+       // else playerAnim.SetInteger("anim",0);
         if(Input.GetKeyDown(KeyCode .J)){
 		playerAnim.SetBool("death",true);
         }
-        else playerAnim.SetBool("death",false);
-
-
-
-
-
-
         }
-        Jump();
-
         
     }
     #endregion
@@ -137,10 +128,21 @@ public class OfflineCharacterController : MonoBehaviour {
         
     }
 
-    private void Jump()
+    private Vector3 JumpInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
-        {
+        Vector3 jumpInput;
+        float jump=Input.GetAxis("Jump");
+        jumpInput= new Vector3(0,jump,0).normalized;
+         return jumpInput;
+/* 
+        if (IsNotGrounded())
+        { 
+            playerAnim.SetBool("ground",true);
+           
+
+        }
+        else playerAnim.SetBool("ground",false);
+        /
             Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
 			//playerAnim.SetInteger("anim",2);
@@ -148,6 +150,17 @@ public class OfflineCharacterController : MonoBehaviour {
             Debug.Log("i m getting called");
         }     
         else playerAnim.SetBool("ground",false);
+         */
+    }
+    private void Jump(Vector3 jumpVector)
+    
+    {
+        jumpVector.y=jumpVector.y*jumpPower;
+        jumpVector.x=0;
+        jumpVector.z=0;
+        playerBody.AddForce(jumpVector,ForceMode.Impulse);
+
+
     }
     
     private void DropMyTile()
