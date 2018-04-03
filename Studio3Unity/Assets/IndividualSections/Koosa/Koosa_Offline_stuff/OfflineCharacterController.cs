@@ -62,8 +62,7 @@ public class OfflineCharacterController : MonoBehaviour {
         if (IsNotGrounded() && vectorOfJump!=Vector3.zero)
         {
         Jump(vectorOfJump);
-         playerAnim.SetBool("ground",true);
-
+        playerAnim.SetBool("ground",true);
         }
         else  playerAnim.SetBool("ground",false);
        
@@ -79,9 +78,10 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Update()
     {
+     float dropTile=Input.GetAxis("Fire1");
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
-        if (Input.GetKeyDown(KeyCode.G)){
+        if (dropTile!=0){
          DropMyTile();
         playerAnim.SetInteger("anim",2);
 		}
