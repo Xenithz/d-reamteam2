@@ -78,9 +78,10 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Update()
     {
+     float dropTile=Input.GetAxis("Fire1");
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
-        if (Input.GetKeyDown(KeyCode.G)){
+        if (dropTile!=0){
          DropMyTile();
         playerAnim.SetInteger("anim",2);
 		}
