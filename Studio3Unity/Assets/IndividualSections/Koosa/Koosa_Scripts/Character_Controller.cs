@@ -195,6 +195,12 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
             hp = (int)stream.ReceiveNext();
         }
     }
+
+    [PunRPC]
+    public void TakeDamage()
+    {
+        
+    }
  }
 
     
