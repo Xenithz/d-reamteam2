@@ -78,7 +78,7 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Update()
     {
-     float dropTile=Input.GetAxis("Fire1");
+     float dropTile=Input.GetAxis("Tile");
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
         if (dropTile!=0){
