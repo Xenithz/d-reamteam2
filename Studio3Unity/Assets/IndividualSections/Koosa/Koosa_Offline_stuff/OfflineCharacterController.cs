@@ -62,8 +62,7 @@ public class OfflineCharacterController : MonoBehaviour {
         if (IsNotGrounded() && vectorOfJump!=Vector3.zero)
         {
         Jump(vectorOfJump);
-         playerAnim.SetBool("ground",true);
-
+        playerAnim.SetBool("ground",true);
         }
         else  playerAnim.SetBool("ground",false);
        
