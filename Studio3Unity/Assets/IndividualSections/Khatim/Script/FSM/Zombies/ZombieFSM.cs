@@ -85,21 +85,6 @@ public class ZombieFSM : Photon.PunBehaviour
             }
                 
         }
-        else if (distanceToPlayer < attackDistance)
-            {
-                //currCondition = Condition.Attack;
-                if(myCondition != attackCondition)
-                {
-                    myCondition=2;
-                }
-            }
-            else if(distanceToPlayer > attackDistance)
-            {
-                if(myCondition != chaseCondition)
-                {
-                    myCondition=1;
-                }
-            }
     }
 
     // Update is called once per frame
