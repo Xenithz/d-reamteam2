@@ -60,14 +60,13 @@ public class ZombieFSM : Photon.PunBehaviour
 
     void Update()
     {
-        Vector3 heading = (transform.position- player.transform.position).normalized;
-           distanceToPlayer=heading.magnitude;
+        // Vector3 heading = (transform.position- player.transform.position).normalized;
+        //    distanceToPlayer=heading.magnitude;
+
+        distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //Processing
         if(PhotonNetwork.isMasterClient)
         {
-
-           //Vector3 heading = (transform.position- player.transform.position).normalized;
-          // distanceToPlayer=heading.magnitude;
             if (distanceToPlayer < attackDistance)
             {
                 //currCondition = Condition.Attack;
