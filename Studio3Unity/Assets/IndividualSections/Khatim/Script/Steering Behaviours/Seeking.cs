@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class Seeking : MonoBehaviour 
 {
+	#region  Public Variable
 	public GameObject healthTarget;
 	public float maxSpeed;
 	public float maxForce;
 	public float distance;
+	#endregion
+
+	#region Private Variables
 	private Rigidbody rg;
-	// Use this for initialization
+	#endregion
+
+	#region Callbacks
 	void Start () 
 	{
 		rg = GetComponent<Rigidbody>();
 		healthTarget = GameObject.FindGameObjectWithTag("Health");
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () 
 	{
 		distance = Vector3.Distance(healthTarget.transform.position, transform.position);
@@ -28,4 +33,5 @@ public class Seeking : MonoBehaviour
 		transform.LookAt(transform.position + rg.velocity);
 		//Debug.DrawLine(transform.position, steering);
 	}
+	#endregion
 }
