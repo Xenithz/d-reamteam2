@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using Photon;
 
-public class Tile_Manager : Photon.MonoBehaviour {
+public class Tile_Manager : Photon.MonoBehaviour 
+{
   
     #region Public Variables
     public static Tile_Manager instance;
@@ -20,18 +21,18 @@ public class Tile_Manager : Photon.MonoBehaviour {
 
     #region Private and Portected Variables
     private Vector3 startpos;
-   public List<Tile> tiles = new List<Tile>();
+    public List<Tile> tiles = new List<Tile>();
     #endregion
     
     #region Unity Functions
-  private void Start()
-   {
-       temp = GameObject.FindGameObjectsWithTag("Tile");
-       foreach (GameObject tile in temp)
+    private void Start()
+    {
+        temp = GameObject.FindGameObjectsWithTag("Tile");
+        foreach (GameObject tile in temp)
         {
-                  tiles.Add(new Tile(tile));
+            tiles.Add(new Tile(tile));
         }
-   }
+    }
     private void Awake()
     {
          instance = this;

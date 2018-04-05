@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthSpawner : MonoBehaviour 
+public class HealthSpawner : Photon.MonoBehaviour 
 {
 	#region Public Variables
 	public GameObject[] healthSpawnLocation;
 	public GameObject healthPrefab;
 	public List<GameObject> health;
 	public float timer = 0;
-	public int index;
+	public string index;
 	#endregion
 
 	#region Private Variables
@@ -24,43 +24,44 @@ public class HealthSpawner : MonoBehaviour
 
 		for(int i = 0; i < healthSpawnLocation.Length; i++)
 		{
-			GameObject healthObj = Instantiate(healthPrefab, healthSpawnLocation[i].transform.position, Quaternion.identity);
-			healthPrefab.SetActive(false);
+			GameObject healthObj = PhotonNetwork.Instantiate(healthPrefab.name, healthSpawnLocation[i].transform.position, Quaternion.identity, 0);
+			Debug.Log("spawned hp");
 			health.Add(healthObj);
 		}
-		#region Commented Code
-		//Instantiate(healthPrefab, healthSpawnLocation.)
-		/*index = Random.Range(0, healthSpawnLocation.childCount);
-		health = new List<GameObject>();
-		for(int i = 0; i < healthPooled; i++)
-		{
-			GameObject healthObj = Instantiate(healthPrefab, healthSpawnLocation.GetChild(index).position, Quaternion.identity);
-			healthObj.SetActive(false);
-			health.Add(healthObj);
-		}*/
-		#endregion
 	}
 	
 	void FixedUpdate () 
 	{
-		index = Random.Range(0, health.Count);
-		timer -= Time.deltaTime;
-		if (timer <= 0)
+		if(PhotonNetwork.isMasterClient)
 		{
-			SpawnHealth();
-			timer = maxTime;
+			index = Random.Range(0, health.Count).ToString();
+			timer -= Time.deltaTime;
+			if (timer <= 0f)
+			{
+				this.photonView.RPC("SpawnHealth", PhotonTargets.All, index);
+				timer = maxTime;
+			}
+
+			if(Input.GetKeyDown(KeyCode.M))
+			{
+				this.photonView.RPC("SpawnHealth", PhotonTargets.All, index);
+				timer = maxTime;
+			}
 		}
 	}
 	#endregion
 
 	#region Functions
-	void SpawnHealth()
+	[PunRPC]
+	void SpawnHealth(string myInt)
 	{
+		Debug.Log("called enable hp func");
+		int convertedInt = int.Parse(myInt);
 		for(int i = 0; i < health.Count; i++)
 		{
 			if(!health[i].activeInHierarchy)
 			{
-				health[index].SetActive(true);
+				health[convertedInt].SetActive(true);
 				break;
 			}
 		}

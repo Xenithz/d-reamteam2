@@ -139,5 +139,14 @@ public class MyNetworkManager : Photon.PunBehaviour
 		Hashtable roomPropertiesToSearch = new Hashtable() {{"fourplayers", 1}};
 		PhotonNetwork.JoinRandomRoom(roomPropertiesToSearch, (byte)maxPlayersForFour);
 	}
+
+	public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+	{
+		if(PhotonNetwork.room.PlayerCount < PhotonNetwork.room.MaxPlayers)
+		{
+			PhotonNetwork.room.IsOpen = true;
+			Debug.Log("Room is now open");
+		}
+	}
 	#endregion
 }

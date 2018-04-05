@@ -101,7 +101,7 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
         {
             PlayerStats.instance.healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(true);
             GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp++;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
     #endregion
@@ -194,6 +194,12 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
             playerAnim.SetBool("death", (bool)stream.ReceiveNext());
             hp = (int)stream.ReceiveNext();
         }
+    }
+
+    [PunRPC]
+    public void TakeDamage()
+    {
+        
     }
  }
 
