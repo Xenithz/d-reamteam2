@@ -9,22 +9,23 @@ public class CollisionAvoidance : MonoBehaviour
 private RaycastHit colliderHit;
 public Vector3 velocity;
 public Vector3 targetVector;
-public Vector3 steering;
+public Vector3 steeringForce;
 public float raycastLenght;
 public Vector3 height;
 public Transform target;
 public float avoidanceForce;
-public Vector3 avoidanceVector;
 public float vision;
 public float speed;
 public float lookSpeed;
 public Rigidbody rb;
+public float maxSpeed;
 	void Start () 
 	{
 	rb = GetComponent<Rigidbody>();
 	}
 	void FixedUpdate () 
 	{
+		velocity=rb.velocity;
 		Look();
         Vector3 left=transform.position;
 		Vector3 right=transform.position;
@@ -88,8 +89,9 @@ public Rigidbody rb;
 	}
 	public void Move()
 	{
-	steering=(transform.position+=targetVector.normalized);
-	rb.AddForce(steering*Time.deltaTime*speed);
+	steeringForce=(transform.position+=targetVector.normalized);
+	rb.AddForce(steeringForce*Time.deltaTime*speed);
+	rb.velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 	}
 
 
