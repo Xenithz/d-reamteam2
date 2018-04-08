@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon;
+public enum GameStates
+{
+        Starting,
+        Spawning,
+        Playing,
+        Ending
+};
 
 public class GameManagerBase : Photon.PunBehaviour
 {
     #region Public variables
-    public enum GameStates
-    {
-        Starting,
-        Playing,
-        Ending
-    };
-
     public GameStates myGameState;
 
     public static GameManagerBase instance;
@@ -47,6 +47,12 @@ public class GameManagerBase : Photon.PunBehaviour
             // roundNumber++;
             // SetUpNewRound(1);
         //}
+
+        if(GameManagerBase.instance.myGameState == GameStates.Spawning)
+        {
+            roundNumber++;
+            SetUpNewRound(roundNumber);
+        }
     }
     #endregion
 
@@ -55,6 +61,7 @@ public class GameManagerBase : Photon.PunBehaviour
     {
         GameObject myPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[0].transform.position, Quaternion.identity, 0);
         myLocalPlayer = myPlayer;
+        myPlayer.name = PhotonNetwork.player.NickName;
         this.myGameState = GameStates.Starting;
         SetUpNewRound(roundNumber);
     }

@@ -6,10 +6,12 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 public class MyNetworkManager : Photon.PunBehaviour
 {
 	#region Public variables
-	public MyNetworkManager instance;
+	public static MyNetworkManager instance;
 
 	public bool shouldConnect;
 	public bool hasConnected;
+
+	public bool isLoggedIn;
 
 	public string myScene;
 
@@ -35,6 +37,7 @@ public class MyNetworkManager : Photon.PunBehaviour
         DontDestroyOnLoad(this.gameObject);
 
 		shouldConnect = false;
+		isLoggedIn = false;
 		uiHolder = GameObject.Find("UI");
 	}
 

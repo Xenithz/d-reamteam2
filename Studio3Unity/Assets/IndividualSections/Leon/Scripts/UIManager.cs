@@ -72,8 +72,16 @@ public class UIManager : MonoBehaviour {
 
     public void OnClickPlayOnline()
     {
-        mainMenuPanel.gameObject.SetActive(false);
-        loginPanel.gameObject.SetActive(true);
+        if(MyNetworkManager.instance.isLoggedIn == false)
+        {
+            mainMenuPanel.gameObject.SetActive(false);
+            loginPanel.gameObject.SetActive(true);
+        }
+        else if(MyNetworkManager.instance.isLoggedIn == true)
+        {
+            mainMenuPanel.gameObject.SetActive(false);
+            onlinePickPanel.gameObject.SetActive(true);
+        }
     }
 
     public void OnClickLobbyPanel()
