@@ -78,7 +78,7 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Update()
     {
-     float dropTile=Input.GetAxis("Tile");
+     float dropTile=Input.GetAxis("Joystick Tile");
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
         if (dropTile!=0){
