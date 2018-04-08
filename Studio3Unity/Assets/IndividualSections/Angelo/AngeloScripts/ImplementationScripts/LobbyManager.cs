@@ -26,7 +26,7 @@ public class LobbyManager : Photon.PunBehaviour
     {
         if(PhotonNetwork.connected && inRoom == true)
         {
-            Debug.Log(myPlayerList.Length);
+            //Debug.Log(myPlayerList.Length);
             for(int i = 0; i < myPlayerList.Length; i++)
             {
                 playerNamePositions[i].GetComponentInChildren<Text>().text = myPlayerList[i].NickName;
@@ -38,7 +38,7 @@ public class LobbyManager : Photon.PunBehaviour
     #region Photon callbacks
     public override void OnJoinedRoom()
     {
-        myPlayerNamePosition.GetComponentInChildren<Text>().text = PhotonNetwork.player.NickName;
+        myPlayerNamePosition.GetComponentInChildren<Text>().text = "Player name: " + PhotonNetwork.player.NickName;
         myPlayerList = PhotonNetwork.playerList;
         inRoom = true;
     }

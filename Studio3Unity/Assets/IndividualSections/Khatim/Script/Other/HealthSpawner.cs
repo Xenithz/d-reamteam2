@@ -42,11 +42,11 @@ public class HealthSpawner : Photon.MonoBehaviour
 				timer = maxTime;
 			}
 
-			if(Input.GetKeyDown(KeyCode.M))
-			{
-				this.photonView.RPC("SpawnHealth", PhotonTargets.All, index);
-				timer = maxTime;
-			}
+			// if(Input.GetKeyDown(KeyCode.M))
+			// {
+			// 	this.photonView.RPC("SpawnHealth", PhotonTargets.All, index);
+			// 	timer = maxTime;
+			// }
 		}
 	}
 	#endregion
