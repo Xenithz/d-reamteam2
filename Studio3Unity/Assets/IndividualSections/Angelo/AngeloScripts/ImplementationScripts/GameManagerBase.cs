@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon;
+public enum GameStates
+{
+        Starting,
+        Spawning,
+        Playing,
+        Ending
+};
 
 public class GameManagerBase : Photon.PunBehaviour
 {
     #region Public variables
-    public enum GameStates
-    {
-        Starting,
-        Playing,
-        Ending
-    };
-
     public GameStates myGameState;
 
     public static GameManagerBase instance;
@@ -47,6 +47,12 @@ public class GameManagerBase : Photon.PunBehaviour
             // roundNumber++;
             // SetUpNewRound(1);
         //}
+
+        if(GameManagerBase.instance.myGameState == GameStates.Spawning)
+        {
+            roundNumber++;
+            SetUpNewRound(roundNumber);
+        }
     }
     #endregion
 

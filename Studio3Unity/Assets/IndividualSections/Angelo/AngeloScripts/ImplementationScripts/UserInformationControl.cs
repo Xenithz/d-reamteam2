@@ -104,6 +104,7 @@ public class UserInformationControl : MonoBehaviour
         if(myWWW.text == "Login success")
         {
             Debug.Log("Login success");
+            gameObject.GetComponent<MyNetworkManager>().isLoggedIn = true;
             gameObject.GetComponent<MyNetworkManager>().shouldConnect = true;
             StartCoroutine(GrabData(username, true));
             StartCoroutine(GrabLeaderboard());

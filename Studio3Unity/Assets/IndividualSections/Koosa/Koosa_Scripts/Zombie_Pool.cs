@@ -84,6 +84,8 @@ public class Zombie_Pool : Photon.MonoBehaviour
 #region My Functions
     public void Spawn(int zombiesToSpawn)
     {
+        GameManagerBase.instance.myGameState = GameStates.Playing;
+        Debug.Log("spawn called");
         for(int i = 0; i < zombiesToSpawn; i++)
         {
             spawnFlag = true;
