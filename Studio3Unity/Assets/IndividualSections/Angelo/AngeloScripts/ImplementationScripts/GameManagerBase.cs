@@ -61,6 +61,7 @@ public class GameManagerBase : Photon.PunBehaviour
     {
         GameObject myPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[0].transform.position, Quaternion.identity, 0);
         myLocalPlayer = myPlayer;
+        myPlayer.name = PhotonNetwork.player.NickName;
         this.myGameState = GameStates.Starting;
         SetUpNewRound(roundNumber);
     }
