@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //(typeof(Rigidbody))]
-public class OfflineCharacterController : MonoBehaviour {
+public class PlayerTwoOfflineController : MonoBehaviour {
 
-#region Private Variables 
+	#region Private Variables 
     [SerializeField]
     private Rigidbody playerBody;
     [SerializeField]
@@ -78,7 +78,7 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Update()
     {
-     float dropTile=Input.GetAxis("Joystick Tile");
+     float dropTile=Input.GetAxis("Joystick Tile 1");
         if(coolDown<=0 ){
             coolDownImage.SetActive(true);
         if (dropTile!=0){
@@ -98,8 +98,8 @@ public class OfflineCharacterController : MonoBehaviour {
     private Vector3 MovementInput()
     {
         Vector3 playerinput;
-        float horInput = Input.GetAxis("Horizontal");
-        float verInput = Input.GetAxis("Vertical");
+        float horInput = Input.GetAxis("Joystick Horizontal 1");
+        float verInput = Input.GetAxis("Joystick Vertical 1");
         playerinput = new Vector3(horInput, 0, verInput).normalized;
         return playerinput;
     }
@@ -131,7 +131,7 @@ public class OfflineCharacterController : MonoBehaviour {
     private Vector3 JumpInput()
     {
         Vector3 jumpInput;
-        float jump=Input.GetAxis("Jump");
+        float jump=Input.GetAxis("Joystick Jump 1");
         jumpInput= new Vector3(0,jump,0).normalized;
          return jumpInput;
 /* 
@@ -191,5 +191,3 @@ public class OfflineCharacterController : MonoBehaviour {
 
  }
     #endregion
-
-
