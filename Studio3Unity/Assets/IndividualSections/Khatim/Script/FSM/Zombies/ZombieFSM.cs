@@ -4,14 +4,11 @@ using UnityEngine;
 public class ZombieFSM : Photon.PunBehaviour
 {
     #region Public Variables
-    public GameObject[] healthSprite;
-
     public int speed;
     public int maxSpeed;
     public float attackDistance;
     public float distanceToPlayer;
     [HideInInspector] public Rigidbody rg;
-
     public GameObject[] players;
     public GameObject player;
     public float damageDelay = 2;
@@ -19,24 +16,15 @@ public class ZombieFSM : Photon.PunBehaviour
     #endregion
     public PlayerStats myPlayer;
     #region Private Variables
-    //private enum Condition { Chase, Attack };
-    //private Condition currCondition;
-    public   int myCondition;
+    private int myCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
     #endregion
 
     #region Callbacks
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
     void Awake()
     {
         rg = GetComponent<Rigidbody>();
-        //currCondition = Condition.Chase;
         myCondition = chaseCondition;
     }
 
@@ -57,19 +45,14 @@ public class ZombieFSM : Photon.PunBehaviour
         Zombie_Pool.zombiePoolInstance.zombies.Add(gameObject);
     }
 
-
     void Update()
     {
-        // Vector3 heading = (transform.position- player.transform.position).normalized;
-        //    distanceToPlayer=heading.magnitude;
-
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //Processing
         if(PhotonNetwork.isMasterClient)
         {
             if (distanceToPlayer < attackDistance)
             {
-                //currCondition = Condition.Attack;
                 if(myCondition != attackCondition)
                 {
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "2");
@@ -81,38 +64,34 @@ public class ZombieFSM : Photon.PunBehaviour
                 {
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
                 }
-            }
-                
+            }    
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         //Execution
-        switch (/*currCondition*/ myCondition)
+        switch (myCondition)
         {
             case 1:
-                Vector3 heading = (player.transform.position - this.gameObject.transform.position).normalized;
-                speed = Mathf.Clamp(speed, 0, maxSpeed);
-                rg.AddForce(heading * speed, ForceMode.Impulse);
-                transform.LookAt(heading+this.transform.position);
-                //Debug.Log("Chasing");
-                break;
+            Vector3 heading = (player.transform.position - this.gameObject.transform.position).normalized;
+            speed = Mathf.Clamp(speed, 0, maxSpeed);
+            rg.AddForce(heading * speed, ForceMode.Impulse);
+            transform.LookAt(heading+this.transform.position);
+            break;
+
             case 2:
             Debug.Log("attacking");
-             GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
-                //myPlayer.Damage();
-                //Debug.Log("Attacking");
-                break;
+            GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
+            break;
+            
             default:
-                break;
+            break;
         }
     }
     #endregion
  
     #region Functions
-
     [PunRPC]
     public void ChangeCondition(string intToPass)
     {
