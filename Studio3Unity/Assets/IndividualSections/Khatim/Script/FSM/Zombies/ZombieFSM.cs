@@ -11,10 +11,12 @@ public class ZombieFSM : Photon.PunBehaviour
     public float attackDistance;
     public float distanceToPlayer;
     [HideInInspector] public Rigidbody rg;
+    private Animator zombieAnime;
 
     public GameObject[] players;
     public GameObject player;
     public float damageDelay = 2;
+    public float actionDelay;
 
     #endregion
     public PlayerStats myPlayer;
@@ -35,9 +37,10 @@ public class ZombieFSM : Photon.PunBehaviour
 
     void Awake()
     {
+        zombieAnime=GetComponent<Animator>();
         rg = GetComponent<Rigidbody>();
         //currCondition = Condition.Chase;
-        myCondition = chaseCondition;
+        //myCondition = chaseCondition;
     }
 
     void OnEnable() 
@@ -60,19 +63,23 @@ public class ZombieFSM : Photon.PunBehaviour
 
     void Update()
     {
+        actionDelay+=Time.deltaTime;
         // Vector3 heading = (transform.position- player.transform.position).normalized;
         //    distanceToPlayer=heading.magnitude;
 
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //Processing
-        if(PhotonNetwork.isMasterClient)
+        if(PhotonNetwork.isMasterClient && actionDelay>1.5f)
         {
+            Debug.Log("kill me online");
             if (distanceToPlayer < attackDistance)
             {
                 //currCondition = Condition.Attack;
                 if(myCondition != attackCondition)
                 {
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "2");
+                    zombieAnime.SetBool("isAttacking",true);
+                    zombieAnime.SetBool("isWaling",false);
                 }
             }
             else if(distanceToPlayer > attackDistance)
@@ -80,9 +87,34 @@ public class ZombieFSM : Photon.PunBehaviour
                 if(myCondition != chaseCondition)
                 {
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
+                    zombieAnime.SetBool("isAttacking",false);
+                    zombieAnime.SetBool("isWaling",true);
                 }
             }
                 
+        }
+        else if(!PhotonNetwork.inRoom && actionDelay>1.5f)
+        {
+            Debug.Log("kill me offline");
+             if (distanceToPlayer < attackDistance)
+            {
+                //currCondition = Condition.Attack;
+                if(myCondition != attackCondition)
+                {
+                    myCondition=2;
+                    zombieAnime.SetBool("isAttacking",true);
+                    zombieAnime.SetBool("isWaling",false);
+                }
+            }
+            else if(distanceToPlayer > attackDistance)
+            {
+                if(myCondition != chaseCondition)
+                {
+                    myCondition=1;
+                    zombieAnime.SetBool("isAttacking",false);
+                    zombieAnime.SetBool("isWaling",true);
+                }
+            }
         }
     }
 

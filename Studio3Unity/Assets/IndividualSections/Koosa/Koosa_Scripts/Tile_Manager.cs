@@ -35,8 +35,7 @@ public class Tile_Manager : Photon.MonoBehaviour
     }
     private void Awake()
     {
-         instance = this;
-        
+        instance = this;
         flagTest = false;
     }
     #endregion 
@@ -51,21 +50,21 @@ public class Tile_Manager : Photon.MonoBehaviour
         Vector3 defaultpos=myTile.myTile.transform.position;
         flagTest = false;
 
-         while (true)
-         {
+        while (true)
+        {
             for(int i=0; i<myTile.timeToShake; i++)
-             {
-                 myTile.ShakeTile(myTile);
-                 yield return new WaitForSeconds(myTile.timeToStartShake);
-             }
-             
-         break;
-         }
+            {
+                myTile.ShakeTile(myTile);
+                yield return new WaitForSeconds(myTile.timeToStartShake);
+            }
+            break;
+        }
 
         yield return new WaitForSeconds(countDownToFall);
         Debug.Log("This gets dropped");
         myTile.myTile.gameObject.SetActive(false);
         yield return new WaitForSeconds(countDownToRise);
+
         Debug.Log("This gets raised");
         myTile.myTile.transform.position=defaultpos;
         myTile.myTile.gameObject.SetActive(true);
