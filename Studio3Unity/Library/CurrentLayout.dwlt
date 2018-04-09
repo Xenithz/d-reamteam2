@@ -43,7 +43,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 1007
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -105,10 +105,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 957
-  m_MinSize: {x: 683, y: 492}
-  m_MaxSize: {x: 14004, y: 14042}
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
   vertical: 1
-  controlID: 50
+  controlID: 641
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -129,10 +129,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 957
-  m_MinSize: {x: 683, y: 492}
-  m_MaxSize: {x: 14004, y: 14042}
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 51
+  controlID: 642
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,10 +153,10 @@ MonoBehaviour:
     y: 0
     width: 1347
     height: 957
-  m_MinSize: {x: 406, y: 492}
+  m_MinSize: {x: 404, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 52
+  controlID: 643
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -177,10 +177,10 @@ MonoBehaviour:
     y: 0
     width: 1347
     height: 686
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
-  controlID: 14
+  controlID: 690
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -199,8 +199,8 @@ MonoBehaviour:
     y: 0
     width: 282
     height: 686
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -224,8 +224,8 @@ MonoBehaviour:
     y: 0
     width: 1065
     height: 686
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -278,8 +278,8 @@ MonoBehaviour:
     y: 0
     width: 573
     height: 957
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -309,10 +309,10 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 284
-    y: 17
+    y: 92
     width: 1061
     height: 665
-  m_MaximizeOnPlay: 1
+  m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
   m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -390,9 +390,9 @@ MonoBehaviour:
     height: 665
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 22080000
+    m_SelectedIDs: 60060000
     m_LastClickedID: 0
-    m_ExpandedIDs: 3a3dffff00000000
+    m_ExpandedIDs: 681cfeffdc52feff8689fefffabffeffe0f6feff9059ffffa0bcffff66f3ffffd8fbfffff4ffffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -411,7 +411,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 9}
     m_SearchString: 
   m_ExpandedScenes:
-  - TestScene
+  - Main_Menu
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -595,7 +595,7 @@ MonoBehaviour:
     width: 1345
     height: 250
   m_SearchFilter:
-    m_NameFilter: fsm
+    m_NameFilter: zombie_poo
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -605,11 +605,11 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/IndividualSections/Angelo/AngeloScripts
+    - Assets/IndividualSections/Angelo/Resources
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/IndividualSections/Angelo/AngeloScripts
+  - Assets/IndividualSections/Angelo/Resources
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\UNITY\Studio-3-stuff\Project\d-reamteam2\Studio3Unity
   m_IsLocked: 0
@@ -617,7 +617,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 55}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006a7d0000d27d0000b27e0000ce7e00005080000094800000a2800000f6800000fa800000ca820000d082000040840000f8850000828600009c860000a68600003a870000c08700001e88000078890000128b00003a8b0000408b0000448b00004c8b0000c28b00004e8c0000628c0000668c0000d0900000e69000006c9100009a910000b2910000229200009c920000069300002a93000040a3000042a3000044a3000046a3000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000084270000f6270000da280000f8280000c02a0000082b00001a2b00007a2b00007e2b0000642d00006a2d0000042f0000c830000062310000803100008c31000028320000ba3200001e3300008c340000043800002e380000383800003c38000044380000c4380000763900008e390000923900000a3e0000203e0000b43e0000e83e0000003f0000823f0000104000009a400000be4000002c5100002e510000305100003251000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -645,7 +645,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006a7d0000d27d0000b27e0000ce7e00005080000094800000a2800000f6800000fa800000ca820000d082000040840000f8850000828600009c860000a68600003a870000c08700001e88000078890000128b00003a8b0000408b0000448b00004c8b0000c28b00004e8c0000628c0000668c0000d0900000e69000006c9100009a910000b2910000229200009c920000069300002a93000040a3000042a3000044a3000046a30000
+    m_ExpandedIDs: 0000000084270000f6270000da280000f8280000c02a0000082b00001a2b00007a2b00007e2b0000642d00006a2d0000042f0000c830000062310000803100008c31000028320000ba3200001e3300008c340000043800002e380000383800003c38000044380000c4380000763900008e390000923900000a3e0000203e0000b43e0000e83e0000003f0000823f0000104000009a400000be4000002c5100002e510000305100003251000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -723,9 +723,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 739
+    y: 778
     width: 1345
-    height: 289
+    height: 250
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -752,7 +752,7 @@ MonoBehaviour:
     y: 92
     width: 571
     height: 936
-  m_ScrollPosition: {x: 0, y: 0}
+  m_ScrollPosition: {x: 0, y: 865.9551}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 292

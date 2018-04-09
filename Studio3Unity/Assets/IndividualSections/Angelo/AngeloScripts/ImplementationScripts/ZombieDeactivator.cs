@@ -9,8 +9,8 @@ public class ZombieDeactivator : MonoBehaviour
 	{
 		if(collision.gameObject.tag == "killbox")
 		{
-			this.gameObject.SetActive(false);
 			Zombie_Pool.zombiePoolInstance.CallRemoveZombie(this.gameObject.name);
+			this.gameObject.SetActive(false);
 			// AIHandler.instance.CallRemoveFromList(this.gameObject.name);
 		}
 	}
@@ -19,8 +19,8 @@ public class ZombieDeactivator : MonoBehaviour
 	{
 		if(other.gameObject.tag == "killbox")
 		{
-			this.gameObject.SetActive(false);
 			Zombie_Pool.zombiePoolInstance.CallRemoveZombie(this.gameObject.name);
+			this.gameObject.SetActive(false);
 			// AIHandler.instance.CallRemoveFromList(this.gameObject.name);
 		}
 	}
