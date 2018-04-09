@@ -67,6 +67,7 @@ public class Tile_Manager : Photon.MonoBehaviour
 
         Debug.Log("This gets raised");
         myTile.myTile.transform.position=defaultpos;
+        myTile.myTile.GetComponent<Renderer>().material.color=Color.black;
         myTile.myTile.gameObject.SetActive(true);
         myTile.timeToShake=30;
     }
