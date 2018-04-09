@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerFSM : MonoBehaviour 
 {
 	#region  Public Variable
-	public GameObject[] zombies;
 	public GameObject zombie;
 	public GameObject healthTarget;
 	public float maxSpeed;
@@ -22,26 +21,25 @@ public class PlayerFSM : MonoBehaviour
 	#endregion
 	
 	#region Callbacks
-	void Awake()
+	void Start()
 	{
 		rg = GetComponent<Rigidbody>();
-		myCondition = fleeCondition;
-	}
-	void OnEnable () 
-	{
-		zombies = GameObject.FindGameObjectsWithTag("Zombies");
-		healthTarget = GameObject.FindGameObjectWithTag("Health");
 	}
 	void Update()
 	{
 		distanceToHealth = Vector3.Distance(transform.position, healthTarget.transform.position);
 		distanceToZombies = Vector3.Distance(transform.position, zombie.transform.position);
-
-		if(GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp <= 5)
+		
+		if(GameObject.FindGameObjectWithTag("Health") != null)
 		{
 			myCondition = 2;
 		}
 		else
+		{
+			myCondition = 0;
+		}
+		
+		if(GameObject.FindGameObjectWithTag("Zombie") != null && distanceToZombies < 10)
 		myCondition = 1;
 	}
 	void FixedUpdate () 
@@ -50,10 +48,12 @@ public class PlayerFSM : MonoBehaviour
 		{
 			case 1:
 			AvoidZombies();
+			Debug.Log("Avoiding Zombies");
 			break;
 
 			case 2:
 			SeekHealth();
+			Debug.Log("Seeking Health");
 			break;
 
 			default:
@@ -74,8 +74,8 @@ public class PlayerFSM : MonoBehaviour
 
 	void AvoidZombies()
 	{
-		Vector3 desiredVel = (transform.position - zombie.transform.position).normalized * maxSpeed;
-		Vector3 steering = desiredVel - rg.velocity;
+		Vector3 vel = (transform.position - zombie.transform.position).normalized * maxSpeed;
+		Vector3 steering = vel - rg.velocity;
 		Vector3 steeringClamped = Vector3.ClampMagnitude(steering, maxForce);
 		rg.AddForce(steeringClamped);
 		transform.LookAt(transform.position + rg.velocity);
