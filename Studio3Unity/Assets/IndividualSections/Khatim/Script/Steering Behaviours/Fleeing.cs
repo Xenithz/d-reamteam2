@@ -13,9 +13,9 @@ public class Fleeing : MonoBehaviour
 
 	#region Private Variables
 	private Rigidbody rg;
-
-	#region Callbacks
 	#endregion
+	
+	#region Callbacks
 	void Start () 
 	{
 		rg = GetComponent<Rigidbody>();
@@ -31,4 +31,5 @@ public class Fleeing : MonoBehaviour
 		transform.LookAt(transform.position + rg.velocity);
 	}
 	#endregion
+
 }

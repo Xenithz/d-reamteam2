@@ -42,10 +42,5 @@ public class PlayerStats : MonoBehaviour
             healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(false);
             Debug.Log("Damage");
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-        
-    }
     #endregion
 }

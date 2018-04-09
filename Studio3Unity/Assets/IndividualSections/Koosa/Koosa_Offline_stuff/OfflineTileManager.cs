@@ -21,21 +21,11 @@ public class OfflineTileManager : MonoBehaviour {
     #endregion
     
     #region Unity Functions
-  private void Start()
-   {
-       temp = GameObject.FindGameObjectsWithTag("Tile");
-       foreach (GameObject tile in temp)
-        {
-                  tiles.Add(new Tile(tile));
-        }
-   }
     private void Awake()
     {
-		 temp = GameObject.FindGameObjectsWithTag("Tile");
-       foreach (GameObject tile in temp)
-        {
-                  tiles.Add(new Tile(tile));
-        }
+		temp = GameObject.FindGameObjectsWithTag("Tile");
+        foreach (GameObject tile in temp)
+        tiles.Add(new Tile(tile));
         instance = this;
     }
     #endregion 
@@ -49,28 +39,27 @@ public class OfflineTileManager : MonoBehaviour {
         Tile myTile= new Tile (thisTile);
         Vector3 defaultpos=myTile.myTile.transform.position;
 
-         while (true)
-         {
+        while (true)
+        {
             for(int i=0; i<myTile.timeToShake; i++)
-             {
-                 myTile.ShakeTile(myTile);
-                 yield return new WaitForSeconds(myTile.timeToStartShake);
-             }
-             
-         break;
-         }
+            {
+            myTile.ShakeTile(myTile);
+            yield return new WaitForSeconds(myTile.timeToStartShake);
+            }
+        break;
+        }
 
         yield return new WaitForSeconds(countDownToFall);
         Debug.Log("This gets dropped");
         myTile.myTile.gameObject.SetActive(false);
         yield return new WaitForSeconds(countDownToRise);
+
         Debug.Log("This gets raised");
         myTile.myTile.transform.position=defaultpos;
+        myTile.myTile.GetComponent<Renderer>().material.color=Color.black;
         myTile.myTile.gameObject.SetActive(true);
         myTile.timeToShake=30;
     }
     #endregion
-
-    
 }
 

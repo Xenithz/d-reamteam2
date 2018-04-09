@@ -163,7 +163,13 @@ public class Zombie_Pool : Photon.MonoBehaviour
         GameObject objectToRemove = GameObject.Find(objectNameToRemove);
         if(activeZombies.Contains(objectToRemove))
 		{
-			activeZombies.Remove(objectToRemove);
+			for(int i = 0; i < activeZombies.Count; i++)
+            {
+                if(activeZombies[i] ==  objectToRemove)
+                {
+                    activeZombies.Remove(objectToRemove);
+                }
+            }
 		}
 		else
 		{

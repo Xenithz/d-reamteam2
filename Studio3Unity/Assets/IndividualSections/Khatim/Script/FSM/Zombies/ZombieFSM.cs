@@ -1,43 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class ZombieFSM : Photon.PunBehaviour
+public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 {
     #region Public Variables
-    public GameObject[] healthSprite;
-
     public int speed;
     public int maxSpeed;
     public float attackDistance;
     public float distanceToPlayer;
     [HideInInspector] public Rigidbody rg;
-
     public GameObject[] players;
     public GameObject player;
     public float damageDelay = 2;
 
+    public float attackTimer;
+
+    public bool canAttack;
     #endregion
     public PlayerStats myPlayer;
     #region Private Variables
-    //private enum Condition { Chase, Attack };
-    //private Condition currCondition;
-    public   int myCondition;
+    private int myCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
+    public Animator zombieAnime;
     #endregion
 
     #region Callbacks
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
     void Awake()
     {
         rg = GetComponent<Rigidbody>();
-        //currCondition = Condition.Chase;
         myCondition = chaseCondition;
+        canAttack = true;
+        damageDelay = 2;
+        attackTimer = 0;
     }
 
     void OnEnable() 
@@ -57,20 +52,15 @@ public class ZombieFSM : Photon.PunBehaviour
         Zombie_Pool.zombiePoolInstance.zombies.Add(gameObject);
     }
 
-
     void Update()
     {
-        // Vector3 heading = (transform.position- player.transform.position).normalized;
-        //    distanceToPlayer=heading.magnitude;
-
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //Processing
-        if(PhotonNetwork.isMasterClient)
+        if(PhotonNetwork.isMasterClient && PhotonNetwork.connected)
         {
             if (distanceToPlayer < attackDistance)
             {
-                //currCondition = Condition.Attack;
-                if(myCondition != attackCondition)
+                if(myCondition != attackCondition && canAttack == true)
                 {
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "2");
                 }
@@ -82,42 +72,95 @@ public class ZombieFSM : Photon.PunBehaviour
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
                 }
             }
-                
+
+            if(canAttack == false)
+            {
+                attackTimer = attackTimer + Time.deltaTime;
+                if(attackTimer >= damageDelay)
+                {
+                    canAttack = true;
+                    attackTimer = 0;
+                }
+            }    
+        }
+        else if(!PhotonNetwork.connected) //OFFLINE
+        {
+            if (distanceToPlayer < attackDistance)
+            {
+                if(myCondition != attackCondition)
+                {
+                   myCondition=2;
+                   zombieAnime.SetBool("isAttacking",true);
+                   zombieAnime.SetBool("isWalking",false);
+                }
+            }
+            else if(distanceToPlayer > attackDistance)
+            {
+                if(myCondition != chaseCondition)
+                {
+                   myCondition=1;
+                   zombieAnime.SetBool("isAttacking",false);
+                   zombieAnime.SetBool("isWalking",true);
+                }
+            }    
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         //Execution
-        switch (/*currCondition*/ myCondition)
+        switch (myCondition)
         {
             case 1:
-                Vector3 heading = (player.transform.position - this.gameObject.transform.position).normalized;
-                speed = Mathf.Clamp(speed, 0, maxSpeed);
-                rg.AddForce(heading * speed, ForceMode.Impulse);
-                transform.LookAt(heading+this.transform.position);
-                //Debug.Log("Chasing");
-                break;
+            Vector3 heading = (player.transform.position - this.gameObject.transform.position).normalized;
+            Vector3 heading1=( new Vector3 (player.transform.position.x,0,player.transform.position.z)- new Vector3 (this.gameObject.transform.position.x,0,this.gameObject.transform.position.z)).normalized;                                        
+            speed = Mathf.Clamp(speed, 0, maxSpeed);
+            rg.AddForce(heading * speed, ForceMode.Impulse);
+            transform.LookAt(heading+this.transform.position);
+            
+            break;
+
             case 2:
             Debug.Log("attacking");
-             GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
-                //myPlayer.Damage();
-                //Debug.Log("Attacking");
-                break;
+            GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
+            canAttack = false;
+            break;
+
             default:
-                break;
+            break;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(canAttack);
+        }
+        else
+        {
+            canAttack = (bool)stream.ReceiveNext();
         }
     }
     #endregion
  
     #region Functions
-
     [PunRPC]
     public void ChangeCondition(string intToPass)
     {
         int myInt = int.Parse(intToPass);
         myCondition = myInt;
+
+        if(intToPass == "1")
+        {
+            zombieAnime.SetBool("isAttacking",false);
+            zombieAnime.SetBool("isWalking",true);
+        }
+        else if(intToPass == "2")
+        {
+            zombieAnime.SetBool("isAttacking",true);
+            zombieAnime.SetBool("isWalking",false);
+        }
         Debug.Log("switched");
     }
 

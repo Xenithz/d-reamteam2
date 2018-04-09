@@ -21,40 +21,39 @@ public Rigidbody rb;
 public float maxSpeed;
 	void Start () 
 	{
-	rb = GetComponent<Rigidbody>();
+	    rb = GetComponent<Rigidbody>();
 	}
 	void FixedUpdate () 
 	{
-		velocity=rb.velocity;
-		Look();
-        Vector3 left=transform.position;
-		Vector3 right=transform.position;
-	  targetVector = (target.transform.position - transform.position).normalized;
-     if (Physics.Raycast(transform.position+height, transform.forward+height, out colliderHit, raycastLenght))
-	 {
-		 Debug.DrawLine(transform.position, colliderHit.point, Color.blue);
-		 targetVector+=AvoidFront();
-	 }
-	  if (Physics.Raycast(left+(-transform.right*vision), transform.forward+height, out colliderHit, raycastLenght))
-	 {
-		 Debug.DrawLine(left, colliderHit.point, Color.red);
-		 targetVector+=AvoidLeft();
-	 }
-	  if (Physics.Raycast(right + (transform.right * vision), transform.forward+height, out colliderHit, raycastLenght))
-	 {
-		 Debug.DrawLine(right, colliderHit.point, Color.green);
-		 targetVector+=AvoidRight();
-	 }
-	 Move();
+	velocity=rb.velocity;
+	Look();
+    Vector3 left=transform.position;
+	Vector3 right=transform.position;
+	targetVector = (target.transform.position - transform.position).normalized;
+    if (Physics.Raycast(transform.position+height, transform.forward+height, out colliderHit, raycastLenght))
+	{
+		Debug.DrawLine(transform.position, colliderHit.point, Color.blue);
+		targetVector+=AvoidFront();
+	}
+	 if (Physics.Raycast(left+(-transform.right*vision), transform.forward+height, out colliderHit, raycastLenght))
+	{
+		Debug.DrawLine(left, colliderHit.point, Color.red);
+		targetVector+=AvoidLeft();
+	}
+	if (Physics.Raycast(right + (transform.right * vision), transform.forward+height, out colliderHit, raycastLenght))
+	{
+		Debug.DrawLine(right, colliderHit.point, Color.green);
+		targetVector+=AvoidRight();
+	}
+    Move();
 	}
 	public Vector3 AvoidFront()
 	{
     Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-           avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
-
-		   Debug.Log("avoidfront");
+        avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+		Debug.Log("avoidfront");
 		}
 	 return avoidanceVector;
 	}
@@ -63,9 +62,8 @@ public float maxSpeed;
 		Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-			avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
-           
-		   Debug.Log("avoidleft");
+		avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+		Debug.Log("avoidleft");
 		}
 	 return avoidanceVector;
 	}
@@ -74,8 +72,8 @@ public float maxSpeed;
     Vector3 avoidanceVector=Vector3.zero;
 		if(CanAvoid())
 		{
-           avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
-		   Debug.Log("avoidright");
+        avoidanceVector=((targetVector-colliderHit.normal).normalized)*avoidanceForce*Time.deltaTime;
+		Debug.Log("avoidright");
 		}
 	 return avoidanceVector;
 	}

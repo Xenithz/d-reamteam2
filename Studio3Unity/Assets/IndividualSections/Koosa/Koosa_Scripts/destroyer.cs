@@ -3,24 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class destroyer : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-		
-	}
-
 	void OnCollisionEnter(Collision other)
 	{
 		if(other.gameObject.tag=="Zombie")
-		{
-	     	Destroy(other.gameObject);
-		}
-		
+		other.gameObject.SetActive(false);
 	}
 }
