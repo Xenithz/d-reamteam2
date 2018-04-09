@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon;
+public enum GameStates
+{
+        Starting,
+        Spawning,
+        Prepping,
+        Playing,
+        Ending
+};
 
 public class GameManagerBase : Photon.PunBehaviour
 {
     #region Public variables
-    public enum GameStates
-    {
-        Starting,
-        Playing,
-        Ending
-    };
-
     public GameStates myGameState;
 
     public static GameManagerBase instance;
@@ -33,6 +34,7 @@ public class GameManagerBase : Photon.PunBehaviour
     {
         roundNumber = 1;
         myGameState = GameStates.Starting;
+        flag1 = false;
         Initialize();
     }
     private void Awake() 
@@ -47,6 +49,21 @@ public class GameManagerBase : Photon.PunBehaviour
             // roundNumber++;
             // SetUpNewRound(1);
         //}
+
+        if(GameManagerBase.instance.myGameState == GameStates.Playing && Zombie_Pool.zombiePoolInstance.activeZombies.Count == 0 && Zombie_Pool.zombiePoolInstance.zombiesHaveSpawned == true)
+        {
+            myGameState = GameStates.Spawning;
+        }
+
+
+        if(GameManagerBase.instance.myGameState == GameStates.Spawning)
+        {
+            if(Zombie_Pool.zombiePoolInstance.stopSpawning == false)
+            {
+                SetUpNewRound(roundNumber);
+            }
+            Debug.Log("This is the count in active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
+        }
     }
     #endregion
 
@@ -55,8 +72,8 @@ public class GameManagerBase : Photon.PunBehaviour
     {
         GameObject myPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[0].transform.position, Quaternion.identity, 0);
         myLocalPlayer = myPlayer;
-        this.myGameState = GameStates.Starting;
-        SetUpNewRound(roundNumber);
+        myPlayer.name = PhotonNetwork.player.NickName;
+        this.myGameState = GameStates.Playing;
     }
 
     public void UpdateRoundsSurvived()

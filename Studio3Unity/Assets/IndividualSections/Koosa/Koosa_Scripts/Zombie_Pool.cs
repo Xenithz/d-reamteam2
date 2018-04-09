@@ -27,6 +27,10 @@ public class Zombie_Pool : Photon.MonoBehaviour
     public List<GameObject> activeEasyZombies;
     public List<GameObject> activeMediumZombies;
     public List<GameObject> activeHardZombies;
+
+    public bool zombiesHaveSpawned;
+
+    public bool stopSpawning;
     #endregion
 
 
@@ -58,6 +62,8 @@ public class Zombie_Pool : Photon.MonoBehaviour
         time = 20;
         myFlag = true;
         spawnFlag = true;
+        zombiesHaveSpawned = false;
+        stopSpawning = false;
     }
 
     private void Start()
@@ -84,6 +90,8 @@ public class Zombie_Pool : Photon.MonoBehaviour
 #region My Functions
     public void Spawn(int zombiesToSpawn)
     {
+        stopSpawning = true;
+        Debug.Log("spawn called");
         for(int i = 0; i < zombiesToSpawn; i++)
         {
             spawnFlag = true;
@@ -95,10 +103,11 @@ public class Zombie_Pool : Photon.MonoBehaviour
     {
         for (int i = 0; i < zombiesPooled; i++)
         {
-            Debug.Log("called");
+            Debug.Log("Starting to pool zombies");
            GameObject zombieObject = PhotonNetwork.Instantiate(zombie.name, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity, 0);
            zombieObject.name = "balllicker" + i;
         } 
+        zombiesHaveSpawned = true;
         myFlag = false;
     }
     
@@ -121,7 +130,7 @@ public class Zombie_Pool : Photon.MonoBehaviour
             spawnIndex = Random.Range(0, spawnPoint.childCount);
             int intToSend = spawnIndex;
             this.photonView.RPC("SetZombie", PhotonTargets.AllViaServer, intToSend.ToString());
-            Debug.Log("do something");
+            Debug.Log("Going to active zombies now");
         }
         else
         {
@@ -139,6 +148,8 @@ public class Zombie_Pool : Photon.MonoBehaviour
         AIHandler.instance.CallRefreshList();
         myZombie.SetActive(true);
         spawnFlag = false;
+        GameManagerBase.instance.myGameState = GameStates.Playing;
+        stopSpawning = false;
     }
 
     public void CallRemoveZombie(string objectToPass)

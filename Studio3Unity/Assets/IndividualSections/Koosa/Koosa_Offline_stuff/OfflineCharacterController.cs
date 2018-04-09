@@ -41,9 +41,10 @@ public class OfflineCharacterController : MonoBehaviour {
         coolDownImage=GameObject.FindGameObjectWithTag("DropAbility");
         coolDown=0;
         GameObject TileManager = GameObject.Find("TileManager");
-       // tileManager = TileManager.GetComponent<OfflineTileManager>();
+        //tileManager = TileManager.GetComponent<OfflineTileManager>();
         playerBody = gameObject.GetComponent<Rigidbody>();
         playerCollider = gameObject.GetComponent<BoxCollider>();
+        //tileManager = TileManager.GetComponent<OfflineTileManager>();
     }
 
     private void FixedUpdate()
@@ -77,20 +78,19 @@ public class OfflineCharacterController : MonoBehaviour {
 
     private void Update()
     {
-     //float dropTile=Input.GetAxis("Tile");
-        if(coolDown<=0 )
-        {
+     float dropTile=Input.GetAxis("Joystick Tile");
+        if(coolDown<=0 ){
             coolDownImage.SetActive(true);
-        if (/*dropTile!=0 ||*/ Input.GetKeyDown(KeyCode.G))
-        {
+        if (dropTile!=0){
          DropMyTile();
         playerAnim.SetInteger("anim",2);
 		}
-        if(Input.GetKeyDown(KeyCode .J))
-        {
+       // else playerAnim.SetInteger("anim",0);
+        if(Input.GetKeyDown(KeyCode .J)){
 		playerAnim.SetBool("death",true);
         }
         }
+        
     }
     #endregion
 
@@ -125,6 +125,7 @@ public class OfflineCharacterController : MonoBehaviour {
         float groundDistance;
         groundDistance = playerCollider.bounds.extents.y;
         return Physics.Raycast(transform.position, -Vector3.up, groundDistance + 1f);
+        
     }
 
     private Vector3 JumpInput()
@@ -152,11 +153,14 @@ public class OfflineCharacterController : MonoBehaviour {
          */
     }
     private void Jump(Vector3 jumpVector)
+    
     {
         jumpVector.y=jumpVector.y*jumpPower;
         jumpVector.x=0;
         jumpVector.z=0;
         playerBody.AddForce(jumpVector,ForceMode.Impulse);
+
+
     }
     
     private void DropMyTile()
@@ -169,8 +173,9 @@ public class OfflineCharacterController : MonoBehaviour {
         if(hit.transform.gameObject.tag == "Tile")
         {
             GameObject thisTile = hit.transform.gameObject;
-            StartCoroutine(tileManager.DroppingTile(thisTile));
-		    Debug.Log("HITTTING");
+
+           StartCoroutine(tileManager.DroppingTile(thisTile));
+			Debug.Log("HITTTING");
         }
         
         // if (hit.transform.gameObject.tag == ("Tile") && tileManager.tiles.Contains(myTile))
@@ -183,6 +188,7 @@ public class OfflineCharacterController : MonoBehaviour {
     {
         coolDown -= Time.deltaTime;
     }        
+
  }
     #endregion
 
