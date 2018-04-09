@@ -32,7 +32,7 @@ public class GameManagerBase : Photon.PunBehaviour
     #region Unity callbacks
     private void Start()
     {
-        roundNumber = 1;
+        roundNumber = 0;
         myGameState = GameStates.Starting;
         flag1 = false;
         Initialize();
@@ -44,14 +44,10 @@ public class GameManagerBase : Photon.PunBehaviour
 
     private void Update()
     {
-        //if(AIHandler.instance.aiToTrack.Count == 0)
-        //{
-            // roundNumber++;
-            // SetUpNewRound(1);
-        //}
-
         if(GameManagerBase.instance.myGameState == GameStates.Playing && Zombie_Pool.zombiePoolInstance.activeZombies.Count == 0 && Zombie_Pool.zombiePoolInstance.zombiesHaveSpawned == true)
         {
+            roundNumber++;
+            Debug.Log("Current round number: " + roundNumber);
             myGameState = GameStates.Spawning;
         }
 
@@ -62,7 +58,7 @@ public class GameManagerBase : Photon.PunBehaviour
             {
                 SetUpNewRound(roundNumber);
             }
-            Debug.Log("This is the count in active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
+            Debug.Log("This is the count of active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
         }
     }
     #endregion
