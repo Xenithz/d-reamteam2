@@ -114,9 +114,11 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
         {
             case 1:
             Vector3 heading = (player.transform.position - this.gameObject.transform.position).normalized;
+            Vector3 heading1=( new Vector3 (player.transform.position.x,0,player.transform.position.z)- new Vector3 (this.gameObject.transform.position.x,0,this.gameObject.transform.position.z)).normalized;                                        
             speed = Mathf.Clamp(speed, 0, maxSpeed);
             rg.AddForce(heading * speed, ForceMode.Impulse);
             transform.LookAt(heading+this.transform.position);
+            
             break;
 
             case 2:
