@@ -2,32 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flocking : MonoBehaviour 
+public class Flocking : MonoBehaviour
 {
-	#region Public Variables
-	public int neighbourCount = 0;
-	public int maxSpeed;
-	#endregion
+    #region Public Variables
+    public int neighbourCount = 0;
+    public int maxSpeed;
+    #endregion
 
-	#region Private Variables
-	private Rigidbody rg;
-	private List<Rigidbody> boids;
-	#endregion
+    #region Private Variables
+    private Rigidbody rg;
+    private List<Rigidbody> boids;
+    #endregion
 
-	#region Callbacks
-	void Start () 
-	{
-		
-	}
-	
-	void Update () 
-	{
+    #region Callbacks
+    void Start()
+    {
 
-	}
-	#endregion
+    }
 
-	#region Function
-	/*Vector3 CompiledAgents ()
+    void Update()
+    {
+
+    }
+    #endregion
+
+    #region Function
+    /*Vector3 CompiledAgents ()
 	{
 
 	}
@@ -54,6 +54,5 @@ public class Flocking : MonoBehaviour
 		Vector3 avgVel = totalVector/boids.Count;
 		//Set Magnitude.
 	}*/
-	
-	#endregion
+    #endregion
 }

@@ -38,6 +38,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     void OnEnable() 
     {
         players = GameObject.FindGameObjectsWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
 
         if(PhotonNetwork.isMasterClient)
         {
