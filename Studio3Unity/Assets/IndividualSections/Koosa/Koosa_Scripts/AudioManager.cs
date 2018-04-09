@@ -5,9 +5,9 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour {
 #region Public Variables
 public static AudioManager auidoInstance;
-public AudioSource musicSource;
+public AudioSource backGroundMusicSource;
 public AudioSource effectSource;
-public AudioClip[] musicClips;
+public AudioClip[] backGroundMusicClips;
 public AudioClip[] effectClips;
 #endregion
 
@@ -20,26 +20,30 @@ void Awake()
 	else if( auidoInstance!=this)
 		Destroy(gameObject);
 
-	DontDestroyOnLoad (gameObject);
-	
+	    DontDestroyOnLoad (gameObject);
 }
 #endregion
 
 #region My Functions
 public void PlaySingleMusicClip()
 {
-    musicSource.Play();
+    backGroundMusicSource.Play();
+}
+void Update()
+{
+	if(!backGroundMusicSource.isPlaying)
+		MusicShuffle();
 }
 
 public void StopSingleMusicClip()
 {
-    musicSource.Stop();
+    backGroundMusicSource.Stop();
 }  
 
 public void PlaySingleMusicClipPoint(float startTime,float endTime)
 {
-    musicSource.PlayScheduled(startTime);
-    musicSource.SetScheduledEndTime(AudioSettings.dspTime+(endTime));
+    backGroundMusicSource.PlayScheduled(startTime);
+    backGroundMusicSource.SetScheduledEndTime(AudioSettings.dspTime+(endTime));
 }
 
 public void PlaySingleEffect()
@@ -59,15 +63,29 @@ public void PlaySingleEffectPoint(float startTime,float endTime)
 }
 public void MusicShuffle()
 {
-	int randomIndex=Random.Range(0,musicClips.Length);
-	for(int i=0; i<musicClips.Length;i++){
-	AudioClip tempClip=musicClips[i];	
-	musicClips[i]=musicClips[randomIndex];
-	musicClips[randomIndex]=tempClip;
+	int randomIndex=Random.Range(0,backGroundMusicClips.Length);
+	for(int i=0; i<backGroundMusicClips.Length;i++)
+    {
+	AudioClip tempClip=backGroundMusicClips[i];	
+	backGroundMusicClips[i]=backGroundMusicClips[randomIndex];
+	backGroundMusicClips[randomIndex]=tempClip;
 	}
-	musicSource.clip=musicClips[randomIndex];
-	musicSource.Play();
+	backGroundMusicSource.clip=backGroundMusicClips[randomIndex];
+	backGroundMusicSource.Play();
+}
+ public void PlaySFX(AudioSource sourcePlay, int index, List<AudioClip> audioClips)
+    {
+        sourcePlay.PlayOneShot(audioClips[index]);
     }
+
+    public void PlaySFX(AudioSource sourcePlay, int index, float startTime, float endTime, List<AudioClip> audioClips)
+    {
+        sourcePlay.clip = audioClips[index];
+        sourcePlay.SetScheduledStartTime(startTime);
+        sourcePlay.SetScheduledEndTime(endTime);
+        sourcePlay.Play();
+    }
+	
 }
 #endregion
 

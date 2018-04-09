@@ -24,7 +24,7 @@ public Rigidbody rb;
 
      if(Input.GetKeyDown(KeyCode.G))
 	 {
-		 playerAnime.SetInteger("anim",3);
+		playerAnime.SetInteger("anim",3);
 	 }
 	if(Input.GetKeyDown(KeyCode.Space))
 	 {

@@ -37,7 +37,8 @@ public class Camera_Controller : Photon.MonoBehaviour
 
     public void GivePlayer()
     {
-        if(PhotonNetwork.connected){
+        if(PhotonNetwork.connected)
+        {
         GameObject[] myPlayers = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject checkPlayer in myPlayers)
         {
@@ -47,7 +48,7 @@ public class Camera_Controller : Photon.MonoBehaviour
             }
         }
         return;
-    }
+        }
     }
 }
 #endregion

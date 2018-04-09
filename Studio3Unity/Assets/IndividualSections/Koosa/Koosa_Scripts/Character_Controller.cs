@@ -76,18 +76,21 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
     {
         if(photonView.isMine)
         {
-            if(coolDown<=0 ){
+            if(coolDown<=0 )
+            {
             coolDownImage.SetActive(true);
-      
-        if (Input.GetKeyDown(KeyCode.G) )
-         DropMyTile();
+
+            if (Input.GetKeyDown(KeyCode.G))
+            DropMyTile();
         }
-        if(Input.GetKeyDown(KeyCode.Y)){
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
             AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
             Debug.Log("ff");
         }
         Jump();
-        if(Input.GetKeyDown(KeyCode .J)){
+        if(Input.GetKeyDown(KeyCode .J))
+        {
 		playerAnim.SetBool("death",true);
         }
         else playerAnim.SetBool("death",false);
