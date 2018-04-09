@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class ZombieFSM : Photon.PunBehaviour
+public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 {
     #region Public Variables
     public int speed;
@@ -13,12 +13,16 @@ public class ZombieFSM : Photon.PunBehaviour
     public GameObject player;
     public float damageDelay = 2;
 
+    public float attackTimer;
+
+    public bool canAttack;
     #endregion
     public PlayerStats myPlayer;
     #region Private Variables
     private int myCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
+    public Animator zombieAnime;
     #endregion
 
     #region Callbacks
@@ -26,6 +30,9 @@ public class ZombieFSM : Photon.PunBehaviour
     {
         rg = GetComponent<Rigidbody>();
         myCondition = chaseCondition;
+        canAttack = true;
+        damageDelay = 2;
+        attackTimer = 0;
     }
 
     void OnEnable() 
@@ -49,11 +56,11 @@ public class ZombieFSM : Photon.PunBehaviour
     {
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //Processing
-        if(PhotonNetwork.isMasterClient)
+        if(PhotonNetwork.isMasterClient && PhotonNetwork.connected)
         {
             if (distanceToPlayer < attackDistance)
             {
-                if(myCondition != attackCondition)
+                if(myCondition != attackCondition && canAttack == true)
                 {
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "2");
                 }
@@ -63,6 +70,37 @@ public class ZombieFSM : Photon.PunBehaviour
                 if(myCondition != chaseCondition)
                 {
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
+                }
+            }
+
+            if(canAttack == false)
+            {
+                attackTimer = attackTimer + Time.deltaTime;
+                if(attackTimer >= damageDelay)
+                {
+                    canAttack = true;
+                    attackTimer = 0;
+                }
+            }    
+        }
+        else if(!PhotonNetwork.connected) //OFFLINE
+        {
+            if (distanceToPlayer < attackDistance)
+            {
+                if(myCondition != attackCondition)
+                {
+                   myCondition=2;
+                   zombieAnime.SetBool("isAttacking",true);
+                   zombieAnime.SetBool("isWalking",false);
+                }
+            }
+            else if(distanceToPlayer > attackDistance)
+            {
+                if(myCondition != chaseCondition)
+                {
+                   myCondition=1;
+                   zombieAnime.SetBool("isAttacking",false);
+                   zombieAnime.SetBool("isWalking",true);
                 }
             }    
         }
@@ -83,10 +121,23 @@ public class ZombieFSM : Photon.PunBehaviour
             case 2:
             Debug.Log("attacking");
             GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
+            canAttack = false;
             break;
-            
+
             default:
             break;
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(canAttack);
+        }
+        else
+        {
+            canAttack = (bool)stream.ReceiveNext();
         }
     }
     #endregion
@@ -97,6 +148,17 @@ public class ZombieFSM : Photon.PunBehaviour
     {
         int myInt = int.Parse(intToPass);
         myCondition = myInt;
+
+        if(intToPass == "1")
+        {
+            zombieAnime.SetBool("isAttacking",false);
+            zombieAnime.SetBool("isWalking",true);
+        }
+        else if(intToPass == "2")
+        {
+            zombieAnime.SetBool("isAttacking",true);
+            zombieAnime.SetBool("isWalking",false);
+        }
         Debug.Log("switched");
     }
 
