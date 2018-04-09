@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/IndividualSections/Koosa/KoosaTestScene.unity
+- path: Assets/IndividualSections/Leon/Scenes/Offline_1_Player.unity
   isLoaded: 1
   isActive: 1
