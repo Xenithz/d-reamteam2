@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerFSM : MonoBehaviour
 {
     #region  Public Variable
-    public GameObject[] zombies;
-    public GameObject healthTarget;
-    //public GameObject[] healthTargets;
+    public GameObject[] zombieTargets;
+    public GameObject[] healthTargets;
     public float maxSpeed;
     public float maxForce;
     public float distanceToZombies;
@@ -20,32 +19,36 @@ public class PlayerFSM : MonoBehaviour
     private int fleeCondition = 1;
     private int seekCondition = 2;
     private Vector3 desriedFleeVel;
-    private Vector3 totalDesiredVel;
+    private Vector3 totalDesiredFleeVel;
+    private Vector3 desiredSeekVel;
+    private Vector3 totalDesiredSeekVel;
     #endregion
 
     #region Callbacks
     void Start()
     {
-        totalDesiredVel = new Vector3(0, 0, 0);
+        totalDesiredFleeVel = Vector3.zero;
+        totalDesiredSeekVel = Vector3.zero;
+
         rg = GetComponent<Rigidbody>();
-        zombies = GameObject.FindGameObjectsWithTag("Zombie");
     }
     void Update()
     {
-        //distanceToHealth = Vector3.Distance(transform.position, healthTarget.transform.position);
+        healthTargets = GameObject.FindGameObjectsWithTag("Health");
+        zombieTargets = GameObject.FindGameObjectsWithTag("Zombie");
 
-
-        if (GameObject.FindGameObjectWithTag("Health") != null)
+        for (int i = 0; i < healthTargets.Length; i++)
         {
-            myCondition = 2;
+            distanceToHealth = Vector3.Distance(transform.position, healthTargets[i].transform.position);
+            if (healthTargets[i] != null)
+                myCondition = 2;
         }
-        else
-            myCondition = 0;
 
-        for (int i = 0; i < zombies.Length; i++)
+
+        for (int j = 0; j < zombieTargets.Length; j++)
         {
-            distanceToZombies = Vector3.Distance(transform.position, zombies[i].transform.position);
-            if (zombies[i] != null)
+            distanceToZombies = Vector3.Distance(transform.position, zombieTargets[j].transform.position);
+            if (zombieTargets[j] != null && distanceToZombies < 30)
                 myCondition = 1;
         }
     }
@@ -55,12 +58,10 @@ public class PlayerFSM : MonoBehaviour
         {
             case 1:
                 AvoidZombies();
-                //Debug.Log("Avoiding Zombies");
                 break;
 
             case 2:
                 SeekHealth();
-                Debug.Log("Seeking Health");
                 break;
 
             default:
@@ -72,8 +73,17 @@ public class PlayerFSM : MonoBehaviour
     #region Functions
     void SeekHealth()
     {
-        Vector3 desiredVel = (healthTarget.transform.position - transform.position).normalized * maxSpeed;
-        Vector3 steering = desiredVel - rg.velocity;
+        totalDesiredSeekVel = Vector3.zero;
+        for (int i = 0; i < healthTargets.Length; i++)
+        {
+            if (healthTargets[i].activeInHierarchy)
+            {
+                Debug.Log("Seeking Health");
+                Vector3 desiredSeekVel = (healthTargets[i].transform.position - transform.position).normalized * maxSpeed;
+                totalDesiredSeekVel += desiredSeekVel;
+            }
+        }
+        Vector3 steering = totalDesiredSeekVel - rg.velocity;
         Vector3 steeringClamped = Vector3.ClampMagnitude(steering, maxForce);
 
         rg.AddForce(steeringClamped);
@@ -82,19 +92,21 @@ public class PlayerFSM : MonoBehaviour
 
     void AvoidZombies()
     {
-        totalDesiredVel = Vector3.zero;
-        for (int j = 0; j < zombies.Length; j++)
+        totalDesiredFleeVel = Vector3.zero;
+        for (int j = 0; j < zombieTargets.Length; j++)
         {
             //This is setting a new velocity everytime.
             //Need to add all of the forces together;
-            if (distanceToZombies < 30)
+            if (distanceToZombies <= 30)
             {
-                desriedFleeVel = (transform.position - zombies[j].transform.position).normalized * maxSpeed;
-                totalDesiredVel += desriedFleeVel;
+                Debug.Log("Avoiding Zombies");
+                desriedFleeVel = (transform.position - zombieTargets[j].transform.position).normalized * maxSpeed;
+                totalDesiredFleeVel += desriedFleeVel;
             }
         }
-        Vector3 steering = totalDesiredVel - rg.velocity;
+        Vector3 steering = totalDesiredFleeVel - rg.velocity;
         Vector3 steeringClamped = Vector3.ClampMagnitude(steering, maxForce);
+
         rg.AddForce(steeringClamped);
         transform.LookAt(transform.position + rg.velocity);
     }
