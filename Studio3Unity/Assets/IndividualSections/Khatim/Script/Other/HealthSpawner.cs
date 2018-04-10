@@ -2,69 +2,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthSpawner : Photon.MonoBehaviour 
+public class HealthSpawner : Photon.MonoBehaviour
 {
-	#region Public Variables
-	public GameObject[] healthSpawnLocation;
-	public GameObject healthPrefab;
-	public List<GameObject> health;
-	public float timer = 0;
-	public string index;
-	#endregion
+    #region Public Variables
+    public GameObject[] healthSpawnLocation;
+    public GameObject healthPrefab;
+    public List<GameObject> health;
+    public float timer = 0;
+    public string index;
+    #endregion
 
-	#region Private Variables
-	private float maxTime = 5;
-	#endregion
+    #region Private Variables
+    private float maxTime = 5;
+    #endregion
 
-	#region Callbacks
-	void Awake () 
-	{
-		timer = maxTime;
-		healthSpawnLocation = GameObject.FindGameObjectsWithTag("HealthSpawn");
+    #region Callbacks
+    void Awake()
+    {
+        timer = maxTime;
+        healthSpawnLocation = GameObject.FindGameObjectsWithTag("HealthSpawn");
 
-		for(int i = 0; i < healthSpawnLocation.Length; i++)
-		{
-			GameObject healthObj = PhotonNetwork.Instantiate(healthPrefab.name, healthSpawnLocation[i].transform.position, Quaternion.identity, 0);
-			Debug.Log("spawned hp");
-			health.Add(healthObj);
-		}
-	}
-	
-	void FixedUpdate () 
-	{
-		if(PhotonNetwork.isMasterClient)
-		{
-			index = Random.Range(0, health.Count).ToString();
-			timer -= Time.deltaTime;
-			if (timer <= 0f)
-			{
-				this.photonView.RPC("SpawnHealth", PhotonTargets.All, index);
-				timer = maxTime;
-			}
+        for (int i = 0; i < healthSpawnLocation.Length; i++)
+        {
+            GameObject healthObj = PhotonNetwork.Instantiate(healthPrefab.name, healthSpawnLocation[i].transform.position, Quaternion.identity, 0);
+            Debug.Log("spawned hp");
+            health.Add(healthObj);
+        }
+    }
 
-			// if(Input.GetKeyDown(KeyCode.M))
-			// {
-			// 	this.photonView.RPC("SpawnHealth", PhotonTargets.All, index);
-			// 	timer = maxTime;
-			// }
-		}
-	}
-	#endregion
+    void FixedUpdate()
+    {
+        if (PhotonNetwork.isMasterClient)
+        {
+            index = Random.Range(0, health.Count).ToString();
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+            {
+                this.photonView.RPC("SpawnHealth", PhotonTargets.All, index);
+                timer = maxTime;
+            }
 
-	#region Functions
-	[PunRPC]
-	void SpawnHealth(string myInt)
-	{
-		Debug.Log("called enable hp func");
-		int convertedInt = int.Parse(myInt);
-		for(int i = 0; i < health.Count; i++)
-		{
-			if(!health[i].activeInHierarchy)
-			{
-				health[convertedInt].SetActive(true);
-				break;
-			}
-		}
-	}
-	#endregion
+            // if(Input.GetKeyDown(KeyCode.M))
+            // {
+            // 	this.photonView.RPC("SpawnHealth", PhotonTargets.All, index);
+            // 	timer = maxTime;
+            // }
+        }
+    }
+    #endregion
+
+    #region Functions
+    [PunRPC]
+    void SpawnHealth(string myInt)
+    {
+        Debug.Log("called enable hp func");
+        int convertedInt = int.Parse(myInt);
+        for (int i = 0; i < health.Count; i++)
+        {
+            if (!health[i].activeInHierarchy)
+            {
+                health[convertedInt].SetActive(true);
+                break;
+            }
+        }
+    }
+    #endregion
 }

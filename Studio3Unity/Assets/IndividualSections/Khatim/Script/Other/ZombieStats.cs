@@ -27,7 +27,7 @@ public class ZombieStats : MonoBehaviour
     void Awake()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
-        
+
     }
     void FixedUpdate()
     {
