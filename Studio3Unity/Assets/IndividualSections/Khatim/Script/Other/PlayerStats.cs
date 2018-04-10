@@ -22,13 +22,13 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        if (GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp<=0)
+        if (GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp <= 0)
         {
             Debug.Log("Dead");
         }
 
         //Testing purposes
-        if(Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             Damage();
         }
@@ -38,9 +38,9 @@ public class PlayerStats : MonoBehaviour
     #region Functions
     public void Damage()
     {
-            GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp--;
-            healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(false);
-            Debug.Log("Damage");
+        GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp--;
+        healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(false);
+        Debug.Log("Damage");
     }
     #endregion
 }

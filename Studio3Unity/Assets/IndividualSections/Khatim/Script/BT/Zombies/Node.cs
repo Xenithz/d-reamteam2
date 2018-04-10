@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Node
 {
-    public enum Condition { Ready, Failed, Success, Running};
+    public enum Condition { Ready, Failed, Success, Running };
     public Condition currCon = Condition.Ready;
 
     public List<Node> children = new List<Node>();

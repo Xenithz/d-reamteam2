@@ -22,7 +22,7 @@ public class Chase : Node
             currCon = Condition.Failed;
         }
 
-        if (ownerBT.zom.distanceToPlayer< ownerBT.zom.attackDistance)
+        if (ownerBT.zom.distanceToPlayer < ownerBT.zom.attackDistance)
         {
             currCon = Condition.Success;
         }
