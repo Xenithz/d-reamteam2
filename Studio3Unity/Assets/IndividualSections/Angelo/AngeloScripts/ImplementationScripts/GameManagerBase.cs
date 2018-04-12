@@ -79,7 +79,7 @@ public class GameManagerBase : Photon.PunBehaviour
 
     public void SetUpNewRound(int roundNumberToPass)
     {
-        Zombie_Pool.zombiePoolInstance.Spawn(roundNumberToPass);
+        Zombie_Pool.zombiePoolInstance.Spawn(roundNumberToPass,roundNumberToPass,roundNumberToPass);
     }
     
     public void EndGame()
