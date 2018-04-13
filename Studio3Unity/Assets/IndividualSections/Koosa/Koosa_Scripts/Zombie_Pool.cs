@@ -106,6 +106,35 @@ public class Zombie_Pool : Photon.MonoBehaviour
         }
     }
 
+    IEnumerator Spawn2(int zombiesToSpawn, int mediumZombiesToSpawn, int hardZombiesToSpawn)
+    {
+        stopSpawning = true;
+        Debug.Log("spawn called");
+        for(int i = 0; i < zombiesToSpawn; i++)
+        {
+            yield return new WaitForSeconds(2);
+            spawnFlag = true;
+            RandomizeSpawn("easy");
+        }
+        for(int i = 0; i < mediumZombiesToSpawn; i++)
+        {
+            yield return new WaitForSeconds(2);
+            spawnFlag = true;
+            RandomizeSpawn("medium");
+        }
+        for(int i = 0; i < hardZombiesToSpawn; i++)
+        {
+            yield return new WaitForSeconds(2);
+            spawnFlag = true;
+            RandomizeSpawn("hard");
+        }   
+    }
+
+    public void CallSpawn2(int zombiesToSpawn, int mediumZombiesToSpawn, int hardZombiesToSpawn)
+    {
+        StartCoroutine(Spawn2(zombiesToSpawn, mediumZombiesToSpawn, hardZombiesToSpawn));
+    }
+
     public void Initialize()
     {
         for (int i = 0; i < zombiesPooled; i++)
