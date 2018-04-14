@@ -153,14 +153,11 @@ public class OfflineCharacterController : MonoBehaviour {
          */
     }
     private void Jump(Vector3 jumpVector)
-    
     {
         jumpVector.y=jumpVector.y*jumpPower;
         jumpVector.x=0;
         jumpVector.z=0;
         playerBody.AddForce(jumpVector,ForceMode.Impulse);
-
-
     }
     
     private void DropMyTile()
@@ -173,8 +170,7 @@ public class OfflineCharacterController : MonoBehaviour {
         if(hit.transform.gameObject.tag == "Tile")
         {
             GameObject thisTile = hit.transform.gameObject;
-
-           StartCoroutine(tileManager.DroppingTile(thisTile));
+            StartCoroutine(tileManager.DroppingTile(thisTile));
 			Debug.Log("HITTTING");
         }
         
