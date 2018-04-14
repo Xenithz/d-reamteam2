@@ -63,7 +63,7 @@ public class UserInformationControl : MonoBehaviour
         //TESTING STUFF
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            CallEditData(UserStats.instance.myUsername);
+            CallEditData(UserStats.instance.myUsername, 1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
@@ -192,10 +192,11 @@ public class UserInformationControl : MonoBehaviour
         Debug.Log(myWWW.text);
     }
 
-    IEnumerator EditData(string username)
+    IEnumerator EditData(string username, int roundsWon)
     {
         WWWForm myForm = new WWWForm();
         myForm.AddField("playerusernamepost", username);
+        myForm.AddField("roundssurvivedpost", roundsWon);
 
         WWW myWWW = new WWW(myEditDataUrl, myForm);
         yield return myWWW;
@@ -268,9 +269,9 @@ public class UserInformationControl : MonoBehaviour
         StartCoroutine(UnbanUser(inputUsername));
     }
 
-    public void CallEditData(string inputUsername)
+    public void CallEditData(string inputUsername, int roundsSurvived)
     {
-        StartCoroutine(EditData(inputUsername));
+        StartCoroutine(EditData(inputUsername, roundsSurvived));
     }
 
     public void CallGrabData(string inputUsername, bool inputBool)

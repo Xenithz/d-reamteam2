@@ -24,9 +24,6 @@ public class Zombie_Pool : Photon.MonoBehaviour
     public List<GameObject> mediumZombies;
     public List<GameObject> hardZombies;
     public List<GameObject> activeZombies;
-    public List<GameObject> activeEasyZombies;
-    public List<GameObject> activeMediumZombies;
-    public List<GameObject> activeHardZombies;
 
     public bool zombiesHaveSpawned;
 
@@ -75,7 +72,7 @@ public class Zombie_Pool : Photon.MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            Spawn(1);
+            Spawn(1,1,1);
         }
 
         //Spawn zombies for Pool
@@ -88,48 +85,125 @@ public class Zombie_Pool : Photon.MonoBehaviour
 
 
 #region My Functions
-    public void Spawn(int zombiesToSpawn)
+    public void Spawn(int zombiesToSpawn, int mediumZombiesToSpawn, int hardZombiesToSpawn)
     {
         stopSpawning = true;
         Debug.Log("spawn called");
         for(int i = 0; i < zombiesToSpawn; i++)
         {
             spawnFlag = true;
-            RandomizeSpawn();
+            RandomizeSpawn("easy");
         }
+        for(int i = 0; i < mediumZombiesToSpawn; i++)
+        {
+            spawnFlag = true;
+            RandomizeSpawn("medium");
+        }
+        for(int i = 0; i < hardZombiesToSpawn; i++)
+        {
+            spawnFlag = true;
+            RandomizeSpawn("hard");
+        }
+    }
+
+    IEnumerator Spawn2(int zombiesToSpawn, int mediumZombiesToSpawn, int hardZombiesToSpawn)
+    {
+        stopSpawning = true;
+        Debug.Log("spawn called");
+        for(int i = 0; i < zombiesToSpawn; i++)
+        {
+            yield return new WaitForSeconds(2);
+            spawnFlag = true;
+            RandomizeSpawn("easy");
+        }
+        for(int i = 0; i < mediumZombiesToSpawn; i++)
+        {
+            yield return new WaitForSeconds(2);
+            spawnFlag = true;
+            RandomizeSpawn("medium");
+        }
+        for(int i = 0; i < hardZombiesToSpawn; i++)
+        {
+            yield return new WaitForSeconds(2);
+            spawnFlag = true;
+            RandomizeSpawn("hard");
+        }   
+    }
+
+    public void CallSpawn2(int zombiesToSpawn, int mediumZombiesToSpawn, int hardZombiesToSpawn)
+    {
+        StartCoroutine(Spawn2(zombiesToSpawn, mediumZombiesToSpawn, hardZombiesToSpawn));
     }
 
     public void Initialize()
     {
         for (int i = 0; i < zombiesPooled; i++)
         {
-            Debug.Log("Starting to pool zombies");
+           Debug.Log("Starting to easy pool zombies");
            GameObject zombieObject = PhotonNetwork.Instantiate(zombie.name, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity, 0);
            zombieObject.name = "balllicker" + i;
+           zombies.Add(zombieObject);
         } 
+        for (int i = 0; i < mediumZombiesPooled; i++)
+        {
+           Debug.Log("Starting to pool medium zombies");
+           GameObject zombieObject = PhotonNetwork.Instantiate(mediumZombie.name, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity, 0);
+           zombieObject.name = "medium balllicker" + i;
+           mediumZombies.Add(zombieObject);
+        }
+        for (int i = 0; i < hardZombiesPooled; i++)
+        {
+           Debug.Log("Starting to pool hard zombies");
+           GameObject zombieObject = PhotonNetwork.Instantiate(hardZombie.name, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity, 0);
+           zombieObject.name = "hard balllicker" + i;
+           hardZombies.Add(zombieObject);
+        }
         zombiesHaveSpawned = true;
         myFlag = false;
     }
     
-    private GameObject ZombieToSpawn()
+    private GameObject ZombieToSpawn(string type)
     {
-        for (int i=0; i < zombies.Count; i++)
+        if(type == "easy")
         {
-            if (!zombies[i].activeInHierarchy)
+            for (int i=0; i < zombies.Count; i++)
             {
-                return zombies[i];
+                if (!zombies[i].activeInHierarchy)
+                {
+                    return zombies[i];
+                }
+            }
+        }
+        else if(type == "medium")
+        {
+            for (int i=0; i < mediumZombies.Count; i++)
+            {
+                if (!mediumZombies[i].activeInHierarchy)
+                {
+                    return mediumZombies[i];
+                }   
+            }
+        }
+        else if(type == "hard")
+        {
+            for (int i=0; i < hardZombies.Count; i++)
+            {
+                if (!hardZombies[i].activeInHierarchy)
+                {
+                    return hardZombies[i];
+                }   
             }
         }
         return null;
     }
 
-    private void RandomizeSpawn()
+    private void RandomizeSpawn(string type)
     {
         if(PhotonNetwork.isMasterClient && spawnFlag == true)
         {
             spawnIndex = Random.Range(0, spawnPoint.childCount);
             int intToSend = spawnIndex;
-            this.photonView.RPC("SetZombie", PhotonTargets.AllViaServer, intToSend.ToString());
+            this.photonView.RPC("SetZombie", PhotonTargets.AllViaServer, intToSend.ToString(), type);
             Debug.Log("Going to active zombies now");
         }
         else
@@ -139,13 +213,13 @@ public class Zombie_Pool : Photon.MonoBehaviour
     }
 
     [PunRPC]
-    public void SetZombie(string myInt)
+    public void SetZombie(string myInt, string type)
     {
-        GameObject myZombie = ZombieToSpawn();
+        GameObject myZombie = ZombieToSpawn(type);
         myZombie.transform.position = spawnPoint.GetChild(int.Parse(myInt)).position;
         myZombie.transform.rotation = Quaternion.identity;
         activeZombies.Add(myZombie);
-        AIHandler.instance.CallRefreshList();
+        //AIHandler.instance.CallRefreshList();
         myZombie.SetActive(true);
         spawnFlag = false;
         GameManagerBase.instance.myGameState = GameStates.Playing;
