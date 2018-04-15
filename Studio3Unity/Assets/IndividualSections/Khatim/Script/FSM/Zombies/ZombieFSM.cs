@@ -11,6 +11,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     [HideInInspector] public Rigidbody rg;
     public GameObject[] players;
     public GameObject player;
+    public float timer;
     public float damageDelay = 2;
 
     public float attackTimer;
@@ -19,7 +20,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     #endregion
     public PlayerStats myPlayer;
     #region Private Variables
-    private int myCondition;
+    public int myCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
     public Animator zombieAnime;
@@ -29,7 +30,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     void Awake()
     {
         rg = GetComponent<Rigidbody>();
-        myCondition = chaseCondition;
+      //  myCondition = chaseCondition;
         canAttack = true;
         damageDelay = 2;
         attackTimer = 0;
@@ -55,9 +56,11 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 
     void Update()
     {
+        timer-=Time.deltaTime;
+        
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //Processing
-        if (PhotonNetwork.isMasterClient && PhotonNetwork.connected)
+        if (PhotonNetwork.isMasterClient && PhotonNetwork.connected && timer<4)
         {
             if (distanceToPlayer < attackDistance)
             {
@@ -84,7 +87,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
                 }
             }
         }
-        else if (!PhotonNetwork.connected) //OFFLINE
+        else if (!PhotonNetwork.connected && timer<4) //OFFLINE
         {
             if (distanceToPlayer < attackDistance)
             {
