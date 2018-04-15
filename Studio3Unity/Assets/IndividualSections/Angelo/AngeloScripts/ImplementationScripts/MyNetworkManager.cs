@@ -64,6 +64,23 @@ public class MyNetworkManager : Photon.PunBehaviour
 		//enable lobby panel
 		uiHolder.GetComponent<UIManager>().lobbyPanel.gameObject.SetActive(true);
 		uiHolder.GetComponent<UIManager>().onlinePickPanel.gameObject.SetActive(false);
+
+		if(PhotonNetwork.room.PlayerCount == 1)
+		{
+			UserStats.instance.spawnType = 0;
+		}
+		else if(PhotonNetwork.room.PlayerCount == 2)
+		{
+			UserStats.instance.spawnType = 1;	
+		}
+		else if(PhotonNetwork.room.PlayerCount == 3)
+		{
+			UserStats.instance.spawnType = 2;
+		}
+		else if(PhotonNetwork.room.PlayerCount == 4)
+		{
+			UserStats.instance.spawnType = 3;
+		}
 	}
 
 	public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)

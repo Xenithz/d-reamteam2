@@ -23,6 +23,8 @@ public class GameManagerBase : Photon.PunBehaviour
 
     public GameObject playerPrefab;
 
+    public GameObject[] playerPrefabsArray;
+
     public GameObject myLocalPlayer;
 
     public GameObject endingPanel;
@@ -81,7 +83,7 @@ public class GameManagerBase : Photon.PunBehaviour
     #region My functions
     public void Initialize()
     {
-        GameObject myPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, spawnPoints[0].transform.position, Quaternion.identity, 0);
+        GameObject myPlayer = PhotonNetwork.Instantiate(playerPrefabsArray[UserStats.instance.spawnType].name, spawnPoints[0].transform.position, Quaternion.identity, 0);
         myLocalPlayer = myPlayer;
         myPlayer.name = PhotonNetwork.player.NickName;
         amountOfEasyToSpawn = 2;

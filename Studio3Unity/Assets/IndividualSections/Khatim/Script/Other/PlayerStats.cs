@@ -11,7 +11,6 @@ public class PlayerStats : MonoBehaviour
     #endregion
 
     #region Private Variables
-    private int hlth = 6;
     #endregion
 
     #region Callbacks
