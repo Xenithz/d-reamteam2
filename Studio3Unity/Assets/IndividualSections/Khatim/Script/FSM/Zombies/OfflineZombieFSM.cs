@@ -13,6 +13,7 @@ public class OfflineZombieFSM : MonoBehaviour
     public float delayedDamage;
     public int randomTarget;
     public float timeToAttack;
+    public GameObject offlinePlyStats;
     public OfflinePlayerStats offlinePly;
     //public Animator zombieAnim;
     public bool attacking;
@@ -34,13 +35,14 @@ public class OfflineZombieFSM : MonoBehaviour
         currCondition = chaseCondition;
         delayedDamage = 2;
         timeToAttack = 2;
-        offlinePly.GetComponent<OfflinePlayerStats>();
+        offlinePlyStats = GameObject.FindGameObjectWithTag("OfflinePlayerStats");
+        offlinePly = offlinePlyStats.GetComponent<OfflinePlayerStats>();
         attacking = false;
     }
 
     void OnEnable()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player2");
         randomTarget = Random.Range(0, players.Length);
     }
 
@@ -78,7 +80,7 @@ public class OfflineZombieFSM : MonoBehaviour
             if (timeToAttack >= delayedDamage)
             {
                 Debug.Log("Attacking");
-                offlinePly.Damage();
+                offlinePly.DamageP2();
                 timeToAttack = 0;
             }
         }

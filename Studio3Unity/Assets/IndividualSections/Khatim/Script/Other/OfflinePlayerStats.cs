@@ -5,9 +5,12 @@ using UnityEngine;
 public class OfflinePlayerStats : MonoBehaviour
 {
     #region Public Variables
-    public GameObject[] healthsprites;
-    public GameObject player;
-    public int health = 6;
+    public GameObject[] healthSpritesP1;
+    public GameObject[] healthSpritesP2;
+    public GameObject playerOne;
+    public GameObject playerTwo;
+    public int healthP1 = 6;
+    public int healthP2 = 6;
     #endregion
 
     #region Private Variables
@@ -16,34 +19,57 @@ public class OfflinePlayerStats : MonoBehaviour
     #region Callbacks
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        playerOne = GameObject.FindGameObjectWithTag("Player1");
+        playerTwo = GameObject.FindGameObjectWithTag("Player2");
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Damage();
+            DamageP1();
         }
 
-        if (health <= 0)
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            player.SetActive(false);
+            DamageP2();
+        }
+
+        /*if (healthP1 <= 0)
+        {
+            playerOne.SetActive(false);
+        }*/
+
+        if (healthP2 <= 0)
+        {
+            playerTwo.SetActive(false);
         }
     }
     #endregion
 
     #region Functions
-    public void Damage()
+    public void DamageP1()
     {
-        health--;
-        healthsprites[health].SetActive(false);
+        healthP1--;
+        healthSpritesP1[healthP1].SetActive(false);
     }
 
-    public void Heal()
+    public void DamageP2()
     {
-        healthsprites[health].SetActive(true);
-        health++;
+        healthP2--;
+        healthSpritesP2[healthP2].SetActive(false);
+    }
+
+    public void HealP1()
+    {
+        healthSpritesP1[healthP1].SetActive(true);
+        healthP1++;
+    }
+
+    public void HealP2()
+    {
+        healthSpritesP2[healthP2].SetActive(true);
+        healthP2++;
     }
     #endregion
 }
