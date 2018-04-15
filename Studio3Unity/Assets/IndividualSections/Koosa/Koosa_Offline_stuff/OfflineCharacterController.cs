@@ -70,7 +70,6 @@ public class OfflineCharacterController : MonoBehaviour {
         {
 			playerAnim.SetBool("isWalk",true);
             transform.rotation = Turn();
-            Debug.Log("i am ");
             playerAnim.SetInteger("anim",0);
         }
         else playerAnim.SetBool("isWalk",false);
@@ -158,6 +157,9 @@ public class OfflineCharacterController : MonoBehaviour {
         jumpVector.x=0;
         jumpVector.z=0;
         playerBody.AddForce(jumpVector,ForceMode.Impulse);
+        playerBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+
+
     }
     
     private void DropMyTile()
