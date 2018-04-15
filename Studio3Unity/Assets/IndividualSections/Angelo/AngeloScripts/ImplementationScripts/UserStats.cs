@@ -10,6 +10,8 @@ public class UserStats : MonoBehaviour
     public string myUsername;
     public int myRounds;
     public int myExp;
+
+    public int spawnType;
     #endregion
 
     #region Private variables

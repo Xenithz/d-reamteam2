@@ -72,7 +72,7 @@ public class Zombie_Pool : Photon.MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.P))
         {
-            Spawn(1,1,1);
+            Spawn(0,1,1);
         }
 
         //Spawn zombies for Pool
