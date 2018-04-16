@@ -56,6 +56,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 
     void Update()
     {
+        Debug.Log(player.GetComponent<PhotonView>().viewID);
         timer-=Time.deltaTime;
         
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
@@ -128,9 +129,21 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
                 if(PhotonNetwork.connected)
                 {
                     //GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
-                        player.GetComponent<PlayerStats>().CallDmg();
-                        myCondition = 1;
-                        canAttack = false;
+                    // player.GetComponent<PlayerStats>().CallDmg();
+                    // myCondition = 1;
+                    // canAttack = false;
+
+                    if(PhotonNetwork.isMasterClient)
+                    {
+                        if(player == GameManagerBase.instance.myLocalPlayer)
+                        {
+                            GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
+                        }
+                        else if(player != GameManagerBase.instance.myLocalPlayer)
+                        {
+                            player.GetComponent<PlayerStats>().CallDmg();
+                        }
+                    }
                 }
                 // if(!PhotonNetwork.connected)
                 //offlinePlayerStats.Damage();
