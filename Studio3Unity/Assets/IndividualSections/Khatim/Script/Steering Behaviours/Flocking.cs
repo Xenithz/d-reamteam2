@@ -5,10 +5,11 @@ using UnityEngine;
 public class Flocking : MonoBehaviour
 {
     #region Public Variables
-    public int neighbourCount = 0;
+    //public int neighbourCount = 0;
     public int maxSpeed;
     public int maxForce;
-    public Transform target;
+    public Transform flockingTarget;
+    public GameObject[] noOfBoids;
     #endregion
 
     #region Private Variables
@@ -18,43 +19,59 @@ public class Flocking : MonoBehaviour
     private Vector3 totalMoveAwayDesiredVel;
     private Vector3 totalCohesionDesiredVel;
     private Vector3 cohesionDesiredVel;
+    private Vector3 seperationSteeringClamp;
     #endregion
 
     #region Callbacks
     void Start()
     {
+        rg = GetComponent<Rigidbody>();
+        boids = new List<Rigidbody>();
 
+        noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
+
+        for (int i = 0; i < noOfBoids.Length; i++)
+        {
+            Rigidbody rgBoid = noOfBoids[i].GetComponent<Rigidbody>();
+            boids.Add(rgBoid);
+        }
     }
 
     void Update()
     {
-
+        CompiledAgents();
     }
     #endregion
 
     #region Function
-    /*Vector3 CompiledAgents()
+    void CompiledAgents()
     {
         //This is where all the force gets applied.
+        Vector3 seek = Seek(flockingTarget);
         Vector3 seperate = Seperation();
         Vector3 align = Alignment();
-        Vector3 cohesion = Cohesion();
-    }*/
+        //Vector3 cohesion = Cohesion();
 
-    Vector3 Seek()
+        rg.AddForce(seek);
+        rg.AddForce(seperate);
+        rg.AddForce(align);
+        /*Vector3 target = flockingTarget.position;
+        target.y = transform.position.y;
+        transform.LookAt(target + rg.velocity);*/
+
+    }
+
+    Vector3 Seek(Transform target)
     {
-        float distance = Vector3.Distance(target.position, transform.position);
-
-        Vector3 desiredSeekVel = (target.transform.position - transform.position).normalized * maxSpeed;
+        Vector3 desiredSeekVel = (target.position - transform.position).normalized * maxSpeed;
         Vector3 seekSteering = desiredSeekVel - rg.velocity;
         Vector3 seekSteeringClamped = Vector3.ClampMagnitude(seekSteering, maxForce);
         return seekSteeringClamped;
-        //transform.LookAt(transform.position + rg.velocity);
     }
 
     /*Vector3 Cohesion()
     {
-        float distanceFromNeighbour = 50;
+        float distanceFromNeighbour = 6;
         totalCohesionDesiredVel = Vector3.zero;
         int count = 0;
 
@@ -72,20 +89,21 @@ public class Flocking : MonoBehaviour
         if (count > 0)
         {
             Vector3 avgCohesionVel = cohesionDesiredVel / boids.Count;
+            return Seek(avgCohesionVel);
             //return Seek(avgCohesionVel);
             //return to Seek function with the avgCohesionVel;
         }
         else
         {
-            //return V3.zero.
+            return Vector3.zero;
         }
 
     }*/
 
-    /*Vector3 Seperation()
+    Vector3 Seperation()
     {
+        float desiredSeperation = 2;
         totalMoveAwayDesiredVel = Vector3.zero;
-        float desiredSeperation = 20;
         int count = 0;
 
         foreach (var other in boids)
@@ -95,24 +113,27 @@ public class Flocking : MonoBehaviour
             if (distanceBetweenBoids > 0 && distanceBetweenBoids < desiredSeperation)
             {
                 moveAwayDesiredVel = (transform.position - other.transform.position).normalized;
-                totalMoveAwayDesiredVel += moveAwayDesiredVel;
+                Vector3 divVel = moveAwayDesiredVel / distanceBetweenBoids;
+                totalMoveAwayDesiredVel += divVel;
                 count++;
             }
         }
 
         if (count > 0)
         {
-            Vector3 avgAwayVel = totalMoveAwayDesiredVel / boids.Count;
-            //Set Magnitude.
+            Vector3 divVel = (totalMoveAwayDesiredVel / count).normalized * maxSpeed;
+            Vector3 seperationSteering = divVel - rg.velocity;
+            seperationSteeringClamp = Vector3.ClampMagnitude(seperationSteering, maxForce);
             //Subtract the setMag with velocity.
             //Clamp it.
-            //Apply the Force.
+            //return.
         }
-    }*/
+        return seperationSteeringClamp;
+    }
 
-    /*Vector3 Alignment()
+    Vector3 Alignment()
     {
-        float neighbourDistance = 50;
+        float neighbourDistance = 6;
         Vector3 totalVector = new Vector3(0, 0, 0);
         int count = 0;
 
@@ -128,7 +149,10 @@ public class Flocking : MonoBehaviour
 
         if (count > 0)
         {
-            Vector3 avgVel = (totalVector / boids.Count).normalized;
+            Vector3 avgVel = (totalVector / boids.Count).normalized * maxSpeed;
+            Vector3 steerAlign = avgVel - rg.velocity;
+            Vector3 steerAlignClamped = Vector3.ClampMagnitude(steerAlign, maxForce);
+            return steerAlignClamped;
             //Set Magnitude.
             //Subtract the setMag with velocity.
             //Clamp it.
@@ -137,8 +161,8 @@ public class Flocking : MonoBehaviour
         else
         {
             //return V3.zero.
-            transform.position = Vector3.zero;
+            return Vector3.zero;
         }
-    }*/
+    }
     #endregion
 }
