@@ -13,7 +13,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     public GameObject player;
     public OfflinePlayerStats offlinePlayerStats;
     public float timer;
-    public float damageDelay = 2;
+    public float damageDelay = 4;
     public PlayerStats playerStats;
 
     public float attackTimer;
@@ -32,7 +32,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     {
         rg = GetComponent<Rigidbody>();
         canAttack = true;
-        damageDelay = 2;
+        damageDelay = 4;
         attackTimer = 0;
     }
 
@@ -56,6 +56,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 
     void Update()
     {
+        Debug.Log(player.GetComponent<PhotonView>().viewID);
         timer-=Time.deltaTime;
         
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
@@ -128,9 +129,23 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
                 if(PhotonNetwork.connected)
                 {
                     //GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
-                        player.GetComponent<PlayerStats>().CallDmg();
-                        myCondition = 1;
-                        canAttack = false;
+                    // player.GetComponent<PlayerStats>().CallDmg();
+                    // myCondition = 1;
+                    // canAttack = false;
+
+                    if(PhotonNetwork.isMasterClient)
+                    {
+                        if(player == GameManagerBase.instance.myLocalPlayer)
+                        {
+                            GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
+                            canAttack = false;
+                        }
+                        else if(player != GameManagerBase.instance.myLocalPlayer)
+                        {
+                            player.GetComponent<PlayerStats>().CallDmg();
+                            canAttack = false;
+                        }
+                    }
                 }
                 // if(!PhotonNetwork.connected)
                 //offlinePlayerStats.Damage();

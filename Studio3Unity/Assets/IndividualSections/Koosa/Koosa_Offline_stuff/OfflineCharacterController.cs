@@ -133,7 +133,7 @@ public class OfflineCharacterController : MonoBehaviour {
     private Vector3 JumpInput()
     {
         Vector3 jumpInput;
-        float jump=Input.GetAxis("Jump");
+        float jump=Input.GetAxis("Joystick Jump");
         jumpInput= new Vector3(0,jump,0).normalized;
          return jumpInput;
 /* 
