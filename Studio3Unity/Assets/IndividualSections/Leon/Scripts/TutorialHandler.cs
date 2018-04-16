@@ -44,7 +44,7 @@ public class TutorialHandler : MonoBehaviour {
 
     void Update () {
 
-     foreach (var zombie in GameObject.FindGameObjectsWithTag("Zombie"))
+     foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("Zombie"))
      {
          if(!zombiesInLevel.Contains(zombie))
              zombiesInLevel.Add(zombie);
@@ -53,7 +53,7 @@ public class TutorialHandler : MonoBehaviour {
 
 
 
-        if(!zombiesInLevel.Contains(gameObject))
+        if(zombiesInLevel.Count==0)
         {
             SceneManager.LoadScene("Main_Menu");
         }
