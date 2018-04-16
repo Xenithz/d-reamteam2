@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : Photon.MonoBehaviour
 {
     #region Public Variables
     public GameObject[] healthSprite;
@@ -42,6 +42,19 @@ public class PlayerStats : MonoBehaviour
         gameObject.GetComponent<Character_Controller>().hp--;
         healthSprite[gameObject.GetComponent<Character_Controller>().hp].SetActive(false);        
         Debug.Log("Damage");
+    }
+
+    [PunRPC]
+    public void Damage2()
+    {
+        gameObject.GetComponent<Character_Controller>().hp--;
+        healthSprite[gameObject.GetComponent<Character_Controller>().hp].SetActive(false);        
+        Debug.Log("Damage");
+    }
+
+    public void CallDmg()
+    {
+        photonView.RPC("Damage2", PhotonTargets.All);
     }
     #endregion
 }
