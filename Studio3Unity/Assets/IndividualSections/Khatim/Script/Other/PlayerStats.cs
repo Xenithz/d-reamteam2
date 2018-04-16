@@ -7,16 +7,15 @@ public class PlayerStats : MonoBehaviour
     #region Public Variables
     public GameObject[] healthSprite;
 
-    public static PlayerStats instance;
     #endregion
 
     #region Private Variables
     #endregion
 
     #region Callbacks
-    void Start()
+    void Awake()
     {
-        instance = this;
+        healthSprite = GameManagerBase.instance.playerHp;
     }
 
     void Update()
@@ -40,8 +39,8 @@ public class PlayerStats : MonoBehaviour
     #region Functions
     public void Damage()
     {
-        GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp--;
-        healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(false);        
+        gameObject.GetComponent<Character_Controller>().hp--;
+        healthSprite[gameObject.GetComponent<Character_Controller>().hp].SetActive(false);        
         Debug.Log("Damage");
     }
     #endregion
