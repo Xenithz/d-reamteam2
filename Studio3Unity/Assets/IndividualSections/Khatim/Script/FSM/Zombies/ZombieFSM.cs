@@ -11,14 +11,15 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     [HideInInspector] public Rigidbody rg;
     public GameObject[] players;
     public GameObject player;
+    public OfflinePlayerStats offlinePlayerStats;
     public float timer;
     public float damageDelay = 2;
+    public PlayerStats playerStats;
 
     public float attackTimer;
 
     public bool canAttack;
     #endregion
-    public PlayerStats myPlayer;
     #region Private Variables
     public int myCondition;
     private int chaseCondition = 1;
@@ -30,7 +31,6 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     void Awake()
     {
         rg = GetComponent<Rigidbody>();
-      //  myCondition = chaseCondition;
         canAttack = true;
         damageDelay = 2;
         attackTimer = 0;
@@ -67,6 +67,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
                 if (myCondition != attackCondition && canAttack == true)
                 {
                     photonView.RPC("ChangeCondition", PhotonTargets.All, "2");
+                    canAttack = false;
                 }
             }
             else if (distanceToPlayer > attackDistance)
@@ -91,7 +92,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
         {
             if (distanceToPlayer < attackDistance)
             {
-                if (myCondition != attackCondition)
+                if (myCondition != attackCondition && canAttack)
                 {
                     myCondition = 2;
                     zombieAnime.SetBool("isAttacking", true);
@@ -116,17 +117,18 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
         switch (myCondition)
         {
             case 1:
-                Vector3 heading = (player.transform.position - this.gameObject.transform.position).normalized;
-                Vector3 heading1 = (new Vector3(player.transform.position.x, 0, player.transform.position.z) - new Vector3(this.gameObject.transform.position.x, 0, this.gameObject.transform.position.z)).normalized;
+                Vector3 heading = (new Vector3(player.transform.position.x, 0, player.transform.position.z) - new Vector3(this.gameObject.transform.position.x, 0, this.gameObject.transform.position.z)).normalized;
                 speed = Mathf.Clamp(speed, 0, maxSpeed);
                 rg.AddForce(heading * speed, ForceMode.Impulse);
                 transform.LookAt(heading + this.transform.position);
-
                 break;
 
             case 2:
                 Debug.Log("attacking");
+                if(PhotonNetwork.connected)
                 GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
+                if(!PhotonNetwork.connected)
+                offlinePlayerStats.Damage();
                 canAttack = false;
                 break;
 

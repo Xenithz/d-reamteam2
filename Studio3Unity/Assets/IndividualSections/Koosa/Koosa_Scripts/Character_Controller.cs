@@ -149,7 +149,7 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
             Debug.Log("jump");
             playerBody.AddForce(new Vector3(0f, jumpPower, 0f),ForceMode.Impulse);
             playerAnim.SetBool("ground",true);
-            //playerBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+            playerBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         }        
         else playerAnim.SetBool("ground",false);
     }
