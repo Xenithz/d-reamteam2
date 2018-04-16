@@ -13,7 +13,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     public GameObject player;
     public OfflinePlayerStats offlinePlayerStats;
     public float timer;
-    public float damageDelay = 2;
+    public float damageDelay = 4;
     public PlayerStats playerStats;
 
     public float attackTimer;
@@ -32,7 +32,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     {
         rg = GetComponent<Rigidbody>();
         canAttack = true;
-        damageDelay = 2;
+        damageDelay = 4;
         attackTimer = 0;
     }
 
