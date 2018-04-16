@@ -58,7 +58,7 @@ public class PlayerFSM : MonoBehaviour
     {
         if (other.gameObject.tag == "HealthPickup")
         {
-            offlinePly.Heal();
+            offlinePly.HealP2();
             other.gameObject.SetActive(false);
         }
     }
@@ -86,7 +86,7 @@ public class PlayerFSM : MonoBehaviour
         totalDesiredSeekVel = Vector3.zero;
         for (int i = 0; i < healthTargets.Length; i++)
         {
-            if (healthTargets[i].activeInHierarchy && offlinePly.health <= 5)
+            if (healthTargets[i].activeInHierarchy && offlinePly.healthP2 <= 5)
             {
                 Debug.Log("Seeking Health");
                 Vector3 desiredSeekVel = (healthTargets[i].transform.position - transform.position).normalized * maxSpeed;
@@ -120,7 +120,7 @@ public class PlayerFSM : MonoBehaviour
         {
             //This is setting a new velocity everytime.
             //Need to add all of the forces together;
-            if (distanceToZombies <= 30)
+            if (distanceToZombies <= 20)
             {
                 Debug.Log("Avoiding Zombies");
                 desriedFleeVel = (transform.position - zombieTargets[j].transform.position).normalized * maxSpeed;
