@@ -11,6 +11,7 @@ public class WaypointsZombies : MonoBehaviour
 
 #region Private Variables
 	private int target;
+	private bool isReverse;
 	#endregion
 
 #region Unity Functions
@@ -24,10 +25,22 @@ public class WaypointsZombies : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Vector3.Distance(transform.position, waypoints[target].transform.position) < 1 && target < waypoints.Length - 1)
+		transform.position = Vector3.MoveTowards(transform.position, waypoints[target].transform.position, speed);
+        if (Vector3.Distance(transform.position, waypoints[target].transform.position) < 1  && !isReverse)
         target++;
-        else
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[target].transform.position, speed);
+        if(target == waypoints.Length && !isReverse)
+		{
+			isReverse=true;
+			target-=1;
+		}
+		if (Vector3.Distance(transform.position, waypoints[target].transform.position) < 1  && isReverse)
+		target--;
+		if (Vector3.Distance(transform.position, waypoints[0].transform.position) < 1  && isReverse)
+		{
+			target=0;
+			isReverse=false;
+		}
+
 	}
 }
 #endregion

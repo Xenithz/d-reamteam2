@@ -147,8 +147,9 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
         if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
         {
             Debug.Log("jump");
-            playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
+            playerBody.AddForce(new Vector3(0f, jumpPower, 0f),ForceMode.Impulse);
             playerAnim.SetBool("ground",true);
+            playerBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         }        
         else playerAnim.SetBool("ground",false);
     }

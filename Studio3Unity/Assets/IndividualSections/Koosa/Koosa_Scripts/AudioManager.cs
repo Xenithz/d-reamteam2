@@ -31,8 +31,8 @@ public void PlaySingleMusicClip()
 }
 void Update()
 {
-	if(!backGroundMusicSource.isPlaying)
-		MusicShuffle();
+	if(!backGroundMusicSource.isPlaying){}
+		//MusicShuffle();
 }
 
 public void StopSingleMusicClip()
@@ -76,6 +76,11 @@ public void MusicShuffle()
  public void PlaySFX(AudioSource sourcePlay, int index, List<AudioClip> audioClips)
     {
         sourcePlay.PlayOneShot(audioClips[index]);
+    }
+    public void Playeffect(int index)
+    {
+         effectSource.PlayOneShot(effectClips[index]);
+
     }
 
     public void PlaySFX(AudioSource sourcePlay, int index, float startTime, float endTime, List<AudioClip> audioClips)

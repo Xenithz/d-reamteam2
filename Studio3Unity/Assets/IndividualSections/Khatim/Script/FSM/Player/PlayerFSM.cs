@@ -11,50 +11,60 @@ public class PlayerFSM : MonoBehaviour
     public float maxForce;
     public float distanceToZombies;
     public float distanceToHealth;
+    public OfflinePlayerStats offlinePly;
     #endregion
 
     #region Private Variables
     private Rigidbody rg;
-    private int myCondition;
-    private int fleeCondition = 1;
-    private int seekCondition = 2;
+    private int currCondition;
     private Vector3 desriedFleeVel;
     private Vector3 totalDesiredFleeVel;
-    private Vector3 desiredSeekVel;
+    //private Vector3 desiredSeekVel;
     private Vector3 totalDesiredSeekVel;
     #endregion
 
     #region Callbacks
     void Start()
     {
+        offlinePly.GetComponent<OfflinePlayerStats>();
+        rg = GetComponent<Rigidbody>();
+
         totalDesiredFleeVel = Vector3.zero;
         totalDesiredSeekVel = Vector3.zero;
 
-        rg = GetComponent<Rigidbody>();
+        currCondition = 1;
     }
     void Update()
     {
-        healthTargets = GameObject.FindGameObjectsWithTag("Health");
+        healthTargets = GameObject.FindGameObjectsWithTag("HealthPickup");
         zombieTargets = GameObject.FindGameObjectsWithTag("Zombie");
 
         for (int i = 0; i < healthTargets.Length; i++)
         {
             distanceToHealth = Vector3.Distance(transform.position, healthTargets[i].transform.position);
             if (healthTargets[i] != null)
-                myCondition = 2;
+                currCondition = 2;
         }
-
 
         for (int j = 0; j < zombieTargets.Length; j++)
         {
             distanceToZombies = Vector3.Distance(transform.position, zombieTargets[j].transform.position);
-            if (zombieTargets[j] != null && distanceToZombies < 30)
-                myCondition = 1;
+            if (zombieTargets[j] != null)
+                currCondition = 1;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "HealthPickup")
+        {
+            offlinePly.HealP2();
+            other.gameObject.SetActive(false);
         }
     }
     void FixedUpdate()
     {
-        switch (myCondition)
+        switch (currCondition)
         {
             case 1:
                 AvoidZombies();
@@ -76,7 +86,7 @@ public class PlayerFSM : MonoBehaviour
         totalDesiredSeekVel = Vector3.zero;
         for (int i = 0; i < healthTargets.Length; i++)
         {
-            if (healthTargets[i].activeInHierarchy)
+            if (healthTargets[i].activeInHierarchy && offlinePly.healthP2 <= 5)
             {
                 Debug.Log("Seeking Health");
                 Vector3 desiredSeekVel = (healthTargets[i].transform.position - transform.position).normalized * maxSpeed;
@@ -88,6 +98,19 @@ public class PlayerFSM : MonoBehaviour
 
         rg.AddForce(steeringClamped);
         transform.LookAt(transform.position + rg.velocity);
+
+        /*for (int i = 0; i < healthTargets.Length; i++)
+        {
+            if (healthTargets[i].activeInHierarchy && offlinePly.health <= 5)
+            {
+                desiredSeekVel = (healthTargets[i].transform.position - transform.position).normalized * maxSpeed;
+            }
+        }
+
+        Vector3 steering = desiredSeekVel - rg.velocity;
+        Vector3 steeringClamped = Vector3.ClampMagnitude(steering, maxForce);
+        rg.AddForce(steeringClamped);
+        transform.LookAt(transform.position + rg.velocity);*/
     }
 
     void AvoidZombies()
@@ -97,7 +120,7 @@ public class PlayerFSM : MonoBehaviour
         {
             //This is setting a new velocity everytime.
             //Need to add all of the forces together;
-            if (distanceToZombies <= 30)
+            if (distanceToZombies <= 20)
             {
                 Debug.Log("Avoiding Zombies");
                 desriedFleeVel = (transform.position - zombieTargets[j].transform.position).normalized * maxSpeed;
