@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour
     {
         if(PhotonNetwork.connected)
         {
-        if (GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp <= 0)
+        if (GetComponent<Character_Controller>().hp <= 0)
         {
             Debug.Log("Dead");
         }
