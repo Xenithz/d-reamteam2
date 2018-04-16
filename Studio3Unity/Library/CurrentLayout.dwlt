@@ -108,7 +108,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 1
-  controlID: 11
+  controlID: 44
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 12
+  controlID: 45
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 13
+  controlID: 46
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 14
+  controlID: 47
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -199,8 +199,8 @@ MonoBehaviour:
     y: 0
     width: 252
     height: 602
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -224,8 +224,8 @@ MonoBehaviour:
     y: 0
     width: 1094
     height: 602
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -278,8 +278,8 @@ MonoBehaviour:
     y: 0
     width: 574
     height: 957
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -390,9 +390,9 @@ MonoBehaviour:
     height: 581
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 98a00100
-    m_LastClickedID: 106648
-    m_ExpandedIDs: 36adffff64b8ffffdefbffff00000000
+    m_SelectedIDs: 04de0200
+    m_LastClickedID: 187908
+    m_ExpandedIDs: 4cadffff3ab8ffffacceffffe2d9ffff18e5ffffdefbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -442,14 +442,14 @@ MonoBehaviour:
     width: 1090
     height: 581
   m_SceneLighting: 1
-  lastFramingTime: 1128.3736297772364
-  m_2DMode: 1
+  lastFramingTime: 166.40264430721749
+  m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.23872596, y: 1.7506888, z: 0}
+    m_Target: {x: 986.7499, y: -457.0676, z: 1389.0079}
     speed: 2
-    m_Value: {x: 0.23872596, y: 1.7506888, z: 0}
+    m_Value: {x: 986.7499, y: -457.0676, z: 1389.0079}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -464,25 +464,25 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     yGrid:
-      m_Target: 0
-      speed: 2
-      m_Value: 0
-    zGrid:
       m_Target: 1
       speed: 2
       m_Value: 1
+    zGrid:
+      m_Target: 0
+      speed: 2
+      m_Value: 0
   m_Rotation:
-    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    m_Target: {x: 0.21484645, y: 0.10466381, z: -0.02316433, w: 0.97074705}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: 0.21484646, y: 0.10466382, z: -0.023164332, w: 0.9707471}
   m_Size:
-    m_Target: 22
+    m_Target: 2267.7751
     speed: 2
-    m_Value: 22
+    m_Value: 2267.7751
   m_Ortho:
-    m_Target: 1
+    m_Target: 0
     speed: 2
-    m_Value: 1
+    m_Value: 0
   m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
@@ -605,19 +605,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/IndividualSections
+    - Assets/IndividualSections/Angelo/AngeloScripts/ImplementationScripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/IndividualSections
+  - Assets/IndividualSections/Angelo/AngeloScripts/ImplementationScripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\UNITY\Studio-3-stuff\Project\d-reamteam2\Studio3Unity
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ec2a0000
-    m_LastClickedID: 10988
-    m_ExpandedIDs: 0000000062270000d4270000b8280000d628000008290000a42a0000fe2a0000022b00003e2b00004a2b00004a2d0000502d0000bc300000603100007e3100008a31000026320000b83200001c3300008c340000043800002e380000383800003c38000044380000c43800007e390000963900009a390000143e00002a3e0000c23e0000f63e00000e3f0000963f000024400000ae400000d240000032fe000034fe000036fe000038fe000000ca9a3bffffff7f
+    m_SelectedIDs: 982e0000
+    m_LastClickedID: 11928
+    m_ExpandedIDs: 0000000064270000d6270000ba280000d82800000a290000a62a0000ee2a0000002b0000042b0000402b00004c2b0000602b00004c2d0000522d0000f62e0000be30000062310000803100008c31000028320000ba3200001e3300008e34000006380000303800003a3800003e38000046380000c638000080390000983900009c390000b2390000163e00002c3e0000c43e0000f83e0000103f0000983f000026400000b0400000d44000004e00010050000100520001005400010000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -645,7 +645,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000062270000d4270000b8280000d628000008290000a42a0000ec2a0000fe2a0000022b00003e2b00004a2b00005e2b00004a2d0000502d0000bc300000603100007e3100008a31000026320000b83200001c3300008c340000043800002e380000383800003c38000044380000c43800007e390000963900009a390000143e00002a3e0000c23e0000f63e00000e3f0000963f000024400000ae400000d240000032fe000034fe000036fe000038fe0000
+    m_ExpandedIDs: 0000000064270000d6270000ba280000d82800000a290000a62a0000002b0000042b0000402b00004c2b00004c2d0000522d0000be30000062310000803100008c31000028320000ba3200001e3300008e34000006380000303800003a3800003e38000046380000c638000080390000983900009c390000163e00002c3e0000c43e0000f83e0000103f0000983f000026400000b0400000d44000004e000100500001005200010054000100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -672,7 +672,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300000000000018690000883b0000282d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -752,7 +752,7 @@ MonoBehaviour:
     y: 92
     width: 572
     height: 936
-  m_ScrollPosition: {x: 0, y: 0}
+  m_ScrollPosition: {x: 0, y: 493.95508}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 292

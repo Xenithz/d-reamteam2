@@ -8,6 +8,8 @@ public class UserStats : MonoBehaviour
     public static UserStats instance = new UserStats();
 
     public string myUsername;
+
+    public string myPassword;
     public int myRounds;
     public int myExp;
 
@@ -32,10 +34,11 @@ public class UserStats : MonoBehaviour
     #endregion
 
     #region My functions
-    public void SetUserStats(string usernameToSet, int roundsToSet, int expToSet)
+    public void SetUserStats(string usernameToSet, string passwordToSet, int roundsToSet, int expToSet)
     {
         PhotonNetwork.playerName = usernameToSet;
         PhotonNetwork.player.NickName = usernameToSet;
+        myPassword = passwordToSet;
         myUsername = usernameToSet;
         myRounds = roundsToSet;
         myExp = expToSet;

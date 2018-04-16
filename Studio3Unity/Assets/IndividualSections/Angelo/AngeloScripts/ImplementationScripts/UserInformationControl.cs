@@ -106,7 +106,7 @@ public class UserInformationControl : MonoBehaviour
             Debug.Log("Login success");
             gameObject.GetComponent<MyNetworkManager>().isLoggedIn = true;
             gameObject.GetComponent<MyNetworkManager>().shouldConnect = true;
-            StartCoroutine(GrabData(username, true));
+            StartCoroutine(GrabData(username, password, true));
             StartCoroutine(GrabLeaderboard());
         }
         else if(myWWW.text == "Password incorrect")
@@ -206,7 +206,7 @@ public class UserInformationControl : MonoBehaviour
         StartCoroutine(GrabData(username, false));
     }
 
-    IEnumerator GrabData(string username, bool usedForLogin)
+    IEnumerator GrabData(string username, string password, bool usedForLogin)
     {
         WWWForm myForm = new WWWForm();
         myForm.AddField("playerusernamepost", username);
@@ -221,7 +221,7 @@ public class UserInformationControl : MonoBehaviour
         localRounds = int.Parse(userStatsArray[0]);
         localExp = int.Parse(userStatsArray[1]);
     
-        UserStats.instance.SetUserStats(username, localRounds, localExp);
+        UserStats.instance.SetUserStats(username, password, localRounds, localExp);
         
         if(usedForLogin == true)
         {

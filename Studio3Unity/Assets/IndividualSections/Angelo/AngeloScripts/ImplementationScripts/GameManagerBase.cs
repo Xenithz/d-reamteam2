@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon;
+using UnityEngine.SceneManagement;
 public enum GameStates
 {
         Starting,
@@ -28,6 +29,8 @@ public class GameManagerBase : Photon.PunBehaviour
     public GameObject myLocalPlayer;
 
     public GameObject endingPanel;
+
+    public Text myText;
 
     public int roundNumber;
 
@@ -130,6 +133,17 @@ public class GameManagerBase : Photon.PunBehaviour
             Debug.Log("Stopping updates");
         }
     }
+
+    public void BackToOnline()
+    {
+        SceneManager.LoadScene("Main_Menu");
+        UserInformationControl.instance.CallLogin(UserStats.instance.myUsername,)
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Main_Menu");
+    }
         
     #endregion
 
@@ -138,8 +152,7 @@ public class GameManagerBase : Photon.PunBehaviour
     public void DisplayEndPanel(string intToPass)
     {
         endingPanel.SetActive(true);
-        Text textHolder = endingPanel.GetComponentInChildren<Text>();
-        textHolder.text = "You survived " + intToPass + " rounds!";
+        myText.text = "You survived " + intToPass + " rounds!";
         UpdateRoundsSurvived();
     }
         
