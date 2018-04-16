@@ -20,6 +20,8 @@ public class GameManagerBase : Photon.PunBehaviour
 
     public static GameManagerBase instance;
 
+    public GameObject[] playerHp;
+    
     public GameObject[] spawnPoints;
 
     public GameObject playerPrefab;

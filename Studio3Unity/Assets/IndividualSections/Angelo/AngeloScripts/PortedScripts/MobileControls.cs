@@ -98,7 +98,7 @@ public class MobileControls : Photon.MonoBehaviour, IPunObservable
     {
         if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp < 6)
         {
-            PlayerStats.instance.healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(true);
+            GetComponent<PlayerStats>().healthSprite[gameObject.GetComponent<Character_Controller>().hp].SetActive(true);
             GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp++;
             Destroy(other.gameObject);
         }

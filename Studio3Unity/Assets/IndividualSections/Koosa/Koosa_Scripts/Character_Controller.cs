@@ -102,7 +102,7 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
     {
         if (other.gameObject.tag == "Health" && Input.GetKey(KeyCode.E) && GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp < 6)
         {
-            PlayerStats.instance.healthSprite[GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp].SetActive(true);
+            GetComponent<PlayerStats>().healthSprite[gameObject.GetComponent<Character_Controller>().hp].SetActive(true);
             GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp++;
             other.gameObject.SetActive(false);
         }
@@ -193,10 +193,10 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
         }
         else
         {
-            playerAnim.SetBool("isWalk", (bool)stream.ReceiveNext());
-            playerAnim.SetBool("ground", (bool)stream.ReceiveNext());
-            playerAnim.SetBool("death", (bool)stream.ReceiveNext());
-            hp = (int)stream.ReceiveNext();
+            this.playerAnim.SetBool("isWalk", (bool)stream.ReceiveNext());
+            this.playerAnim.SetBool("ground", (bool)stream.ReceiveNext());
+            this.playerAnim.SetBool("death", (bool)stream.ReceiveNext());
+            this.hp = (int)stream.ReceiveNext();
         }
     }
 
