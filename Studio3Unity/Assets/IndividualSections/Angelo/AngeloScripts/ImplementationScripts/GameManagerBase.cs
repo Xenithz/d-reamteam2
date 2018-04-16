@@ -61,25 +61,25 @@ public class GameManagerBase : Photon.PunBehaviour
 
     private void Update()
     {
-        if(GameManagerBase.instance.myGameState == GameStates.Playing && Zombie_Pool.zombiePoolInstance.activeZombies.Count == 0 && Zombie_Pool.zombiePoolInstance.zombiesHaveSpawned == true)
-        {
-            roundNumber++;
-            Debug.Log("Current round number: " + roundNumber);
-            UpdateSpawnValues();
-            Debug.Log("Updating spawn values");
-            myGameState = GameStates.Spawning;
-            Debug.Log("Transitioning to spawning state");
-        }
+        // if(GameManagerBase.instance.myGameState == GameStates.Playing && Zombie_Pool.zombiePoolInstance.activeZombies.Count == 0 && Zombie_Pool.zombiePoolInstance.zombiesHaveSpawned == true)
+        // {
+        //     roundNumber++;
+        //     Debug.Log("Current round number: " + roundNumber);
+        //     UpdateSpawnValues();
+        //     Debug.Log("Updating spawn values");
+        //     myGameState = GameStates.Spawning;
+        //     Debug.Log("Transitioning to spawning state");
+        // }
 
 
-        if(GameManagerBase.instance.myGameState == GameStates.Spawning)
-        {
-            if(Zombie_Pool.zombiePoolInstance.stopSpawning == false)
-            {
-                SetUpNewRound(amountOfEasyToSpawn, amountOfMediumToSpawn, amountOfHardToSpawn);
-            }
-            Debug.Log("This is the count of active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
-        }
+        // if(GameManagerBase.instance.myGameState == GameStates.Spawning)
+        // {
+        //     if(Zombie_Pool.zombiePoolInstance.stopSpawning == false)
+        //     {
+        //         SetUpNewRound(amountOfEasyToSpawn, amountOfMediumToSpawn, amountOfHardToSpawn);
+        //     }
+        //     Debug.Log("This is the count of active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
+        // }
     }
     #endregion
 
@@ -137,7 +137,7 @@ public class GameManagerBase : Photon.PunBehaviour
     public void BackToOnline()
     {
         SceneManager.LoadScene("Main_Menu");
-        UserInformationControl.instance.CallLogin(UserStats.instance.myUsername,)
+        UserInformationControl.instance.CallLogin(UserStats.instance.myUsername, UserStats.instance.myPassword);
     }
 
     public void BackToMenu()

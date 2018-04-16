@@ -67,7 +67,7 @@ public class UserInformationControl : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            CallGrabData(UserStats.instance.myUsername, false);
+            CallGrabData(UserStats.instance.myUsername, UserStats.instance.myPassword, false);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -203,7 +203,7 @@ public class UserInformationControl : MonoBehaviour
 
         Debug.Log(myWWW.text);
 
-        StartCoroutine(GrabData(username, false));
+        StartCoroutine(GrabData(username, UserStats.instance.myPassword, false));
     }
 
     IEnumerator GrabData(string username, string password, bool usedForLogin)
@@ -274,9 +274,9 @@ public class UserInformationControl : MonoBehaviour
         StartCoroutine(EditData(inputUsername, roundsSurvived));
     }
 
-    public void CallGrabData(string inputUsername, bool inputBool)
+    public void CallGrabData(string inputUsername, string inputPassword, bool inputBool)
     {
-        StartCoroutine(GrabData(inputUsername, inputBool));
+        StartCoroutine(GrabData(inputUsername, inputPassword, inputBool));
     }
 
     public void CallGrabLeaderboard()
