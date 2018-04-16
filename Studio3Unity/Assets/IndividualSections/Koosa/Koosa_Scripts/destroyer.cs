@@ -5,7 +5,7 @@ using UnityEngine;
 public class destroyer : MonoBehaviour {
 	void OnCollisionEnter(Collision other)
 	{
-		if(other.gameObject.tag=="Zombie")
-		other.gameObject.SetActive(false);
+        if (other.gameObject.tag == "zombie1")
+            Destroy(other.gameObject);
 	}
 }
