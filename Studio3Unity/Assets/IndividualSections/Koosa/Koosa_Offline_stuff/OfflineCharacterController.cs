@@ -26,7 +26,7 @@ public class OfflineCharacterController : MonoBehaviour {
     public float jumpPower;
     public OfflineTileManager tileManager;
     public Animator playerAnim;
-    public float hp;
+    public int hp;
 	private float inputH;
 	private float inputV;
     
@@ -78,11 +78,14 @@ public class OfflineCharacterController : MonoBehaviour {
     private void Update()
     {
      float dropTile=Input.GetAxis("Joystick Tile");
-        if(coolDown<=0 ){
+        if(coolDown<=0 )
+        {
             coolDownImage.SetActive(true);
-        if (dropTile!=0){
+        if (dropTile!=0)
+        {
          DropMyTile();
         playerAnim.SetInteger("anim",2);
+        AudioManager.auidoInstance.Playeffect(10);
 		}
        // else playerAnim.SetInteger("anim",0);
         if(Input.GetKeyDown(KeyCode .J)){

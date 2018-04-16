@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OfflinePlayerStats : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class OfflinePlayerStats : MonoBehaviour
         if (health <= 0)
         {
             player.SetActive(false);
+            SceneManager.LoadScene("GameOver");
         }
     }
     #endregion
