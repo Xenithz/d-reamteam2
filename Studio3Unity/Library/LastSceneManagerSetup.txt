@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/IndividualSections/Leon/Scenes/Game_Over_Scene.unity
+- path: Assets/IndividualSections/Leon/Scenes/Main_Menu.unity
   isLoaded: 1
   isActive: 1
