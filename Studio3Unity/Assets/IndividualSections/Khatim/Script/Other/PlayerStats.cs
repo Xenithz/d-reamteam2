@@ -7,6 +7,8 @@ public class PlayerStats : Photon.MonoBehaviour
     #region Public Variables
     public GameObject[] healthSprite;
 
+    public GameObject[] players;
+
     #endregion
 
     #region Private Variables
@@ -20,6 +22,7 @@ public class PlayerStats : Photon.MonoBehaviour
 
     void Update()
     {
+        players = GameObject.FindGameObjectsWithTag("Player");
         if(PhotonNetwork.connected)
         {
         if (GetComponent<Character_Controller>().hp <= 0)
@@ -31,6 +34,11 @@ public class PlayerStats : Photon.MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             Damage();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            players[1].GetComponent<PlayerStats>().CallDmg();
         }
     }
 }
