@@ -34,6 +34,8 @@ public class GameManagerBase : Photon.PunBehaviour
 
     public Text myText;
 
+    public Text roundText;
+
     public int roundNumber;
 
     public int amountOfEasyToSpawn;
@@ -82,6 +84,8 @@ public class GameManagerBase : Photon.PunBehaviour
             }
             Debug.Log("This is the count of active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
         }
+
+        roundText.text = roundNumber.ToString();
     }
     #endregion
 

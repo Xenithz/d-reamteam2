@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : Photon.MonoBehaviour
 {
     #region Public Variables
     public GameObject[] healthSprite;
 
-    public GameObject[] players;
+    public GameObject textHolder;
 
     #endregion
 
@@ -20,11 +21,12 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         healthSprite = GameManagerBase.instance.playerHp;
         myChar = GetComponent<Character_Controller>();
+        textHolder = GameObject.FindWithTag("hpText");
     }
 
     void Update()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
+        textHolder.GetComponent<Text>().text = myChar.hp.ToString();
         if(PhotonNetwork.connected)
         {
         if (GetComponent<Character_Controller>().hp <= 0)
