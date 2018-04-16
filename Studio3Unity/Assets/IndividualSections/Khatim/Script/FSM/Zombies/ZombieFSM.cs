@@ -138,10 +138,12 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
                         if(player == GameManagerBase.instance.myLocalPlayer)
                         {
                             GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
+                            canAttack = false;
                         }
                         else if(player != GameManagerBase.instance.myLocalPlayer)
                         {
                             player.GetComponent<PlayerStats>().CallDmg();
+                            canAttack = false;
                         }
                     }
                 }
