@@ -75,6 +75,11 @@ public class Zombie_Pool : Photon.MonoBehaviour
             Spawn(0,1,1);
         }
 
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            Spawn(1,0,0);
+        }
+
         //Spawn zombies for Pool
         if(PhotonNetwork.connected && myFlag == true && PhotonNetwork.room.PlayerCount >= 1 && PhotonNetwork.isMasterClient)
         {
