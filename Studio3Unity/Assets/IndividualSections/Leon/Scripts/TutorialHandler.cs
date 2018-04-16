@@ -9,6 +9,7 @@ public class TutorialHandler : MonoBehaviour {
     public Transform dismantleTileCanvas;
     public Transform zombieExplainCanvas;
     public Transform playerExplainCanvas;
+    public Transform tileUIExplainCanvas;
     public List<GameObject> zombiesInLevel=new List<GameObject>();
 	// Use this for initialization
 	void Start () {
@@ -35,9 +36,16 @@ public class TutorialHandler : MonoBehaviour {
         zombieExplainCanvas.gameObject.SetActive(true);
     }
 
-    public void OnClickToDismantleTile()
+    public void OnClickToTileUIExplain()
     {
         zombieExplainCanvas.gameObject.SetActive(false);
+        tileUIExplainCanvas.gameObject.SetActive(true);
+    }
+
+
+    public void OnClickToDismantleTile()
+    {
+        tileUIExplainCanvas.gameObject.SetActive(false);
         dismantleTileCanvas.gameObject.SetActive(true);
         Time.timeScale = 1;
     }

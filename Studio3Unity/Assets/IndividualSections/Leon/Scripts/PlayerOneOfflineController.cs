@@ -1,12 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-//(typeof(Rigidbody))]
-public class OfflineCharacterController : MonoBehaviour {
+public class PlayerOneOfflineController : MonoBehaviour {
 
-#region Private Variables 
+	#region Private Variables 
     [SerializeField]
     private Rigidbody playerBody;
     [SerializeField]
@@ -85,7 +83,7 @@ public class OfflineCharacterController : MonoBehaviour {
         {
          DropMyTile();
         playerAnim.SetInteger("anim",2);
-        AudioManager.auidoInstance.Playeffect(10);
+        //AudioManager.auidoInstance.Playeffect(10);
 		}
        // else playerAnim.SetInteger("anim",0);
         if(Input.GetKeyDown(KeyCode .J)){
@@ -100,8 +98,8 @@ public class OfflineCharacterController : MonoBehaviour {
     private Vector3 MovementInput()
     {
         Vector3 playerinput;
-        float horInput = Input.GetAxis("Horizontal");
-        float verInput = Input.GetAxis("Vertical");
+        float horInput = Input.GetAxis("Joystick Horizontal");
+        float verInput = Input.GetAxis("Joystick Vertical");
         playerinput = new Vector3(horInput, 0, verInput).normalized;
         return playerinput;
     }
@@ -192,5 +190,3 @@ public class OfflineCharacterController : MonoBehaviour {
 
  }
     #endregion
-
-
