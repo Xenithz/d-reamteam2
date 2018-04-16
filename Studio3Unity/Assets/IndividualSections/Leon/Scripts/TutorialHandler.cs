@@ -9,7 +9,8 @@ public class TutorialHandler : MonoBehaviour {
     public Transform dismantleTileCanvas;
     public Transform zombieExplainCanvas;
     public Transform playerExplainCanvas;
-    public GameObject[] zombiesInLevel;
+    public Transform tileUIExplainCanvas;
+    public List<GameObject> zombiesInLevel=new List<GameObject>();
 	// Use this for initialization
 	void Start () {
         Time.timeScale = 0;
@@ -35,16 +36,32 @@ public class TutorialHandler : MonoBehaviour {
         zombieExplainCanvas.gameObject.SetActive(true);
     }
 
-    public void OnClickToDismantleTile()
+    public void OnClickToTileUIExplain()
     {
         zombieExplainCanvas.gameObject.SetActive(false);
+        tileUIExplainCanvas.gameObject.SetActive(true);
+    }
+
+
+    public void OnClickToDismantleTile()
+    {
+        tileUIExplainCanvas.gameObject.SetActive(false);
         dismantleTileCanvas.gameObject.SetActive(true);
         Time.timeScale = 1;
     }
 
-    void Update () 
-    {
-        if(zombiesInLevel.Length==0)
+    void Update () {
+
+     foreach (GameObject zombie in GameObject.FindGameObjectsWithTag("Zombie"))
+     {
+         if(!zombiesInLevel.Contains(zombie))
+             zombiesInLevel.Add(zombie);
+     }
+
+
+
+
+        if(zombiesInLevel.Count==0)
         {
             SceneManager.LoadScene("Main_Menu");
         }
