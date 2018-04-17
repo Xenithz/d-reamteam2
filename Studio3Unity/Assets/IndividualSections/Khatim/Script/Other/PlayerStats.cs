@@ -8,8 +8,6 @@ public class PlayerStats : Photon.MonoBehaviour
     #region Public Variables
     public GameObject[] healthSprite;
 
-    public GameObject textHolder;
-
     #endregion
 
     #region Private Variables
@@ -21,12 +19,10 @@ public class PlayerStats : Photon.MonoBehaviour
     {
         healthSprite = GameManagerBase.instance.playerHp;
         myChar = GetComponent<Character_Controller>();
-        textHolder = GameObject.FindWithTag("hpText");
     }
 
     void Update()
     {
-        textHolder.GetComponent<Text>().text = myChar.hp.ToString();
         if(PhotonNetwork.connected)
         {
         if (GetComponent<Character_Controller>().hp <= 0)

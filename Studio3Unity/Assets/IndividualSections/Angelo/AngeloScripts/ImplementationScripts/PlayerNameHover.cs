@@ -17,7 +17,7 @@ public class PlayerNameHover : MonoBehaviour
 
 	public void Update()
 	{
-		myText.text = PhotonNetwork.player.NickName;
+		myText.text = GetComponent<PhotonView>().owner.NickName;
 		debugString = myText.text;
 	}
 }

@@ -189,21 +189,21 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
             stream.SendNext(playerAnim.GetBool("isWalk"));
             stream.SendNext(playerAnim.GetBool("ground"));
             stream.SendNext(playerAnim.GetBool("death"));
-            stream.SendNext(hp);
+            //stream.SendNext(hp);
         }
         else
         {
             this.playerAnim.SetBool("isWalk", (bool)stream.ReceiveNext());
             this.playerAnim.SetBool("ground", (bool)stream.ReceiveNext());
             this.playerAnim.SetBool("death", (bool)stream.ReceiveNext());
-            this.hp = (int)stream.ReceiveNext();
+            //this.hp = (int)stream.ReceiveNext();
         }
     }
 
     [PunRPC]
-    public void TakeDamage()
+    public void TakeDamage(int damageToTake)
     {
-        
+        hp = hp - damageToTake;
     }
  }
 
