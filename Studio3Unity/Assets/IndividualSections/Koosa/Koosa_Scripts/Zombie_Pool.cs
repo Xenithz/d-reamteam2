@@ -117,19 +117,19 @@ public class Zombie_Pool : Photon.MonoBehaviour
         Debug.Log("spawn called");
         for(int i = 0; i < zombiesToSpawn; i++)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(4);
             spawnFlag = true;
             RandomizeSpawn("easy");
         }
         for(int i = 0; i < mediumZombiesToSpawn; i++)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(4);
             spawnFlag = true;
             RandomizeSpawn("medium");
         }
         for(int i = 0; i < hardZombiesToSpawn; i++)
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(4);
             spawnFlag = true;
             RandomizeSpawn("hard");
         }   

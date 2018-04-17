@@ -56,7 +56,6 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 
     void Update()
     {
-        Debug.Log(player.GetComponent<PhotonView>().viewID);
         timer-=Time.deltaTime;
         
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
