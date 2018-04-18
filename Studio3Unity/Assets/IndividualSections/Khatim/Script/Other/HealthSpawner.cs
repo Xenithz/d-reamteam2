@@ -8,17 +8,18 @@ public class HealthSpawner : Photon.MonoBehaviour
     public GameObject[] healthSpawnLocation;
     public GameObject healthPrefab;
     public List<GameObject> health;
-    public float timer = 0;
+    public float timer;
     public string index;
     #endregion
 
     #region Private Variables
-    private float maxTime = 5;
+    public float maxTime;
     #endregion
 
     #region Callbacks
     void Awake()
     {
+        maxTime = 5f;
         timer = maxTime;
         healthSpawnLocation = GameObject.FindGameObjectsWithTag("HealthSpawn");
 

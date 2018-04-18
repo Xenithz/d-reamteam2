@@ -10,7 +10,8 @@ public enum GameStates
         Spawning,
         Prepping,
         Playing,
-        Ending
+        Ending,
+        Default
 };
 
 public class GameManagerBase : Photon.PunBehaviour
@@ -19,6 +20,8 @@ public class GameManagerBase : Photon.PunBehaviour
     public GameStates myGameState;
 
     public static GameManagerBase instance;
+
+    public List<GameObject> playersDead;
 
     public GameObject[] playerHp;
     
@@ -90,6 +93,11 @@ public class GameManagerBase : Photon.PunBehaviour
 
         roundText.text = roundNumber.ToString();
         textHolder.GetComponent<Text>().text = myLocalPlayer.GetComponent<Character_Controller>().hp.ToString();
+
+        if(playersDead.Count == 2 && myGameState != GameStates.Ending)
+        {
+            EndGame();
+        }
     }
     #endregion
 
