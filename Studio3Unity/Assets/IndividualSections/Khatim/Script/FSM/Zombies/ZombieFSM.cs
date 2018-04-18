@@ -4,6 +4,8 @@ using UnityEngine;
 public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 {
     #region Public Variables
+
+    public int playerId;
     public int speed;
     public int maxSpeed;
     public float attackDistance;
@@ -39,7 +41,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     void OnEnable()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
 
         if (PhotonNetwork.isMasterClient)
         {
@@ -56,7 +58,17 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 
     void Update()
     {
+        if(player == null)
+        {
+            if (PhotonNetwork.isMasterClient)
+            {
+                int randomizedInt = Random.Range(0, players.Length);
+                this.photonView.RPC("ChoosePlayer", PhotonTargets.AllViaServer, randomizedInt.ToString());
+            }
+        }
+
         timer-=Time.deltaTime;
+        playerId = player.GetComponent<PhotonView>().viewID;
         
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //Processing
@@ -132,18 +144,32 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
                     // myCondition = 1;
                     // canAttack = false;
 
+                    // if(PhotonNetwork.isMasterClient)
+                    // {
+                    //     if(player == GameManagerBase.instance.myLocalPlayer)
+                    //     {
+                    //         GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
+                    //         canAttack = false;
+                    //     }
+                    //     else if(player != GameManagerBase.instance.myLocalPlayer)
+                    //     {
+                    //         player.GetComponent<PlayerStats>().CallDmg();
+                    //         canAttack = false;
+                    //     }
+                    // }
+
                     if(PhotonNetwork.isMasterClient)
                     {
-                        if(player == GameManagerBase.instance.myLocalPlayer)
-                        {
-                            GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
-                            canAttack = false;
-                        }
-                        else if(player != GameManagerBase.instance.myLocalPlayer)
-                        {
-                            player.GetComponent<PlayerStats>().CallDmg();
-                            canAttack = false;
-                        }
+                        player.GetComponent<PhotonView>().RPC("TakeDamage",PhotonTargets.All, 1);
+                        Debug.Log("Attacker: " + this.gameObject.name + "    " + "Victim: " + player.GetComponent<PhotonView>().viewID);
+                        photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
+                        canAttack = false;
+                    }
+                    if(!PhotonNetwork.isMasterClient)
+                    {
+                        player.GetComponent<PhotonView>().RPC("TakeDamage",PhotonTargets.All, 1);
+                        Debug.Log("Attacker: " + this.gameObject.name + "    " + "Victim: " + player.GetComponent<PhotonView>().viewID);
+                        photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
                     }
                 }
                 // if(!PhotonNetwork.connected)

@@ -34,6 +34,10 @@ public class GameManagerBase : Photon.PunBehaviour
 
     public Text myText;
 
+    public Text roundText;
+
+    public GameObject textHolder;
+
     public int roundNumber;
 
     public int amountOfEasyToSpawn;
@@ -59,29 +63,33 @@ public class GameManagerBase : Photon.PunBehaviour
     private void Awake() 
     {
         instance = this;
+        textHolder = GameObject.FindWithTag("hpText");
     }
 
     private void Update()
     {
-        if(GameManagerBase.instance.myGameState == GameStates.Playing && Zombie_Pool.zombiePoolInstance.activeZombies.Count == 0 && Zombie_Pool.zombiePoolInstance.zombiesHaveSpawned == true)
-        {
-            roundNumber++;
-            Debug.Log("Current round number: " + roundNumber);
-            UpdateSpawnValues();
-            Debug.Log("Updating spawn values");
-            myGameState = GameStates.Spawning;
-            Debug.Log("Transitioning to spawning state");
-        }
+        // if(GameManagerBase.instance.myGameState == GameStates.Playing && Zombie_Pool.zombiePoolInstance.activeZombies.Count == 0 && Zombie_Pool.zombiePoolInstance.zombiesHaveSpawned == true)
+        // {
+        //     roundNumber++;
+        //     Debug.Log("Current round number: " + roundNumber);
+        //     UpdateSpawnValues();
+        //     Debug.Log("Updating spawn values");
+        //     myGameState = GameStates.Spawning;
+        //     Debug.Log("Transitioning to spawning state");
+        // }
 
 
-        if(GameManagerBase.instance.myGameState == GameStates.Spawning)
-        {
-            if(Zombie_Pool.zombiePoolInstance.stopSpawning == false)
-            {
-                SetUpNewRound(amountOfEasyToSpawn, amountOfMediumToSpawn, amountOfHardToSpawn);
-            }
-            Debug.Log("This is the count of active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
-        }
+        // if(GameManagerBase.instance.myGameState == GameStates.Spawning)
+        // {
+        //     if(Zombie_Pool.zombiePoolInstance.stopSpawning == false)
+        //     {
+        //         SetUpNewRound(amountOfEasyToSpawn, amountOfMediumToSpawn, amountOfHardToSpawn);
+        //     }
+        //     Debug.Log("This is the count of active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
+        // }
+
+        roundText.text = roundNumber.ToString();
+        textHolder.GetComponent<Text>().text = myLocalPlayer.GetComponent<Character_Controller>().hp.ToString();
     }
     #endregion
 

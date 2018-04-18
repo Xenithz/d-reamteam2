@@ -18,6 +18,11 @@ public class settting : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+
+
+		//health[hp].SetActive(true);
+		health[hp].SetActive(false);
+		/* 
 		if(Input.GetKey(KeyCode.P))
 		{
 		hp--;
@@ -27,6 +32,15 @@ public class settting : MonoBehaviour
 		{
 			health[i].SetActive(true);
 		}
-		
+		for (int i = health.Length; i < hp; i--)
+		{
+			health[i].SetActive(false);
+			
+		}
+		*/
+
+
+
+
 	}
 }
