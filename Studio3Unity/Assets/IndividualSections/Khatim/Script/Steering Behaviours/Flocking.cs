@@ -5,11 +5,14 @@ using UnityEngine;
 public class Flocking : MonoBehaviour
 {
     #region Public Variables
-    //public int neighbourCount = 0;
     public int maxSpeed;
     public int maxForce;
     public Transform flockingTarget;
     public GameObject[] noOfBoids;
+    public float seekWeight;
+    public float alignWeight;
+    public float separateWeight;
+    public float cohesionWeight;
     #endregion
 
     #region Private Variables
@@ -19,7 +22,7 @@ public class Flocking : MonoBehaviour
     private Vector3 totalMoveAwayDesiredVel;
     private Vector3 totalCohesionDesiredVel;
     private Vector3 cohesionDesiredVel;
-    private Vector3 seperationSteeringClamp;
+    private Vector3 separationSteeringClamp;
     #endregion
 
     #region Callbacks
@@ -48,13 +51,19 @@ public class Flocking : MonoBehaviour
     {
         //This is where all the force gets applied.
         Vector3 seek = Seek(flockingTarget);
-        Vector3 seperate = Seperation();
+        Vector3 separate = Separation();
         Vector3 align = Alignment();
         //Vector3 cohesion = Cohesion();
 
-        rg.AddForce(seek);
-        rg.AddForce(seperate);
-        rg.AddForce(align);
+        Vector3 seekMulti = seek * seekWeight;
+        Vector3 separateMulti = separate * separateWeight;
+        Vector3 alignMulti = align * alignWeight;
+        //Vector3 cohesionMulti = cohesion * cohesionWeight;
+
+        rg.AddForce(seekMulti);
+        rg.AddForce(separateMulti);
+        rg.AddForce(alignMulti);
+        //rg.AddForce(cohesionMulti);
         /*Vector3 target = flockingTarget.position;
         target.y = transform.position.y;
         transform.LookAt(target + rg.velocity);*/
@@ -100,9 +109,9 @@ public class Flocking : MonoBehaviour
 
     }*/
 
-    Vector3 Seperation()
+    Vector3 Separation()
     {
-        float desiredSeperation = 2;
+        float desiredSeperation = 10;
         totalMoveAwayDesiredVel = Vector3.zero;
         int count = 0;
 
@@ -123,17 +132,17 @@ public class Flocking : MonoBehaviour
         {
             Vector3 divVel = (totalMoveAwayDesiredVel / count).normalized * maxSpeed;
             Vector3 seperationSteering = divVel - rg.velocity;
-            seperationSteeringClamp = Vector3.ClampMagnitude(seperationSteering, maxForce);
+            separationSteeringClamp = Vector3.ClampMagnitude(seperationSteering, maxForce);
             //Subtract the setMag with velocity.
             //Clamp it.
             //return.
         }
-        return seperationSteeringClamp;
+        return separationSteeringClamp;
     }
 
     Vector3 Alignment()
     {
-        float neighbourDistance = 6;
+        float neighbourDistance = 30;
         Vector3 totalVector = new Vector3(0, 0, 0);
         int count = 0;
 
