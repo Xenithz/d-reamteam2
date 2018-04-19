@@ -160,6 +160,14 @@ public class MyNetworkManager : Photon.PunBehaviour
 		PhotonNetwork.JoinRandomRoom(roomPropertiesToSearch, (byte)maxPlayersForFour);
 	}
 
+	public void GoBackToPickerFromRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+		uiHolder.GetComponent<UIManager>().lobbyPanel.gameObject.SetActive(false);
+		uiHolder.GetComponent<UIManager>().onlinePickPanel.gameObject.SetActive(true);
+        
+    }
+
 	public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
 	{
 		if(PhotonNetwork.room.PlayerCount < PhotonNetwork.room.MaxPlayers)

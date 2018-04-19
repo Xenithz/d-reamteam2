@@ -162,6 +162,7 @@ public class GameManagerBase : Photon.PunBehaviour
     {
         SceneManager.LoadScene("Main_Menu");
     }
+    
         
     #endregion
 
