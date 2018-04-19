@@ -42,7 +42,7 @@ public class OfflineZombieFSM : MonoBehaviour
 
     void OnEnable()
     {
-        players = GameObject.FindGameObjectsWithTag("Player2");
+        players = GameObject.FindGameObjectsWithTag("Player");
         randomTarget = Random.Range(0, players.Length);
     }
 
@@ -80,7 +80,6 @@ public class OfflineZombieFSM : MonoBehaviour
             if (timeToAttack >= delayedDamage)
             {
                 Debug.Log("Attacking");
-                offlinePly.DamageP2();
                 timeToAttack = 0;
             }
         }

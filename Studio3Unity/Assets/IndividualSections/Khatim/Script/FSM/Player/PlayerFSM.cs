@@ -58,7 +58,6 @@ public class PlayerFSM : MonoBehaviour
     {
         if (other.gameObject.tag == "HealthPickup")
         {
-            offlinePly.HealP2();
             other.gameObject.SetActive(false);
         }
     }
