@@ -58,7 +58,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 
     void Update()
     {
-        if(player == null)
+        if (player == null)
         {
             if (PhotonNetwork.isMasterClient)
             {
@@ -67,12 +67,12 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
             }
         }
 
-        timer-=Time.deltaTime;
+        timer -= Time.deltaTime;
         playerId = player.GetComponent<PhotonView>().viewID;
-        
+
         distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         //Processing
-        if (PhotonNetwork.isMasterClient && PhotonNetwork.connected && timer<4)
+        if (PhotonNetwork.isMasterClient && PhotonNetwork.connected && timer < 4)
         {
             if (distanceToPlayer < attackDistance)
             {
@@ -100,7 +100,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
                 }
             }
         }
-        else if (!PhotonNetwork.connected && timer<4) //OFFLINE
+        else if (!PhotonNetwork.connected && timer < 4) //OFFLINE
         {
             if (distanceToPlayer < attackDistance)
             {
@@ -137,7 +137,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 
             case 2:
                 Debug.Log("attacking");
-                if(PhotonNetwork.connected)
+                if (PhotonNetwork.connected)
                 {
                     //GameManagerBase.instance.myLocalPlayer.GetComponent<PlayerStats>().Damage();
                     // player.GetComponent<PlayerStats>().CallDmg();
@@ -158,16 +158,16 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
                     //     }
                     // }
 
-                    if(PhotonNetwork.isMasterClient)
+                    if (PhotonNetwork.isMasterClient)
                     {
-                        player.GetComponent<PhotonView>().RPC("TakeDamage",PhotonTargets.All, 1);
+                        player.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, 1);
                         Debug.Log("Attacker: " + this.gameObject.name + "    " + "Victim: " + player.GetComponent<PhotonView>().viewID);
                         photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
                         canAttack = false;
                     }
-                    if(!PhotonNetwork.isMasterClient)
+                    if (!PhotonNetwork.isMasterClient)
                     {
-                        player.GetComponent<PhotonView>().RPC("TakeDamage",PhotonTargets.All, 1);
+                        player.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, 1);
                         Debug.Log("Attacker: " + this.gameObject.name + "    " + "Victim: " + player.GetComponent<PhotonView>().viewID);
                         photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
                     }
