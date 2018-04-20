@@ -1,16 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OfflinePlayerStats : MonoBehaviour
 {
     #region Public Variables
-    public GameObject[] healthSpritesP1;
-    public GameObject[] healthSpritesP2;
-    public GameObject playerOne;
-    public GameObject playerTwo;
-    public int healthP1 = 6;
-    public int healthP2 = 6;
+    public GameObject[] healthsprites;
+    public GameObject player;
+    public int health = 6;
     #endregion
 
     #region Private Variables
@@ -19,57 +17,34 @@ public class OfflinePlayerStats : MonoBehaviour
     #region Callbacks
     void Awake()
     {
-        playerOne = GameObject.FindGameObjectWithTag("Player1");
-        playerTwo = GameObject.FindGameObjectWithTag("Player2");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            DamageP1();
+            Damage();
         }
-
-        if (Input.GetKeyDown(KeyCode.T))
+        if (health <= 0)
         {
-            DamageP2();
-        }
-
-        /*if (healthP1 <= 0)
-        {
-            playerOne.SetActive(false);
-        }*/
-
-        if (healthP2 <= 0)
-        {
-            playerTwo.SetActive(false);
+            player.SetActive(false);
+            SceneManager.LoadScene("GameOver");
         }
     }
     #endregion
 
     #region Functions
-    public void DamageP1()
+    public void Damage()
     {
-        healthP1--;
-        healthSpritesP1[healthP1].SetActive(false);
+        health--;
+        healthsprites[health].SetActive(false);
     }
 
-    public void DamageP2()
+    public void Heal()
     {
-        healthP2--;
-        healthSpritesP2[healthP2].SetActive(false);
-    }
-
-    public void HealP1()
-    {
-        healthSpritesP1[healthP1].SetActive(true);
-        healthP1++;
-    }
-
-    public void HealP2()
-    {
-        healthSpritesP2[healthP2].SetActive(true);
-        healthP2++;
+        healthsprites[health].SetActive(true);
+        health++;
     }
     #endregion
 }

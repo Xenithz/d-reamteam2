@@ -58,7 +58,7 @@ public class PlayerFSM : MonoBehaviour
     {
         if (other.gameObject.tag == "HealthPickup")
         {
-            offlinePly.HealP2();
+           // offlinePly.HealP2();
             other.gameObject.SetActive(false);
         }
     }
@@ -86,7 +86,7 @@ public class PlayerFSM : MonoBehaviour
         totalDesiredSeekVel = Vector3.zero;
         for (int i = 0; i < healthTargets.Length; i++)
         {
-            if (healthTargets[i].activeInHierarchy && offlinePly.healthP2 <= 5)
+            if (healthTargets[i].activeInHierarchy)/*  && offlinePly.healthP2 <= 5)*/
             {
                 Debug.Log("Seeking Health");
                 Vector3 desiredSeekVel = (healthTargets[i].transform.position - transform.position).normalized * maxSpeed;
@@ -112,6 +112,7 @@ public class PlayerFSM : MonoBehaviour
         rg.AddForce(steeringClamped);
         transform.LookAt(transform.position + rg.velocity);*/
     }
+     
 
     void AvoidZombies()
     {

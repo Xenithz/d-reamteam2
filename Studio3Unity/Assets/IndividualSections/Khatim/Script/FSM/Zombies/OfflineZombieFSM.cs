@@ -80,7 +80,7 @@ public class OfflineZombieFSM : MonoBehaviour
             if (timeToAttack >= delayedDamage)
             {
                 Debug.Log("Attacking");
-                offlinePly.DamageP2();
+               // offlinePly.DamageP2();
                 timeToAttack = 0;
             }
         }
