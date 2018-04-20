@@ -43,7 +43,7 @@ public class MyNetworkManager : Photon.PunBehaviour
 
 	private void Update()
 	{
-		if(shouldConnect == true && PhotonNetwork.connected == false)
+		if(shouldConnect == true && PhotonNetwork.connected == false && PhotonNetwork.offlineMode == false)
 		{
 			PhotonNetwork.ConnectUsingSettings("0.1");
 		}
