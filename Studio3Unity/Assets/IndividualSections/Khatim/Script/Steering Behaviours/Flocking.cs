@@ -18,11 +18,11 @@ public class Flocking : MonoBehaviour
     #region Private Variables
     private Rigidbody rg;
     private List<Rigidbody> boids;
-    private Vector3 moveAwayDesiredVel;
+    /*private Vector3 moveAwayDesiredVel;
     private Vector3 totalMoveAwayDesiredVel;
     private Vector3 totalCohesionDesiredVel;
     private Vector3 cohesionDesiredVel;
-    private Vector3 separationSteeringClamp;
+    private Vector3 separationSteeringClamp;*/
     #endregion
 
     #region Callbacks
@@ -32,7 +32,7 @@ public class Flocking : MonoBehaviour
         boids = new List<Rigidbody>();
 
         noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
-        flockingTarget = GameObject.FindGameObjectWithTag("FlockTarget");
+        flockingTarget = GameObject.FindGameObjectWithTag("Player");
 
         for (int i = 0; i < noOfBoids.Length; i++)
         {
@@ -56,15 +56,10 @@ public class Flocking : MonoBehaviour
         Vector3 align = Alignment();
         Vector3 cohesion = Cohesion();
 
-        Vector3 seekMulti = seek * seekWeight;
-        Vector3 separateMulti = separate * separateWeight;
-        Vector3 alignMulti = align * alignWeight;
-        Vector3 cohesionMulti = cohesion * cohesionWeight;
-
-        rg.AddForce(seekMulti);
-        rg.AddForce(separateMulti);
-        rg.AddForce(alignMulti);
-        //rg.AddForce(cohesionMulti);
+        rg.AddForce(seek * seekWeight);
+        rg.AddForce(separate * separateWeight);
+        rg.AddForce(align * alignWeight);
+        rg.AddForce(cohesion * cohesionWeight);
         /*Vector3 target = flockingTarget.position;
         target.y = transform.position.y;
         transform.LookAt(target + rg.velocity);*/
@@ -82,7 +77,8 @@ public class Flocking : MonoBehaviour
     Vector3 Cohesion()
     {
         float distanceFromNeighbour = 6;
-        totalCohesionDesiredVel = Vector3.zero;
+        Vector3 totalCohesionDesiredVel = Vector3.zero;
+        Vector3 cohesionDesiredVel = Vector3.zero;
         Vector3 sumOfPos = Vector3.zero;
         int count = 0;
 
@@ -113,8 +109,9 @@ public class Flocking : MonoBehaviour
     Vector3 Separation()
     {
         float desiredSeperation = 10;
-        totalMoveAwayDesiredVel = Vector3.zero;
-        separationSteeringClamp = Vector3.zero;
+        Vector3 totalMoveAwayDesiredVel = Vector3.zero;
+        Vector3 separationSteeringClamp = Vector3.zero;
+        Vector3 moveAwayDesiredVel = Vector3.zero;
         int count = 0;
 
         foreach (var other in boids)
@@ -145,7 +142,7 @@ public class Flocking : MonoBehaviour
     Vector3 Alignment()
     {
         float neighbourDistance = 30;
-        Vector3 totalVector = new Vector3(0, 0, 0);
+        Vector3 totalVector = Vector3.zero;
         int count = 0;
 
         foreach (var other in boids)
