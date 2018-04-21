@@ -5,37 +5,39 @@ using UnityEngine;
 public class ZombieStats : MonoBehaviour
 {
     #region Public Variables
-    public int speed;
-    public int maxSpeed;
-    public int attackDistance;
-    public float distanceToPlayer;
-    [HideInInspector] public Rigidbody rg;
-
-    public GameObject[] players;
-    public GameObject player;
-    public float damageDelay = 2;
     #endregion
 
     #region Private Variables
-    /*private Animation anim;
-    private int health = 1;
     private int regularDamage = 1;
-    private int heavyDamage = 3;*/
+    private int fallDamage = 2;
+    private int heavyDamage = 6;
+    private OfflinePlayerStats offlinePlyStats;
+
     #endregion
 
     #region Callbacks
-    void Awake()
+    void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-
+        offlinePlyStats = GetComponent<OfflinePlayerStats>();
     }
-    void FixedUpdate()
+    void Update()
     {
 
     }
     #endregion
 
     #region Functions
+    public void DamageGiven(int damage)
+    {
+        if (damage == 1)
+        {
+            Debug.Log("Regular Damage");
+        }
 
+        if (damage == 2)
+        {
+            Debug.Log("Heavy Damage");
+        }
+    }
     #endregion
 }

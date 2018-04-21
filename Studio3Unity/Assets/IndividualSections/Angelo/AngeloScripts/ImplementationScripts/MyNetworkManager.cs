@@ -43,7 +43,7 @@ public class MyNetworkManager : Photon.PunBehaviour
 
 	private void Update()
 	{
-		if(shouldConnect == true && PhotonNetwork.connected == false)
+		if(shouldConnect == true && PhotonNetwork.connected == false && PhotonNetwork.offlineMode == false)
 		{
 			PhotonNetwork.ConnectUsingSettings("0.1");
 		}
@@ -159,6 +159,14 @@ public class MyNetworkManager : Photon.PunBehaviour
 		Hashtable roomPropertiesToSearch = new Hashtable() {{"fourplayers", 1}};
 		PhotonNetwork.JoinRandomRoom(roomPropertiesToSearch, (byte)maxPlayersForFour);
 	}
+
+	public void GoBackToPickerFromRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+		uiHolder.GetComponent<UIManager>().lobbyPanel.gameObject.SetActive(false);
+		uiHolder.GetComponent<UIManager>().onlinePickPanel.gameObject.SetActive(true);
+        
+    }
 
 	public override void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
 	{

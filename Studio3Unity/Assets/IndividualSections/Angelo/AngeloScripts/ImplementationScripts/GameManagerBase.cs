@@ -10,7 +10,8 @@ public enum GameStates
         Spawning,
         Prepping,
         Playing,
-        Ending
+        Ending,
+        Default
 };
 
 public class GameManagerBase : Photon.PunBehaviour
@@ -19,6 +20,8 @@ public class GameManagerBase : Photon.PunBehaviour
     public GameStates myGameState;
 
     public static GameManagerBase instance;
+
+    public List<GameObject> playersDead;
 
     public GameObject[] playerHp;
     
@@ -68,28 +71,39 @@ public class GameManagerBase : Photon.PunBehaviour
 
     private void Update()
     {
-        // if(GameManagerBase.instance.myGameState == GameStates.Playing && Zombie_Pool.zombiePoolInstance.activeZombies.Count == 0 && Zombie_Pool.zombiePoolInstance.zombiesHaveSpawned == true)
-        // {
-        //     roundNumber++;
-        //     Debug.Log("Current round number: " + roundNumber);
-        //     UpdateSpawnValues();
-        //     Debug.Log("Updating spawn values");
-        //     myGameState = GameStates.Spawning;
-        //     Debug.Log("Transitioning to spawning state");
-        // }
+        if(GameManagerBase.instance.myGameState == GameStates.Playing && Zombie_Pool.zombiePoolInstance.activeZombies.Count == 0 && Zombie_Pool.zombiePoolInstance.zombiesHaveSpawned == true)
+        {
+            roundNumber++;
+            Debug.Log("Current round number: " + roundNumber);
+            UpdateSpawnValues();
+            Debug.Log("Updating spawn values");
+            myGameState = GameStates.Spawning;
+            Debug.Log("Transitioning to spawning state");
+        }
 
 
-        // if(GameManagerBase.instance.myGameState == GameStates.Spawning)
-        // {
-        //     if(Zombie_Pool.zombiePoolInstance.stopSpawning == false)
-        //     {
-        //         SetUpNewRound(amountOfEasyToSpawn, amountOfMediumToSpawn, amountOfHardToSpawn);
-        //     }
-        //     Debug.Log("This is the count of active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
-        // }
+        if(GameManagerBase.instance.myGameState == GameStates.Spawning)
+        {
+            if(Zombie_Pool.zombiePoolInstance.stopSpawning == false)
+            {
+                SetUpNewRound(amountOfEasyToSpawn, amountOfMediumToSpawn, amountOfHardToSpawn);
+            }
+            Debug.Log("This is the count of active zombies: " + Zombie_Pool.zombiePoolInstance.activeZombies.Count);
+        }
 
         roundText.text = roundNumber.ToString();
         textHolder.GetComponent<Text>().text = myLocalPlayer.GetComponent<Character_Controller>().hp.ToString();
+
+        if(playersDead.Count == 2 && myGameState != GameStates.Ending)
+        {
+            EndGame();
+        }
+
+        //failsafe
+        if(Input.GetKeyDown(KeyCode.Slash))
+        {
+            EndGame();
+        }
     }
     #endregion
 
@@ -154,6 +168,7 @@ public class GameManagerBase : Photon.PunBehaviour
     {
         SceneManager.LoadScene("Main_Menu");
     }
+    
         
     #endregion
 

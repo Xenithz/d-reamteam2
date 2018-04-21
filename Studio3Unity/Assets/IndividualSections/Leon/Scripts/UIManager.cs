@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour {
 
     public void OnClickOfflinePanel()
     { 
+        PhotonNetwork.offlineMode = true;
         offlinePickPanel.gameObject.SetActive(true);
         mainMenuPanel.gameObject.SetActive(false);
     }
@@ -74,11 +75,13 @@ public class UIManager : MonoBehaviour {
     {
         if(MyNetworkManager.instance.isLoggedIn == false)
         {
+            PhotonNetwork.offlineMode = false;
             mainMenuPanel.gameObject.SetActive(false);
             loginPanel.gameObject.SetActive(true);
         }
         else if(MyNetworkManager.instance.isLoggedIn == true)
         {
+            PhotonNetwork.offlineMode = false;
             mainMenuPanel.gameObject.SetActive(false);
             onlinePickPanel.gameObject.SetActive(true);
         }

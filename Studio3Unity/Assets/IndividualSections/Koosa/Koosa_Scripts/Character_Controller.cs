@@ -82,18 +82,28 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
 
             if (Input.GetKeyDown(KeyCode.G))
             DropMyTile();
-        }
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
-            Debug.Log("ff");
-        }
-        Jump();
-        if(Input.GetKeyDown(KeyCode .J))
-        {
-		playerAnim.SetBool("death",true);
-        }
-        else playerAnim.SetBool("death",false);
+            
+            }
+
+            if(Input.GetKeyDown(KeyCode.Y))
+            {   
+                AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
+                Debug.Log("ff");
+            }
+
+            Jump();
+            
+            if(Input.GetKeyDown(KeyCode .J))
+            {
+		        playerAnim.SetBool("death",true);
+            }
+            else playerAnim.SetBool("death",false);
+
+            if(hp <= 0)
+            {
+                GameManagerBase.instance.playersDead.Add(this.gameObject);
+			    photonView.RPC("Deactivate", PhotonTargets.All);
+            }
         }
     }
 
@@ -204,6 +214,12 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
     public void TakeDamage(int damageToTake)
     {
         hp = hp - damageToTake;
+    }
+
+    [PunRPC]
+    public void Deactivate()
+    {
+        this.gameObject.SetActive(false);
     }
  }
 

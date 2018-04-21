@@ -35,14 +35,14 @@ public class OfflineZombieFSM : MonoBehaviour
         currCondition = chaseCondition;
         delayedDamage = 2;
         timeToAttack = 2;
-        offlinePlyStats = GameObject.FindGameObjectWithTag("OfflinePlayerStats");
+        offlinePlyStats = GameObject.FindGameObjectWithTag("OfflineStats");
         offlinePly = offlinePlyStats.GetComponent<OfflinePlayerStats>();
         attacking = false;
     }
 
     void OnEnable()
     {
-        players = GameObject.FindGameObjectsWithTag("Player2");
+        players = GameObject.FindGameObjectsWithTag("Player");
         randomTarget = Random.Range(0, players.Length);
     }
 
@@ -79,8 +79,7 @@ public class OfflineZombieFSM : MonoBehaviour
             timeToAttack = timeToAttack + Time.deltaTime;
             if (timeToAttack >= delayedDamage)
             {
-                Debug.Log("Attacking");
-               // offlinePly.DamageP2();
+                offlinePly.DamageTaken(1);
                 timeToAttack = 0;
             }
         }
@@ -92,7 +91,6 @@ public class OfflineZombieFSM : MonoBehaviour
         {
             case 1:
                 Vector3 heading = (players[randomTarget].transform.position - this.gameObject.transform.position).normalized;
-
                 speed = Mathf.Clamp(speed, 0, maxSpeed);
                 rg.AddForce(heading * speed, ForceMode.Impulse);
                 transform.LookAt(heading + this.transform.position);

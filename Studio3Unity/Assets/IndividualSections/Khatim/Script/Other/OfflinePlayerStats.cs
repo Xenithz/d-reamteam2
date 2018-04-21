@@ -1,50 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class OfflinePlayerStats : MonoBehaviour
 {
     #region Public Variables
-    public GameObject[] healthsprites;
+    public GameObject[] healthSpritesP1;
+    public GameObject[] healthSpritesP2;
     public GameObject player;
-    public int health = 6;
+    public int healthP1 = 6;
+    public int healthP2 = 6;
     #endregion
 
     #region Private Variables
+    private ZombieStats zomStats;
     #endregion
 
     #region Callbacks
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        zomStats = GetComponent<ZombieStats>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            Damage();
+            DamageTaken(1);
         }
-        if (health <= 0)
+
+        if (Input.GetKeyDown(KeyCode.U))
         {
-            player.SetActive(false);
-            SceneManager.LoadScene("GameOver");
+            DamageTaken(2);
         }
     }
     #endregion
 
     #region Functions
-    public void Damage()
+    public void DamageTaken(int damage)
     {
-        health--;
-        healthsprites[health].SetActive(false);
-    }
+        if (damage == 1)
+        {
+            zomStats.DamageGiven(1);
+        }
 
-    public void Heal()
-    {
-        healthsprites[health].SetActive(true);
-        health++;
+        if (damage == 2)
+        {
+            zomStats.DamageGiven(2);
+        }
     }
     #endregion
 }

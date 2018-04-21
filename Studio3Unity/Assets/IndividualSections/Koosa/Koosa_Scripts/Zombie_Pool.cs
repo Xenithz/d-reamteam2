@@ -221,7 +221,7 @@ public class Zombie_Pool : Photon.MonoBehaviour
     public void SetZombie(string myInt, string type)
     {
         GameObject myZombie = ZombieToSpawn(type);
-        myZombie.transform.position = spawnPoint.GetChild(int.Parse(myInt)).position;
+        myZombie.transform.position = new Vector3(spawnPoint.GetChild(int.Parse(myInt)).position.x, spawnPoint.GetChild(int.Parse(myInt)).position.y + 3f, spawnPoint.GetChild(int.Parse(myInt)).position.z);
         myZombie.transform.rotation = Quaternion.identity;
         activeZombies.Add(myZombie);
         //AIHandler.instance.CallRefreshList();
