@@ -50,6 +50,8 @@ public class GameManagerBase : Photon.PunBehaviour
     public int amountOfHardToSpawn;
 
     public bool flag1;
+
+    public Scene myScene;
     #endregion
 
     #region Unity callbacks
@@ -71,6 +73,7 @@ public class GameManagerBase : Photon.PunBehaviour
 
     private void Update()
     {
+        myScene = SceneManager.GetActiveScene();
         if(GameManagerBase.instance.myGameState == GameStates.Playing && Zombie_Pool.zombiePoolInstance.activeZombies.Count == 0 && Zombie_Pool.zombiePoolInstance.zombiesHaveSpawned == true)
         {
             roundNumber++;
@@ -94,11 +97,21 @@ public class GameManagerBase : Photon.PunBehaviour
         roundText.text = roundNumber.ToString();
         textHolder.GetComponent<Text>().text = myLocalPlayer.GetComponent<Character_Controller>().hp.ToString();
 
-        if(playersDead.Count == 2 && myGameState != GameStates.Ending)
+        if(myScene.name == "2_Player_Online")
         {
-            EndGame();
+            if(playersDead.Count == 2 && myGameState != GameStates.Ending)
+            {
+                EndGame();
+            }
         }
 
+        if(myScene.name == "4_Player_Online")
+        {
+            if(playersDead.Count == 4 && myGameState != GameStates.Ending)
+            {
+                EndGame();
+            }
+        }
         //failsafe
         if(Input.GetKeyDown(KeyCode.Slash))
         {

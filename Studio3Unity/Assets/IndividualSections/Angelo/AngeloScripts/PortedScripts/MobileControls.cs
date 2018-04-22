@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MobileControls : Photon.MonoBehaviour, IPunObservable
 {
-    #region Private Variables 
+
+#region Private Variables 
     [SerializeField]
     private Rigidbody playerBody;
     [SerializeField]
@@ -26,7 +27,7 @@ public class MobileControls : Photon.MonoBehaviour, IPunObservable
     public Animator playerAnim;
     public int hp;
 
-    public Joystick myJoystick;
+    public Joystick JoystickScript;
     
     #endregion
 
@@ -43,6 +44,7 @@ public class MobileControls : Photon.MonoBehaviour, IPunObservable
         playerBody = gameObject.GetComponent<Rigidbody>();
         playerCollider = gameObject.GetComponent<BoxCollider>();
         tileManager = controlScripts.GetComponent<Tile_Manager>();
+        JoystickScript = GameObject.FindWithTag("joystick").GetComponent<Joystick>();
         hp = 6;
     }
 
@@ -56,11 +58,11 @@ public class MobileControls : Photon.MonoBehaviour, IPunObservable
 
             transform.rotation = Quaternion.Euler(lockRot, transform.rotation.eulerAngles.y, lockRot);
 
-            //Vector3 vectorOfMovement = MovementInput();
+            Vector3 vectorOfMovement = JoystickScript.Input;
 
-            Movement(myJoystick.Input);
+            Movement(vectorOfMovement);
        
-            if (myJoystick.Input != Vector3.zero)
+            if (JoystickScript.Input != Vector3.zero)
             {
                 transform.rotation = Turn();
                 playerAnim.SetBool("isWalk", true);
@@ -76,20 +78,34 @@ public class MobileControls : Photon.MonoBehaviour, IPunObservable
     {
         if(photonView.isMine)
         {
-            if(coolDown<=0 ){
+            if(coolDown<=0 )
+            {
             coolDownImage.SetActive(true);
-      
-        if (Input.GetKeyDown(KeyCode.G) )
-         DropMyTile();
-        }
-        if(Input.GetKeyDown(KeyCode.Y)){
-            AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
-            Debug.Log("ff");
-        }
-        if(Input.GetKeyDown(KeyCode .J)){
-		playerAnim.SetBool("death",true);
-        }
-        else playerAnim.SetBool("death",false);
+
+            if (Input.GetKeyDown(KeyCode.G))
+            DropMyTile();
+            
+            }
+
+            if(Input.GetKeyDown(KeyCode.Y))
+            {   
+                AudioManager.auidoInstance.PlaySingleEffectPoint(0,1f);
+                Debug.Log("ff");
+            }
+
+            Jump();
+            
+            if(Input.GetKeyDown(KeyCode .J))
+            {
+		        playerAnim.SetBool("death",true);
+            }
+            else playerAnim.SetBool("death",false);
+
+            if(hp <= 0)
+            {
+                GameManagerBase.instance.playersDead.Add(this.gameObject);
+			    photonView.RPC("Deactivate", PhotonTargets.All);
+            }
         }
     }
 
@@ -100,12 +116,13 @@ public class MobileControls : Photon.MonoBehaviour, IPunObservable
         {
             GetComponent<PlayerStats>().healthSprite[gameObject.GetComponent<Character_Controller>().hp].SetActive(true);
             GameManagerBase.instance.myLocalPlayer.GetComponent<Character_Controller>().hp++;
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
     }
     #endregion
 
 #region  My Functions
+
     private void Movement(Vector3 movementvector)
     {
         movementvector.x = movementvector.x * moveSpeed;
@@ -118,7 +135,7 @@ public class MobileControls : Photon.MonoBehaviour, IPunObservable
     private Quaternion Turn()
     {
         Quaternion look;
-        look= Quaternion.LookRotation(myJoystick.Input);
+        look= Quaternion.LookRotation(JoystickScript.Input);
         return look;
     }
 
@@ -127,16 +144,16 @@ public class MobileControls : Photon.MonoBehaviour, IPunObservable
         float groundDistance;
         groundDistance = playerCollider.bounds.extents.y;
         return Physics.Raycast(transform.position, -Vector3.up, groundDistance + 1);
-        
     }
 
     private void Jump()
     {
-        if (IsNotGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && IsNotGrounded())
         {
             Debug.Log("jump");
-            playerBody.AddForce(new Vector3(0f, jumpPower, 0f), ForceMode.Impulse);
+            playerBody.AddForce(new Vector3(0f, jumpPower, 0f),ForceMode.Impulse);
             playerAnim.SetBool("ground",true);
+            playerBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         }        
         else playerAnim.SetBool("ground",false);
     }
@@ -176,14 +193,26 @@ public class MobileControls : Photon.MonoBehaviour, IPunObservable
             stream.SendNext(playerAnim.GetBool("isWalk"));
             stream.SendNext(playerAnim.GetBool("ground"));
             stream.SendNext(playerAnim.GetBool("death"));
-            stream.SendNext(hp);
+            //stream.SendNext(hp);
         }
         else
         {
-            playerAnim.SetBool("isWalk", (bool)stream.ReceiveNext());
-            playerAnim.SetBool("ground", (bool)stream.ReceiveNext());
-            playerAnim.SetBool("death", (bool)stream.ReceiveNext());
-            hp = (int)stream.ReceiveNext();
+            this.playerAnim.SetBool("isWalk", (bool)stream.ReceiveNext());
+            this.playerAnim.SetBool("ground", (bool)stream.ReceiveNext());
+            this.playerAnim.SetBool("death", (bool)stream.ReceiveNext());
+            //this.hp = (int)stream.ReceiveNext();
         }
+    }
+
+    [PunRPC]
+    public void TakeDamage(int damageToTake)
+    {
+        hp = hp - damageToTake;
+    }
+
+    [PunRPC]
+    public void Deactivate()
+    {
+        this.gameObject.SetActive(false);
     }
 }
