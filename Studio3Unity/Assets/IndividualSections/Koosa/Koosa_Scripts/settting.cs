@@ -3,45 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class settting : MonoBehaviour 
-{ // Drag & drop the gameObjects in the inspector
- // Here, I suppose you want to have a fixed number of hearts
- // Representing the remaining health of your character
- // Make sure the gameObjects are referenced in the correct order
- // The 1st gameObject must represent the lowest value of remaining health
- // The last gameObject must represent the highest value of remaining health
- [SerializeField]
- private GameObject[] hearts;
- // The remaining amount of health
- [SerializeField]
- private int health;
- // The maximum health of the player
- [SerializeField]
- private int maxHealth = 100;
- private void Awake()
- {
-     // Initializes the health to its max value
-     health = maxHealth;
- }
+{ 
+ 
+ public GameObject[] hearts;
+
+ public int health;
+  public int maxHealth = 100;
+ public void Awake()
+{
+    health = maxHealth;
+}
  
  public void Update()
- {
+{
 	if(Input.GetKeyDown(KeyCode.P))
-	    Hurt(10);
+	    Hurt(1);
     if(Input.GetKeyDown(KeyCode.L))
-        health=maxHealth;
-
-
-	 
- }
+        Hurt(-1);
+}
  
- public void Hurt( int damages )
+ public void Hurt( int damage )
  {
-     // Decrease the health, but make sure it does fall under 0
-     health = Mathf.Max( health - damages, 0 );
+    health = (health - damage);
+    float healthPercentage = (float) health / maxHealth;
+    for( int i = 0 ; i < hearts.Length ; i++ )
+    {
+        float ratio = (float) i / hearts.Length;
+        hearts[i].SetActive( healthPercentage > ratio );
+    }
+ }
+ }
+/* 
+ // Decrease the health, but make sure it doesn't fall under 0
+     health = (health - damage);
      // Compute the remaining health as a percentage, 50% for example
      float healthPercentage = (float) health / maxHealth ;
      // Loop through all the gameObjects (hearts)
-     for( int i = 0 ; i < hearts.Length ; ++i )
+     for( int i = 0 ; i < hearts.Length ; i++ )
      {
          // Supposing you have 10 hearts
          // If i = 1, then ratio = 1/10 = 0.1
@@ -53,10 +51,11 @@ public class settting : MonoBehaviour
          hearts[i].SetActive( healthPercentage > ratio ) ;
          // OR, IN A MORE EXPLICIT WAY:
          
+         /* 
          if( healthPercentage < ratio )
              hearts[i].SetActive( true ) ;
          else
              hearts[i].SetActive( false ) ;
-     }
- }
-}
+             */
+             
+
