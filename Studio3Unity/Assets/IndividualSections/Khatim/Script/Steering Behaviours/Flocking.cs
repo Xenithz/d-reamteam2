@@ -71,6 +71,7 @@ public class Flocking : MonoBehaviour
         Vector3 desiredSeekVel = (target - transform.position).normalized * maxSpeed;
         Vector3 seekSteering = desiredSeekVel - rg.velocity;
         Vector3 seekSteeringClamped = Vector3.ClampMagnitude(seekSteering, maxForce);
+        transform.LookAt(flockingTarget.transform.position);
         return seekSteeringClamped;
     }
 
