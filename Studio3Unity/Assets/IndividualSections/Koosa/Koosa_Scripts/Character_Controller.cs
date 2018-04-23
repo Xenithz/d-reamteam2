@@ -43,7 +43,7 @@ public class Character_Controller : Photon.MonoBehaviour, IPunObservable {
         playerBody = gameObject.GetComponent<Rigidbody>();
         playerCollider = gameObject.GetComponent<BoxCollider>();
         tileManager = controlScripts.GetComponent<Tile_Manager>();
-        hp = 6;
+        hp = 10;
     }
 
     private void FixedUpdate()
