@@ -61,6 +61,12 @@ public class OfflinePlayerStats : MonoBehaviour
         {
             /*healthP1 -= fallDamage;
             healthSpritesP1[healthP1].SetActive(false);*/
+            
+            //if helath = 5
+            for (int i = healthP1 - 1; i >= healthP1 - damage; i--)
+            {
+                healthSpritesP1[i].SetActive(false);
+            }
         }
     }
     #endregion
