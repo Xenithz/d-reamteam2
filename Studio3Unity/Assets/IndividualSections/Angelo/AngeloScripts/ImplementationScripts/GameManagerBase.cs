@@ -113,7 +113,7 @@ public class GameManagerBase : Photon.PunBehaviour
             }
         }
         //failsafe
-        if(Input.GetKeyDown(KeyCode.Slash))
+        if(Input.GetKeyDown(KeyCode.O) && PhotonNetwork.isMasterClient)
         {
             EndGame();
         }

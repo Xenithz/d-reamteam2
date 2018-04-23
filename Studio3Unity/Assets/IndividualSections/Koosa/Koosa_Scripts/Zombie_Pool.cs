@@ -70,9 +70,9 @@ public class Zombie_Pool : Photon.MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.P) && PhotonNetwork.isMasterClient)
         {
-            Spawn(0,1,1);
+            Spawn(GameManagerBase.instance.amountOfEasyToSpawn,GameManagerBase.instance.amountOfMediumToSpawn,GameManagerBase.instance.amountOfHardToSpawn);
         }
 
         if(Input.GetKeyDown(KeyCode.K))
