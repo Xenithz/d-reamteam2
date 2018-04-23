@@ -14,6 +14,8 @@ using System.Collections.Generic;
     public int easyZombiesPooled;
     public int mediumZombiesPooled;
     public int hardZombiesPooled;
+    
+
     public int easyZombieToSpawn;
     public int mediumZombieToSpawn;
     public int hardZombieToSpawn;
@@ -44,6 +46,7 @@ using System.Collections.Generic;
         PoolZombies(easyZombie,easyZombiesPooled);
         PoolZombies(mediumZombie,mediumZombiesPooled);
         PoolZombies(hardZombie,hardZombiesPooled);
+        StartCoroutine(Spawnner());
     }
     private void Start()
     {
@@ -107,7 +110,7 @@ private void spawn()
             }
             round++;
             easyZombieToSpawn+=5;
-            mediumZombieToSpawn+=3;
+            mediumZombieToSpawn+=2;
             hardZombieToSpawn+=1;
         }
     }

@@ -15,6 +15,7 @@ public class OfflineCameraController : MonoBehaviour
 	#endregion
 	#region Private Variables
 	private Bounds bounds;
+	[SerializeField]
 	private List <Transform> Players;
 	#endregion
     #region Unity Functions
