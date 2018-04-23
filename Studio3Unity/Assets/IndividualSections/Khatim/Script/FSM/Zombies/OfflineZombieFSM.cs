@@ -43,7 +43,7 @@ public class OfflineZombieFSM : MonoBehaviour
     #region Callbacks
     void Awake()
     {
-        zombieAnim=this.gameObject.GetComponent<Animator>();
+        zombieAnim = this.gameObject.GetComponent<Animator>();
         rg = GetComponent<Rigidbody>();
         boids = new List<Rigidbody>();
         delayedDamage = 2;
@@ -53,13 +53,7 @@ public class OfflineZombieFSM : MonoBehaviour
         offlinePlyStats = GameObject.FindGameObjectWithTag("OfflineStats");
         offlinePly = offlinePlyStats.GetComponent<OfflinePlayerStats>();
 
-        noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
 
-        for (int i = 0; i < noOfBoids.Length; i++)
-        {
-            Rigidbody rgBoid = noOfBoids[i].GetComponent<Rigidbody>();
-            boids.Add(rgBoid);
-        }
     }
 
     void OnEnable()
@@ -70,6 +64,14 @@ public class OfflineZombieFSM : MonoBehaviour
 
     void Update()
     {
+        noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
+
+        for (int i = 0; i < noOfBoids.Length; i++)
+        {
+            Rigidbody rgBoid = noOfBoids[i].GetComponent<Rigidbody>();
+            boids.Add(rgBoid);
+        }
+
         distanceToPlayer = Vector3.Distance(transform.position, players[randomTarget].transform.position);
 
         if (distanceToPlayer < attackDistance && timer < 4)
@@ -113,7 +115,10 @@ public class OfflineZombieFSM : MonoBehaviour
         {
             case 1:
                 CompiledAgents();
-                transform.LookAt(players[randomTarget].transform.position + rg.velocity);
+                Vector3 target = players[randomTarget].transform.position + rg.velocity;
+                target.y = transform.position.y;
+                transform.LookAt(target);
+                //transform.LookAt(players[randomTarget].transform.position + rg.velocity);
                 attacking = false;
                 break;
 
