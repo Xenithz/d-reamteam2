@@ -52,8 +52,6 @@ public class OfflineZombieFSM : MonoBehaviour
 
         offlinePlyStats = GameObject.FindGameObjectWithTag("OfflineStats");
         offlinePly = offlinePlyStats.GetComponent<OfflinePlayerStats>();
-
-
     }
 
     void OnEnable()
@@ -101,15 +99,9 @@ public class OfflineZombieFSM : MonoBehaviour
         if (attacking == true)
         {
             timeToAttack = timeToAttack + Time.deltaTime;
-            if (timeToAttack >= delayedDamage && this.tag == "RegularZombie")
+            if (timeToAttack >= delayedDamage)
             {
                 offlinePly.DamageTaken(1);
-                timeToAttack = 0;
-            }
-            
-            if (timeToAttack >= delayedDamage && this.tag == "HeavyZombie")
-            {
-                offlinePly.DamageTaken(2);
                 timeToAttack = 0;
             }
         }
