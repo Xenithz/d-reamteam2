@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/IndividualSections/Leon/Scenes/Main_Menu.unity
+- path: Assets/IndividualSections/Leon/Scenes/Story_Scene.unity
   isLoaded: 1
   isActive: 1
