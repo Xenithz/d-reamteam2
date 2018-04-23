@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/IndividualSections/Leon/Scenes/2_Player_Online.unity
+- path: Assets/IndividualSections/Leon/Scenes/4_Player_Online.unity
   isLoaded: 1
   isActive: 1
