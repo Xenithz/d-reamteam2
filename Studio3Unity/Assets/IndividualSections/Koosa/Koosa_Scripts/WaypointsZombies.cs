@@ -26,6 +26,7 @@ public class WaypointsZombies : MonoBehaviour
 	void Update ()
     {
 		transform.position = Vector3.MoveTowards(transform.position, waypoints[target].transform.position, speed);
+		Quaternion.LookRotation(waypoints[target].transform.position);
         if (Vector3.Distance(transform.position, waypoints[target].transform.position) < 1  && !isReverse)
         target++;
         if(target == waypoints.Length && !isReverse)
