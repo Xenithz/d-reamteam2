@@ -15,14 +15,16 @@ public class OfflineZombieFSM : MonoBehaviour
     public int maxSpeed;
     public int maxForce;
     public bool attacking;
+    public Animator zombieAnim;
+    public int zomDamage;
+    public float timer;
     [Header("Flocking Weightage")]
     public GameObject[] noOfBoids;
     public float seekWeight;
     public float alignWeight;
     public float separateWeight;
     public float cohesionWeight;
-    public Animator zombieAnim;
-    public float timer;
+
 
     #endregion
 
@@ -32,9 +34,7 @@ public class OfflineZombieFSM : MonoBehaviour
     private int currCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
-    [SerializeField]
     private GameObject offlinePlyStats;
-    [SerializeField]
     private OfflinePlayerStats offlinePly;
     #endregion
 
@@ -56,10 +56,7 @@ public class OfflineZombieFSM : MonoBehaviour
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         randomTarget = Random.Range(0, players.Length);
-    }
 
-    void Update()
-    {
         noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
 
         for (int i = 0; i < noOfBoids.Length; i++)
@@ -67,9 +64,11 @@ public class OfflineZombieFSM : MonoBehaviour
             Rigidbody rgBoid = noOfBoids[i].GetComponent<Rigidbody>();
             boids.Add(rgBoid);
         }
+    }
 
+    void Update()
+    {
         distanceToPlayer = Vector3.Distance(transform.position, players[randomTarget].transform.position);
-
         if (distanceToPlayer < attackDistance && timer < 4)
         {
             if (currCondition != attackCondition)
@@ -99,7 +98,7 @@ public class OfflineZombieFSM : MonoBehaviour
             timeToAttack = timeToAttack + Time.deltaTime;
             if (timeToAttack >= delayedDamage)
             {
-                offlinePly.DamageTaken(1);
+                offlinePly.DamageTaken(zomDamage);
                 timeToAttack = 0;
             }
         }

@@ -7,19 +7,23 @@ public class OfflinePlayerStats : MonoBehaviour
     #region Public Variables
     public GameObject[] healthSpritesP1;
     public GameObject[] healthSpritesP2;
-    public GameObject player;
+    public GameObject[] players;
     public int healthP1 = 6;
     public int healthP2 = 6;
     #endregion
 
     #region Private Variables
     private ZombieStats zomStats;
+    private int regularDamage = 1;
+    private int fallDamage = 2;
+    private int heavyDamage = 6;
+
     #endregion
 
     #region Callbacks
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player");
         zomStats = GetComponent<ZombieStats>();
     }
 
@@ -27,12 +31,12 @@ public class OfflinePlayerStats : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            DamageTaken(1);
+            DamageTaken(4);
         }
 
-        if (Input.GetKeyDown(KeyCode.U))
+        if (healthP1 <= 0)
         {
-            DamageTaken(2);
+            players[0].SetActive(false);
         }
     }
     #endregion
@@ -42,12 +46,21 @@ public class OfflinePlayerStats : MonoBehaviour
     {
         if (damage == 1)
         {
-            Debug.Log("Regular Damage");
+            healthP1 -= regularDamage;
+            healthSpritesP1[healthP1].SetActive(false);
+            Debug.Log("Regular Daamge");
         }
 
-        if (damage == 2)
+        if (damage == 6)
         {
             Debug.Log("Heavy Damage");
+        }
+
+        //Testing
+        if (damage == 4)
+        {
+            /*healthP1 -= fallDamage;
+            healthSpritesP1[healthP1].SetActive(false);*/
         }
     }
     #endregion

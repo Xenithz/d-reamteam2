@@ -27,7 +27,7 @@ public class ZombieStats : MonoBehaviour
     #endregion
 
     #region Functions
-    public virtual void DamageGiven()
+    public void DamageGiven()
     {
 
     }
