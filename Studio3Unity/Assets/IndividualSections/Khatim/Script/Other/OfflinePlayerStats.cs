@@ -13,14 +13,17 @@ public class OfflinePlayerStats : MonoBehaviour
     #endregion
 
     #region Private Variables
-    private ZombieStats zomStats;
+    //private ZombieStats zomStats;
+    private int regularDamage = 1;
+    private int fallDamage = 2;
+    private int heavyDamage = 6;
     #endregion
 
     #region Callbacks
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        zomStats = GetComponent<ZombieStats>();
+        //zomStats = GetComponent<ZombieStats>();
     }
 
     void Update()
@@ -42,12 +45,12 @@ public class OfflinePlayerStats : MonoBehaviour
     {
         if (damage == 1)
         {
-            zomStats.DamageGiven(1);
+            Debug.Log("Regular Damage");
         }
 
         if (damage == 2)
         {
-            zomStats.DamageGiven(2);
+            Debug.Log("Heavy Damage");
         }
     }
     #endregion

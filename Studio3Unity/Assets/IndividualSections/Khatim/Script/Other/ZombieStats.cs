@@ -8,17 +8,17 @@ public class ZombieStats : MonoBehaviour
     #endregion
 
     #region Private Variables
-    private int regularDamage = 1;
+    /*private int regularDamage = 1;
     private int fallDamage = 2;
     private int heavyDamage = 6;
     private OfflinePlayerStats offlinePlyStats;
 
     #endregion
 
-    #region Callbacks
+    #region Callbacks*/
     void Start()
     {
-        offlinePlyStats = GetComponent<OfflinePlayerStats>();
+        //offlinePlyStats = GetComponent<OfflinePlayerStats>();
     }
     void Update()
     {
@@ -27,17 +27,17 @@ public class ZombieStats : MonoBehaviour
     #endregion
 
     #region Functions
-    public void DamageGiven(int damage)
+    /*public void DamageGiven(int damage)
     {
         if (damage == 1)
         {
-            Debug.Log("Regular Damage");
+            
         }
 
         if (damage == 2)
         {
-            Debug.Log("Heavy Damage");
+            
         }
-    }
+    }*/
     #endregion
 }
