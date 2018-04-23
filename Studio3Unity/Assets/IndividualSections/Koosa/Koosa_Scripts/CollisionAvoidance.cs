@@ -21,7 +21,8 @@ public Rigidbody rb;
 public float maxSpeed;
 	void Start () 
 	{
-	    rb = GetComponent<Rigidbody>();
+	    rb = this.gameObject.GetComponent<Rigidbody>();
+		target=GameObject.FindGameObjectWithTag("Player").transform;
 	}
 	void FixedUpdate () 
 	{

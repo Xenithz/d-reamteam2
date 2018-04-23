@@ -89,7 +89,7 @@ private void spawn()
             for (int i = 0; i < easyZombieToSpawn; i++)
             {
                 spawnIndex = Random.Range(0, spawnPoint.childCount);
-                Instantiate(easyZombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
+                Instantiate(easyZombie, (spawnPoint.GetChild(spawnIndex).position + new Vector3(0,2,0)), Quaternion.identity);
                 yield return new WaitForSeconds (spawnWait);
             }
             yield return new WaitForSeconds (waveWait);
@@ -97,7 +97,7 @@ private void spawn()
             for (int i = 0; i < mediumZombieToSpawn; i++)
             {
                 spawnIndex = Random.Range(0, spawnPoint.childCount);
-                Instantiate(mediumZombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
+                Instantiate(mediumZombie,  (spawnPoint.GetChild(spawnIndex).position + new Vector3(0,2,0)), Quaternion.identity);
                 yield return new WaitForSeconds (spawnWait);
             }
             yield return new WaitForSeconds (waveWait);
@@ -105,7 +105,7 @@ private void spawn()
             for (int i = 0; i < hardZombieToSpawn; i++)
             {
                 spawnIndex = Random.Range(0, spawnPoint.childCount);
-                Instantiate(hardZombie, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
+                Instantiate(hardZombie, (spawnPoint.GetChild(spawnIndex).position + new Vector3(0,2,0)), Quaternion.identity);
                 yield return new WaitForSeconds (spawnWait);
             }
             round++;

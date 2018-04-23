@@ -16,6 +16,8 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     public OfflinePlayerStats offlinePlayerStats;
     public float timer;
     public float damageDelay = 4;
+
+    public int damage;
     public PlayerStats playerStats;
 
     public float attackTimer;
@@ -32,6 +34,7 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
     #region Callbacks
     void Awake()
     {
+        zombieAnime=this.gameObject.GetComponent<Animator>();
         rg = GetComponent<Rigidbody>();
         canAttack = true;
         damageDelay = 4;
@@ -160,14 +163,14 @@ public class ZombieFSM : Photon.PunBehaviour, IPunObservable
 
                     if (PhotonNetwork.isMasterClient)
                     {
-                        player.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, 1);
+                        player.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);
                         Debug.Log("Attacker: " + this.gameObject.name + "    " + "Victim: " + player.GetComponent<PhotonView>().viewID);
                         photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
                         canAttack = false;
                     }
                     if (!PhotonNetwork.isMasterClient)
                     {
-                        player.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, 1);
+                        player.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);
                         Debug.Log("Attacker: " + this.gameObject.name + "    " + "Victim: " + player.GetComponent<PhotonView>().viewID);
                         photonView.RPC("ChangeCondition", PhotonTargets.All, "1");
                     }

@@ -21,7 +21,8 @@ public class OfflineZombieFSM : MonoBehaviour
     public float alignWeight;
     public float separateWeight;
     public float cohesionWeight;
-    //public Animator zombieAnim;
+    public Animator zombieAnim;
+    public float timer;
 
     #endregion
 
@@ -31,18 +32,20 @@ public class OfflineZombieFSM : MonoBehaviour
     private int currCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
+    [SerializeField]
     private GameObject offlinePlyStats;
+    [SerializeField]
     private OfflinePlayerStats offlinePly;
+
 
     #endregion
 
     #region Callbacks
-    void Start()
+    void Awake()
     {
+        zombieAnim=this.gameObject.GetComponent<Animator>();
         rg = GetComponent<Rigidbody>();
         boids = new List<Rigidbody>();
-
-        currCondition = chaseCondition;
         delayedDamage = 2;
         timeToAttack = 2;
         attacking = false;
@@ -69,13 +72,13 @@ public class OfflineZombieFSM : MonoBehaviour
     {
         distanceToPlayer = Vector3.Distance(transform.position, players[randomTarget].transform.position);
 
-        if (distanceToPlayer < attackDistance)
+        if (distanceToPlayer < attackDistance && timer < 4)
         {
             if (currCondition != attackCondition)
             {
                 currCondition = 2;
-                /*zombieAnim.SetBool("isAttacking", true);
-                zombieAnim.SetBool("isWalking", false);*/
+                zombieAnim.SetBool("isAttacking", true);
+                zombieAnim.SetBool("isWalking", false);
             }
         }
         else if (distanceToPlayer > attackDistance)
@@ -83,8 +86,8 @@ public class OfflineZombieFSM : MonoBehaviour
             if (currCondition != chaseCondition)
             {
                 currCondition = 1;
-                /*zombieAnim.SetBool("isAttacking", false);
-                zombieAnim.SetBool("isWalking", true);*/
+                zombieAnim.SetBool("isAttacking", false);
+                zombieAnim.SetBool("isWalking", true);
             }
         }
 
