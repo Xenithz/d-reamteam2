@@ -36,8 +36,6 @@ public class OfflineZombieFSM : MonoBehaviour
     private GameObject offlinePlyStats;
     [SerializeField]
     private OfflinePlayerStats offlinePly;
-
-
     #endregion
 
     #region Callbacks

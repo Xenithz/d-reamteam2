@@ -19,7 +19,6 @@ public class PlayerFSM : MonoBehaviour
     private int currCondition;
     private Vector3 desriedFleeVel;
     private Vector3 totalDesiredFleeVel;
-    //private Vector3 desiredSeekVel;
     private Vector3 totalDesiredSeekVel;
     #endregion
 

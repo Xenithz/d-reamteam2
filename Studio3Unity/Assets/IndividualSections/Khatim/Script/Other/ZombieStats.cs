@@ -8,9 +8,9 @@ public class ZombieStats : MonoBehaviour
     #endregion
 
     #region Private Variables
-    /*private int regularDamage = 1;
-    private int fallDamage = 2;
-    private int heavyDamage = 6;
+    private int regularDamage; //1 Point of Damage.
+    private int fallDamage; //2 Points of Damage.
+    private int heavyDamage; //6 Points of Damage.
     private OfflinePlayerStats offlinePlyStats;
 
     #endregion
@@ -18,7 +18,7 @@ public class ZombieStats : MonoBehaviour
     #region Callbacks*/
     void Start()
     {
-        //offlinePlyStats = GetComponent<OfflinePlayerStats>();
+        offlinePlyStats = GetComponent<OfflinePlayerStats>();
     }
     void Update()
     {
@@ -27,17 +27,9 @@ public class ZombieStats : MonoBehaviour
     #endregion
 
     #region Functions
-    /*public void DamageGiven(int damage)
+    public virtual void DamageGiven()
     {
-        if (damage == 1)
-        {
-            
-        }
 
-        if (damage == 2)
-        {
-            
-        }
-    }*/
+    }
     #endregion
 }
