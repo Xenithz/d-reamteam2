@@ -60,10 +60,7 @@ public class OfflineZombieFSM : MonoBehaviour
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         randomTarget = Random.Range(0, players.Length);
-    }
 
-    void Update()
-    {
         noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
 
         for (int i = 0; i < noOfBoids.Length; i++)
@@ -71,6 +68,10 @@ public class OfflineZombieFSM : MonoBehaviour
             Rigidbody rgBoid = noOfBoids[i].GetComponent<Rigidbody>();
             boids.Add(rgBoid);
         }
+    }
+
+    void Update()
+    {
 
         distanceToPlayer = Vector3.Distance(transform.position, players[randomTarget].transform.position);
         if (distanceToPlayer < attackDistance && timer < 4)
@@ -81,10 +82,10 @@ public class OfflineZombieFSM : MonoBehaviour
                 zombieAnim.SetBool("isAttacking", true);
                 zombieAnim.SetBool("isWalking", false);
             }
-            if(easy|| medium)
-            AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource,10,4,0.8f,AudioManager.auidoInstance.effectClips);
+            if (easy || medium)
+                AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource, 10, 4, 0.8f, AudioManager.auidoInstance.effectClips);
             if (hard)
-            AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource,10,3,0.8f,AudioManager.auidoInstance.effectClips);
+                AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource, 10, 3, 0.8f, AudioManager.auidoInstance.effectClips);
         }
         else if (distanceToPlayer > attackDistance)
         {
