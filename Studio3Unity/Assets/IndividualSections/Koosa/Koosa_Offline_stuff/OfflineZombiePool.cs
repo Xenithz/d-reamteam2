@@ -48,10 +48,10 @@ using UnityEngine.UI;
         easyZombies=new List<GameObject>();
         mediumZombies=new List<GameObject>();
         hardZombies=new List<GameObject>();
-        PoolZombies(easyZombie,easyZombiesPooled);
-        PoolZombies(mediumZombie,mediumZombiesPooled);
-        PoolZombies(hardZombie,hardZombiesPooled);
-        StartCoroutine(Spawnner());
+        PoolZombies(easyZombie,easyZombiesPooled,easyZombies);
+        PoolZombies(mediumZombie,mediumZombiesPooled,mediumZombies);
+        PoolZombies(hardZombie,hardZombiesPooled,hardZombies);
+        StartCoroutine(SpawnnerPool());
     }
     private void Update()
     {
@@ -60,13 +60,13 @@ using UnityEngine.UI;
     #endregion
  
     #region My Functions
- private void PoolZombies(GameObject zombieToPool,int zombiesPooled)
+ private void PoolZombies(GameObject zombieToPool,int zombiesPooled,List<GameObject> zombielist)
  {
     for(int i = 0; i < zombiesPooled; i++)
     {
         GameObject zombieobject = Instantiate(zombieToPool, spawnPoint.GetChild(spawnIndex).position, Quaternion.identity);
         zombieobject.SetActive(false);
-        zombies.Add(zombieobject);
+        zombielist.Add(zombieobject);
     }
  }
 private void spawn()
@@ -116,5 +116,57 @@ private void spawn()
             hardZombieToSpawn+=1;
         }
     }
+    IEnumerator SpawnnerPool ()
+   {
+         yield return new WaitForSeconds (startWait);
+        while (true)
+        {
+           for (int i = 0; i < easyZombieToSpawn; i++)
+            {
+                spawnIndex = Random.Range(0, spawnPoint.childCount);
+            if (!easyZombies[i].activeInHierarchy)
+        {
+            easyZombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
+            easyZombies[i].transform.rotation = transform.rotation;
+            easyZombies[i].SetActive(true);
+            
+        }
+            yield return new WaitForSeconds (spawnWait);
+            }
+           yield return new WaitForSeconds (waveWait);
+
+           for (int i = 0; i < mediumZombieToSpawn; i++)
+           {
+            spawnIndex = Random.Range(0, spawnPoint.childCount);
+            if (!mediumZombies[i].activeInHierarchy)
+        {
+            mediumZombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
+            mediumZombies[i].transform.rotation = transform.rotation;
+            mediumZombies[i].SetActive(true);
+            
+        }
+            yield return new WaitForSeconds (spawnWait);
+            }
+            yield return new WaitForSeconds (waveWait);
+
+            for (int i = 0; i < hardZombieToSpawn; i++)
+            {
+                spawnIndex = Random.Range(0, spawnPoint.childCount);
+            if (!hardZombies[i].activeInHierarchy)
+        {
+            hardZombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
+            hardZombies[i].transform.rotation = transform.rotation;
+            hardZombies[i].SetActive(true);
+           
+        }
+           yield return new WaitForSeconds (spawnWait);
+           }
+           
+           round++;
+           easyZombieToSpawn+=5;
+           mediumZombieToSpawn+=2;
+            hardZombieToSpawn+=1;
+        }
+}
 }
 #endregion
