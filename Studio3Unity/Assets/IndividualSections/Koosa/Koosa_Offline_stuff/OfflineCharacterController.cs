@@ -25,6 +25,8 @@ public class OfflineCharacterController : MonoBehaviour {
     public float magnitudeToClamp;
     public float jumpPower;
     public OfflineTileManager tileManager;
+    public GameObject offply;
+    public OfflinePlayerStats offlinePlayerStats;
     public Animator playerAnim;
     public int hp;
 	private float inputH;
@@ -45,6 +47,8 @@ public class OfflineCharacterController : MonoBehaviour {
         playerBody = gameObject.GetComponent<Rigidbody>();
         playerCollider = gameObject.GetComponent<BoxCollider>();
         //tileManager = TileManager.GetComponent<OfflineTileManager>();
+        //offply=GameObject.FindGameObjectWithTag("OfflineStats");
+        offlinePlayerStats=GameObject.FindGameObjectWithTag("OfflineStats").GetComponent<OfflinePlayerStats>();
     }
 
     private void FixedUpdate()
@@ -71,6 +75,7 @@ public class OfflineCharacterController : MonoBehaviour {
 			playerAnim.SetBool("isWalk",true);
             transform.rotation = Turn();
             playerAnim.SetInteger("anim",0);
+            AudioManager.auidoInstance.Playeffect(7);
         }
         else playerAnim.SetBool("isWalk",false);
     }
@@ -167,6 +172,7 @@ public class OfflineCharacterController : MonoBehaviour {
     
     private void DropMyTile()
     {
+        AudioManager.auidoInstance.Playeffect(5);
         coolDownImage.SetActive(false);
         coolDown = coolDownToSet;
         Physics.Raycast(transform.position, Vector3.down, out hit, 100f);
@@ -188,8 +194,16 @@ public class OfflineCharacterController : MonoBehaviour {
     private void Countdown()
     {
         coolDown -= Time.deltaTime;
-    }        
-
+    }   
+  
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag==("HealthPickup"))
+        {
+            offlinePlayerStats.healthP1++;
+            offlinePlayerStats.healthSpritesP1[offlinePlayerStats.healthP1].SetActive(true);
+        }
+    }     
  }
     #endregion
 

@@ -24,6 +24,9 @@ public class OfflineZombieFSM : MonoBehaviour
     public float alignWeight;
     public float separateWeight;
     public float cohesionWeight;
+    public bool easy;
+    public bool medium;
+    public bool hard;
 
 
     #endregion
@@ -77,6 +80,10 @@ public class OfflineZombieFSM : MonoBehaviour
                 zombieAnim.SetBool("isAttacking", true);
                 zombieAnim.SetBool("isWalking", false);
             }
+            if(easy|| medium)
+            AudioManager.auidoInstance.Playeffect(4);
+            if (hard)
+            AudioManager.auidoInstance.Playeffect(3);
         }
         else if (distanceToPlayer > attackDistance)
         {

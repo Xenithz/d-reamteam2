@@ -126,6 +126,7 @@ private void spawn()
                 spawnIndex = Random.Range(0, spawnPoint.childCount);
             if (!easyZombies[i].activeInHierarchy)
         {
+            AudioManager.auidoInstance.Playeffect(0);
             easyZombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
             easyZombies[i].transform.rotation = transform.rotation;
             easyZombies[i].SetActive(true);
@@ -140,6 +141,7 @@ private void spawn()
             spawnIndex = Random.Range(0, spawnPoint.childCount);
             if (!mediumZombies[i].activeInHierarchy)
         {
+            AudioManager.auidoInstance.Playeffect(1);
             mediumZombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
             mediumZombies[i].transform.rotation = transform.rotation;
             mediumZombies[i].SetActive(true);
@@ -154,6 +156,7 @@ private void spawn()
                 spawnIndex = Random.Range(0, spawnPoint.childCount);
             if (!hardZombies[i].activeInHierarchy)
         {
+            AudioManager.auidoInstance.Playeffect(2);
             hardZombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
             hardZombies[i].transform.rotation = transform.rotation;
             hardZombies[i].SetActive(true);

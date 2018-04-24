@@ -79,7 +79,7 @@ public void MusicShuffle()
     }
     public void Playeffect(int index)
     {
-         effectSource.PlayOneShot(effectClips[index]);
+        effectSource.PlayOneShot(effectClips[index]);
 
     }
 
