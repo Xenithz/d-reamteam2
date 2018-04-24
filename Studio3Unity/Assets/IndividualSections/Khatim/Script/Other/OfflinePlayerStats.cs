@@ -17,28 +17,45 @@ public class OfflinePlayerStats : MonoBehaviour
     private int regularDamage = 1;
     private int fallDamage = 2;
     private int heavyDamage = 6;
+    [SerializeField]
+    private int playerInt;
 
     #endregion
 
     #region Callbacks
     void Awake()
     {
+        playerInt=players.Length;
         players = GameObject.FindGameObjectsWithTag("Player");
+    }
+    void Start()
+    {
+        playerInt=players.Length;
+
     }
 
     void Update()
     {
-        if (healthP1 <= 0)
+    //playerInt=players.Length;
+    if(playerInt==0)
+    {
+        SceneManager.LoadScene("Game_Over");
+        AudioManager.auidoInstance.Playeffect(6);
+    }
+
+        if (healthP1 <= 0 && players[1].active )
         {
             players[1].SetActive(false);
-            SceneManager.LoadScene("Game_Over");
-            //AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource,10,0,0.8f,AudioManager.auidoInstance.effectClips);
-
+            AudioManager.auidoInstance.Playeffect(6);
+            playerInt--;
         }
 
-        if (healthP2 <= 0)
+        if (healthP2 <= 0 && players[0].active)
         {
             players[0].SetActive(false);
+            AudioManager.auidoInstance.Playeffect(6);
+            playerInt--;
+
         }
     }
     #endregion
