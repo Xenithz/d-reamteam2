@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
  
  public class OfflineZombiePool : MonoBehaviour {
@@ -34,11 +35,15 @@ using System.Collections.Generic;
     public float waveWait;
     public float spawnWait;
     public int round;
+    public int roundWait;
+    public Text roundText;
     #endregion
 
  #region Unity Functions
      private void Awake()
     {
+        roundText.text = round.ToString();
+        roundText.enabled = true;
         zombies = new List<GameObject>();
         easyZombies=new List<GameObject>();
         mediumZombies=new List<GameObject>();
@@ -47,10 +52,6 @@ using System.Collections.Generic;
         PoolZombies(mediumZombie,mediumZombiesPooled);
         PoolZombies(hardZombie,hardZombiesPooled);
         StartCoroutine(Spawnner());
-    }
-    private void Start()
-    {
-       
     }
     private void Update()
     {
@@ -108,6 +109,7 @@ private void spawn()
                 Instantiate(hardZombie, (spawnPoint.GetChild(spawnIndex).position + new Vector3(0,2,0)), Quaternion.identity);
                 yield return new WaitForSeconds (spawnWait);
             }
+            yield return new WaitForSeconds(roundWait);
             round++;
             easyZombieToSpawn+=5;
             mediumZombieToSpawn+=2;
