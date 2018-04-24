@@ -73,22 +73,20 @@ public void MusicShuffle()
 	backGroundMusicSource.clip=backGroundMusicClips[randomIndex];
 	backGroundMusicSource.Play();
 }
- public void PlaySFX(AudioSource sourcePlay, int index, List<AudioClip> audioClips)
-    {
-        sourcePlay.PlayOneShot(audioClips[index]);
-    }
-    public void Playeffect(int index)
-    {
-        effectSource.PlayOneShot(effectClips[index]);
-
-    }
-
-    public void PlaySFX(AudioSource sourcePlay, int index, float startTime, float endTime, List<AudioClip> audioClips)
+ public void PlaySFX(AudioSource sourcePlay, int index,float startTime, float endTime, AudioClip[] audioClips)
     {
         sourcePlay.clip = audioClips[index];
         sourcePlay.SetScheduledStartTime(startTime);
         sourcePlay.SetScheduledEndTime(endTime);
         sourcePlay.Play();
+    }
+    public void Playeffect(int index)
+    {
+        effectSource.PlayOneShot(effectClips[index]);
+    }
+    public void PlaySpawn(int index)
+    {
+        backGroundMusicSource.PlayOneShot(effectClips[index]);
     }
 	
 }

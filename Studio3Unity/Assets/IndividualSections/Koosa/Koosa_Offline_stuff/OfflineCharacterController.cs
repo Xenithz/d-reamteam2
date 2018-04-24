@@ -75,20 +75,38 @@ public class OfflineCharacterController : MonoBehaviour {
 			playerAnim.SetBool("isWalk",true);
             transform.rotation = Turn();
             playerAnim.SetInteger("anim",0);
-            AudioManager.auidoInstance.Playeffect(7);
+           // AudioManager.auidoInstance.PlayWalk(7);
+           // AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource,7,0,0.8f,AudioManager.auidoInstance.effectClips);
         }
         else playerAnim.SetBool("isWalk",false);
-    }
 
+        float dropTile=Input.GetAxis("Joystick Tile");
+        if(coolDown<=0 )
+        {
+            coolDownImage.SetActive(true);
+        if (dropTile!=0 && vectorOfMovement== Vector3.zero)
+        {
+        DropMyTile();
+        playerAnim.SetInteger("anim",2);
+       // AudioManager.auidoInstance.Playeffect(10);
+        AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource,10,0,0.8f,AudioManager.auidoInstance.effectClips);
+		}
+       // else playerAnim.SetInteger("anim",0);
+        if(Input.GetKeyDown(KeyCode .J)){
+		playerAnim.SetBool("death",true);
+        }
+        }
+    }
+/* 
     private void Update()
     {
      float dropTile=Input.GetAxis("Joystick Tile");
         if(coolDown<=0 )
         {
             coolDownImage.SetActive(true);
-        if (dropTile!=0)
+        if (dropTile!=0 && vectorOfMovement)
         {
-         DropMyTile();
+        DropMyTile();
         playerAnim.SetInteger("anim",2);
         AudioManager.auidoInstance.Playeffect(10);
 		}
@@ -99,6 +117,7 @@ public class OfflineCharacterController : MonoBehaviour {
         }
         
     }
+    */
     #endregion
 
 #region  My Functions

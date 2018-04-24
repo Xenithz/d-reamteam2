@@ -126,7 +126,8 @@ private void spawn()
                 spawnIndex = Random.Range(0, spawnPoint.childCount);
             if (!easyZombies[i].activeInHierarchy)
         {
-            AudioManager.auidoInstance.Playeffect(0);
+           // AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource,10,0,0.8f,AudioManager.auidoInstance.effectClips);
+            AudioManager.auidoInstance.PlaySpawn(0);
             easyZombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
             easyZombies[i].transform.rotation = transform.rotation;
             easyZombies[i].SetActive(true);
@@ -141,7 +142,8 @@ private void spawn()
             spawnIndex = Random.Range(0, spawnPoint.childCount);
             if (!mediumZombies[i].activeInHierarchy)
         {
-            AudioManager.auidoInstance.Playeffect(1);
+           // AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource,10,1,0.8f,AudioManager.auidoInstance.effectClips);
+            AudioManager.auidoInstance.PlaySpawn(1);
             mediumZombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
             mediumZombies[i].transform.rotation = transform.rotation;
             mediumZombies[i].SetActive(true);
@@ -156,7 +158,8 @@ private void spawn()
                 spawnIndex = Random.Range(0, spawnPoint.childCount);
             if (!hardZombies[i].activeInHierarchy)
         {
-            AudioManager.auidoInstance.Playeffect(2);
+            //AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource,10,2,0.8f,AudioManager.auidoInstance.effectClips);
+            AudioManager.auidoInstance.PlaySpawn(2);
             hardZombies[i].transform.position = spawnPoint.GetChild(spawnIndex).position;
             hardZombies[i].transform.rotation = transform.rotation;
             hardZombies[i].SetActive(true);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OfflinePlayerStats : MonoBehaviour
 {
@@ -29,21 +30,24 @@ public class OfflinePlayerStats : MonoBehaviour
     {
         if (healthP1 <= 0)
         {
-            players[0].SetActive(false);
+            players[1].SetActive(false);
+            SceneManager.LoadScene("Game_Over");
+            //AudioManager.auidoInstance.PlaySFX(AudioManager.auidoInstance.effectSource,10,0,0.8f,AudioManager.auidoInstance.effectClips);
+
         }
 
         if (healthP2 <= 0)
         {
-            players[1].SetActive(false);
+            players[0].SetActive(false);
         }
     }
     #endregion
 
     #region Functions
-    public void DamageTaken(int damage)
+    public void DamageTaken(int damage, int target)
     {
         //For P1 Health
-        if (damage == 1)
+        if (damage == 1 && target == 1)
         {
             for (int i = healthP1 - 1; i >= healthP1 - damage; i--)
             {
@@ -52,7 +56,7 @@ public class OfflinePlayerStats : MonoBehaviour
             healthP1 -= damage;
         }
 
-        if (damage == 2)
+        if (damage == 2 && target == 1)
         {
             //if helath = 5
             for (int i = healthP1 - 1; i >= healthP1 - damage; i--)
@@ -60,30 +64,27 @@ public class OfflinePlayerStats : MonoBehaviour
                 healthSpritesP1[i].SetActive(false);
             }
             healthP1 -= damage;
+        }
+
+        //For P2 Health
+        if (damage == 1 && target == 0)
+        {
+            for (int i = healthP2 - 1; i >= healthP2 - damage; i--)
+            {
+                healthSpritesP2[i].SetActive(false);
+            }
+            healthP2 -= damage;
+        }
+
+        if (damage == 2 && target == 0)
+        {
+            //if helath = 5
+            for (int i = healthP2 - 1; i >= healthP2 - damage; i--)
+            {
+                healthSpritesP2[i].SetActive(false);
+            }
+            healthP2 -= damage;
         }
     }
-
-    /*public void DamageTakenP2(int damage)
-    {
-        //For P2 Health
-        if (damage == 1)
-        {
-            for (int i = healthP2 - 1; i >= healthP2 - damage; i--)
-            {
-                healthSpritesP2[i].SetActive(false);
-            }
-            healthP2 -= damage;
-        }
-
-        if (damage == 2)
-        {
-            //if helath = 5
-            for (int i = healthP2 - 1; i >= healthP2 - damage; i--)
-            {
-                healthSpritesP2[i].SetActive(false);
-            }
-            healthP2 -= damage;
-        }
-    }*/
     #endregion
 }
