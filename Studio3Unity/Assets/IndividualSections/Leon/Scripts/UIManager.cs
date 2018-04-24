@@ -114,13 +114,13 @@ public class UIManager : MonoBehaviour {
     
     public void OnClickOfflineOnePlayerScene() // to go to 2 player map
     {
-        SceneManager.LoadScene("2_Player_Offline");
+        SceneManager.LoadScene("Offline_1_Player");
     }
 
     
     public void OnClickOfflineTwoPlayerScene() // to go to 4 player map
     {
-        SceneManager.LoadScene("2_Player_Offline");
+        SceneManager.LoadScene("Offline_2_Player");
     }
 
     public void OnClickFourPlayerScene() // to go to 4 player map
