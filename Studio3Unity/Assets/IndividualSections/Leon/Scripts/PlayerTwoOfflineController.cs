@@ -159,8 +159,7 @@ public class PlayerTwoOfflineController : MonoBehaviour {
         jumpVector.x=0;
         jumpVector.z=0;
         playerBody.AddForce(jumpVector,ForceMode.Impulse);
-
-
+        playerBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
     }
     
     private void DropMyTile()

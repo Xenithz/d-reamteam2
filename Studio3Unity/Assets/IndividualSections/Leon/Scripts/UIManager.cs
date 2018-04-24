@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour {
+public class UIManager : MonoBehaviour
+{
     public Transform loginPanel;
     public Transform registerPanel;
     public Transform mainMenuPanel;
@@ -18,18 +19,20 @@ public class UIManager : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    void Start()
     {
-	}
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    }
 
     public void OnClickToMainMenuScene()
     {
         SceneManager.LoadScene("Main_Menu");
+        Time.timeScale = 1;
     }
     public void OnClickToLogin() // to go to log in
     {
@@ -46,7 +49,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void OnClickOfflinePanel()
-    { 
+    {
         PhotonNetwork.offlineMode = true;
         offlinePickPanel.gameObject.SetActive(true);
         mainMenuPanel.gameObject.SetActive(false);
@@ -55,7 +58,7 @@ public class UIManager : MonoBehaviour {
     public void OnClickOnlinePanel()
     {
         onlinePickPanel.gameObject.SetActive(true);
-        mainMenuPanel.gameObject.SetActive(false); 
+        mainMenuPanel.gameObject.SetActive(false);
         loginPanel.gameObject.SetActive(false);
     }
 
@@ -73,13 +76,13 @@ public class UIManager : MonoBehaviour {
 
     public void OnClickPlayOnline()
     {
-        if(MyNetworkManager.instance.isLoggedIn == false)
+        if (MyNetworkManager.instance.isLoggedIn == false)
         {
             PhotonNetwork.offlineMode = false;
             mainMenuPanel.gameObject.SetActive(false);
             loginPanel.gameObject.SetActive(true);
         }
-        else if(MyNetworkManager.instance.isLoggedIn == true)
+        else if (MyNetworkManager.instance.isLoggedIn == true)
         {
             PhotonNetwork.offlineMode = false;
             mainMenuPanel.gameObject.SetActive(false);
@@ -101,23 +104,23 @@ public class UIManager : MonoBehaviour {
 
     public void OnClickToAdminPanel()
     {
-       if( banPanel.activeInHierarchy == false)
+        if (banPanel.activeInHierarchy == false)
         {
             banPanel.gameObject.SetActive(true);
         }
-       else if( banPanel.activeInHierarchy == true)
+        else if (banPanel.activeInHierarchy == true)
         {
             banPanel.gameObject.SetActive(false);
         }
     }
 
-    
+
     public void OnClickOfflineOnePlayerScene() // to go to 2 player map
     {
         SceneManager.LoadScene("Offline_1_Player");
     }
 
-    
+
     public void OnClickOfflineTwoPlayerScene() // to go to 4 player map
     {
         SceneManager.LoadScene("Offline_2_Player");
