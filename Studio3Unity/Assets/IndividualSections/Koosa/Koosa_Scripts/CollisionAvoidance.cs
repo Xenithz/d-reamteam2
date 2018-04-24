@@ -84,11 +84,12 @@ public float maxSpeed;
    }
     public bool CanAvoid()
 	{
-	return colliderHit.transform != target && colliderHit.collider.tag == "Avoid";
+	return colliderHit.transform != target;
 	}
 	public void Move()
 	{
 	steeringForce=(transform.position+=targetVector.normalized);
+    steeringForce=Vector3.ClampMagnitude(steeringForce,10);
 	rb.AddForce(steeringForce*Time.deltaTime*speed);
 	rb.velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 	}
