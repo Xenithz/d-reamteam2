@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -42,10 +42,10 @@ MonoBehaviour:
     y: 30
     width: 1858
     height: 987
-  m_MinSize: {x: 683, y: 492}
-  m_MaxSize: {x: 14004, y: 14042}
+  m_MinSize: {x: 683, y: 342}
+  m_MaxSize: {x: 12008, y: 8042}
   vertical: 0
-  controlID: 642
+  controlID: 9
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -114,14 +114,14 @@ MonoBehaviour:
     y: 598
     width: 1481
     height: 389
-  m_MinSize: {x: 232, y: 271}
-  m_MaxSize: {x: 10002, y: 10021}
-  m_ActualView: {fileID: 13}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 13}
   - {fileID: 18}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: Default
+  m_LastLoadedLayoutName: 
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -206,10 +206,10 @@ MonoBehaviour:
     y: 0
     width: 1481
     height: 987
-  m_MinSize: {x: 406, y: 492}
-  m_MaxSize: {x: 10002, y: 14042}
+  m_MinSize: {x: 406, y: 342}
+  m_MaxSize: {x: 8006, y: 8042}
   vertical: 1
-  controlID: 643
+  controlID: 10
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 644
+  controlID: 11
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -324,19 +324,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/IndividualSections/Leon/Scenes
+    - Assets/IndividualSections/Koosa/Koosa_Prefabs
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/IndividualSections/Leon/Scenes
+  - Assets/IndividualSections/Koosa/Koosa_Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity Projects\Studio 3\d-reamteam2\Studio3Unity
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 289}
-    m_SelectedIDs: 40f30000
-    m_LastClickedID: 62272
-    m_ExpandedIDs: 0000000048cf0000a4e80000f8e80000d0e90000b2ea0000e2ea0000f0ea0000f4ea000026eb00002aeb00003aeb000000ed000006ed000014ed00001aed00003aed0000d8ed00003cee000018ef0000aeef0000b2ef0000c6ef000030f00000aef00000baf0000016f200003cf2000042f2000046f20000a8f2000040f3000044f300004ef30000f0f300003cf400006af400007af4000036f500008ef50000aef5000066fe000068fe00006afe00006cfe00006efe000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 145}
+    m_SelectedIDs: 16330000
+    m_LastClickedID: 13078
+    m_ExpandedIDs: 0000000078270000ea270000f2280000c62a0000122b0000262b00002a2b0000682b00007a2b0000922b0000742c0000782d00007e2d0000b22d0000b82d0000e42d0000882e0000222f0000f0300000bc310000c8310000ea31000068320000fa3200001633000046380000703800007a3800007e38000004390000d6390000da390000f83900007c3e00001c3f00007a3f0000943f0000b04000003a4100005e410000c2b30000c4b30000c6b30000c8b30000cab3000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -364,7 +364,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000048cf0000a4e80000f8e80000d0e90000b2ea0000e2ea0000f0ea0000f4ea000026eb00002aeb00003aeb000000ed000006ed000014ed00001aed00003aed0000d8ed00003cee000018ef0000aeef0000b2ef0000c6ef000030f00000aef00000baf0000016f200003cf2000042f2000046f20000a8f2000040f3000044f300004ef30000f0f300003cf400006af400007af4000036f500008ef50000aef5000066fe000068fe00006afe00006cfe00006efe0000
+    m_ExpandedIDs: 0000000078270000ea270000f2280000c62a0000122b0000262b00002a2b0000682b00007a2b0000922b0000742c0000782d00007e2d0000b22d0000b82d0000e42d0000882e0000222f0000f0300000bc310000c8310000ea31000068320000fa3200001633000046380000703800007a3800007e38000004390000d6390000da390000f83900007c3e00001c3f00007a3f0000943f0000b04000003a4100005e410000c2b30000c4b30000c6b30000c8b30000cab30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -389,8 +389,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: f8e1fcff
+    m_LastClickedInstanceID: -204296
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -480,9 +480,9 @@ MonoBehaviour:
     height: 577
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: def40000
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 5af1f5ffe8f3f5ff5a8ff6fff0f0f6ff325cf7ff1c7ff8ffc8f7f8ffb6fcf8ff10b5fcff06f6fdff0000000096fb0000b4a50700f0490a00baaa0a00
+    m_ExpandedIDs: 242efdffd6a1fdff8c0afeffea1afeff5689feffe8abfeff505effffba6dffffdafbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -501,7 +501,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 0}
     m_SearchString: 
   m_ExpandedScenes:
-  - Offline_1_Player
+  - Offline_2_Player
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -532,14 +532,14 @@ MonoBehaviour:
     width: 1275
     height: 577
   m_SceneLighting: 1
-  lastFramingTime: 2126.264415813859
+  lastFramingTime: 1923.9669135541044
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 209.50153, y: 224.09299, z: -251.07455}
+    m_Target: {x: 196.52867, y: 130.285, z: 140.21411}
     speed: 2
-    m_Value: {x: 209.50153, y: 224.09299, z: -251.07455}
+    m_Value: {x: 196.52867, y: 130.285, z: 140.21411}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -562,13 +562,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.3776019, y: 0.0008502017, z: -0.00034400795, w: 0.92596763}
+    m_Target: {x: 0.13326687, y: -0.024360662, z: 0.0032792145, w: 0.9907755}
     speed: 2
-    m_Value: {x: 0.37760186, y: 0.00085020164, z: -0.00034400795, w: 0.9259676}
+    m_Value: {x: 0.13326684, y: -0.024360657, z: 0.0032792138, w: 0.9907753}
   m_Size:
-    m_Target: 591.80505
+    m_Target: 1046.2543
     speed: 2
-    m_Value: 591.80505
+    m_Value: 1046.2543
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -678,6 +678,6 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 819
+    y: 690
     width: 1479
-    height: 239
+    height: 368

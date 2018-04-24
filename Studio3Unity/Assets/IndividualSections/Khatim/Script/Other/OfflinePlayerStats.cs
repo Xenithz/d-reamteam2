@@ -42,6 +42,7 @@ public class OfflinePlayerStats : MonoBehaviour
     #region Functions
     public void DamageTaken(int damage)
     {
+        //For P1 Health
         if (damage == 1)
         {
             for (int i = healthP1 - 1; i >= healthP1 - damage; i--)
@@ -51,7 +52,6 @@ public class OfflinePlayerStats : MonoBehaviour
             healthP1 -= damage;
         }
 
-        //Testing
         if (damage == 2)
         {
             //if helath = 5
@@ -62,5 +62,28 @@ public class OfflinePlayerStats : MonoBehaviour
             healthP1 -= damage;
         }
     }
+
+    /*public void DamageTakenP2(int damage)
+    {
+        //For P2 Health
+        if (damage == 1)
+        {
+            for (int i = healthP2 - 1; i >= healthP2 - damage; i--)
+            {
+                healthSpritesP2[i].SetActive(false);
+            }
+            healthP2 -= damage;
+        }
+
+        if (damage == 2)
+        {
+            //if helath = 5
+            for (int i = healthP2 - 1; i >= healthP2 - damage; i--)
+            {
+                healthSpritesP2[i].SetActive(false);
+            }
+            healthP2 -= damage;
+        }
+    }*/
     #endregion
 }
