@@ -18,11 +18,6 @@ public class Flocking : MonoBehaviour
     #region Private Variables
     private Rigidbody rg;
     private List<Rigidbody> boids;
-    /*private Vector3 moveAwayDesiredVel;
-    private Vector3 totalMoveAwayDesiredVel;
-    private Vector3 totalCohesionDesiredVel;
-    private Vector3 cohesionDesiredVel;
-    private Vector3 separationSteeringClamp;*/
     #endregion
 
     #region Callbacks
