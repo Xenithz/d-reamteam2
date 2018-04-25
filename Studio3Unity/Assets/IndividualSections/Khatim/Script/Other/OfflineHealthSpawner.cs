@@ -13,7 +13,7 @@ public class OfflineHealthSpawner : MonoBehaviour
     #endregion
 
     #region Private Variables
-    private float maxTime = 60;
+    private float maxTime = 30.0f;
 
     #endregion
 

@@ -11,6 +11,7 @@ public class PlayerFSM : MonoBehaviour
     public float maxForce;
     public float distanceToZombies;
     public float distanceToHealth;
+    public Animator aiAnim;
     #endregion
 
     #region Private Variables
@@ -20,6 +21,8 @@ public class PlayerFSM : MonoBehaviour
     private Vector3 totalDesiredFleeVel;
     private Vector3 totalDesiredSeekVel;
     private OfflinePlayerStats offlinePly;
+    [SerializeField]
+    private int randomTarget;
     #endregion
 
     #region Callbacks
@@ -27,11 +30,10 @@ public class PlayerFSM : MonoBehaviour
     {
         offlinePly = GameObject.FindGameObjectWithTag("OfflineStats").GetComponent<OfflinePlayerStats>();
         rg = GetComponent<Rigidbody>();
+        aiAnim = GetComponent<Animator>();
 
         totalDesiredFleeVel = Vector3.zero;
         totalDesiredSeekVel = Vector3.zero;
-
-        currCondition = 1;
     }
     void Update()
     {
@@ -44,24 +46,21 @@ public class PlayerFSM : MonoBehaviour
             if (healthTargets[i] != null)
                 currCondition = 2;
         }
+    }
+
+    void FixedUpdate()
+    {
+        randomTarget = Random.Range(0, zombieTargets.Length);
 
         for (int j = 0; j < zombieTargets.Length; j++)
         {
-            distanceToZombies = Vector3.Distance(transform.position, zombieTargets[j].transform.position);
-            if (zombieTargets[j] != null)
+            distanceToZombies = Vector3.Distance(transform.position, zombieTargets[randomTarget].transform.position);
+            if (zombieTargets[randomTarget] != null)
+            {
                 currCondition = 1;
+            }
         }
-    }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "HealthPickup")
-        {
-            other.gameObject.SetActive(false);
-        }
-    }
-    void FixedUpdate()
-    {
         switch (currCondition)
         {
             case 1:
@@ -76,6 +75,14 @@ public class PlayerFSM : MonoBehaviour
                 break;
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "HealthPickup")
+        {
+            other.gameObject.SetActive(false);
+        }
+    }
     #endregion
 
     #region Functions
@@ -86,10 +93,13 @@ public class PlayerFSM : MonoBehaviour
         {
             if (healthTargets[i].activeInHierarchy && offlinePly.healthP2 <= 5)
             {
+                aiAnim.SetBool("isWalk", true);
                 Debug.Log("Seeking Health");
                 Vector3 desiredSeekVel = (healthTargets[i].transform.position - transform.position).normalized * maxSpeed;
                 totalDesiredSeekVel += desiredSeekVel;
             }
+            else
+                aiAnim.SetBool("isWalk", false);
         }
         Vector3 steering = totalDesiredSeekVel - rg.velocity;
         Vector3 steeringClamped = Vector3.ClampMagnitude(steering, maxForce);
@@ -118,8 +128,9 @@ public class PlayerFSM : MonoBehaviour
         {
             //This is setting a new velocity everytime.
             //Need to add all of the forces together;
-            if (distanceToZombies <= 20)
+            if (distanceToZombies < 20)
             {
+                aiAnim.SetBool("isWalk", true);
                 Debug.Log("Avoiding Zombies");
                 desriedFleeVel = (transform.position - zombieTargets[j].transform.position).normalized * maxSpeed;
                 totalDesiredFleeVel += desriedFleeVel;
