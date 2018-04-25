@@ -11,7 +11,6 @@ public class PlayerFSM : MonoBehaviour
     public float maxForce;
     public float distanceToZombies;
     public float distanceToHealth;
-    public OfflinePlayerStats offlinePly;
     #endregion
 
     #region Private Variables
@@ -20,12 +19,13 @@ public class PlayerFSM : MonoBehaviour
     private Vector3 desriedFleeVel;
     private Vector3 totalDesiredFleeVel;
     private Vector3 totalDesiredSeekVel;
+    private OfflinePlayerStats offlinePly;
     #endregion
 
     #region Callbacks
     void Start()
     {
-        offlinePly.GetComponent<OfflinePlayerStats>();
+        offlinePly = GameObject.FindGameObjectWithTag("OfflineStats").GetComponent<OfflinePlayerStats>();
         rg = GetComponent<Rigidbody>();
 
         totalDesiredFleeVel = Vector3.zero;
