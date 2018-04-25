@@ -28,8 +28,6 @@ public class OfflineZombieFSM : MonoBehaviour
     public bool easy;
     public bool medium;
     public bool hard;
-
-
     #endregion
 
     #region Private Variables
@@ -58,7 +56,6 @@ public class OfflineZombieFSM : MonoBehaviour
 
     void OnEnable()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
         randomTarget = Random.Range(0, players.Length);
 
         noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
@@ -72,7 +69,6 @@ public class OfflineZombieFSM : MonoBehaviour
 
     void Update()
     {
-
         distanceToPlayer = Vector3.Distance(transform.position, players[randomTarget].transform.position);
         if (distanceToPlayer < attackDistance && timer < 4)
         {
@@ -115,6 +111,8 @@ public class OfflineZombieFSM : MonoBehaviour
 
     void FixedUpdate()
     {
+        players = GameObject.FindGameObjectsWithTag("Player");
+
         switch (currCondition)
         {
             case 1:
