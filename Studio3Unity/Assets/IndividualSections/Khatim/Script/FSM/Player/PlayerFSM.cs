@@ -10,6 +10,7 @@ public class PlayerFSM : MonoBehaviour
     public float maxSpeed;
     public float maxForce;
     public float distanceToZombies;
+    public float closeRange;
     public float distanceToHealth;
     public Animator aiAnim;
     #endregion
@@ -128,7 +129,7 @@ public class PlayerFSM : MonoBehaviour
         {
             //This is setting a new velocity everytime.
             //Need to add all of the forces together;
-            if (distanceToZombies < 20)
+            if (distanceToZombies < closeRange)
             {
                 aiAnim.SetBool("isWalk", true);
                 Debug.Log("Avoiding Zombies");
