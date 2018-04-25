@@ -10,11 +10,10 @@ public class OfflineHealthSpawner : MonoBehaviour
     public List<GameObject> health;
     public float timer = 0;
     public int index;
+    public float maxTime;
     #endregion
 
     #region Private Variables
-    private float maxTime = 30.0f;
-
     #endregion
 
     #region Callbacks
