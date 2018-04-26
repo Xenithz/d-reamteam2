@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class OfflineZombieFSM : MonoBehaviour
 {
@@ -36,7 +37,6 @@ public class OfflineZombieFSM : MonoBehaviour
     private int currCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
-    private GameObject offlinePlyStats;
     private OfflinePlayerStats offlinePly;
     #endregion
 
@@ -50,12 +50,12 @@ public class OfflineZombieFSM : MonoBehaviour
         timeToAttack = 2;
         attacking = false;
 
-        offlinePlyStats = GameObject.FindGameObjectWithTag("OfflineStats");
-        offlinePly = offlinePlyStats.GetComponent<OfflinePlayerStats>();
+        offlinePly = GameObject.FindGameObjectWithTag("OfflineStats").GetComponent<OfflinePlayerStats>();
     }
 
     void OnEnable()
     {
+        players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
         randomTarget = Random.Range(0, players.Length);
 
         noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
@@ -95,9 +95,12 @@ public class OfflineZombieFSM : MonoBehaviour
 
         if (!players[randomTarget].activeInHierarchy)
         {
+            players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
+            randomTarget = Random.Range(0, players.Length);
             currCondition = 3;
         }
 
+        //Zombie Attacking
         if (attacking == true)
         {
             timeToAttack = timeToAttack + Time.deltaTime;
@@ -111,8 +114,6 @@ public class OfflineZombieFSM : MonoBehaviour
 
     void FixedUpdate()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-
         switch (currCondition)
         {
             case 1:

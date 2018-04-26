@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 //(typeof(Rigidbody))]
 public class OfflineCharacterController : MonoBehaviour
 {
-
     #region Private Variables 
-    [SerializeField]
     private Rigidbody playerBody;
-    [SerializeField]
     private Collider playerCollider;
     private RaycastHit hit;
     private Tile myTile;
-    [SerializeField]
     private float coolDown;
-    public float coolDownToSet;
-    public GameObject coolDownImage;
+    private OfflinePlayerStats offlinePlyStats;
+    private GameObject coolDownImage;
+    private Animator playerAnim;
+    private float inputH;
+    private float inputV;
     #endregion
 
     #region Public Variables
@@ -26,17 +26,12 @@ public class OfflineCharacterController : MonoBehaviour
     public float magnitudeToClamp;
     public float jumpPower;
     public OfflineTileManager tileManager;
-    public GameObject offply;
-    public OfflinePlayerStats offlinePlyStats;
-    public Animator playerAnim;
-    public int hp;
-    private float inputH;
-    private float inputV;
+    public float coolDownToSet;
+    public int healthP1 = 6;
+    public GameObject[] healthSpritesP1;
     #endregion
 
     #region Unity Functions
-
-
     private void Awake()
     {
         playerAnim = GetComponent<Animator>();
@@ -47,9 +42,10 @@ public class OfflineCharacterController : MonoBehaviour
         playerCollider = gameObject.GetComponent<BoxCollider>();
 
         offlinePlyStats = GameObject.FindGameObjectWithTag("OfflineStats").GetComponent<OfflinePlayerStats>();
+        healthSpritesP1 = GameObject.FindGameObjectsWithTag("Health").OrderBy(go => go.name).ToArray();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         Countdown();
 
@@ -104,7 +100,7 @@ public class OfflineCharacterController : MonoBehaviour
         return playerinput;
     }
 
-    private void Movement(Vector3 movementvector)
+    void Movement(Vector3 movementvector)
     {
         movementvector.x = movementvector.x * moveSpeed;
         movementvector.z = movementvector.z * moveSpeed;
@@ -113,28 +109,28 @@ public class OfflineCharacterController : MonoBehaviour
         playerBody.AddForce(movementvector, ForceMode.Impulse);
     }
 
-    private Quaternion Turn()
+    Quaternion Turn()
     {
         Quaternion look;
         look = Quaternion.LookRotation(MovementInput());
         return look;
     }
 
-    private bool IsNotGrounded()
+    bool IsNotGrounded()
     {
         float groundDistance;
         groundDistance = playerCollider.bounds.extents.y;
         return Physics.Raycast(transform.position, -Vector3.up, groundDistance + 1f);
     }
 
-    private Vector3 JumpInput()
+    Vector3 JumpInput()
     {
         Vector3 jumpInput;
         float jump = Input.GetAxis("Joystick Jump");
         jumpInput = new Vector3(0, jump, 0).normalized;
         return jumpInput;
     }
-    private void Jump(Vector3 jumpVector)
+    void Jump(Vector3 jumpVector)
     {
         jumpVector.y = jumpVector.y * jumpPower;
         jumpVector.x = 0;
@@ -143,7 +139,7 @@ public class OfflineCharacterController : MonoBehaviour
         playerBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
     }
 
-    private void DropMyTile()
+    void DropMyTile()
     {
         AudioManager.auidoInstance.Playeffect(5);
         coolDownImage.SetActive(false);
@@ -158,18 +154,9 @@ public class OfflineCharacterController : MonoBehaviour
             Debug.Log("HITTTING");
         }
     }
-    private void Countdown()
+    void Countdown()
     {
         coolDown -= Time.deltaTime;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == ("HealthPickup") && offlinePlyStats.healthP1 <6)
-        {
-            offlinePlyStats.healthP1++;
-            offlinePlyStats.healthSpritesP1[offlinePlyStats.healthP1].SetActive(true);
-        }
     }
 }
 #endregion

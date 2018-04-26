@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class OfflinePlayerStats : MonoBehaviour
 {
@@ -14,19 +15,15 @@ public class OfflinePlayerStats : MonoBehaviour
     #endregion
 
     #region Private Variables
-    private int regularDamage = 1;
-    private int fallDamage = 2;
-    private int heavyDamage = 6;
     [SerializeField]
     private int playerInt;
-
     #endregion
 
     #region Callbacks
     void Awake()
     {
         playerInt = players.Length;
-        players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
     }
     void Start()
     {
@@ -42,16 +39,16 @@ public class OfflinePlayerStats : MonoBehaviour
             AudioManager.auidoInstance.Playeffect(6);
         }
 
-        if (healthP1 <= 0 && players[1].active)
+        if (healthP1 <= 0 && players[0].active)
         {
-            players[1].SetActive(false);
+            players[0].SetActive(false);
             AudioManager.auidoInstance.Playeffect(6);
             playerInt--;
         }
 
-        if (healthP2 <= 0 && players[0].active)
+        if (healthP2 <= 0 && players[1].active)
         {
-            players[0].SetActive(false);
+            players[1].SetActive(false);
             AudioManager.auidoInstance.Playeffect(6);
             playerInt--;
         }
@@ -62,7 +59,7 @@ public class OfflinePlayerStats : MonoBehaviour
     public void DamageTaken(int damage, int target)
     {
         //For P1 Damage
-        if (damage == 1 && target == 1)
+        if (damage == 1 && target == 0)
         {
             for (int i = healthP1 - 1; i >= healthP1 - damage; i--)
             {
@@ -71,7 +68,7 @@ public class OfflinePlayerStats : MonoBehaviour
             healthP1 -= damage;
         }
 
-        if (damage == 2 && target == 1)
+        if (damage == 2 && target == 0)
         {
             //if helath = 5
             for (int i = healthP1 - 1; i >= healthP1 - damage; i--)
@@ -82,7 +79,7 @@ public class OfflinePlayerStats : MonoBehaviour
         }
 
         //For P2 Damage
-        if (damage == 1 && target == 0)
+        if (damage == 1 && target == 1)
         {
             for (int i = healthP2 - 1; i >= healthP2 - damage; i--)
             {
@@ -91,7 +88,7 @@ public class OfflinePlayerStats : MonoBehaviour
             healthP2 -= damage;
         }
 
-        if (damage == 2 && target == 0)
+        if (damage == 2 && target == 1)
         {
             //if helath = 5
             for (int i = healthP2 - 1; i >= healthP2 - damage; i--)
@@ -101,28 +98,5 @@ public class OfflinePlayerStats : MonoBehaviour
             healthP2 -= damage;
         }
     }
-
-    /*public void HealthGained(int health, int target)
-    {
-        if (health == 1 && target == 1)
-        {
-            healthP1 += health;
-            for (int i = healthP1; i < healthP1 + health; i++)
-            {
-                healthSpritesP1[i].SetActive(true);
-            }
-
-        }
-
-        if (health == 1 && target == 2)
-        {
-            //if helath = 5
-            for (int i = healthP1 - 1; i >= healthP1 - health; i--)
-            {
-                healthSpritesP1[i].SetActive(false);
-            }
-            healthP1 -= health;
-        }
-    }*/
     #endregion
 }
