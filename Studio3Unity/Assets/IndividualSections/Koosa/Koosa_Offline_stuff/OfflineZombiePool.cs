@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class OfflineZombiePool : MonoBehaviour
 {
-
     #region Public Variables
     public List<GameObject> zombies;
     public List<GameObject> easyZombies;
@@ -18,7 +17,6 @@ public class OfflineZombiePool : MonoBehaviour
     public int easyZombieToSpawn;
     public int mediumZombieToSpawn;
     public int hardZombieToSpawn;
-    public GameObject zombie;
     public GameObject easyZombie;
     public GameObject mediumZombie;
     public GameObject hardZombie;
