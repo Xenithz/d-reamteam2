@@ -18,7 +18,7 @@ public class destroyer : MonoBehaviour
         }
         if (other.gameObject.GetComponent<ZombieFSM>() || other.gameObject.GetComponent<OfflineZombieFSM>())
         {
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         }
         if (other.gameObject.GetComponent<Character_Controller>() || other.gameObject.GetComponent<OfflineCharacterController>() && tutorialflag)
         {

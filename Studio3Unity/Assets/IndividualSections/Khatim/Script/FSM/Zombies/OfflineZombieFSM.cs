@@ -59,7 +59,6 @@ public class OfflineZombieFSM : MonoBehaviour
     {
         players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
         randomTarget = Random.Range(0, players.Length);
-        //noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
 
         /*for (int i = 0; i < noOfBoids.Length; i++)
         {
@@ -70,6 +69,8 @@ public class OfflineZombieFSM : MonoBehaviour
 
     void Update()
     {
+        offZomPool.noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
+
         distanceToPlayer = Vector3.Distance(transform.position, players[randomTarget].transform.position);
         if (distanceToPlayer < attackDistance && timer < 4)
         {
@@ -180,12 +181,15 @@ public class OfflineZombieFSM : MonoBehaviour
 
         foreach (var other in offZomPool.boids)
         {
-            float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
-
-            if (distanceBetweenBoids > 0 && distanceBetweenBoids < distanceFromNeighbour)
+            if (offZomPool.boids != null)
             {
-                sumOfPos += other.transform.position;
-                count++;
+                float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
+
+                if (distanceBetweenBoids > 0 && distanceBetweenBoids < distanceFromNeighbour)
+                {
+                    sumOfPos += other.transform.position;
+                    count++;
+                }
             }
         }
 
@@ -212,14 +216,17 @@ public class OfflineZombieFSM : MonoBehaviour
 
         foreach (var other in offZomPool.boids)
         {
-            float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
-
-            if (distanceBetweenBoids > 0 && distanceBetweenBoids < desiredSeperation)
+            if (offZomPool.boids != null)
             {
-                moveAwayDesiredVel = (transform.position - other.transform.position).normalized;
-                Vector3 divVel = moveAwayDesiredVel / distanceBetweenBoids;
-                totalMoveAwayDesiredVel += divVel;
-                count++;
+                float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
+
+                if (distanceBetweenBoids > 0 && distanceBetweenBoids < desiredSeperation)
+                {
+                    moveAwayDesiredVel = (transform.position - other.transform.position).normalized;
+                    Vector3 divVel = moveAwayDesiredVel / distanceBetweenBoids;
+                    totalMoveAwayDesiredVel += divVel;
+                    count++;
+                }
             }
         }
 
@@ -243,11 +250,14 @@ public class OfflineZombieFSM : MonoBehaviour
 
         foreach (var other in offZomPool.boids)
         {
-            float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
-            if (distanceBetweenBoids > 0 && distanceBetweenBoids < neighbourDistance)
+            if (offZomPool.boids != null)
             {
-                totalVector = totalVector + other.velocity;
-                count++;
+                float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
+                if (distanceBetweenBoids > 0 && distanceBetweenBoids < neighbourDistance)
+                {
+                    totalVector = totalVector + other.velocity;
+                    count++;
+                }
             }
         }
 

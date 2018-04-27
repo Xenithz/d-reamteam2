@@ -27,8 +27,6 @@ public class OfflineCharacterController : MonoBehaviour
     public float jumpPower;
     public OfflineTileManager tileManager;
     public float coolDownToSet;
-    public int healthP1 = 6;
-    public GameObject[] healthSpritesP1;
     #endregion
 
     #region Unity Functions
@@ -42,9 +40,7 @@ public class OfflineCharacterController : MonoBehaviour
         playerCollider = gameObject.GetComponent<BoxCollider>();
 
         offlinePlyStats = GameObject.FindGameObjectWithTag("OfflineStats").GetComponent<OfflinePlayerStats>();
-        healthSpritesP1 = GameObject.FindGameObjectsWithTag("Health").OrderBy(go => go.name).ToArray();
     }
-
     void FixedUpdate()
     {
         Countdown();
@@ -86,6 +82,15 @@ public class OfflineCharacterController : MonoBehaviour
             {
                 playerAnim.SetBool("death", true);
             }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "HealthPickup" && offlinePlyStats.healthP1 < 6)
+        {
+            offlinePlyStats.HealthGained(1);
+            other.gameObject.SetActive(false);
         }
     }
     #endregion

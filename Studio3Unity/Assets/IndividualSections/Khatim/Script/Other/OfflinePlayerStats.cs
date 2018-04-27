@@ -98,5 +98,17 @@ public class OfflinePlayerStats : MonoBehaviour
             healthP2 -= damage;
         }
     }
+
+    public void HealthGained(int health)
+    {
+        if (health == 1)
+        {
+            for (int i = healthP1 - 1; i <= healthP1; i++)
+            {
+                healthSpritesP1[i].SetActive(true);
+            }
+            healthP1 += health;
+        }
+    }
     #endregion
 }
