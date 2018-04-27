@@ -5,18 +5,22 @@ using UnityEngine;
 public class PlayerFSM : MonoBehaviour
 {
     #region  Public Variable
+    [Header("Zombies")]
     public GameObject[] zombieTargets;
-    public GameObject[] healthTargets;
-    public float maxSpeed;
-    public float maxForce;
     public float distanceToZombies;
     public float closeRange;
+    [Header("Health")]
+    public GameObject[] healthTargets;
     public float distanceToHealth;
-    public Animator aiAnim;
+    [Header("Forces")]
+    public float maxSpeed;
+    public float maxForce;
+
     #endregion
 
     #region Private Variables
     private Rigidbody rg;
+    private Animator aiAnim;
     private int currCondition;
     private Vector3 desriedFleeVel;
     private Vector3 totalDesiredFleeVel;
@@ -107,19 +111,6 @@ public class PlayerFSM : MonoBehaviour
 
         rg.AddForce(steeringClamped);
         transform.LookAt(transform.position + rg.velocity);
-
-        /*for (int i = 0; i < healthTargets.Length; i++)
-        {
-            if (healthTargets[i].activeInHierarchy && offlinePly.health <= 5)
-            {
-                desiredSeekVel = (healthTargets[i].transform.position - transform.position).normalized * maxSpeed;
-            }
-        }
-
-        Vector3 steering = desiredSeekVel - rg.velocity;
-        Vector3 steeringClamped = Vector3.ClampMagnitude(steering, maxForce);
-        rg.AddForce(steeringClamped);
-        transform.LookAt(transform.position + rg.velocity);*/
     }
 
     void AvoidZombies()
