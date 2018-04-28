@@ -34,7 +34,7 @@ public class OfflinePlayerStats : MonoBehaviour
     {
         if (playerInt == 0)
         {
-            SceneManager.LoadScene("Game_Over");
+            SceneManager.LoadScene("Game_Over_Scene");
             AudioManager.auidoInstance.Playeffect(6);
         }
 

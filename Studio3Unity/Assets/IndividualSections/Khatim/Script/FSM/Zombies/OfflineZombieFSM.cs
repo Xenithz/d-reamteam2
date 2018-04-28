@@ -88,7 +88,6 @@ public class OfflineZombieFSM : MonoBehaviour
 
         if (!players[randomTarget].activeInHierarchy)
         {
-            players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
             randomTarget = Random.Range(0, players.Length);
             currCondition = 3;
         }
