@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-//(typeof(Rigidbody))]
 public class OfflineCharacterController : MonoBehaviour
 {
     #region Private Variables 

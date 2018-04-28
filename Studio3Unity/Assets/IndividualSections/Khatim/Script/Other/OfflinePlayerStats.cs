@@ -32,7 +32,6 @@ public class OfflinePlayerStats : MonoBehaviour
 
     void Update()
     {
-        //playerInt=players.Length;
         if (playerInt == 0)
         {
             SceneManager.LoadScene("Game_Over");

@@ -21,7 +21,6 @@ public class OfflineZombieFSM : MonoBehaviour
     public int zomDamage;
     public float timer;
     [Header("Flocking Weightage")]
-    //public GameObject[] noOfBoids;
     public float seekWeight;
     public float alignWeight;
     public float separateWeight;
@@ -33,7 +32,6 @@ public class OfflineZombieFSM : MonoBehaviour
 
     #region Private Variables
     private Rigidbody rg;
-    //private List<Rigidbody> boids;
     private int currCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
@@ -46,7 +44,6 @@ public class OfflineZombieFSM : MonoBehaviour
     {
         zombieAnim = this.gameObject.GetComponent<Animator>();
         rg = GetComponent<Rigidbody>();
-        //boids = new List<Rigidbody>();
         delayedDamage = 2;
         timeToAttack = 2;
         attacking = false;
@@ -59,12 +56,6 @@ public class OfflineZombieFSM : MonoBehaviour
     {
         players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
         randomTarget = Random.Range(0, players.Length);
-
-        /*for (int i = 0; i < noOfBoids.Length; i++)
-        {
-            Rigidbody rgBoid = noOfBoids[i].GetComponent<Rigidbody>();
-            boids.Add(rgBoid);
-        }*/
     }
 
     void Update()
