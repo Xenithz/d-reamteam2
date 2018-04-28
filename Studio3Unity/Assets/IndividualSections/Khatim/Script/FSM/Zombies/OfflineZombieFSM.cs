@@ -50,13 +50,16 @@ public class OfflineZombieFSM : MonoBehaviour
 
         offZomPool = GameObject.FindGameObjectWithTag("OfflineZombieSpawner").GetComponent<OfflineZombiePool>();
         offlinePly = GameObject.FindGameObjectWithTag("OfflineStats").GetComponent<OfflinePlayerStats>();
-    }
 
-    void OnEnable()
-    {
         players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
         randomTarget = Random.Range(0, players.Length);
     }
+
+    /*void OnEnable()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
+        randomTarget = Random.Range(0, players.Length);
+    }*/
 
     void Update()
     {
