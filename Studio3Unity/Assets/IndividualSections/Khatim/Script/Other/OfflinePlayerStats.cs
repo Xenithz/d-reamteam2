@@ -106,7 +106,16 @@ public class OfflinePlayerStats : MonoBehaviour
             {
                 healthSpritesP1[i].SetActive(true);
             }
-            healthP1 += health;
+            healthP1++;
+        }
+
+        if (health == 2)
+        {
+            for (int i = healthP2 - 1; i <= healthP2; i++)
+            {
+                healthSpritesP2[i].SetActive(true);
+            }
+            healthP2++;
         }
     }
     #endregion
