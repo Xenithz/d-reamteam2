@@ -11,9 +11,9 @@ public class destroyer : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
 
-        if ((other.gameObject.GetComponent<ZombieFSM>() || other.gameObject.GetComponent<OfflineZombieFSM>()) && tutorialflag)
+        if ((other.gameObject.GetComponent<ZombieFSM>() || other.gameObject.GetComponent<OfflineZombieTutorial>()) && tutorialflag)
         {
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             tutorial.zombieCount--;
         }
         if (other.gameObject.GetComponent<ZombieFSM>() || other.gameObject.GetComponent<OfflineZombieFSM>())
