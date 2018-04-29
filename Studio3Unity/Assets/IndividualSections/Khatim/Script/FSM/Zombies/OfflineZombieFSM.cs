@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class OfflineZombieFSM : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class OfflineZombieFSM : MonoBehaviour
     public int zomDamage;
     public float timer;
     [Header("Flocking Weightage")]
-    public GameObject[] noOfBoids;
     public float seekWeight;
     public float alignWeight;
     public float separateWeight;
@@ -32,12 +32,11 @@ public class OfflineZombieFSM : MonoBehaviour
 
     #region Private Variables
     private Rigidbody rg;
-    private List<Rigidbody> boids;
     private int currCondition;
     private int chaseCondition = 1;
     private int attackCondition = 2;
-    private GameObject offlinePlyStats;
     private OfflinePlayerStats offlinePly;
+    private OfflineZombiePool offZomPool;
     #endregion
 
     #region Callbacks
@@ -45,30 +44,27 @@ public class OfflineZombieFSM : MonoBehaviour
     {
         zombieAnim = this.gameObject.GetComponent<Animator>();
         rg = GetComponent<Rigidbody>();
-        boids = new List<Rigidbody>();
         delayedDamage = 2;
         timeToAttack = 2;
         attacking = false;
 
-        offlinePlyStats = GameObject.FindGameObjectWithTag("OfflineStats");
-        offlinePly = offlinePlyStats.GetComponent<OfflinePlayerStats>();
-    }
+        offZomPool = GameObject.FindGameObjectWithTag("OfflineZombieSpawner").GetComponent<OfflineZombiePool>();
+        offlinePly = GameObject.FindGameObjectWithTag("OfflineStats").GetComponent<OfflinePlayerStats>();
 
-    void OnEnable()
-    {
+        players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
         randomTarget = Random.Range(0, players.Length);
-
-        noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
-
-        for (int i = 0; i < noOfBoids.Length; i++)
-        {
-            Rigidbody rgBoid = noOfBoids[i].GetComponent<Rigidbody>();
-            boids.Add(rgBoid);
-        }
     }
+
+    /*void OnEnable()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player").OrderBy(go => go.name).ToArray();
+        randomTarget = Random.Range(0, players.Length);
+    }*/
 
     void Update()
     {
+        offZomPool.noOfBoids = GameObject.FindGameObjectsWithTag("Zombie");
+
         distanceToPlayer = Vector3.Distance(transform.position, players[randomTarget].transform.position);
         if (distanceToPlayer < attackDistance && timer < 4)
         {
@@ -95,9 +91,11 @@ public class OfflineZombieFSM : MonoBehaviour
 
         if (!players[randomTarget].activeInHierarchy)
         {
+            randomTarget = Random.Range(0, players.Length);
             currCondition = 3;
         }
 
+        //Zombie Attacking
         if (attacking == true)
         {
             timeToAttack = timeToAttack + Time.deltaTime;
@@ -111,8 +109,6 @@ public class OfflineZombieFSM : MonoBehaviour
 
     void FixedUpdate()
     {
-        players = GameObject.FindGameObjectsWithTag("Player");
-
         switch (currCondition)
         {
             case 1:
@@ -176,20 +172,23 @@ public class OfflineZombieFSM : MonoBehaviour
         Vector3 sumOfPos = Vector3.zero;
         int count = 0;
 
-        foreach (var other in boids)
+        foreach (var other in offZomPool.boids)
         {
-            float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
-
-            if (distanceBetweenBoids > 0 && distanceBetweenBoids < distanceFromNeighbour)
+            if (offZomPool.boids != null)
             {
-                sumOfPos += other.transform.position;
-                count++;
+                float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
+
+                if (distanceBetweenBoids > 0 && distanceBetweenBoids < distanceFromNeighbour)
+                {
+                    sumOfPos += other.transform.position;
+                    count++;
+                }
             }
         }
 
         if (count > 0)
         {
-            Vector3 avgPos = cohesionDesiredVel / boids.Count;
+            Vector3 avgPos = cohesionDesiredVel / offZomPool.boids.Count;
             return Seek(avgPos);
             //return Seek(avgCohesionVel);
             //return to Seek function with the avgCohesionVel;
@@ -208,16 +207,19 @@ public class OfflineZombieFSM : MonoBehaviour
         Vector3 moveAwayDesiredVel = Vector3.zero;
         int count = 0;
 
-        foreach (var other in boids)
+        foreach (var other in offZomPool.boids)
         {
-            float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
-
-            if (distanceBetweenBoids > 0 && distanceBetweenBoids < desiredSeperation)
+            if (offZomPool.boids != null)
             {
-                moveAwayDesiredVel = (transform.position - other.transform.position).normalized;
-                Vector3 divVel = moveAwayDesiredVel / distanceBetweenBoids;
-                totalMoveAwayDesiredVel += divVel;
-                count++;
+                float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
+
+                if (distanceBetweenBoids > 0 && distanceBetweenBoids < desiredSeperation)
+                {
+                    moveAwayDesiredVel = (transform.position - other.transform.position).normalized;
+                    Vector3 divVel = moveAwayDesiredVel / distanceBetweenBoids;
+                    totalMoveAwayDesiredVel += divVel;
+                    count++;
+                }
             }
         }
 
@@ -239,19 +241,22 @@ public class OfflineZombieFSM : MonoBehaviour
         Vector3 totalVector = Vector3.zero;
         int count = 0;
 
-        foreach (var other in boids)
+        foreach (var other in offZomPool.boids)
         {
-            float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
-            if (distanceBetweenBoids > 0 && distanceBetweenBoids < neighbourDistance)
+            if (offZomPool.boids != null)
             {
-                totalVector = totalVector + other.velocity;
-                count++;
+                float distanceBetweenBoids = Vector3.Distance(transform.position, other.transform.position);
+                if (distanceBetweenBoids > 0 && distanceBetweenBoids < neighbourDistance)
+                {
+                    totalVector = totalVector + other.velocity;
+                    count++;
+                }
             }
         }
 
         if (count > 0)
         {
-            Vector3 avgVel = (totalVector / boids.Count).normalized * maxSpeed;
+            Vector3 avgVel = (totalVector / offZomPool.boids.Count).normalized * maxSpeed;
             Vector3 steerAlign = avgVel - rg.velocity;
             Vector3 steerAlignClamped = Vector3.ClampMagnitude(steerAlign, maxForce);
             return steerAlignClamped;

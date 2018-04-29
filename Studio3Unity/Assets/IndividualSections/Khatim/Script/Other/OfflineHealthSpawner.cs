@@ -26,7 +26,6 @@ public class OfflineHealthSpawner : MonoBehaviour
         {
             GameObject healthObj = Instantiate(healthPrefab, healthSpawnLocation[i].transform.position, Quaternion.identity);
             healthPrefab.SetActive(false);
-            Debug.Log("Health Spawned");
             health.Add(healthObj);
         }
     }
@@ -48,7 +47,6 @@ public class OfflineHealthSpawner : MonoBehaviour
     {
         if (!health[index].activeInHierarchy)
         {
-            Debug.Log("Health Active");
             health[index].SetActive(true);
         }
     }
