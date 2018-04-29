@@ -28,7 +28,7 @@ public class destroyer : MonoBehaviour
         if (other.gameObject.GetComponent<Character_Controller>() || other.gameObject.GetComponent<OfflineCharacterController>())
         {
             Destroy(other.gameObject);
-            SceneManager.LoadScene("Game_Over");
+            SceneManager.LoadScene("Game_Over_Scene");
         }
 
 

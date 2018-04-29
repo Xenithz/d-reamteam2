@@ -41,10 +41,10 @@ public class OfflineTileManager : MonoBehaviour {
 
         while (true)
         {
-            for(int i=0; i<myTile.timeToShake; i++)
+            for(int i=0; i<timeToShake; i++)
             {
             myTile.ShakeTile(myTile);
-            yield return new WaitForSeconds(myTile.timeToStartShake);
+            yield return new WaitForSeconds(timeToStartShake);
             }
         break;
         }

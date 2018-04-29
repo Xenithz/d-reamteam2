@@ -71,7 +71,7 @@ public class OfflineCharacterController : MonoBehaviour
         if (coolDown <= 0)
         {
             coolDownImage.SetActive(true);
-            if (dropTile != 0 && vectorOfMovement == Vector3.zero)
+            if (dropTile != 0)
             {
                 DropMyTile();
                 playerAnim.SetInteger("anim", 2);
