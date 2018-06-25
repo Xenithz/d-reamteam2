@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 public class CollisionAvoidance : MonoBehaviour
- {
-
+{
 private RaycastHit colliderHit;
+public GameObject[] alex= new GameObject[6];
 public Vector3 velocity;
 public Vector3 targetVector;
 public Vector3 steeringForce;
